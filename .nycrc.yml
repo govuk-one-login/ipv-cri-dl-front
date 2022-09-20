@@ -1,0 +1,31 @@
+all: true
+check-coverage: true
+include:
+  - "src/**/*.js"
+exclude:
+  - "**/*.test.js"
+  - "**/*router.js"
+  - "src/assets/*"
+  - "src/app/passport/router.js"
+  - "src/app/passport/steps.js"
+  - "src/app/passport/fields.js"
+  - "src/lib/*"
+  - "src/app.js"
+report-dir: coverage
+statements: 80
+branches: 80
+functions: 80
+lines: 80
+watermarks:
+  statements:
+    - 80
+    - 90
+  branches:
+    - 80
+    - 90
+  functions:
+    - 80
+    - 90
+  lines:
+    - 80
+    - 90

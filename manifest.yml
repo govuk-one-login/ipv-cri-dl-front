@@ -1,0 +1,8 @@
+---
+applications:
+  - name: ((environment))-di-ipv-cri-uk-driving-licence-front
+    memory: 256M
+    buildpack: nodejs_buildpack
+    command: yarn start
+    env:
+      API_BASE_URL: ((api-base-url))

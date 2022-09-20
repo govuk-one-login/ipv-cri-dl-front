@@ -1,0 +1,27 @@
+const { Controller: BaseController } = require("hmpo-form-wizard");
+var logger = require('hmpo-logger').get();
+
+
+
+class RootController extends BaseController {
+  async saveValues(req, res, next) {
+    const sharedClaims = req.session?.shared_claims;
+    console.log('JB!@£$%^&*SharedClaims' + sharedClaims)
+    logger.info('EM!@£$%^&*SharedClaims' + sharedClaims);
+
+
+    if (sharedClaims) {
+      if (sharedClaims?.names?.length > 0) {
+        req.journeyModel.set("surname", sharedClaims.names[0]?.familyName);
+        req.journeyModel.set("givenNames", sharedClaims.names[0]?.givenNames);
+      }
+
+      if (sharedClaims?.dateOfBirths?.length > 0) {
+        req.journeyModel.set("dateOfBirth", sharedClaims.dateOfBirths[0]);
+      }
+    }
+    super.saveValues(req, res, next);
+  }
+}
+
+module.exports = RootController;
