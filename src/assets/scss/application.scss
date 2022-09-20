@@ -3,9 +3,9 @@ $govuk-assets-path: "/public/";
 @import "../../../node_modules/govuk-frontend/govuk/all";
 @import "../../../node_modules/hmpo-components/all";
 
-// repainting the notification banner red for a warning state on the passport CRI [PYIC-1563]
+// repainting the notification banner red for a warning state on the driving licence CRI [PYIC-1563]
 
-.govuk-notification-banner.passport-message {
+.govuk-notification-banner.driving-licence-message {
   border: $govuk-border-width solid $govuk-error-colour;
   background-color: $govuk-error-colour;
 }

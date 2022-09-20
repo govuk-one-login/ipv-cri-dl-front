@@ -37,9 +37,9 @@ jobs:
           echo "Build Docker Image has been Disabled - Using New Compatible Template Method"
           #cd ${GITHUB_WORKSPACE} || exit 1
           #docker build -t "driving-licence-front-build:${IMAGE_TAG}" .
-          #docker tag "driving-licence-front-build:${IMAGE_TAG}" "${{ secrets.BUILD_ACCOUNT_ID }}.dkr.ecr.eu-west-2.amazonaws.com/passport-front-build:${IMAGE_TAG}"
-          #docker tag "driving-licence-front-build:${IMAGE_TAG}" "${{ secrets.DEVELOPMENT_ACCOUNT_ID }}.dkr.ecr.eu-west-2.amazonaws.com/passport-front-development:${IMAGE_TAG}"
-          #docker tag "driving-licence-front-build:${IMAGE_TAG}" "${{ secrets.DEVELOPMENT_ACCOUNT_ID }}.dkr.ecr.eu-west-2.amazonaws.com/passport-front-development:latest"
+          #docker tag "driving-licence-front-build:${IMAGE_TAG}" "${{ secrets.BUILD_ACCOUNT_ID }}.dkr.ecr.eu-west-2.amazonaws.com/driving-licence-front-build:${IMAGE_TAG}"
+          #docker tag "driving-licence-front-build:${IMAGE_TAG}" "${{ secrets.DEVELOPMENT_ACCOUNT_ID }}.dkr.ecr.eu-west-2.amazonaws.com/driving-licence-front-development:${IMAGE_TAG}"
+          #docker tag "driving-licence-front-build:${IMAGE_TAG}" "${{ secrets.DEVELOPMENT_ACCOUNT_ID }}.dkr.ecr.eu-west-2.amazonaws.com/driving-licence-front-development:latest"
       - name: Push docker image to build
         env:
           ECR_REGISTRY: ${{ secrets.BUILD_ACCOUNT_ID }}.dkr.ecr.eu-west-2.amazonaws.com

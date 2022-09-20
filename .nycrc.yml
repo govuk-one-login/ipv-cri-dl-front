@@ -6,9 +6,9 @@ exclude:
   - "**/*.test.js"
   - "**/*router.js"
   - "src/assets/*"
-  - "src/app/passport/router.js"
-  - "src/app/passport/steps.js"
-  - "src/app/passport/fields.js"
+  - "src/app/drivingLicence/router.js"
+  - "src/app/drivingLicence/steps.js"
+  - "src/app/drivingLicence/fields.js"
   - "src/lib/*"
   - "src/app.js"
 report-dir: coverage
