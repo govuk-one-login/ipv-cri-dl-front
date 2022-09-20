@@ -7,7 +7,7 @@ const firstNameMiddleNameLengthValidatorObj = {
 
 module.exports = {
   firstNameMiddleNameLengthValidator: firstNameMiddleNameLengthValidator,
-  passportNumber: {
+  documentNumber: {
     type: "text",
     journeyKey: "documentNumber",
     validate: [

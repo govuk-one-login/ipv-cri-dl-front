@@ -26,7 +26,7 @@ describe("validate controller", () => {
     expect(validate).to.be.an.instanceof(BaseController);
   });
 
-  it("should retrieve redirect url from cri-passport-back and store in session", async () => {
+  it("should retrieve redirect url from cri-driving-permit-back and store in session", async () => {
     const sessionId = "drivingLicence123";
 
     req.sessionModel.set("documentNumber", "123456789");

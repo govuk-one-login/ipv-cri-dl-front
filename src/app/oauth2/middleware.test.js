@@ -58,7 +58,7 @@ describe("oauth middleware", () => {
 
     it("should save drivingLicenceSessionId to session", async function () {
       await middleware.decryptJWTAuthorizeRequest(req, res, next);
-      expect(req.session.passportSessionId).to.be.equal(passportSessionId);
+      expect(req.session.sessionId).to.be.equal(sessionId);
     });
   });
 
@@ -233,7 +233,7 @@ describe("oauth middleware", () => {
     it("should successfully redirects when code is valid", async function () {
       await middleware.redirectToDrivingLicenceDetailsPage(req, res);
 
-      expect(res.redirect).to.have.been.calledWith(`/passport`);
+      expect(res.redirect).to.have.been.calledWith(`/drivingLicence`);
     });
   });
 

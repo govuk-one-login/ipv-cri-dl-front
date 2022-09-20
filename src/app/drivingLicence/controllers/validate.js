@@ -29,7 +29,7 @@ class ValidateController extends BaseController {
         session_id: req.session.sessionId,
       };
 
-      logger.info("validate: calling check-passport lambda", { req, res });
+      logger.info("validate: calling check-driving-licence lambda", { req, res });
       const checkDrivingLicenceResponse = await axios.post(
         `${API_BASE_URL}${API_CHECK_DRIVING_LICENCE_PATH}`,
         attributes,
