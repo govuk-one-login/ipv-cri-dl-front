@@ -13,7 +13,9 @@ module.exports = {
   },
   "/details": {
     fields: [
-      "documentNumber",
+      "drivingLicenceNumber",
+      "postcode",
+      "issueNumber",
       "surname",
       "firstName",
       "middleNames",

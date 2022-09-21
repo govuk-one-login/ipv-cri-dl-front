@@ -1,15 +1,15 @@
-const axios = require("axios");
 const BaseController = require("hmpo-form-wizard").Controller;
 
 const {
-  API_BASE_URL,
-  API_CHECK_DRIVING_LICENCE_PATH,
-  API_BUILD_CLIENT_OAUTH_RESPONSE_PATH,
+  API: {
+    PATHS: { CHECK },
+  },
 } = require("../../../lib/config");
 const logger = require("hmpo-logger").get();
 
 class ValidateController extends BaseController {
   async saveValues(req, res, callback) {
+
     const firstName = req.sessionModel.get("firstName");
     const middleNames = req.sessionModel.get("middleNames");
     const forenames =
@@ -17,7 +17,9 @@ class ValidateController extends BaseController {
         ? firstName.split(" ")
         : firstName.split(" ").concat(middleNames.split(" "));
     const attributes = {
-      documentNumber: req.sessionModel.get("documentNumber"),
+      drivingLicenceNumber: req.sessionModel.get("drivingLicenceNumber"),
+      issueNumber: req.sessionModel.get("issueNumber"),
+      postcode: req.sessionModel.get("postcode"),
       surname: req.sessionModel.get("surname"),
       forenames: forenames,
       dateOfBirth: req.sessionModel.get("dateOfBirth"),
@@ -26,12 +28,12 @@ class ValidateController extends BaseController {
 
     try {
       const headers = {
-        session_id: req.session.sessionId,
+        session_id: req.session.tokenId,
       };
 
       logger.info("validate: calling check-driving-licence lambda", { req, res });
-      const checkDrivingLicenceResponse = await axios.post(
-        `${API_BASE_URL}${API_CHECK_DRIVING_LICENCE_PATH}`,
+      const checkDrivingLicenceResponse = await req.axios.post(
+        `${CHECK}`,
         attributes,
         { headers: headers }
       );
@@ -42,17 +44,7 @@ class ValidateController extends BaseController {
         return callback();
       }
 
-      logger.info("validate: calling build-client-oauth-response lambda", {
-        req,
-        res,
-      });
-      const apiResponse = await axios.post(
-        `${API_BASE_URL}${API_BUILD_CLIENT_OAUTH_RESPONSE_PATH}`,
-        undefined,
-        { headers: headers }
-      );
-
-      const redirect_url = apiResponse?.data?.client?.redirectUrl;
+      const redirect_url = checkDrivingLicenceResponse?.data?.client?.redirectUrl;
       logger.info("Validate: redirecting user to callBack with url ", {
         req,
         res,

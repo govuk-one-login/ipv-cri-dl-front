@@ -1,6 +1,6 @@
-{% extends "shared/ipv-template.html" %}
+{% extends "base-form.njk" %}
 {# the content for this page is controlled by locales/en/default.yml #}
-{% set hmpoPageKey = "driving-licence" %}
+{% set hmpoPageKey = "details" %}
 
 {% from "govuk/components/fieldset/macro.njk" import govukFieldset %}
 {% from "govuk/components/notification-banner/macro.njk" import govukNotificationBanner %}
@@ -66,10 +66,24 @@ html: translate("drivingLicence.drivingLicenceTryAnotherWay")
     {% call hmpoForm(ctx, {attributes: {onsubmit: 'window.disableFormSubmit()'} }) %}
 
     {{ hmpoText(ctx, {
-        id: "documentNumber",
+        id: "drivingLicenceNumber",
         label: {
             classes: "govuk-label"
         }
+    }) }}
+
+    {{ hmpoText(ctx, {
+    id: "postcode",
+    label: {
+    classes: "govuk-label"
+    }
+    }) }}
+
+    {{ hmpoText(ctx, {
+    id: "issueNumber",
+    label: {
+    classes: "govuk-label"
+    }
     }) }}
 
     {{ hmpoText(ctx, {

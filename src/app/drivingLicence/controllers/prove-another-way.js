@@ -1,10 +1,9 @@
 const BaseController = require("hmpo-form-wizard").Controller;
-const axios = require("axios");
 const logger = require("hmpo-logger").get();
 
 const {
-  API_BUILD_CLIENT_OAUTH_RESPONSE_PATH,
-  API_BASE_URL,
+  API,
+  APP
 } = require("../../../lib/config");
 
 class ProveAnotherWayController extends BaseController {
@@ -20,13 +19,14 @@ class ProveAnotherWayController extends BaseController {
       };
 
       switch (action) {
+      //TODO needs updated
         case "proveAnotherWay": {
           logger.info(
             "prove-another-way: user selected proveAnotherWay - calling build-client-oauth-response lambda",
             { req, res }
           );
-          const apiResponse = await axios.post(
-            `${API_BASE_URL}${API_BUILD_CLIENT_OAUTH_RESPONSE_PATH}`,
+          const apiResponse = await req.axios.post(
+            `${API.BASE_URL}${APP.PATH.DRIVING_LICENCE}`,
             undefined,
             { headers: headers }
           );

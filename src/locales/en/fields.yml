@@ -6,6 +6,11 @@ drivingLicenceNumber:
     exactlength: "Your driving licence number should be 16 digits long"
     numeric: "Your driving licence number should not include letters or symbols"
     limit: "Driving licence numbers do not start with 16 – enter the number as it appears on your driving licence"
+issueNumber:
+  label: Issue Number
+  hint: "This is the issue number on your driving licence"
+  validation:
+    default: "Enter the number as it appears on your driving licence"
 
 surname:
   label: Surname
@@ -52,6 +57,12 @@ expiryDate:
 
 "date-year":
   label: Year
+
+postcode:
+  label: Postcode
+  hint: "This is the your postal code"
+  validation:
+    default: "Enter the postcode as it appears on your driving licence"
 
 proveAnotherWayRadio:
   label: What would you like to do?
