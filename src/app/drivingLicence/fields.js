@@ -7,14 +7,19 @@ const firstNameMiddleNameLengthValidatorObj = {
 
 module.exports = {
   firstNameMiddleNameLengthValidator: firstNameMiddleNameLengthValidator,
-  documentNumber: {
+  drivingLicenceNumber: {
     type: "text",
-    journeyKey: "documentNumber",
+    journeyKey: "drivingLicenceNumber",
     validate: [
-      "required",
-      "numeric",
-      { type: "exactlength", arguments: [9] },
-      { type: "limit", fn: (value) => !value.startsWith("9") },
+      "required"
+    ],
+    classes: "govuk-input--width-10",
+  },
+  issueNumber: {
+    type: "text",
+    journeyKey: "issueNumber",
+    validate: [
+      "required"
     ],
     classes: "govuk-input--width-10",
   },
@@ -80,6 +85,15 @@ module.exports = {
         ],
       },
     ],
+  },
+  postcode: {
+    type: "text",
+    journeyKey: "postcode",
+    validate: [
+      "required",
+      { type: "regexPostcode", fn: (value) => value.match(/([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9][A-Za-z]?))))\s?[0-9][A-Za-z]{2})/) },
+    ],
+    classes: "govuk-input--width-10",
   },
   proveAnotherWayRadio: {
     type: "radios",

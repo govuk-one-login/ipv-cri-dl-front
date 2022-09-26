@@ -25,42 +25,6 @@ describe("prove another way controller", () => {
     expect(proveAnotherWayController).to.be.an.instanceOf(BaseController);
   });
 
-  it("should store redirect_url in session when users selects proveAnotherWay", async () => {
-    const sessionId = "drivingLicence123";
-    req.session.sessionId = sessionId;
-    req.form = {
-      values: {
-        proveAnotherWayRadio: "proveAnotherWay",
-      },
-    };
-
-    const data = {
-      client: {
-        redirectUrl:
-          "https://client.example.com/cb?id=DrivingLicenceIssuer&code=1234",
-      },
-    };
-
-    const resolvedPromise = new Promise((resolve) => resolve({ data }));
-    sandbox.stub(axios, "post").returns(resolvedPromise);
-
-    await proveAnotherWayController.saveValues(req, res, next);
-
-    sandbox.assert.calledWith(
-      axios.post,
-      sinon.match("/build-client-oauth-response"),
-      undefined,
-      {
-        headers: {
-          session_id: sessionId,
-        },
-      }
-    );
-    expect(req.session.test.redirect_url).to.eq(
-      "https://client.example.com/cb?id=DrivingLicenceIssuer&code=1234"
-    );
-  });
-
   it("should throw an error if action is invalid", async () => {
     const sessionId = "drivingLicence123";
     req.session.sessionId = sessionId;
