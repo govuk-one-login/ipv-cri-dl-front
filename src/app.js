@@ -31,12 +31,8 @@ const { setup } = require("hmpo-app");
 
 const loggerConfig = {
   console: true,
-    consoleLevel: 'debug',
-    connsoleJSON: false, // logstash json or pretty print output
-    consoleColor: true,
+  connsoleJSON: true, // logstash json or pretty print output
   app: false,
-      handleExceptions: true,
-
   requestMeta: {
     sessionId: "session.sessionId",
   },
