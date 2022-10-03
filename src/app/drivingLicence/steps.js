@@ -2,6 +2,7 @@ const details = require("./controllers/details");
 const root = require("./controllers/root");
 const validate = require("./controllers/validate");
 const proveAnotherWay = require("./controllers/prove-another-way");
+const licenceIssuer = require("./controllers/licence-issuer")
 
 module.exports = {
   "/": {
@@ -9,7 +10,12 @@ module.exports = {
     entryPoint: true,
     skip: true,
     controller: root,
-    next: "details",
+    next: "licence-issuer",
+  },
+  "/licence-issuer": {
+    controller: licenceIssuer,
+    fields: ["licenceIssuerRadio"],
+    next: "/details",
   },
   "/details": {
     fields: [

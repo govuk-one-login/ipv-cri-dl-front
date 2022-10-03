@@ -119,6 +119,7 @@ const wizardOptions = {
   name: "cri-driving-licence-front",
   journeyName: "drivingLicence",
   templatePath: "drivingLicence",
+  isPageHeading: true,
 };
 
 router.use(wizard(steps, fields, wizardOptions));

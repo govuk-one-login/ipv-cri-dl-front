@@ -63,3 +63,7 @@ drivingLicence:
 
 prove-another-way:
   title: Prove your identity another way
+
+licence-issuer:
+  title: Who was your UK driving licence issued by?
+  content: You can find this in section 4c of your driving licence. It will either say DVLA (Driving and vehicle Licensing Agency) or DVA (Driver and Vehicle Agency).

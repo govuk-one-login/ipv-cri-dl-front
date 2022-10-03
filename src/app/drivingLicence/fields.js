@@ -100,4 +100,11 @@ module.exports = {
     items: ["proveAnotherWay", "retry"],
     validate: ["required"],
   },
+    licenceIssuerRadio: {
+      type: "radios",
+      label: "",
+      legend: "",
+      items: [{value:"licenceIssuer"}, {value:"licenceIssuer2"}, {divider: "Or"}, {value:"noLicence"}],
+      validate: ["required"],
+    },
 };
