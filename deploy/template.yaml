@@ -297,7 +297,7 @@ Resources:
   DrivingPermitFrontEcsService:
     Type: 'AWS::ECS::Service'
     Properties:
-      Cluster: !Ref DrivingPermitEcsCluster
+      Cluster: !Ref DrivingPermitFrontEcsCluster
       DeploymentConfiguration:
         MaximumPercent: 200
         MinimumHealthyPercent: 50
