@@ -601,5 +601,5 @@ Outputs:
   DrivingPermitFrontGatewayID:
     Description: Driving Licence Front API Gateway ID
     Export:
-      Name: !Sub "${AWS::StackName}-DrivingPermitFrontGatewayId"
+      Name: !Sub "${AWS::StackName}-DlFrontGatewayId"
     Value: !Ref ApiGwHttpEndpoint
