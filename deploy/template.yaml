@@ -96,7 +96,7 @@ Resources:
     Properties:
       IpProtocol: tcp
       Description: >-
-        Driving Permit Front ECS permits inbound from the Fraud Front
+        Driving Permit Front ECS permits inbound from the Driving Permit Front
         load balancer.
       FromPort: 8080
       ToPort: 8080
@@ -216,7 +216,7 @@ Resources:
         - Key: Product
           Value: "GOV.UK sign in"
         - Key: System
-          Value: "Fraud CRI"
+          Value: "Driving Permit CRI"
         - Key: Environment
           Value: !Sub "${Environment}"
 
@@ -233,7 +233,7 @@ Resources:
         - Key: Product
           Value: "GOV.UK sign in"
         - Key: System
-          Value: "Fraud CRI"
+          Value: "Driving Permit CRI"
         - Key: Environment
           Value: !Sub "${Environment}"
 
@@ -241,7 +241,7 @@ Resources:
     Type: 'AWS::EC2::SecurityGroup'
     Properties:
       GroupDescription: >-
-        Fraud Front Redis Security Group
+        Driving Permit Front Redis Security Group
       SecurityGroupIngress:
         - Description: Allow inbound on port 6379
           SourceSecurityGroupId: !GetAtt ECSSecurityGroup.GroupId
@@ -273,7 +273,7 @@ Resources:
         - Key: Product
           Value: "GOV.UK sign in"
         - Key: System
-          Value: "Fraud CRI"
+          Value: "Driving Permit CRI"
         - Key: Environment
           Value: !Sub "${Environment}"
 
@@ -344,13 +344,13 @@ Resources:
       LogGroupName: !Sub /aws/ecs/${AWS::StackName}-DrivingPermitFront-ECS
       RetentionInDays: 14
 
-  ECSAccessLogsGroupSubscriptionFilter:
-    Type: AWS::Logs::SubscriptionFilter
-    Condition: IsNotDevelopment
-    Properties:
-      DestinationArn: "arn:aws:logs:eu-west-2:885513274347:destination:csls_cw_logs_destination_prod"
-      FilterPattern: ""
-      LogGroupName: !Sub "/aws/ecs/${AWS::StackName}-DrivingPermitFront-ECS"
+#  ECSAccessLogsGroupSubscriptionFilter:
+#    Type: AWS::Logs::SubscriptionFilter
+#    Condition: IsNotDevelopment
+#    Properties:
+#      DestinationArn: "arn:aws:logs:eu-west-2:885513274347:destination:csls_cw_logs_destination_prod"
+#      FilterPattern: ""
+#      LogGroupName: !Sub "/aws/ecs/${AWS::StackName}-DrivingPermitFront-ECS"
 
   ECSServiceTaskDefinition:
     Type: 'AWS::ECS::TaskDefinition'
@@ -525,13 +525,13 @@ Resources:
     Properties:
       LogGroupName: !Sub /aws/apigateway/${AWS::StackName}-DrivingPermitFront-API-GW-AccessLogs
 
-  APIGWAccessLogsGroupSubscriptionFilter:
-    Type: AWS::Logs::SubscriptionFilter
-    Condition: IsNotDevelopment
-    Properties:
-      DestinationArn: "arn:aws:logs:eu-west-2:885513274347:destination:csls_cw_logs_destination_prod"
-      FilterPattern: ""
-      LogGroupName: !Sub "/aws/apigateway/${AWS::StackName}-DrivingPermitFront-API-GW-AccessLogs"
+#  APIGWAccessLogsGroupSubscriptionFilter:
+#    Type: AWS::Logs::SubscriptionFilter
+#    Condition: IsNotDevelopment
+#    Properties:
+#      DestinationArn: "arn:aws:logs:eu-west-2:885513274347:destination:csls_cw_logs_destination_prod"
+#      FilterPattern: ""
+#      LogGroupName: !Sub "/aws/apigateway/${AWS::StackName}-DrivingPermitFront-API-GW-AccessLogs"
 
 # ECS Autoscaling
 # The number of pods will increase when the configured CPU utilization is breached for more than 3 minutes.
@@ -546,8 +546,8 @@ Resources:
       ResourceId: !Join
         - '/'
         - - "service"
-          - !Ref   FraudFrontEcsCluster
-          - !GetAtt FraudFrontEcsService.Name
+          - !Ref   DrivingPermitFrontEcsCluster
+          - !GetAtt DrivingPermitFrontEcsService.Name
       RoleARN: !Sub "arn:aws:iam::${AWS::AccountId}:role/aws-service-role/ecs.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_ECSService"
       ScalableDimension: ecs:service:DesiredCount
       ServiceNamespace: ecs
@@ -562,8 +562,8 @@ Resources:
       ResourceId: !Join
         - '/'
         - - "service"
-          - !Ref   FraudFrontEcsCluster
-          - !GetAtt FraudFrontEcsService.Name
+          - !Ref   DrivingPermitFrontEcsCluster
+          - !GetAtt DrivingPermitFrontEcsService.Name
       ScalableDimension: ecs:service:DesiredCount
       ServiceNamespace: ecs
       TargetTrackingScalingPolicyConfiguration:
