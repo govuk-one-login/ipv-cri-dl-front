@@ -66,42 +66,21 @@ html: translate("drivingLicence.drivingLicenceTryAnotherWay")
     {% call hmpoForm(ctx, {attributes: {onsubmit: 'window.disableFormSubmit()'} }) %}
 
     {{ hmpoText(ctx, {
-        id: "drivingLicenceNumber",
-        label: {
-            classes: "govuk-label"
-        }
-    }) }}
-
-    {{ hmpoText(ctx, {
-    id: "postcode",
+    id: "surname",
     label: {
     classes: "govuk-label"
-    }
-    }) }}
-
-    {{ hmpoText(ctx, {
-    id: "issueNumber",
-    label: {
-    classes: "govuk-label"
-    }
-    }) }}
-
-    {{ hmpoText(ctx, {
-        id: "surname",
-        label: {
-            classes: "govuk-label"
-        },
-        classes: "govuk-input"
+    },
+    classes: "govuk-input"
     }) }}
 
     {%- set firstNameError = hmpoGetError(ctx, {id: 'firstName'}) %}
     {%- set middleNameError = hmpoGetError(ctx, {id: 'middleNames'}) %}
 
     {% if firstNameError and middleNameError %}
-        <div class="govuk-form-group govuk-form-group--error">
+    <div class="govuk-form-group govuk-form-group--error">
     {% else %}
-        <div class="govuk-form-group ">
-    {% endif %}
+    <div class="govuk-form-group ">
+        {% endif %}
 
         {% call govukFieldset({
         legend: {
@@ -129,19 +108,46 @@ html: translate("drivingLicence.drivingLicenceTryAnotherWay")
         {% endcall %}
     </div>
 
-
-    {{ hmpoDate(ctx, {
+        {{ hmpoDate(ctx, {
         id: "dateOfBirth",
         legend: {
+        classes: "govuk-label"
+        }
+        }) }}
+
+        {{ hmpoDate(ctx, {
+        id: "issueDate",
+        legend: {
+        classes: "govuk-label"
+        }
+        }) }}
+
+        {{ hmpoDate(ctx, {
+        id: "validTo",
+        legend: {
+        classes: "govuk-label"
+        }
+        }) }}
+
+    {{ hmpoText(ctx, {
+        id: "drivingLicenceNumber",
+        label: {
             classes: "govuk-label"
         }
     }) }}
 
-    {{ hmpoDate(ctx, {
-        id: "expiryDate",
-        legend: {
-            classes: "govuk-label"
-        }
+    {{ hmpoText(ctx, {
+    id: "issueNumber",
+    label: {
+    classes: "govuk-label"
+    }
+    }) }}
+
+    {{ hmpoText(ctx, {
+    id: "postcode",
+    label: {
+    classes: "govuk-label"
+    }
     }) }}
 
     {% if values.showRetryMessage and not (ctx("errors") | length) %}

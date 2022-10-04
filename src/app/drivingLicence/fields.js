@@ -7,56 +7,40 @@ const firstNameMiddleNameLengthValidatorObj = {
 
 module.exports = {
   firstNameMiddleNameLengthValidator: firstNameMiddleNameLengthValidator,
-  drivingLicenceNumber: {
-    type: "text",
-    journeyKey: "drivingLicenceNumber",
-    validate: [
-      "required"
-    ],
-    classes: "govuk-input--width-10",
-  },
-  issueNumber: {
-    type: "text",
-    journeyKey: "issueNumber",
-    validate: [
-      "required"
-    ],
-    classes: "govuk-input--width-10",
-  },
   surname: {
-    type: "text",
-    validate: [
-      "required",
-      { type: "maxlength", arguments: [30] },
-      { type: "regexDrivingLicence", fn: (value) => value.match(/^[a-zA-Z .'-]*$/) },
-    ],
-    journeyKey: "surname",
-  },
-  firstName: {
-    type: "text",
-    validate: [
-      "required",
-      { type: "maxlength", arguments: [30] },
-      { type: "regexDrivingLicence", fn: (value) => value.match(/^[a-zA-Z .'-]*$/) },
-      {
-        type: "firstNameMiddleNameLength",
-        ...firstNameMiddleNameLengthValidatorObj,
-      },
-    ],
-    journeyKey: "firstName",
-  },
-  middleNames: {
-    type: "text",
-    journeyKey: "middleNames",
-    validate: [
-      { type: "maxlength", arguments: [30] },
-      { type: "regexDrivingLicence", fn: (value) => value.match(/^[a-zA-Z .'-]*$/) },
-      {
-        type: "firstNameMiddleNameLength",
-        ...firstNameMiddleNameLengthValidatorObj,
-      },
-    ],
-  },
+      type: "text",
+      validate: [
+        "required",
+        { type: "maxlength", arguments: [30] },
+        { type: "regexDrivingLicence", fn: (value) => value.match(/^[a-zA-Z .'-]*$/) },
+      ],
+      journeyKey: "surname",
+    },
+    firstName: {
+      type: "text",
+      validate: [
+        "required",
+        { type: "maxlength", arguments: [30] },
+        { type: "regexDrivingLicence", fn: (value) => value.match(/^[a-zA-Z .'-]*$/) },
+        {
+          type: "firstNameMiddleNameLength",
+          ...firstNameMiddleNameLengthValidatorObj,
+        },
+      ],
+      journeyKey: "firstName",
+    },
+    middleNames: {
+      type: "text",
+      journeyKey: "middleNames",
+      validate: [
+        { type: "maxlength", arguments: [30] },
+        { type: "regexDrivingLicence", fn: (value) => value.match(/^[a-zA-Z .'-]*$/) },
+        {
+          type: "firstNameMiddleNameLength",
+          ...firstNameMiddleNameLengthValidatorObj,
+        },
+      ],
+    },
   dateOfBirth: {
     type: "date",
     journeyKey: "dateOfBirth",
@@ -66,9 +50,18 @@ module.exports = {
       { type: "before", arguments: [new Date().toISOString().split("T")[0]] },
     ],
   },
-  expiryDate: {
+  issueDate: {
     type: "date",
-    journeyKey: "expiryDate",
+    journeyKey: "issueDate",
+    validate: [
+      "required",
+      "date",
+      { type: "before", arguments: [new Date().toISOString().split("T")[0]] },
+    ],
+  },
+  validTo: {
+    type: "date",
+    journeyKey: "validTo",
     validate: [
       "required",
       "date",
@@ -85,6 +78,22 @@ module.exports = {
         ],
       },
     ],
+  },
+  drivingLicenceNumber: {
+    type: "text",
+    journeyKey: "drivingLicenceNumber",
+    validate: [
+      "required"
+    ],
+    classes: "govuk-input--width-10",
+  },
+  issueNumber: {
+    type: "text",
+    journeyKey: "issueNumber",
+    validate: [
+      "required"
+    ],
+    classes: "govuk-input--width-10",
   },
   postcode: {
     type: "text",
