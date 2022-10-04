@@ -37,6 +37,9 @@ describe("validate controller", () => {
     req.sessionModel.set("middleNames", "Joe");
     req.sessionModel.set("dateOfBirth", "10/02/1975");
     req.sessionModel.set("expiryDate", "15/01/2035");
+    req.sessionModel.set("issueDate", "10/02/2005");
+    req.sessionModel.set("dateOfIssue", "10/02/2005");
+    req.sessionModel.set("licenceIssuer", "DVLA");
 
     const data = {
       client: {
@@ -61,6 +64,9 @@ describe("validate controller", () => {
         forenames: ["Dan", "Joe"],
         dateOfBirth: "10/02/1975",
         expiryDate: "15/01/2035",
+        issueDate: "10/02/2005",
+        licenceIssuer: "DVLA",
+        dateOfIssue: "10/02/2005",
       },
       {
         headers: {
@@ -80,6 +86,9 @@ describe("validate controller", () => {
     req.sessionModel.set("middleNames", "Joe");
     req.sessionModel.set("dateOfBirth", "10/02/1975");
     req.sessionModel.set("expiryDate", "15/01/2035");
+    req.sessionModel.set("issueDate", "10/02/2005");
+    req.sessionModel.set("licenceIssuer", "DVLA");
+    req.sessionModel.set("dateOfIssue", "10/02/2005");
 
     const data = {
       invalidData: {
@@ -107,6 +116,10 @@ describe("validate controller", () => {
     req.sessionModel.set("middleNames", "Joe");
     req.sessionModel.set("dateOfBirth", "10/02/1975");
     req.sessionModel.set("expiryDate", "15/01/2035");
+    req.sessionModel.set("issueDate", "10/02/2005");
+    req.sessionModel.set("licenceIssuer", "DVLA");
+    req.sessionModel.set("dateOfIssue", "10/02/2005");
+
 
     const testError = {
       name: "Test error name",

@@ -54,9 +54,8 @@ expiryDate:
   legend: Valid To
   hint: "This is the date in section 4b of your licence, for example 27 5 2019"
   validation:
-    default: "Enter your valid to date as it appears on your driving licence"
-    before: "Your licence valid to date must be in the past"
-    after: "Your driving licence must not have expired more than 18 months ago"
+    default: "Enter the date as it appears on your driving licence"
+    after: "Your cannot use an expired driving licence"
 
 "date-day":
   label: Day

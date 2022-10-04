@@ -24,6 +24,9 @@ class ValidateController extends BaseController {
       forenames: forenames,
       dateOfBirth: req.sessionModel.get("dateOfBirth"),
       expiryDate: req.sessionModel.get("expiryDate"),
+      issueDate: req.sessionModel.get("issueDate"),
+      dateOfIssue: req.sessionModel.get("issueDate"),
+      licenceIssuer: req.sessionModel.get("licenceIssuer"),
     };
 
     try {
@@ -38,13 +41,13 @@ class ValidateController extends BaseController {
         { headers: headers }
       );
 
-      if (checkDrivingLicenceResponse.data?.result === "retry") {
+      if (checkDrivingLicenceResponse.data?.retry === true) {
         logger.info("validate: driving licence retry", { req, res });
         req.sessionModel.set("showRetryMessage", true);
         return callback();
       }
 
-      const redirect_url = checkDrivingLicenceResponse?.data?.client?.redirectUrl;
+      const redirect_url = checkDrivingLicenceResponse?.data?.redirectUrl;
       logger.info("Validate: redirecting user to callBack with url ", {
         req,
         res,

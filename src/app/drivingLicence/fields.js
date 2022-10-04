@@ -58,6 +58,13 @@ module.exports = {
       "date",
       { type: "before", arguments: [new Date().toISOString().split("T")[0]] },
     ],
+    dependent: {field: "licenceIssuerDependent", value: "DVLA"}
+  },
+  licenceIssuerDependent: {
+     type: "hidden",
+     label: "",
+     legend: "",
+     default: "DVLA"
   },
   expiryDate: {
     type: "date",
@@ -65,18 +72,7 @@ module.exports = {
     validate: [
       "required",
       "date",
-      {
-        type: "after",
-        arguments: [
-          new Date(
-            new Date().getFullYear(),
-            new Date().getMonth() - 18,
-            new Date().getDate()
-          )
-            .toISOString()
-            .split("T")[0],
-        ],
-      },
+      { type: "after", arguments: [new Date().toISOString().split("T")[0]] },
     ],
   },
   drivingLicenceNumber: {
@@ -93,6 +89,7 @@ module.exports = {
     validate: [
       "required"
     ],
+    dependent: {field: "licenceIssuerDependent", value: "DVLA"},
     classes: "govuk-input--width-10",
   },
   postcode: {
