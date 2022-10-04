@@ -1,6 +1,5 @@
 const { Controller: BaseController } = require("hmpo-form-wizard");
 
-
 class RootController extends BaseController {
   async saveValues(req, res, next) {
     const sharedClaims = req.session?.shared_claims;
