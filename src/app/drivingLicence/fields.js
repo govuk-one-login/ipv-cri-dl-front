@@ -59,9 +59,9 @@ module.exports = {
       { type: "before", arguments: [new Date().toISOString().split("T")[0]] },
     ],
   },
-  validTo: {
+  expiryDate: {
     type: "date",
-    journeyKey: "validTo",
+    journeyKey: "expiryDate",
     validate: [
       "required",
       "date",
@@ -113,7 +113,7 @@ module.exports = {
       type: "radios",
       label: "",
       legend: "",
-      items: [{value:"licenceIssuer"}, {value:"licenceIssuer2"}, {divider: "Or"}, {value:"noLicence"}],
+      items: [{value:"DVLA"}, {value:"DVA"}, {divider: "Or"}, {value:"noLicence"}],
       validate: ["required"],
     },
 };

@@ -13,6 +13,7 @@ class LicenceIssuerController extends BaseController {
       req.sessionModel.set("redirect_url", undefined);
 
       const action = req.form.values.licenceIssuerRadio;
+      req.sessionModel.set("licenceIssuer", action);
 
       const headers = {
         session_id: req.session.sessionId,
@@ -42,7 +43,7 @@ class LicenceIssuerController extends BaseController {
           req.sessionModel.set("redirect_url", redirect_url);
           return next();
         }
-        case "licenceIssuer": {
+        case "DVLA": {
           logger.info(
             "licence-issuer: user selected DVLA : redirecting to driving licence details",
             {
@@ -52,7 +53,7 @@ class LicenceIssuerController extends BaseController {
           );
           return next();
         }
-          case "licenceIssuer2": {
+          case "DVA": {
             logger.info(
               "licence-issuer: user selected DVA : redirecting to driving licence details",
               {
