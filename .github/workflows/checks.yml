@@ -6,16 +6,20 @@ on:
       - reopened
       - ready_for_review
       - synchronize
+  push:
+    branches:
+      - main
 
 jobs:
   run-tests:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v3
       - name: Use Node.js 16.x
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2
         with:
-          node-version: 16.15.0
+          node-version: 16
           cache: 'yarn'
       - name: Install dependencies
         run: yarn install
@@ -23,12 +27,11 @@ jobs:
         run: yarn lint
       - name: Run test and write coverage
         run: yarn test:coverage
+      - name: Run browser tests
+        run: npm run test:browser:ci
       - name: Run sonarcloud scan
         if: ${{ github.actor != 'dependabot[bot]' }}
         uses: sonarsource/sonarcloud-github-action@master
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} # obtained from https://sonarcloud.io
-      - name: Build docker image
-        run: |
-          cd ${GITHUB_WORKSPACE} || exit 1
-          docker build -t "driving-licence-front-build:test" .
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
