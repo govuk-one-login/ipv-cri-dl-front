@@ -84,3 +84,17 @@ proveAnotherWayRadio:
     retry:
       label: Try to enter your driving licence details and prove your identity with a GOV.UK account
       value: retry
+
+licenceIssuerRadio:
+  validation:
+    required: You must choose an option to continue
+  items:
+    licenceIssuer:
+      label: DVLA
+      value: DVLA
+    licenceIssuer2:
+      label: DVA
+      value: DVA
+    noLicence:
+      label: I do not have a UK driving licence
+      value: noLicence
