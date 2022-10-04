@@ -1,9 +1,9 @@
 drivingLicenceNumber:
   label: Driving Licence number
-  hint: "This is the 16 digit number in the top right hand corner of the photo page in your driving licence"
+  hint: "This is the 8-16 digit number in the top right hand corner of the photo page in your driving licence"
   validation:
     default: "Enter the number as it appears on your driving licence"
-    exactlength: "Your driving licence number should be 16 digits long"
+    exactlength: "Your driving licence number should be 8-16 digits long"
     numeric: "Your driving licence number should not include letters or symbols"
     limit: "Driving licence numbers do not start with 16 – enter the number as it appears on your driving licence"
 issueNumber:
@@ -50,7 +50,7 @@ issueDate:
     default: "Enter your issue date as it appears on your driving licence"
     before: "Your licence issue date must be in the past"
 
-validTo:
+expiryDate:
   legend: Valid To
   hint: "This is the date in section 4b of your licence, for example 27 5 2019"
   validation:
@@ -89,10 +89,10 @@ licenceIssuerRadio:
   validation:
     required: You must choose an option to continue
   items:
-    licenceIssuer:
+    DVLA:
       label: DVLA
       value: DVLA
-    licenceIssuer2:
+    DVA:
       label: DVA
       value: DVA
     noLicence:

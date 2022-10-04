@@ -52,8 +52,13 @@ classes:'driving-licence-message'
 
 {% else %}
 {# user's first attempt #}
-    <p> {{ translate("drivingLicence.drivingLicenceInformationContext") }} </p>
-    <p> {{ translate("drivingLicence.checkDetailsContext") }}  </p>
+
+    {% if (values.licenceIssuer == "DVA") %}
+        <p> {{ translate("drivingLicence.checkDetailsContextDVA") }}  </p>
+    {% else %}
+        <p> {{ translate("drivingLicence.checkDetailsContext") }}  </p>
+    {% endif %}
+
 {% endif %}
 
 {{ govukInsetText({
@@ -115,6 +120,11 @@ html: translate("drivingLicence.drivingLicenceTryAnotherWay")
         }
         }) }}
 
+        {% if (values.licenceIssuer == "DVA") %}
+        {# user has DVA licence and therefore no issue date is required #}
+
+        {% else %}
+
         {{ hmpoDate(ctx, {
         id: "issueDate",
         legend: {
@@ -122,8 +132,10 @@ html: translate("drivingLicence.drivingLicenceTryAnotherWay")
         }
         }) }}
 
+        {% endif %}
+
         {{ hmpoDate(ctx, {
-        id: "validTo",
+        id: "expiryDate",
         legend: {
         classes: "govuk-label"
         }
@@ -136,14 +148,19 @@ html: translate("drivingLicence.drivingLicenceTryAnotherWay")
         }
     }) }}
 
-    {{ hmpoText(ctx, {
-    id: "issueNumber",
-    label: {
-    classes: "govuk-label"
-    }
-    }) }}
+    {% if (values.licenceIssuer == "DVA") %}
+    {# user has DVA licence and therefore no issue number is required #}
 
-    {{ hmpoText(ctx, {
+    {% else %}
+        {{ hmpoText(ctx, {
+        id: "issueNumber",
+        label: {
+        classes: "govuk-label"
+        }
+        }) }}
+    {% endif %}
+
+        {{ hmpoText(ctx, {
     id: "postcode",
     label: {
     classes: "govuk-label"
