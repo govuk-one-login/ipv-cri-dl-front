@@ -13,14 +13,15 @@ issueNumber:
     default: "Enter the number as it appears on your driving licence"
 
 surname:
-  label: Surname
+  label: Last Name
   validation:
     default: "Enter your surname as it appears on your driving licence"
     maxlength: "Enter your surname as it appears on your driving licence"
     regexDrivingLicence: "Enter your surname as it appears on your driving licence"
 
 firstName:
-  label: First name
+  label: Name
+  hint: "Your first name and any middle names in section 2 on your licence your driving licence"
   validation:
     default: "Enter your first name as it appears on your driving licence"
     maxlength: "Enter your first name as it appears on your driving licence"
@@ -42,11 +43,19 @@ dateOfBirth:
     default: "Enter your date of birth as it appears on your driving licence"
     before: "Your date of birth must be in the past"
 
-expiryDate:
-  legend: Expiry date
-  hint: "For example, 27 5 2029"
+issueDate:
+  legend: Issue Date
+  hint: "This is the date in section 4a of your licence, for example 27 5 2019"
   validation:
-    default: "Enter the expiry date as it appears on your driving licence"
+    default: "Enter your issue date as it appears on your driving licence"
+    before: "Your licence issue date must be in the past"
+
+validTo:
+  legend: Valid To
+  hint: "This is the date in section 4b of your licence, for example 27 5 2019"
+  validation:
+    default: "Enter your valid to date as it appears on your driving licence"
+    before: "Your licence valid to date must be in the past"
     after: "Your driving licence must not have expired more than 18 months ago"
 
 "date-day":

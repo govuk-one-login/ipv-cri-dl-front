@@ -1,7 +1,4 @@
 const { Controller: BaseController } = require("hmpo-form-wizard");
-var logger = require('hmpo-logger').get();
-
-
 
 class RootController extends BaseController {
   async saveValues(req, res, next) {

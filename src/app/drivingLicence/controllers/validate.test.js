@@ -29,6 +29,7 @@ describe("validate controller", () => {
     const sessionId = "drivingLicence123";
 
     req.sessionModel.set("drivingLicenceNumber", "123456789");
+    req.sessionModel.set("issueNumber", "123456789")
     req.sessionModel.set("postcode", "SW1 EQR");
     req.session.tokenId = sessionId;
     req.sessionModel.set("surname", "Jones Smith");
@@ -45,13 +46,13 @@ describe("validate controller", () => {
     };
 
     const resolvedPromise = new Promise((resolve) => resolve({ data }));
-    sandbox.stub(req.axios, "post").returns(resolvedPromise);
+    let stub = sandbox.stub(req.axios, "post").returns(resolvedPromise);
 
     await validate.saveValues(req, res, next);
 
     sandbox.assert.calledWith(
-      req.axios.post,
-      sinon.match("check-driving-permit"),
+      stub,
+      "check-driving-licence",
       {
         drivingLicenceNumber: "123456789",
         issueNumber: "123456789",
@@ -72,6 +73,7 @@ describe("validate controller", () => {
 
   it("should set an error object in the session if redirect url is missing", async () => {
     req.sessionModel.set("drivingLicenceNumber:", "123456789");
+    req.sessionModel.set("issueNumber", "123456789");
     req.sessionModel.set("postcode:", "SW1 EQR");
     req.sessionModel.set("surname", "Jones Smith");
     req.sessionModel.set("firstName", "Dan");
@@ -98,6 +100,7 @@ describe("validate controller", () => {
 
   it("should save error in session when error caught from cri-back", async () => {
     req.sessionModel.set("drivingLicenceNumber:", "123456789");
+    req.sessionModel.set("issueNumber", "123456789")
     req.sessionModel.set("postcode:", "SW1 EQR");
     req.sessionModel.set("surname", "Jones Smith");
     req.sessionModel.set("firstName", "Dan");
