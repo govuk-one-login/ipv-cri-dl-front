@@ -1,11 +1,6 @@
 const BaseController = require("hmpo-form-wizard").Controller;
 const logger = require("hmpo-logger").get();
 
-const {
-  API,
-  APP
-} = require("../../../lib/config");
-
 class LicenceIssuerController extends BaseController {
   async saveValues(req, res, next) {
     try {
@@ -15,10 +10,6 @@ class LicenceIssuerController extends BaseController {
       const action = req.form.values.licenceIssuerRadio;
       req.sessionModel.set("licenceIssuer", action);
 
-      const headers = {
-        session_id: req.session.sessionId,
-      };
-
       switch (action) {
       //TODO needs updated
         case "noLicence": {
@@ -26,21 +17,7 @@ class LicenceIssuerController extends BaseController {
             "licence-issuer: user has no licence, routing back to IPVCore - calling build-client-oauth-response lambda",
             { req, res }
           );
-          const apiResponse = await req.axios.post(
-            `${API.BASE_URL}${APP.PATH.DRIVING_LICENCE}`,
-            undefined,
-            { headers: headers }
-          );
-          logger.info(
-            "licence-issuer: redirecting user to callBack " +
-              apiResponse?.data?.client?.redirectUrl,
-            {
-              req,
-              res,
-            }
-          );
-          const redirect_url = apiResponse?.data?.client?.redirectUrl;
-          req.sessionModel.set("redirect_url", redirect_url);
+          req.sessionModel.set("noLicence", true);
           return next();
         }
         case "DVLA": {
@@ -71,10 +48,10 @@ class LicenceIssuerController extends BaseController {
   }
 
   next(req) {
-    if (req.sessionModel.get("redirect_url")) {
+    if (req.sessionModel.get("noLicence")) {
       return "/oauth2/callback";
     } else {
-      return "/driving-licence/details";
+      return "/details";
     }
   }
 }

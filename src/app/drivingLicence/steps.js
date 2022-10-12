@@ -15,7 +15,7 @@ module.exports = {
   "/licence-issuer": {
     controller: licenceIssuer,
     fields: ["licenceIssuerRadio"],
-    next: "/details",
+    next: licenceIssuer.prototype.next,
   },
   "/details": {
     fields: [
@@ -28,6 +28,7 @@ module.exports = {
       "drivingLicenceNumber",
       "issueNumber",
       "postcode",
+      "licenceIssuerDependent",
     ],
     controller: details,
     next: "validate",

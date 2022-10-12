@@ -55,12 +55,13 @@ drivingLicence:
   retryWarningLabel: Warning
   retryWarningText: You will not be able to change your details again if you make a mistake this time
   retryMessageHeading: We could not find your details
-  retryMessageParagraph1: There was a problem when we checked your details with DVA/DVLA.
+  retryMessageParagraph1: There was a problem when we checked your details with DVLA.
+  retryMessageParagraph1DVA: There was a problem when we checked your details with DVA.
   retryMessageParagraph2: "Check your details again. Remember to make sure:"
-  retryMessageList1: your licence is a UK drivers licence
-  retryMessageList2: you’ve entered your first and middle names (‘given names’) in the right sections
-  retryMessageList3: you’ve left the middle names section blank if you do not have any middle names
-  retryMessageList4: days and months are in the right order in your date of birth and driving licence expiry date
+  retryMessageList1: your driving licence is a UK drivers licence
+  retryMessageList2: you’ve entered your driving licence number correctly
+  retryMessageList3: days and months are in the right order in your date of birth, issue date and valid to date
+  retryMessageList4: you’ve left the middle names section blank if you do not have any middle names
 
 prove-another-way:
   title: Prove your identity another way

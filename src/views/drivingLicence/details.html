@@ -30,7 +30,11 @@
 {% set retryHtml %}
 <h2>{{ translate("drivingLicence.retryMessageHeading") }}</h2>
 <p>
-    {{ translate("drivingLicence.retryMessageParagraph1") }}
+    {% if (values.licenceIssuer == "DVA") %}
+        {{ translate("drivingLicence.retryMessageParagraph1DVA") }}
+    {% else %}
+        {{ translate("drivingLicence.retryMessageParagraph1") }}
+    {% endif %}
 </p>
 <p>
     {{ translate("drivingLicence.retryMessageParagraph2") }}
@@ -39,7 +43,6 @@
     <li>{{ translate("drivingLicence.retryMessageList1") }}</li>
     <li>{{ translate("drivingLicence.retryMessageList2") }}</li>
     <li>{{ translate("drivingLicence.retryMessageList3") }}</li>
-    <li>{{ translate("drivingLicence.retryMessageList4") }}</li>
 </ul>
 {% endset %}
 
@@ -120,10 +123,22 @@ html: translate("drivingLicence.drivingLicenceTryAnotherWay")
         }
         }) }}
 
-        {% if (values.licenceIssuer == "DVA") %}
-        {# user has DVA licence and therefore no issue date is required #}
+        {% if (values.licenceIssuer == "DVLA") %}
+
+        {{ hmpoText(ctx, {
+        id: "licenceIssuerDependent",
+        type: "hidden",
+        legend: "",
+        default: "DVLA"
+        }) }}
 
         {% else %}
+
+        {% endif %}
+
+
+        {% if (values.licenceIssuer == "DVLA") %}
+        {# user has DVA licence and therefore no issue date is required #}
 
         {{ hmpoDate(ctx, {
         id: "issueDate",
@@ -148,16 +163,16 @@ html: translate("drivingLicence.drivingLicenceTryAnotherWay")
         }
     }) }}
 
-    {% if (values.licenceIssuer == "DVA") %}
+    {% if (values.licenceIssuer == "DVLA") %}
     {# user has DVA licence and therefore no issue number is required #}
 
-    {% else %}
         {{ hmpoText(ctx, {
         id: "issueNumber",
         label: {
         classes: "govuk-label"
         }
         }) }}
+
     {% endif %}
 
         {{ hmpoText(ctx, {
