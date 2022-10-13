@@ -1,6 +1,6 @@
 drivingLicenceNumber:
-  label: Driving Licence number
-  hint: "This is the 8-16 digit number in the top right hand corner of the photo page in your driving licence"
+  label: Licence number
+  hint: "This is the long number in section 5 on your licence for example HARRI559146MJ931 "
   validation:
     default: "Enter the number as it appears on your driving licence"
     exactlength: "Your driving licence number should be 8-16 digits long"
@@ -8,7 +8,7 @@ drivingLicenceNumber:
     limit: "Driving licence numbers do not start with 16 – enter the number as it appears on your driving licence"
 issueNumber:
   label: Issue Number
-  hint: "This is the issue number on your driving licence"
+  hint: "This is the 2 digit number after the space in section 5 of your licence."
   validation:
     default: "Enter the number as it appears on your driving licence"
 
@@ -21,7 +21,7 @@ surname:
 
 firstName:
   label: Name
-  hint: "Your first name and any middle names in section 2 on your licence your driving licence"
+  hint: "This is in section 2 of your licence. You do not need to include your title."
   validation:
     default: "Enter your first name as it appears on your driving licence"
     maxlength: "Enter your first name as it appears on your driving licence"
@@ -68,7 +68,7 @@ expiryDate:
 
 postcode:
   label: Postcode
-  hint: "This is the your postal code"
+  hint: "Enter the postcode in the address in section 8 of your licence"
   validation:
     default: "Enter the postcode as it appears on your driving licence"
 
