@@ -47,7 +47,7 @@ govuk:
         - href: "https://signin.account.gov.uk/contact-us"
           text: "Support"
 drivingLicence:
-  title: Enter your details exactly as they appear on your UK Driving licence
+  title: Enter your details exactly as they appear on your UK driving licence
   serviceNameRequired: true
   drivingLicenceInformationContext: Your driving licence includes a lot of information that we can check to make sure that you are who you say you are.
   checkDetailsContext: We’ll check your details with DVLA to make sure your driving licence has not been cancelled or reported as lost or stolen.
