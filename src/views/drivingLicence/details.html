@@ -156,12 +156,23 @@ html: translate("drivingLicence.drivingLicenceTryAnotherWay")
         }
         }) }}
 
+    {% if (values.licenceIssuer == "DVLA") %}
     {{ hmpoText(ctx, {
         id: "drivingLicenceNumber",
         label: {
             classes: "govuk-label"
         }
     }) }}
+
+    {% else %}
+    {{ hmpoText(ctx, {
+        id: "dvaLicenceNumber",
+        label: {
+        classes: "govuk-label"
+        }
+    }) }}
+
+    {% endif %}
 
     {% if (values.licenceIssuer == "DVLA") %}
     {# user has DVA licence and therefore no issue number is required #}

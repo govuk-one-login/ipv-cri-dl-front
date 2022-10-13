@@ -18,6 +18,7 @@ class ValidateController extends BaseController {
         : firstName.split(" ").concat(middleNames.split(" "));
     const attributes = {
       drivingLicenceNumber: req.sessionModel.get("drivingLicenceNumber"),
+      dvaLicenceNumber: req.sessionModel.get("drivingLicenceNumber"),
       issueNumber: req.sessionModel.get("issueNumber"),
       postcode: req.sessionModel.get("postcode"),
       surname: req.sessionModel.get("surname"),

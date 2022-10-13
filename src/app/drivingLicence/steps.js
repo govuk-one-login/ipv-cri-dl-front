@@ -26,6 +26,7 @@ module.exports = {
       "issueDate",
       "expiryDate",
       "drivingLicenceNumber",
+      "dvaLicenceNumber",
       "issueNumber",
       "postcode",
       "licenceIssuerDependent",

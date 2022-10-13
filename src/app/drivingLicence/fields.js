@@ -47,7 +47,7 @@ module.exports = {
     validate: [
       "required",
       "date",
-      { type: "before", arguments: [new Date().toISOString().split("T")[0]] },
+      { type: "before", arguments: [new Date().toISOString().split("T")[0]] }
     ],
   },
   issueDate: {
@@ -56,7 +56,7 @@ module.exports = {
     validate: [
       "required",
       "date",
-      { type: "before", arguments: [new Date().toISOString().split("T")[0]] },
+      { type: "before", arguments: [new Date().toISOString().split("T")[0]] }
     ],
     dependent: {field: "licenceIssuerDependent", value: "DVLA"}
   },
@@ -72,14 +72,26 @@ module.exports = {
     validate: [
       "required",
       "date",
-      { type: "after", arguments: [new Date().toISOString().split("T")[0]] },
+      { type: "after", arguments: [new Date().toISOString().split("T")[0]] }
     ],
   },
   drivingLicenceNumber: {
     type: "text",
     journeyKey: "drivingLicenceNumber",
     validate: [
-      "required"
+      "required",
+      { type: "maxlength", arguments: [30] },
+      { type: "minlength", arguments: [30] },
+      { type: "regexDrivingLicence", fn: (value) => value.match(/^(?=.{16}$)[A-Za-z]{1,5}9{0,4}[0-9](?:[05][1-9]|[16][0-2])(?:[0][1-9]|[12][0-9]|3[01])[0-9](?:99|[A-Za-z][A-Za-z9])(?![IOQYZioqyz01_])\w[A-Za-z]{2}$/) }
+    ],
+    classes: "govuk-input--width-10",
+  },
+  dvaLicenceNumber: {
+    type: "text",
+    journeyKey: "dvaLicenceNumber",
+    validate: [
+      "required",
+      { type: "regexDrivingLicence", fn: (value) => value.match(/^[0-9]{8}$/) }
     ],
     classes: "govuk-input--width-10",
   },
@@ -87,7 +99,8 @@ module.exports = {
     type: "text",
     journeyKey: "issueNumber",
     validate: [
-      "required"
+      "required",
+      { type: "regexDrivingLicence", fn: (value) => value.match(/^[0-9]{2}$/) }
     ],
     dependent: {field: "licenceIssuerDependent", value: "DVLA"},
     classes: "govuk-input--width-10",
@@ -97,7 +110,7 @@ module.exports = {
     journeyKey: "postcode",
     validate: [
       "required",
-      { type: "regexPostcode", fn: (value) => value.match(/([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9][A-Za-z]?))))\s?[0-9][A-Za-z]{2})/) },
+      { type: "regexPostcode", fn: (value) => value.match(/([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9][A-Za-z]?))))\s?[0-9][A-Za-z]{2})/) }
     ],
     classes: "govuk-input--width-10",
   },
