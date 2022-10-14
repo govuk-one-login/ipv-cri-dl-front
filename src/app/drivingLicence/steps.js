@@ -24,6 +24,7 @@ module.exports = {
       "middleNames",
       "dateOfBirth",
       "issueDate",
+      "dateOfIssue",
       "expiryDate",
       "drivingLicenceNumber",
       "dvaLicenceNumber",

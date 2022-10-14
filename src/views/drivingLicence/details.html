@@ -68,9 +68,6 @@ classes:'driving-licence-message'
 html: translate("drivingLicence.drivingLicenceTryAnotherWay")
 }) }}
 
-
-
-
     {% call hmpoForm(ctx, {attributes: {onsubmit: 'window.disableFormSubmit()'} }) %}
 
     {{ hmpoText(ctx, {
@@ -145,8 +142,6 @@ html: translate("drivingLicence.drivingLicenceTryAnotherWay")
 
 
         {% if (values.licenceIssuer == "DVLA") %}
-        {# user has DVA licence and therefore no issue date is required #}
-
         {{ hmpoDate(ctx, {
         id: "issueDate",
         legend: {
@@ -154,14 +149,22 @@ html: translate("drivingLicence.drivingLicenceTryAnotherWay")
         }
         }) }}
 
-        {% endif %}
-
+        {% else %}
         {{ hmpoDate(ctx, {
-        id: "expiryDate",
+        id: "dateOfIssue",
         legend: {
         classes: "govuk-label"
         }
         }) }}
+
+        {% endif %}
+
+    {{ hmpoDate(ctx, {
+    id: "expiryDate",
+    legend: {
+    classes: "govuk-label"
+    }
+    }) }}
 
     {% if (values.licenceIssuer == "DVLA") %}
     {{ hmpoText(ctx, {
@@ -208,12 +211,44 @@ html: translate("drivingLicence.drivingLicenceTryAnotherWay")
                 }) }}
     {% endif %}
 
-    {{ hmpoSubmit(ctx, {id: 'submitButton'}) }}
+        {{ hmpoSubmit(ctx, {id: "continue", text: translate("buttons.next")}) }}
 
     {% endcall %}
 
 {% endblock %}
+{% block scripts %}
 
+{{ super ()}}
+
+<script nonce="{{ cspNonce }}">
+    var formSubmitted = false;
+
+    submitSpinner()
+
+    function delayDisableButton (button) {
+        button.className += ' button--spinner'
+        setTimeout(function() {
+            button.setAttribute('disabled', 'disabled')
+        }, 200);
+    }
+
+
+    function submitSpinner() {
+        var selects = document.getElementById('continue')
+
+        selects.addEventListener('click', function (event) {
+            if(!formSubmitted) {
+                formSubmitted = true;
+
+                delayDisableButton(event.target);
+            } else {
+                event.preventDefault()
+            }
+        })
+    }
+</script>
+
+{% endblock %}
 {# generate the specific footer items required for the PYI flows #}
 {% set footerNavItems = translate("govuk.footerNavItems") %}
 
