@@ -3,23 +3,22 @@ drivingLicenceNumber:
   hint: "This is the long number in section 5 on your licence for example HARRI559146MJ931"
   validation:
     default: "Enter the number as it appears on your driving licence"
-    exactLength: "Your licence number should be 16 characters long"
+    exactlength: "Your licence number should be 16 characters long"
     numeric: "Your licence number should not include any symbols or spaces"
     limit: "Driving licence numbers do not start with 16 – enter the number as it appears on your driving licence"
 dvaLicenceNumber:
   label: Licence number
-  hint: "This is the long number in section 5 on your licence for example HARRI559146MJ931"
+  hint: "This is the long number in section 5 on your licence"
   validation:
     default: "Enter the number as it appears on your driving licence"
-    exactLength: "Your licence number should be 8 characters long"
+    exactlength: "Your licence number should be 8 characters long"
     numeric: "Your licence number should not include any symbols or spaces"
-    limit: "Driving licence numbers do not start with 16 – enter the number as it appears on your driving licence"
 issueNumber:
   label: Issue number
   hint: "This is the 2 digit number after the space in section 5 of your licence"
   validation:
     default: "Enter the issue number as it appears on your driving licence"
-    exactLength: "Your issue number should be 2 numbers long"
+    exactlength: "Your issue number should be 2 numbers long"
     regexDrivingLicence: "Your issue number should not include any symbols or spaces"
 
 surname:
@@ -83,7 +82,7 @@ postcode:
     default: "Enter the postcode as it appears on your driving licence"
     maxlength: "Your postcode should be between 5 and 7 characters"
     minlength: "Your postcode should be between 5 and 7 characters"
-    regexDrivingLicence: "Your postcode should only include numbers and letters"
+    regexPostcode: "Your postcode should only include numbers and letters"
 
 proveAnotherWayRadio:
   label: What would you like to do?

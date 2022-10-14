@@ -126,13 +126,20 @@ html: translate("drivingLicence.drivingLicenceTryAnotherWay")
         {% if (values.licenceIssuer == "DVLA") %}
 
         {{ hmpoText(ctx, {
-        id: "licenceIssuerDependent",
+        id: "dvlaDependent",
         type: "hidden",
         legend: "",
         default: "DVLA"
         }) }}
 
         {% else %}
+
+        {{ hmpoText(ctx, {
+        id: "dvaDependent",
+        type: "hidden",
+        legend: "",
+        default: "DVA"
+        }) }}
 
         {% endif %}
 
