@@ -60,6 +60,16 @@ module.exports = {
     ],
     dependent: {field: "dvlaDependent", value: "DVLA"}
   },
+  dateOfIssue: {
+    type: "date",
+    journeyKey: "dateOfIssue",
+    validate: [
+      "required",
+      "date",
+      { type: "before", arguments: [new Date().toISOString().split("T")[0]] }
+    ],
+    dependent: {field: "dvaDependent", value: "DVA"}
+  },
   dvlaDependent: {
      type: "hidden",
      label: "",

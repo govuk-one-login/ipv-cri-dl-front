@@ -17,16 +17,15 @@ class ValidateController extends BaseController {
         ? firstName.split(" ")
         : firstName.split(" ").concat(middleNames.split(" "));
     const attributes = {
-      drivingLicenceNumber: req.sessionModel.get("drivingLicenceNumber"),
-      dvaLicenceNumber: req.sessionModel.get("drivingLicenceNumber"),
-      issueNumber: req.sessionModel.get("issueNumber"),
+      drivingLicenceNumber: req.sessionModel.get("dvaLicenceNumber") || req.sessionModel.get("drivingLicenceNumber"),
+      issueNumber: req.sessionModel.get("issueNumber") || null,
       postcode: req.sessionModel.get("postcode"),
       surname: req.sessionModel.get("surname"),
       forenames: forenames,
       dateOfBirth: req.sessionModel.get("dateOfBirth"),
       expiryDate: req.sessionModel.get("expiryDate"),
-      issueDate: req.sessionModel.get("issueDate"),
-      dateOfIssue: req.sessionModel.get("issueDate"),
+      issueDate: req.sessionModel.get("issueDate") || null,
+      dateOfIssue: req.sessionModel.get("dateOfIssue"),
       licenceIssuer: req.sessionModel.get("licenceIssuer"),
     };
 
