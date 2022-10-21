@@ -53,6 +53,13 @@ dateOfBirth:
     default: "Enter your date of birth as it appears on your driving licence"
     before: "Your date of birth must be in the past"
     dvlaChecker: "Enter your date of birth as it appears on your driving licence"
+dvaDateOfBirth:
+  legend: Date of birth
+  hint: "For example, 5 9 1973"
+  validation:
+    default: "Enter your date of birth as it appears on your driving licence"
+    before: "Your date of birth must be in the past"
+    dvlaChecker: "Enter your date of birth as it appears on your driving licence"
 
 issueDate:
   legend: Issue date

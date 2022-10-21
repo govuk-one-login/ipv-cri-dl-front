@@ -113,14 +113,14 @@ html: translate("drivingLicence.drivingLicenceTryAnotherWay")
         {% endcall %}
     </div>
 
+        {% if (values.licenceIssuer == "DVLA") %}
+
         {{ hmpoDate(ctx, {
         id: "dateOfBirth",
         legend: {
         classes: "govuk-label"
         }
         }) }}
-
-        {% if (values.licenceIssuer == "DVLA") %}
 
         {{ hmpoText(ctx, {
         id: "dvlaDependent",
@@ -130,6 +130,13 @@ html: translate("drivingLicence.drivingLicenceTryAnotherWay")
         }) }}
 
         {% else %}
+
+        {{ hmpoDate(ctx, {
+        id: "dvaDateOfBirth",
+        legend: {
+        classes: "govuk-label"
+        }
+        }) }}
 
         {{ hmpoText(ctx, {
         id: "dvaDependent",

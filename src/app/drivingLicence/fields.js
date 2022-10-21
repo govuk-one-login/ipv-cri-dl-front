@@ -54,12 +54,23 @@ module.exports = {
       "required",
       "date",
       { type: "before", arguments: [new Date().toISOString().split("T")[0]] },
-//      {
-//        type: "dvlaChecker",
-//        ...dvlaValidatorObj,
-//      }
+      {
+        type: "dvlaChecker",
+        ...dvlaValidatorObj,
+      }
     ],
+    dependent: {field: "dvlaDependent", value: "DVLA"}
   },
+  dvaDateOfBirth: {
+       type: "date",
+       journeyKey: "dvaDateOfBirth",
+       validate: [
+         "required",
+         "date",
+         { type: "before", arguments: [new Date().toISOString().split("T")[0]] }
+       ],
+       dependent: {field: "dvaDependent", value: "DVA"}
+     },
   issueDate: {
     type: "date",
     journeyKey: "issueDate",
