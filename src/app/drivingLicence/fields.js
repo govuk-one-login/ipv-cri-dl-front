@@ -54,10 +54,10 @@ module.exports = {
       "required",
       "date",
       { type: "before", arguments: [new Date().toISOString().split("T")[0]] },
-      {
-        type: "dvlaChecker",
-        ...dvlaValidatorObj,
-      }
+//      {
+//        type: "dvlaChecker",
+//        ...dvlaValidatorObj,
+//      }
     ],
   },
   issueDate: {
