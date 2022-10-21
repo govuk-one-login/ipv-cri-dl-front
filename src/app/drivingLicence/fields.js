@@ -1,12 +1,18 @@
-const { firstNameMiddleNameLengthValidator } = require("./fieldsHelper");
+const fields = require("./fieldsHelper");
 
 const firstNameMiddleNameLengthValidatorObj = {
-  fn: firstNameMiddleNameLengthValidator,
+  fn: fields.firstNameMiddleNameLengthValidator,
   arguments: [30, "firstName", "middleNames"],
 };
 
+const dvlaValidatorObj = {
+  fn: fields.dvlaValidator,
+  arguments: ["dateOfBirth", "drivingLicenceNumber"]
+};
+
 module.exports = {
-  firstNameMiddleNameLengthValidator: firstNameMiddleNameLengthValidator,
+  firstNameMiddleNameLengthValidator: fields.firstNameMiddleNameLengthValidator,
+  dvlaValidator: fields.dvlaValidator,
   surname: {
       type: "text",
       validate: [
@@ -47,7 +53,11 @@ module.exports = {
     validate: [
       "required",
       "date",
-      { type: "before", arguments: [new Date().toISOString().split("T")[0]] }
+      { type: "before", arguments: [new Date().toISOString().split("T")[0]] },
+      {
+        type: "dvlaChecker",
+        ...dvlaValidatorObj,
+      }
     ],
   },
   issueDate: {
@@ -97,7 +107,11 @@ module.exports = {
     validate: [
       "required",
       { type: "exactlength", arguments: [16] },
-      { type: "regexDrivingLicence", fn: (value) => value.match(/^(?=.{16}$)[A-Za-z]{1,5}9{0,4}[0-9](?:[05][1-9]|[16][0-2])(?:[0][1-9]|[12][0-9]|3[01])[0-9](?:99|[A-Za-z][A-Za-z9])(?![IOQYZioqyz01_])\w[A-Za-z]{2}$/) }
+      { type: "regexDrivingLicence", fn: (value) => value.match(/^[A-Za-z]{1,5}9{0,4}[0-9]{6}[A-Za-z]{2}[A-Za-z0-9]{3}$/) },
+      {
+        type: "dvlaChecker",
+        ...dvlaValidatorObj,
+      }
     ],
     dependent: {field: "dvlaDependent", value: "DVLA"},
     classes: "govuk-input--width-10",
