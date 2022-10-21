@@ -32,4 +32,48 @@ describe("custom validation fields test", () => {
 
     expect(validator(1, 30, "firstName", "middleNames")).to.be.false;
   });
+
+  it("should be true when licence number matches DOB", () => {
+    const licenceNo = "HARRI559146MJ931"
+    const validator = fields.dvlaValidator.bind({
+      values: {
+        dob: "1956-09-14",
+      },
+    });
+
+    expect(validator(licenceNo, "dob")).to.be.true;
+  });
+
+  it("should be false when licence number does not match DOB year", () => {
+    const licenceNo = "HARRI559146MJ931"
+    const validator = fields.dvlaValidator.bind({
+      values: {
+        dob: "1958-09-14",
+      },
+    });
+
+    expect(validator(licenceNo, "dob")).to.be.false;
+  });
+
+  it("should be false when licence number does not match DOB month", () => {
+    const licenceNo = "HARRI559146MJ931"
+    const validator = fields.dvlaValidator.bind({
+      values: {
+        dob: "1956-10-14",
+      },
+    });
+
+    expect(validator(licenceNo, "dob")).to.be.false;
+  });
+
+  it("should be false when licence number does not match DOB date", () => {
+    const licenceNo = "HARRI559146MJ931"
+    const validator = fields.dvlaValidator.bind({
+      values: {
+        dob: "1956-09-16",
+      },
+    });
+
+    expect(validator(licenceNo, "dob")).to.be.false;
+  });
 });

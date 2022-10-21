@@ -22,7 +22,7 @@ class ValidateController extends BaseController {
       postcode: req.sessionModel.get("postcode"),
       surname: req.sessionModel.get("surname"),
       forenames: forenames,
-      dateOfBirth: req.sessionModel.get("dateOfBirth"),
+      dateOfBirth: req.sessionModel.get("dvaDateOfBirth") || req.sessionModel.get("dateOfBirth"),
       expiryDate: req.sessionModel.get("expiryDate"),
       issueDate: req.sessionModel.get("issueDate") || null,
       dateOfIssue: req.sessionModel.get("dateOfIssue"),

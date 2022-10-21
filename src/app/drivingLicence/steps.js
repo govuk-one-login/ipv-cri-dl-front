@@ -23,6 +23,7 @@ module.exports = {
       "firstName",
       "middleNames",
       "dateOfBirth",
+      "dvaDateOfBirth",
       "issueDate",
       "dateOfIssue",
       "expiryDate",
