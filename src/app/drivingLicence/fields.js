@@ -18,7 +18,7 @@ module.exports = {
       validate: [
         "required",
         { type: "maxlength", arguments: [30] },
-        { type: "regexDrivingLicence", fn: (value) => value.match(/^[a-zA-Z .'-]*$/) },
+        { type: "regexSurname", fn: (value) => value.match(/^[a-zA-Z .'-]*$/) },
       ],
       journeyKey: "surname",
     },
@@ -27,7 +27,7 @@ module.exports = {
       validate: [
         "required",
         { type: "maxlength", arguments: [30] },
-        { type: "regexDrivingLicence", fn: (value) => value.match(/^[a-zA-Z .'-]*$/) },
+        { type: "regexFirstName", fn: (value) => value.match(/^[a-zA-Z .'-]*$/) },
         {
           type: "firstNameMiddleNameLength",
           ...firstNameMiddleNameLengthValidatorObj,
@@ -40,7 +40,7 @@ module.exports = {
       journeyKey: "middleNames",
       validate: [
         { type: "maxlength", arguments: [30] },
-        { type: "regexDrivingLicence", fn: (value) => value.match(/^[a-zA-Z .'-]*$/) },
+        { type: "regexMiddleNames", fn: (value) => value.match(/^[a-zA-Z .'-]*$/) },
         {
           type: "firstNameMiddleNameLength",
           ...firstNameMiddleNameLengthValidatorObj,
@@ -118,6 +118,7 @@ module.exports = {
     validate: [
       "required",
       { type: "exactlength", arguments: [16] },
+      { type: "regexSpecialCharacters", fn: (value) => value.match(/^[A-Za-z0-9]*$/) },
       { type: "regexDrivingLicence", fn: (value) => value.match(/^[A-Za-z]{1,5}9{0,4}[0-9]{6}[A-Za-z]{2}[A-Za-z0-9]{3}$/) },
       {
         type: "dvlaChecker",
@@ -132,6 +133,7 @@ module.exports = {
     journeyKey: "dvaLicenceNumber",
     validate: [
       "required",
+      { type: "numeric"},
       { type: "exactlength", arguments: [8] },
       { type: "regexDrivingLicence", fn: (value) => value.match(/^[0-9]{8}$/) }
     ],
@@ -144,7 +146,7 @@ module.exports = {
     validate: [
       "required",
       { type: "exactlength", arguments: [2] },
-      { type: "regexDrivingLicence", fn: (value) => value.match(/^[0-9]{2}$/) }
+      { type: "regexIssueNumber", fn: (value) => value.match(/^[0-9]{2}$/) }
     ],
     dependent: {field: "dvlaDependent", value: "DVLA"},
     classes: "govuk-input--width-10",

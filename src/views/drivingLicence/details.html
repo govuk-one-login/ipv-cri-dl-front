@@ -129,6 +129,13 @@ html: translate("drivingLicence.drivingLicenceTryAnotherWay")
         default: "DVLA"
         }) }}
 
+        {{ hmpoDate(ctx, {
+        id: "issueDate",
+        legend: {
+        classes: "govuk-label"
+        }
+        }) }}
+
         {% else %}
 
         {{ hmpoDate(ctx, {
@@ -145,18 +152,6 @@ html: translate("drivingLicence.drivingLicenceTryAnotherWay")
         default: "DVA"
         }) }}
 
-        {% endif %}
-
-
-        {% if (values.licenceIssuer == "DVLA") %}
-        {{ hmpoDate(ctx, {
-        id: "issueDate",
-        legend: {
-        classes: "govuk-label"
-        }
-        }) }}
-
-        {% else %}
         {{ hmpoDate(ctx, {
         id: "dateOfIssue",
         legend: {
@@ -181,6 +176,13 @@ html: translate("drivingLicence.drivingLicenceTryAnotherWay")
         }
     }) }}
 
+        {{ hmpoText(ctx, {
+        id: "issueNumber",
+        label: {
+        classes: "govuk-label"
+        }
+        }) }}
+
     {% else %}
     {{ hmpoText(ctx, {
         id: "dvaLicenceNumber",
@@ -188,18 +190,6 @@ html: translate("drivingLicence.drivingLicenceTryAnotherWay")
         classes: "govuk-label"
         }
     }) }}
-
-    {% endif %}
-
-    {% if (values.licenceIssuer == "DVLA") %}
-    {# user has DVA licence and therefore no issue number is required #}
-
-        {{ hmpoText(ctx, {
-        id: "issueNumber",
-        label: {
-        classes: "govuk-label"
-        }
-        }) }}
 
     {% endif %}
 
