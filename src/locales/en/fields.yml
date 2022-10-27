@@ -6,7 +6,7 @@ drivingLicenceNumber:
     exactlength: "Your licence number should be 16 characters long"
     numeric: "Your licence number should not include any symbols or spaces"
     limit: "Driving licence numbers do not start with 16 – enter the number as it appears on your driving licence"
-    dvlaChecker: "Enter the number as it appears on your driving licence"
+    dvlaChecker: "Enter the number exactly as it appears on your driving licence"
     regexSpecialCharacters: "Your licence number should not include any symbols or spaces"
 dvaLicenceNumber:
   label: Licence number
@@ -53,7 +53,7 @@ dateOfBirth:
   validation:
     default: "Enter your date of birth as it appears on your driving licence"
     before: "Your date of birth must be in the past"
-    dvlaChecker: "Enter your date of birth as it appears on your driving licence"
+    dvlaChecker: "Check you've entered your date of birth correctly"
 dvaDateOfBirth:
   legend: Date of birth
   hint: "For example, 5 9 1973"
