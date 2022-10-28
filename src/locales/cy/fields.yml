@@ -1,0 +1,128 @@
+drivingLicenceNumber:
+  label: Rhif trwydded
+  hint: "Dyma'r rhif hir yn adran 5 ar eich trwydded"
+  validation:
+    default: "Rhowch y rhif fel y mae'n ymddangos ar eich trwydded yrru"
+    exactlength: "Dylai rhif eich trwydded fod yn 16 nod o hyd"
+    numeric: "Your licence number should not include any symbols or spaces"
+    limit: "Driving licence numbers do not start with 16 – enter the number as it appears on your driving licence"
+    dvlaChecker: "Rhowch y rhif yn union fel mae'n ymddangos ar eich trwydded yrru"
+    regexSpecialCharacters: "Ni ddylai rhif eich trwydded gynnwys unrhyw symbolau neu ofodau"
+dvaLicenceNumber:
+  label: Rhif trwydded
+  hint: "Dyma'r rhif hir yn adran 5 ar eich trwydded"
+  validation:
+    default: "Rhowch y rhif fel y mae'n ymddangos ar eich trwydded yrru"
+    exactlength: "Dylai rhif eich trwydded fod yn 8 nod o hyd"
+    numeric: "Ni ddylai rhif eich trwydded gynnwys unrhyw symbolau neu ofodau"
+issueNumber:
+  label: Rhif cyhoeddi
+  hint: "Dyma'r rhif 2 ddigid ar ôl y gofod yn adran 5 o'ch trwydded"
+  validation:
+    default: "Rhowch y rhif cyhoeddi fel y mae'n ymddangos ar eich trwydded yrru"
+    exactlength: "Dylai eich rhif cyhoeddi fod yn 2 rif o hyd"
+    regexIssueNumber: "Ni ddylai eich rhif cyhoeddi gynnwys unrhyw symbolau neu ofodau"
+
+surname:
+  label: Enw olaf
+  validation:
+    default: "Rhowch eich enw olaf fel y mae'n ymddangos ar eich trwydded yrru"
+    maxlength: "Rhowch eich enw olaf fel y mae'n ymddangos ar eich trwydded yrru"
+    regexSurname: "Rhowch eich enw olaf fel y mae'n ymddangos ar eich trwydded yrru"
+
+firstName:
+  label: Enw cyntaf
+  hint: "Mae hwn yn adran 2 o'ch trwydded. Nid oes angen i chi gynnwys eich teitl."
+  validation:
+    default: "Rhowch eich enw cyntaf fel y mae'n ymddangos ar eich trwydded yrru"
+    maxlength: "Rhowch eich enw cyntaf fel y mae'n ymddangos ar eich trwydded yrru"
+    regexFirstName: "Rhowch eich enw cyntaf fel y mae'n ymddangos ar eich trwydded yrru"
+    firstNameMiddleNameLength: "Enter your first and middle names as they appear on your driving licence"
+
+middleNames:
+  label: Enwau canol
+  hint: "Gadewch hyn yn wag os nad oes gennych unrhyw enwau canol"
+  validation:
+    maxlength: "Rhowch unrhyw enwau canol fel y maent yn ymddangos ar eich trwydded yrru"
+    regexMiddleNames: "Rhowch unrhyw enwau canol fel y maent yn ymddangos ar eich trwydded yrru"
+    firstNameMiddleNameLength: "Rhowch unrhyw enwau canol fel y maent yn ymddangos ar eich trwydded yrru"
+
+dateOfBirth:
+  legend: Dyddiad geni
+  hint: "Er enghraifft, 5 9 1973"
+  validation:
+    default: "Rhowch eich dyddiad geni fel y mae'n ymddangos ar eich trwydded yrru"
+    before: "Rhaid i'ch dyddiad geni fod yn y gorffennol"
+    dvlaChecker: "Gwiriwch eich bod wedi rhoi eich dyddiad geni yn gywir"
+dvaDateOfBirth:
+  legend: Dyddiad geni
+  hint: "Er enghraifft, 5 9 1973"
+  validation:
+    default: "Rhowch eich dyddiad geni fel y mae'n ymddangos ar eich trwydded yrru"
+    before: "Rhaid i'ch dyddiad geni fod yn y gorffennol"
+    dvlaChecker: "Gwiriwch eich bod wedi rhoi eich dyddiad geni yn gywir"
+
+issueDate:
+  legend: Dyddiad cyhoeddi
+  hint: "Dyma'r dyddiad yn adran 4a o'ch trwydded, er enghraifft 27 5 2019"
+  validation:
+    default: "Rhowch y dyddiad fel y mae'n ymddangos ar eich trwydded yrru"
+    before: "Rhaid i ddyddiad cyhoeddi fod yn y gorffennol"
+
+dateOfIssue:
+  legend: Dyddiad cyhoeddi
+  hint: "Dyma'r dyddiad yn adran 4a o'ch trwydded, er enghraifft 27 5 2019"
+  validation:
+    default: "Rhowch eich dyddiad geni fel y mae'n ymddangos ar eich trwydded yrru"
+    before: "Rhaid i'ch dyddiad geni fod yn y gorffennol"
+
+expiryDate:
+  legend: Yn ddilys tan
+  hint: "Dyma'r dyddiad yn adran 4b o'ch trwydded, er enghraifft 27 5 2019"
+  validation:
+    default: "Rhowch y dyddiad fel y mae'n ymddangos ar eich trwydded yrru"
+    after: "Ni allwch ddefnyddio trwydded yrru sydd wedi dod i ben"
+
+"date-day":
+  label: Diwrnod
+
+"date-month":
+  label: Mis
+
+"date-year":
+  label: Blwyddyn
+
+postcode:
+  label: Cod post
+  hint: "Rhowch y cod post yn y cyfeiriad yn adran 8 o'ch trwydded"
+  validation:
+    default: "Rhowch eich cod post"
+    maxlength: "Dylai eich rhowch eich cod post fod rhwng 5 a 7 nod"
+    minlength: "Dylai eich rhowch eich cod post fod rhwng 5 a 7 nod"
+    regexPostcode: "Dylai eich rhowch eich cod post ond cynnwys rhifau a llythrennau yn unig"
+
+proveAnotherWayRadio:
+  label: Beth hoffech chi ei wneud?
+  validation:
+    required: Mae'n rhaid i chi ddewis opsiwn i barhau
+  items:
+    proveAnotherWay:
+      label: Profi pwy ydych chi mewn ffordd arall
+      value: continue
+    retry:
+      label: Ceisiwch roi manylion eich pasbort a phrofi pwy ydych chi gyda chyfrif GOV.UK
+      value: retry
+
+licenceIssuerRadio:
+  validation:
+    required: Mae'n rhaid i chi ddewis opsiwn i barhau
+  items:
+    DVLA:
+      label: DVLA
+      value: DVLA
+    DVA:
+      label: DVA
+      value: DVA
+    noLicence:
+      label: Nid oes gennyf drwydded yrru y DU
+      value: noLicence

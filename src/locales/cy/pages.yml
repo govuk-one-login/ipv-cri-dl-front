@@ -1,0 +1,11 @@
+# title is managed in default.yml
+prove-another-way:
+  title: Profi pwy ydych chi mewn ffordd arall
+  content:
+    - Mae'n rhaid cael pasbort y DU i brofi pwy ydych chi gyda chyfrif GOV.UK. Os nad oes gennych un neu os na allwch gofio eich manylion, gallwch brofi pwy ydych chi mewn ffordd arall.
+    - Efallai y bydd hyn yn cymryd mwy na 10 munud i chi..
+
+licence-issuer:
+  title: Pwy wnaeth gyhoeddi eich trwydded yrru y DU?
+  content:
+    - Gallwch ddod o hyd i hwn yn adran 4c o'ch trwydded yrru. Bydd naill ai'n dweud DVLA (Asiantaeth Trwyddedu Gyrru a Cherbydau) neu DVA (Asiantaeth Gyrrwyr a Cherbydau).

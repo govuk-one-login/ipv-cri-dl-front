@@ -1,0 +1,74 @@
+buttons:
+  authorizeAndReturn: Awdurdodi a Dychwelyd
+  next: Parhau
+  cancel: Canslo
+govuk:
+  phaseBanner:
+    tag: beta
+    content: TMae hwn yn wasanaeth newydd – <a href="https://signin.account.gov.uk/contact-us" class="govuk-link" rel="noopener" target="_blank">bydd eich adborth (agor mewn tab newydd)</a> yn ein helpu i'w wella.
+  serviceName: " "
+  backLink: Back
+  errorSummaryTitle: Mae problem
+  error: Gwall
+  warning: Rhybudd
+  skipLink: Neidio i'r prif gynnwys
+  betaBannerRequired: true
+  betaBannerContent:
+    betaBannerContentLabel: beta
+    betaBannerContentHTML: Mae hwn yn wasanaeth newydd – bydd eich <a class="govuk-link" rel="noopener" target="_blank" href="https://signin.account.gov.uk/contact-us">adborth (agor mewn tab newydd)</a>  yn ein helpu i''w wella.
+  cookie:
+    cookieBanner:
+      title: Cwcis ar gyfrif GOV.UK
+      heading: Cwcis ar gyfrif GOV.UK
+      paragraph1: Rydym yn defnyddio rhai cwcis hanfodol i wneud i'r gwasanaeth hwn weithio.
+      paragraph2: Hoffem osod cwcis ychwanegol er mwyn i ni allu cofio eich gosodiadau, deall sut rydych yn defnyddio'r gwasanaeth a gwneud gwelliannau.
+      changeCookiePreferencesLink: newid eich gosodiadau cwcis"
+      cookieBannerAccept:
+        paragraph1: Rydych wedi derbyn cwcis ychwanegol. Gallwch
+        paragraph2:  unrhyw bryd."
+      cookieBannerReject:
+        paragraph1: Rydych wedi gwrthod cwcis ychwanegol. Gallwch
+        paragraph2:  unrhyw bryd.
+      buttonAcceptText: Derbyn cwcis dadansoddi
+      buttonRejectText: Gwrthod cwcis dadansoddi
+      linkViewCookies: Gweld cwcis
+      cookieBannerHideLink: Cuddio'r neges yma
+  footerNavItems:
+    meta:
+      items:
+        - href: "https://signin.account.gov.uk/accessibility-statement"
+          text: "Accessibility statement"
+        - href: "https://signin.account.gov.uk/cookies"
+          text: "Cookies"
+        - href: "https://signin.account.gov.uk/terms-and-conditions"
+          text: "Terms and conditions"
+        - href: "https://signin.account.gov.uk/privacy-notice"
+          text: "Privacy notice"
+        - href: "https://signin.account.gov.uk/contact-us"
+          text: "Support"
+drivingLicence:
+  title: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru
+  serviceNameRequired: true
+  drivingLicenceInformationContext: Your driving licence includes a lot of information that we can check to make sure that you are who you say you are.
+  checkDetailsContext: Byddwn yn gwirio eich manylion gyda'r DVLA i sicrhau nad yw eich trwydded yrru wedi cael ei chanslo na'i hadrodd fel un sydd ar goll neu wedi ei dwyn.
+  checkDetailsContextDVA: Byddwn yn gwirio eich manylion gyda'r DVA i sicrhau nad yw eich trwydded yrru wedi cael ei chanslo na'i hadrodd fel un sydd ar goll neu wedi ei dwyn.
+  drivingLicenceTryAnotherWay: Os nad oes gennych drwydded yrru y DU neu os na allwch gofio'ch manylion, gallwch <a href="/oauth2/callback" class="govuk-link">brofi pwy ydych chi mewn ffordd arall</a> yn lle.
+  drivingLicenceGivenNames: Enwau a roddwyd
+  retryTitle: Gwiriwch bod eich manylion yn paru gyda beth sydd ar eich trwydded yrru y DU
+  retryWarningLabel: Warning
+  retryWarningText: Ni fyddwch yn gallu newid eich manylion eto os byddwch yn gwneud camgymeriad.
+  retryMessageHeading: Nid oeddem yn gallu dod o hyd i'ch manylion
+  retryMessageParagraph1: Roedd yna broblem wrth i ni wirio eich manylion gyda'r DVLA.
+  retryMessageParagraph1DVA: Roedd yna broblem wrth i ni wirio eich manylion gyda'r DVA.
+  retryMessageParagraph2: "Edrychwch dros eich manylion eto. Cofiwch wneud yn siwr:"
+  retryMessageList1: bod eich trwydded yrru yn drwydded yrru y DU
+  retryMessageList2: rydych wedi rhoi eich rhif trwydded yrru yn gywir
+  retryMessageList3: bod dyddiau a misoedd yn y drefn gywir yn eich dyddiad geni, dyddiad cyhoeddi a dyddiad dilys tan
+  retryMessageList4: you’ve left the middle names section blank if you do not have any middle names
+
+prove-another-way:
+  title: Profi pwy ydych chi mewn ffordd arall
+
+licence-issuer:
+  title: Pwy wnaeth gyhoeddi eich trwydded yrru y DU?
+  content: Gallwch ddod o hyd i hwn yn adran 4c o'ch trwydded yrru. Bydd naill ai'n dweud DVLA (Asiantaeth Trwyddedu Gyrru a Cherbydau) neu DVA (Asiantaeth Gyrrwyr a Cherbydau).
