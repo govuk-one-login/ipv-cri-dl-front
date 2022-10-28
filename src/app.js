@@ -72,6 +72,11 @@ const { app, router } = setup({
     publicImages: "/public/images",
   },
   publicDirs: ["../dist/public"],
+    translation: {
+      allowedLangs: ["en", "cy"],
+      fallbackLang: ["en"],
+      cookie: { name: "lng" },
+    },
   publicImagesDirs: ["../dist/public/images"],
   views: [
     path.resolve(
