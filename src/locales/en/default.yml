@@ -54,6 +54,7 @@ drivingLicence:
   checkDetailsContextDVA: We’ll check your details with DVA to make sure your driving licence has not been cancelled or reported as lost or stolen.
   drivingLicenceTryAnotherWay: If you do not have a UK driving licence or you cannot remember your details, you can <a href="/oauth2/callback" class="govuk-link">prove your identity another way</a> instead.
   drivingLicenceGivenNames: Given names
+  retryBannerTitle: Error
   retryTitle: Check your details match what’s on your UK driving licence
   retryWarningLabel: Warning
   retryWarningText: You will not be able to change your details again if you make a mistake this time

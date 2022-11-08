@@ -54,6 +54,7 @@ drivingLicence:
   checkDetailsContextDVA: Byddwn yn gwirio eich manylion gyda'r DVA i sicrhau nad yw eich trwydded yrru wedi cael ei chanslo na'i hadrodd fel un sydd ar goll neu wedi ei dwyn.
   drivingLicenceTryAnotherWay: Os nad oes gennych drwydded yrru y DU neu os na allwch gofio'ch manylion, gallwch <a href="/oauth2/callback" class="govuk-link">brofi pwy ydych chi mewn ffordd arall</a> yn lle.
   drivingLicenceGivenNames: Enwau a roddwyd
+  retryBannerTitle: Gwall
   retryTitle: Gwiriwch bod eich manylion yn paru gyda beth sydd ar eich trwydded yrru y DU
   retryWarningLabel: Warning
   retryWarningText: Ni fyddwch yn gallu newid eich manylion eto os byddwch yn gwneud camgymeriad.

@@ -171,7 +171,7 @@ module.exports = {
       type: "radios",
       label: "",
       legend: "",
-      items: [{value:"DVLA"}, {value:"DVA"}, {divider: "Or"}, {value:"noLicence"}],
+      items: [{value:"DVLA"}, {value:"DVA"}, {divider: "or"}, {value:"noLicence"}],
       validate: ["required"],
     },
 };
