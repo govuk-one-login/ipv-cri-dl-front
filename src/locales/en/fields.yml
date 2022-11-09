@@ -2,17 +2,17 @@ drivingLicenceNumber:
   label: Licence number
   hint: "This is the long number in section 5 on your licence for example HARRI559146MJ931"
   validation:
-    default: "Enter the number as it appears on your driving licence"
+    default: "Enter the number exactly as it appears on your driving licence"
     exactlength: "Your licence number should be 16 characters long"
     numeric: "Your licence number should not include any symbols or spaces"
-    limit: "Driving licence numbers do not start with 16 – enter the number as it appears on your driving licence"
+    limit: "Driving licence numbers do not start with 16 – Enter the number exactly as it appears on your driving licence"
     dvlaChecker: "Enter the number exactly as it appears on your driving licence"
-    regexSpecialCharacters: "Your licence number should not include any symbols or spaces"
+    regexSpecialCharacters: "Enter the number exactly as it appears on your driving licence"
 dvaLicenceNumber:
   label: Licence number
   hint: "This is the long number in section 5 on your licence"
   validation:
-    default: "Enter the number as it appears on your driving licence"
+    default: "Enter the number exactly as it appears on your driving licence"
     exactlength: "Your licence number should be 8 characters long"
     numeric: "Your licence number should not include any symbols or spaces"
 issueNumber:
@@ -21,7 +21,7 @@ issueNumber:
   validation:
     default: "Enter the issue number as it appears on your driving licence"
     exactlength: "Your issue number should be 2 numbers long"
-    regexIssueNumber: "Your issue number should not include any symbols or spaces"
+    regexIssueNumber: "Enter the issue number as it appears on your driving licence"
 
 surname:
   label: Last name
@@ -37,7 +37,7 @@ firstName:
     default: "Enter your first name as it appears on your driving licence"
     maxlength: "Enter your first name as it appears on your driving licence"
     regexFirstName: "Enter your first name as it appears on your driving licence"
-    firstNameMiddleNameLength: "Enter your first and middle names as they appear on your driving licence"
+    firstNameMiddleNameLength: "Enter your first name as it appears on your driving licence"
 
 middleNames:
   label: Middle names
@@ -96,10 +96,11 @@ postcode:
   label: Postcode
   hint: "Enter the postcode in the address in section 8 of your licence"
   validation:
-    default: "Enter the postcode as it appears on your driving licence"
+    default: "Enter your postcode"
     maxlength: "Your postcode should be between 5 and 7 characters"
     minlength: "Your postcode should be between 5 and 7 characters"
-    regexPostcode: "Your postcode should only include numbers and letters"
+    regexPostcodeAlpha: "Your postcode should only include numbers and letters"
+    regexPostcodeUK: "Enter a UK postcode"
 
 proveAnotherWayRadio:
   label: What would you like to do?
