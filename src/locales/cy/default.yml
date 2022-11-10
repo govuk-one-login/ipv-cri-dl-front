@@ -5,7 +5,7 @@ buttons:
 govuk:
   phaseBanner:
     tag: beta
-    content: TMae hwn yn wasanaeth newydd – <a href="https://signin.account.gov.uk/contact-us" class="govuk-link" rel="noopener" target="_blank">bydd eich adborth (agor mewn tab newydd)</a> yn ein helpu i'w wella.
+    content: Mae hwn yn wasanaeth newydd – <a href="https://signin.account.gov.uk/contact-us" class="govuk-link" rel="noopener" target="_blank">bydd eich adborth (agor mewn tab newydd)</a> yn ein helpu i'w wella.
   serviceName: " "
   backLink: Back
   errorSummaryTitle: Mae problem

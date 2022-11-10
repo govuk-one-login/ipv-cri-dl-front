@@ -77,7 +77,15 @@ module.exports = {
     validate: [
       "required",
       "date",
-      { type: "before", arguments: [new Date().toISOString().split("T")[0]] }
+      { type: "before", arguments: [
+          new Date(
+            new Date().getFullYear(),
+            new Date().getMonth(),
+            new Date().getDate()
+          )
+            .toISOString()
+            .split("T")[0],
+        ] }
     ],
     dependent: {field: "dvlaDependent", value: "DVLA"}
   },
@@ -87,7 +95,15 @@ module.exports = {
     validate: [
       "required",
       "date",
-      { type: "before", arguments: [new Date().toISOString().split("T")[0]] }
+      { type: "before", arguments: [
+          new Date(
+            new Date().getFullYear(),
+            new Date().getMonth(),
+            new Date().getDate()
+          )
+            .toISOString()
+            .split("T")[0],
+        ] }
     ],
     dependent: {field: "dvaDependent", value: "DVA"}
   },
@@ -109,7 +125,15 @@ module.exports = {
     validate: [
       "required",
       "date",
-      { type: "after", arguments: [new Date().toISOString().split("T")[0]] }
+      { type: "after", arguments: [
+          new Date(
+            new Date().getFullYear(),
+            new Date().getMonth(),
+            new Date().getDate()
+          )
+            .toISOString()
+            .split("T")[0],
+        ] }
     ],
   },
   drivingLicenceNumber: {
