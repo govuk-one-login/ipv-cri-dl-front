@@ -74,7 +74,7 @@ dateOfIssue:
   hint: "Dyma'r dyddiad yn adran 4a o'ch trwydded, er enghraifft 27 5 2019"
   validation:
     default: "Rhowch eich dyddiad geni fel y mae'n ymddangos ar eich trwydded yrru"
-    before: "Rhaid i'ch dyddiad geni fod yn y gorffennol"
+    before: "Rhaid i ddyddiad cyhoeddi fod yn y gorffennol"
 
 expiryDate:
   legend: Yn ddilys tan
