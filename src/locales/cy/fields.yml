@@ -2,17 +2,17 @@ drivingLicenceNumber:
   label: Rhif trwydded
   hint: "Dyma'r rhif hir yn adran 5 ar eich trwydded er enghraifft HARRI559146MJ931"
   validation:
-    default: "Rhowch y rhif fel y mae'n ymddangos ar eich trwydded yrru"
+    default: "Rhowch y rhif yn union fel mae’n ymddangos ar eich trwydded yrru"
     exactlength: "Dylai rhif eich trwydded fod yn 16 nod o hyd"
     numeric: "Your licence number should not include any symbols or spaces"
     limit: "Driving licence numbers do not start with 16 – enter the number as it appears on your driving licence"
-    dvlaChecker: "Rhowch y rhif yn union fel y mae'n ymddangos ar eich trwydded yrru"
+    dvlaChecker: "Rhowch y rhif yn union fel mae’n ymddangos ar eich trwydded yrru"
     regexSpecialCharacters: "Ni ddylai rhif eich trwydded gynnwys unrhyw symbolau neu ofodau"
 dvaLicenceNumber:
   label: Rhif trwydded
   hint: "Dyma'r rhif hir yn adran 5 ar eich trwydded"
   validation:
-    default: "Rhowch y rhif fel y mae'n ymddangos ar eich trwydded yrru"
+    default: "Rhowch y rhif yn union fel mae’n ymddangos ar eich trwydded yrru"
     exactlength: "Dylai rhif eich trwydded fod yn 8 nod o hyd"
     numeric: "Ni ddylai rhif eich trwydded gynnwys unrhyw symbolau neu ofodau"
 issueNumber:
