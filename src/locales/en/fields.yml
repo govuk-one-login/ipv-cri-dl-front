@@ -14,7 +14,8 @@ dvaLicenceNumber:
   validation:
     default: "Enter the number exactly as it appears on your driving licence"
     exactlength: "Your licence number should be 8 characters long"
-    numeric: "Your licence number should not include any symbols or spaces"
+    regexSpecialCharacters: "Your licence number should not include any symbols or spaces"
+    numeric: "Enter the number exactly as it appears on your driving licence"
 issueNumber:
   label: Issue number
   hint: "This is the 2 digit number after the space in section 5 of your licence"
@@ -53,7 +54,7 @@ dateOfBirth:
   validation:
     default: "Enter your date of birth as it appears on your driving licence"
     before: "Your date of birth must be in the past"
-    dvlaChecker: "Enter your date of birth as it appears on your driving licence"
+    dvlaChecker: "Check you have entered your date of birth correctly"
 dvaDateOfBirth:
   legend: Date of birth
   hint: "For example, 5 9 1973"
@@ -99,7 +100,7 @@ postcode:
     default: "Enter your postcode"
     maxlength: "Your postcode should be between 5 and 7 characters"
     minlength: "Your postcode should be between 5 and 7 characters"
-    regexPostcodeAlpha: "Your postcode should only include numbers and letters"
+    regexPostcodeAlpha: "Your postcode should include numbers and letters"
     regexPostcodeNumeric: "Your postcode should include numbers and letters"
     regexPostcodeSymbol: "Your postcode should only include numbers and letters"
     regexPostcodeUK: "Enter a UK postcode"
