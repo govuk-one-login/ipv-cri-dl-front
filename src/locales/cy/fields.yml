@@ -21,7 +21,7 @@ issueNumber:
   validation:
     default: "Rhowch y rhif cyhoeddi fel y mae'n ymddangos ar eich trwydded yrru"
     exactlength: "Dylai eich rhif cyhoeddi fod yn 2 rif o hyd"
-    regexIssueNumber: "Ni ddylai eich rhif cyhoeddi gynnwys unrhyw symbolau neu ofodau"
+    numeric: "Ni ddylai eich rhif cyhoeddi gynnwys unrhyw symbolau neu ofodau"
 
 surname:
   label: Enw olaf
@@ -99,7 +99,10 @@ postcode:
     default: "Rhowch eich cod post"
     maxlength: "Dylai eich rhowch eich cod post fod rhwng 5 a 7 nod"
     minlength: "Dylai eich rhowch eich cod post fod rhwng 5 a 7 nod"
-    regexPostcode: "Dylai eich rhowch eich cod post ond cynnwys rhifau a llythrennau yn unig"
+    regexPostcodeUK: "Rhowch god post yn y DU"
+    regexPostcodeAlpha: "Dylai eich rhowch eich cod post ond cynnwys rhifau a llythrennau yn unig"
+    regexPostcodeNumeric: "Dylai eich rhowch eich cod post ond cynnwys rhifau a llythrennau"
+    regexPostcodeSymbol: "Dylai eich rhowch eich cod post ond cynnwys rhifau a llythrennau yn unig"
 
 proveAnotherWayRadio:
   label: Beth hoffech chi ei wneud?

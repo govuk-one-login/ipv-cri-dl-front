@@ -7,7 +7,7 @@ drivingLicenceNumber:
     numeric: "Your licence number should not include any symbols or spaces"
     limit: "Driving licence numbers do not start with 16 – Enter the number exactly as it appears on your driving licence"
     dvlaChecker: "Enter the number exactly as it appears on your driving licence"
-    regexSpecialCharacters: "Enter the number exactly as it appears on your driving licence"
+    regexSpecialCharacters: "Your licence number should not include any symbols or spaces"
 dvaLicenceNumber:
   label: Licence number
   hint: "This is the long number in section 5 on your licence"
@@ -21,7 +21,7 @@ issueNumber:
   validation:
     default: "Enter the issue number as it appears on your driving licence"
     exactlength: "Your issue number should be 2 numbers long"
-    regexIssueNumber: "Enter the issue number as it appears on your driving licence"
+    numeric: "Your issue number should not include any symbols or spaces"
 
 surname:
   label: Last name
@@ -99,7 +99,8 @@ postcode:
     default: "Enter your postcode"
     maxlength: "Your postcode should be between 5 and 7 characters"
     minlength: "Your postcode should be between 5 and 7 characters"
-    regexPostcodeAlpha: "Your postcode should include numbers and letters"
+    regexPostcodeAlpha: "Your postcode should only include numbers and letters"
+    regexPostcodeNumeric: "Your postcode should include numbers and letters"
     regexPostcodeSymbol: "Your postcode should only include numbers and letters"
     regexPostcodeUK: "Enter a UK postcode"
 
