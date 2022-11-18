@@ -22,7 +22,7 @@ issueNumber:
   validation:
     default: "Enter the issue number as it appears on your driving licence"
     exactlength: "Your issue number should be 2 numbers long"
-    regexSpecialCharacters: "Your licence number should not include any symbols or spaces"
+    regexSpecialCharacters: "Your issue number should not include any symbols or spaces"
 
 surname:
   label: Last name
