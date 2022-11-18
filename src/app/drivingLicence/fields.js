@@ -158,6 +158,7 @@ module.exports = {
     validate: [
       "required",
       { type: "exactlength", arguments: [2] },
+      { type: "regexSpecialCharacters", fn: (value) => value.match(/^[A-Za-z0-9]*$/) },
       { type: "numeric"}
       //{ type: "regexIssueNumber", fn: (value) => value.match(/^[0-9]{2}$/) }
     ],
