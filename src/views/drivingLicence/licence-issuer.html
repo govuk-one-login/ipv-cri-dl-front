@@ -15,16 +15,16 @@ id: "licenceIssuerRadio"
 
 {% endcall %}
 
+
 {% block submitButton %}
     {{ hmpoSubmit(ctx, {id: 'submitButton'}) }}
-{% endblock %}
 
-{% block innerContent %}
     {{ govukDetails({
         summaryText: translate("pages.licence-issuer.details.summary"),
         text: translate("pages.licence-issuer.details.text")
     }) }}
 {% endblock %}
+
 
 {% set footerNavItems = translate("govuk.footerNavItems") %}
 
