@@ -31,7 +31,7 @@ govuk:
         paragraph2: " at any time."
       buttonAcceptText: Accept analytics cookies
       buttonRejectText: Reject analytics cookies
-      linkViewCookies: View cookies
+      linkViewCookiesText: View cookies
       cookieBannerHideLink: Hide this message
   footerNavItems:
     meta:
@@ -73,3 +73,7 @@ prove-another-way:
 licence-issuer:
   title: Who was your UK driving licence issued by?
   content: You can find this in section 4c of your driving licence. It will either say DVLA (Driving and vehicle Licensing Agency) or DVA (Driver and Vehicle Agency).
+  details:
+    summary: Why we need to know this
+    text:
+      - We need to make sure we check your driving licence details with the right organisation. DVLA issues driving licences in England, Scotland and Wales. DVA issues driving licences in Northern Ireland.

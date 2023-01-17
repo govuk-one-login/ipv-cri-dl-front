@@ -4,6 +4,8 @@
 {% from "hmpo-text/macro.njk" import hmpoText %}
 {% from "hmpo-form/macro.njk" import hmpoForm %}
 {% from "hmpo-radios/macro.njk" import hmpoRadios %}
+{% from "govuk/components/details/macro.njk" import govukDetails %}
+{% from "hmpo-details/macro.njk" import hmpoDetails %}
 
 {% call hmpoForm(ctx, {attributes: {onsubmit: 'window.disableFormSubmit()'} }) %}
 
@@ -11,11 +13,17 @@
 id: "licenceIssuerRadio"
 }) }}
 
-
 {% endcall %}
 
 {% block submitButton %}
     {{ hmpoSubmit(ctx, {id: 'submitButton'}) }}
+{% endblock %}
+
+{% block innerContent %}
+    {{ govukDetails({
+        summaryText: translate("pages.licence-issuer.details.summary"),
+        text: translate("pages.licence-issuer.details.text")
+    }) }}
 {% endblock %}
 
 {% set footerNavItems = translate("govuk.footerNavItems") %}
