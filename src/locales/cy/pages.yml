@@ -9,6 +9,10 @@ licence-issuer:
   title: Pwy wnaeth gyhoeddi eich trwydded yrru y DU?
   content:
     - Gallwch ddod o hyd i hwn yn adran 4c o'ch trwydded yrru. Bydd naill ai'n dweud DVLA (Asiantaeth Trwyddedu Gyrru a Cherbydau) neu DVA (Asiantaeth Gyrrwyr a Cherbydau).
+  details:
+    summary: Pam rydym angen gwybod hyn
+    text:
+      - Mae angen i ni sicrhau ein bod yn gwirio manylion eich trwydded yrru gyda'r sefydliad cywir. Mae DVLA yn cyhoeddi trwyddedau gyrru yng Nghymru, Lloegr a'r Alban. Mae DVA yn cyhoeddi trwyddedau gyrru yng Ngogledd Iwerddon.
 
 details:
   title: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru
