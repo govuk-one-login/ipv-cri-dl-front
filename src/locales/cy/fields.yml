@@ -126,6 +126,9 @@ licenceIssuerRadio:
     DVA:
       label: DVA
       value: DVA
+    or:
+      label: nue
+      value: or
     noLicence:
       label: Nid oes gennyf drwydded yrru y DU
       value: noLicence
