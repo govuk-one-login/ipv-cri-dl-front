@@ -9,7 +9,6 @@ const logger = require("hmpo-logger").get();
 
 class ValidateController extends BaseController {
   async saveValues(req, res, callback) {
-
     const firstName = req.sessionModel.get("firstName");
     const middleNames = req.sessionModel.get("middleNames");
     const forenames =
@@ -17,12 +16,16 @@ class ValidateController extends BaseController {
         ? firstName.split(" ")
         : firstName.split(" ").concat(middleNames.split(" "));
     const attributes = {
-      drivingLicenceNumber: req.sessionModel.get("dvaLicenceNumber") || req.sessionModel.get("drivingLicenceNumber"),
+      drivingLicenceNumber:
+        req.sessionModel.get("dvaLicenceNumber") ||
+        req.sessionModel.get("drivingLicenceNumber"),
       issueNumber: req.sessionModel.get("issueNumber") || null,
       postcode: req.sessionModel.get("postcode"),
       surname: req.sessionModel.get("surname"),
       forenames: forenames,
-      dateOfBirth: req.sessionModel.get("dvaDateOfBirth") || req.sessionModel.get("dateOfBirth"),
+      dateOfBirth:
+        req.sessionModel.get("dvaDateOfBirth") ||
+        req.sessionModel.get("dateOfBirth"),
       expiryDate: req.sessionModel.get("expiryDate"),
       issueDate: req.sessionModel.get("issueDate") || null,
       dateOfIssue: req.sessionModel.get("dateOfIssue"),
@@ -34,7 +37,10 @@ class ValidateController extends BaseController {
         session_id: req.session.tokenId,
       };
 
-      logger.info("validate: calling check-driving-licence lambda", { req, res });
+      logger.info("validate: calling check-driving-licence lambda", {
+        req,
+        res,
+      });
       const checkDrivingLicenceResponse = await req.axios.post(
         `${CHECK}`,
         attributes,
@@ -72,14 +78,6 @@ class ValidateController extends BaseController {
         req.sessionModel.set("error", error.response.data);
         callback();
       });
-    }
-  }
-
-  next(req) {
-    if (req.sessionModel.get("showRetryMessage")) {
-      return "details";
-    } else {
-      return "/oauth2/callback";
     }
   }
 }

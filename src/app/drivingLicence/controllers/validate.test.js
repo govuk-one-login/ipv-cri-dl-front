@@ -25,11 +25,11 @@ describe("validate controller", () => {
     expect(validate).to.be.an.instanceof(BaseController);
   });
 
-  it("should retrieve redirect url from cri-driving-permit-back and store in session", async () => {
+  it("should retrieve redirect url from cri-driving-permit-api and store in session", async () => {
     const sessionId = "drivingLicence123";
 
     req.sessionModel.set("drivingLicenceNumber", "123456789");
-    req.sessionModel.set("issueNumber", "123456789")
+    req.sessionModel.set("issueNumber", "123456789");
     req.sessionModel.set("postcode", "SW1 EQR");
     req.session.tokenId = sessionId;
     req.sessionModel.set("surname", "Jones Smith");
@@ -42,10 +42,9 @@ describe("validate controller", () => {
     req.sessionModel.set("licenceIssuer", "DVLA");
 
     const data = {
-      client: {
-        redirectUrl:
-          "https://client.example.com/cb?id=DrivingLicenceIssuer&code=1234",
-      },
+      redirectUrl:
+        "https://client.example.com/cb?id=DrivingLicenceIssuer&code=1234",
+      retry: false,
     };
 
     const resolvedPromise = new Promise((resolve) => resolve({ data }));
@@ -75,6 +74,7 @@ describe("validate controller", () => {
       }
     );
 
+    expect(req.sessionModel.get("redirect_url")).to.eq(data.redirectUrl);
   });
 
   it("should set an error object in the session if redirect url is missing", async () => {
@@ -91,9 +91,8 @@ describe("validate controller", () => {
     req.sessionModel.set("dateOfIssue", "10/02/2005");
 
     const data = {
-      invalidData: {
-        value: "test invalid data",
-      },
+      redirectUrl: undefined,
+      retry: false,
     };
     const resolvedPromise = new Promise((resolve) => resolve({ data }));
     sandbox.stub(req.axios, "post").returns(resolvedPromise);
@@ -109,7 +108,7 @@ describe("validate controller", () => {
 
   it("should save error in session when error caught from cri-back", async () => {
     req.sessionModel.set("drivingLicenceNumber:", "123456789");
-    req.sessionModel.set("issueNumber", "123456789")
+    req.sessionModel.set("issueNumber", "123456789");
     req.sessionModel.set("postcode:", "SW1 EQR");
     req.sessionModel.set("surname", "Jones Smith");
     req.sessionModel.set("firstName", "Dan");
@@ -119,7 +118,6 @@ describe("validate controller", () => {
     req.sessionModel.set("issueDate", "10/02/2005");
     req.sessionModel.set("licenceIssuer", "DVLA");
     req.sessionModel.set("dateOfIssue", "10/02/2005");
-
 
     const testError = {
       name: "Test error name",
@@ -140,5 +138,57 @@ describe("validate controller", () => {
     expect(sessionError.error_description).to.eq(
       testError.response.data.error_description
     );
+  });
+
+  it("should have showRetryMessage in sessionModel when api response 'retry' is true", async () => {
+    req.sessionModel.set("drivingLicenceNumber:", "123456789");
+    req.sessionModel.set("issueNumber", "123456789");
+    req.sessionModel.set("postcode:", "SW1 EQR");
+    req.sessionModel.set("surname", "Jones Smith");
+    req.sessionModel.set("firstName", "Dan");
+    req.sessionModel.set("middleNames", "Joe");
+    req.sessionModel.set("dateOfBirth", "10/02/1975");
+    req.sessionModel.set("expiryDate", "15/01/2035");
+    req.sessionModel.set("issueDate", "10/02/2005");
+    req.sessionModel.set("licenceIssuer", "DVLA");
+    req.sessionModel.set("dateOfIssue", "10/02/2005");
+
+    const data = {
+      redirectUrl:
+        "https://client.example.com/cb?id=DrivingLicenceIssuer&code=1234",
+      retry: true,
+    };
+    const resolvedPromise = new Promise((resolve) => resolve({ data }));
+    sandbox.stub(req.axios, "post").returns(resolvedPromise);
+
+    await validate.saveValues(req, res, next);
+
+    expect(req.sessionModel.get("showRetryMessage")).to.eq(true);
+  });
+
+  it("should not have showRetryMessage in sessionModel when api response 'retry' is false", async () => {
+    req.sessionModel.set("drivingLicenceNumber:", "123456789");
+    req.sessionModel.set("issueNumber", "123456789");
+    req.sessionModel.set("postcode:", "SW1 EQR");
+    req.sessionModel.set("surname", "Jones Smith");
+    req.sessionModel.set("firstName", "Dan");
+    req.sessionModel.set("middleNames", "Joe");
+    req.sessionModel.set("dateOfBirth", "10/02/1975");
+    req.sessionModel.set("expiryDate", "15/01/2035");
+    req.sessionModel.set("issueDate", "10/02/2005");
+    req.sessionModel.set("licenceIssuer", "DVLA");
+    req.sessionModel.set("dateOfIssue", "10/02/2005");
+
+    const data = {
+      redirectUrl:
+        "https://client.example.com/cb?id=DrivingLicenceIssuer&code=1234",
+      retry: false,
+    };
+    const resolvedPromise = new Promise((resolve) => resolve({ data }));
+    sandbox.stub(req.axios, "post").returns(resolvedPromise);
+
+    await validate.saveValues(req, res, next);
+
+    expect(req.sessionModel.get("showRetryMessage")).to.eq(undefined);
   });
 });

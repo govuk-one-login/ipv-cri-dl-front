@@ -4,19 +4,18 @@ const logger = require("hmpo-logger").get();
 class LicenceIssuerController extends BaseController {
   async saveValues(req, res, next) {
     try {
-      req.sessionModel.reset()
+      req.sessionModel.reset();
       logger.info("user submitting licence issuer", { req, res });
-      req.sessionModel.set("redirect_url", undefined);
+      req.sessionModel.set("noLicence", undefined);
 
       const action = req.form.values.licenceIssuer;
       req.sessionModel.set("licenceIssuer", action);
       req.sessionModel.set("issuerDependent", action);
 
       switch (action) {
-      //TODO needs updated
         case "noLicence": {
           logger.info(
-            "licence-issuer: user has no licence, routing back to IPVCore - calling build-client-oauth-response lambda",
+            "licence-issuer: user has no licence, routing back to IPVCore",
             { req, res }
           );
           req.sessionModel.set("noLicence", true);
@@ -32,28 +31,20 @@ class LicenceIssuerController extends BaseController {
           );
           return next();
         }
-          case "DVA": {
-            logger.info(
-              "licence-issuer: user selected DVA : redirecting to driving licence details",
-              {
-                req,
-                res,
-              }
-            );
-            return next();
-          }
+        case "DVA": {
+          logger.info(
+            "licence-issuer: user selected DVA : redirecting to driving licence details",
+            {
+              req,
+              res,
+            }
+          );
+          return next();
+        }
       }
       return next(new Error("licence-issuer: Invalid action " + action));
     } catch (err) {
       return next(err);
-    }
-  }
-
-  next(req) {
-    if (req.sessionModel.get("noLicence")) {
-      return "/oauth2/callback";
-    } else {
-      return "/details";
     }
   }
 }

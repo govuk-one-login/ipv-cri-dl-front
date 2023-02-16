@@ -52,7 +52,7 @@ drivingLicence:
   drivingLicenceInformationContext: Your driving licence includes a lot of information that we can check to make sure that you are who you say you are.
   checkDetailsContext: We’ll check your details with DVLA to make sure your driving licence has not been cancelled or reported as lost or stolen.
   checkDetailsContextDVA: We’ll check your details with DVA to make sure your driving licence has not been cancelled or reported as lost or stolen.
-  drivingLicenceTryAnotherWay: If you do not have a UK driving licence or you cannot remember your details, you can <a href="/oauth2/callback" class="govuk-link">prove your identity another way</a> instead.
+  drivingLicenceTryAnotherWay: If you do not have a UK driving licence or you cannot remember your details, you can <a href="/prove-another-way" class="govuk-link">prove your identity another way</a> instead.
   drivingLicenceGivenNames: Given names
   retryBannerTitle: Error
   retryTitle: Check your details match what’s on your UK driving licence

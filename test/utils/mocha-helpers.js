@@ -42,6 +42,6 @@ global.setupDefaultMocks = () => {
   return {
     req,
     res,
-    next
+    next,
   };
 };

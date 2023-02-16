@@ -5,7 +5,7 @@ const path = require("path");
 const session = require("express-session");
 const AWS = require("aws-sdk");
 const DynamoDBStore = require("connect-dynamodb")(session);
-const wizard = require('hmpo-form-wizard');
+const wizard = require("hmpo-form-wizard");
 const commonExpress = require("di-ipv-cri-common-express");
 
 const setHeaders = commonExpress.lib.headers;
@@ -31,14 +31,14 @@ const { setup } = require("hmpo-app");
 
 const loggerConfig = {
   console: true,
-  connsoleJSON: true, // logstash json or pretty print output
+  consoleJSON: true, // logstash json or pretty print output
   app: false,
   requestMeta: {
     sessionId: "session.sessionId",
   },
   meta: {
     sessionId: "session.sessionId",
-  }
+  },
 };
 
 AWS.config.update({
@@ -72,11 +72,11 @@ const { app, router } = setup({
     publicImages: "/public/images",
   },
   publicDirs: ["../dist/public"],
-    translation: {
-      allowedLangs: ["en", "cy"],
-      fallbackLang: ["en"],
-      cookie: { name: "lng" },
-    },
+  translation: {
+    allowedLangs: ["en", "cy"],
+    fallbackLang: ["en"],
+    cookie: { name: "lng" },
+  },
   publicImagesDirs: ["../dist/public/images"],
   views: [
     path.resolve(

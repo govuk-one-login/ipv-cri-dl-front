@@ -11,7 +11,8 @@
     margin-bottom: -9px;
     height: 25px;
     width: 25px;
-    background: transparent url("/public/images/mini-button-spinner.svg") no-repeat;
+    background: transparent url("/public/images/mini-button-spinner.svg")
+      no-repeat;
     background-size: 25px 25px;
     animation-name: spin;
     animation-duration: 0.75s;
@@ -32,6 +33,6 @@
   &[disabled]:hover {
     //background-color: #44834D;
     opacity: 0.7;
-    box-shadow: 0 2px 0 #88988c
+    box-shadow: 0 2px 0 #88988c;
   }
 }
