@@ -188,7 +188,7 @@ module.exports = {
       type: "radios",
       label: "",
       legend: "",
-      items: [{value:"DVLA"}, {value:"DVA"}, {divider: "or"}, {value:"noLicence"}],
+      items: [{value:"DVLA"}, {value:"DVA"}, {divider: true, key: "fields.licenceIssuerRadio.items.or.label"}, {value:"noLicence"}],
       validate: ["required"],
     },
 };
