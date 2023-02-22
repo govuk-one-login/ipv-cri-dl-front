@@ -127,6 +127,9 @@ licenceIssuerRadio:
     DVA:
       label: DVA
       value: DVA
+    or:
+      label: or
+      value: or
     noLicence:
       label: I do not have a UK driving licence
       value: noLicence
