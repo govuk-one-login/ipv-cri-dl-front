@@ -13,7 +13,9 @@ $govuk-assets-path: "/public/";
 }
 
 // remove the resize option on the driving licence number character count
-textarea[name="drivingLicenceNumber"] {resize: none;}
+// To match both the DVLA and DVA forms this selector looks for any textarea
+// that contains the string 'LicenceNumber' anywhere in the class name
+textarea[name*="LicenceNumber"] {resize: none;}
 
 //// Task list pattern
 //
