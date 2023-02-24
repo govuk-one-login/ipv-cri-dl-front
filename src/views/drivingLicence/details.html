@@ -8,6 +8,7 @@
 {% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
 
 {% from "hmpo-text/macro.njk" import hmpoText %}
+{% from "./hmpoCountText.njk" import hmpoCountText %}
 {% from "hmpo-form/macro.njk" import hmpoForm %}
 {% from "hmpo-date/macro.njk" import hmpoDate %}
 
@@ -169,27 +170,30 @@ html: translate("drivingLicence.drivingLicenceTryAnotherWay")
     }) }}
 
     {% if (values.licenceIssuer == "DVLA") %}
-    {{ hmpoText(ctx, {
+
+        {{ hmpoCountText(ctx, {
         id: "drivingLicenceNumber",
         label: {
             classes: "govuk-label"
         }
-    }) }}
+        }) }}
 
         {{ hmpoText(ctx, {
         id: "issueNumber",
+        classes: "govuk-input--width-3",
         label: {
         classes: "govuk-label"
         }
         }) }}
 
     {% else %}
-    {{ hmpoText(ctx, {
+
+        {{ hmpoCountText(ctx, {
         id: "dvaLicenceNumber",
         label: {
         classes: "govuk-label"
         }
-    }) }}
+        }) }}
 
     {% endif %}
 

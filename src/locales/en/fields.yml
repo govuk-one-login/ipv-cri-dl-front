@@ -1,6 +1,7 @@
 drivingLicenceNumber:
   label: Licence number
   hint: "This is the long number in section 5 on your licence for example HARRI559146MJ931"
+  maxlength: false
   validation:
     default: "Enter the number exactly as it appears on your driving licence"
     exactlength: "Your licence number should be 16 characters long"
@@ -8,6 +9,7 @@ drivingLicenceNumber:
     limit: "Driving licence numbers do not start with 16 – Enter the number exactly as it appears on your driving licence"
     dvlaChecker: "Enter the number exactly as it appears on your driving licence"
     regexSpecialCharacters: "Your licence number should not include any symbols or spaces"
+
 dvaLicenceNumber:
   label: Licence number
   hint: "This is the long number in section 5 on your licence"
@@ -16,6 +18,7 @@ dvaLicenceNumber:
     exactlength: "Your licence number should be 8 characters long"
     regexSpecialCharacters: "Your licence number should not include any symbols or spaces"
     numeric: "Enter the number exactly as it appears on your driving licence"
+
 issueNumber:
   label: Issue number
   hint: "This is the 2 digit number after the space in section 5 of your licence"

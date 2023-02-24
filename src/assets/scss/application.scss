@@ -12,6 +12,9 @@ $govuk-assets-path: "/public/";
   background-color: $govuk-error-colour;
 }
 
+// remove the resize option on the driving licence number character count
+textarea[name="drivingLicenceNumber"] {resize: none;}
+
 //// Task list pattern
 //
 //.app-task-list {
