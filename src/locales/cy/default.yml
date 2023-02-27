@@ -66,6 +66,11 @@ drivingLicence:
   retryMessageList2: rydych wedi rhoi eich rhif trwydded yrru yn gywir
   retryMessageList3: bod dyddiau a misoedd yn y drefn gywir yn eich dyddiad geni, dyddiad cyhoeddi a dyddiad dilys tan
   retryMessageList4: you’ve left the middle names section blank if you do not have any middle names
+  charactersUnderLimitTextOther: CY You have %{count} characters remaining
+  charactersUnderLimitTextOne: CY You have %{count} character remaining
+  charactersAtLimitText: CY The Licence number is the correct length
+  charactersOverLimitTextOne: CY You have %{count} too many characters
+  charactersOverLimitTextOther: CY You have %{count} too many characters
 
 prove-another-way:
   title: Profi pwy ydych chi mewn ffordd arall

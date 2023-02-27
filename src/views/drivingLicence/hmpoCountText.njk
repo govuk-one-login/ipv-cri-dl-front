@@ -25,6 +25,7 @@
         formGroup: params.formGroup,
         autocomplete: params.autocomplete,
         rows: params.rows,
+        i18n: params.i18n,
         attributes: hmpoGetAttributes(ctx, params, {
             "aria-required": hmpoGetValidatorAttribute(ctx, params, "required", null, false),
             "min": hmpoGetValidatorAttribute(ctx, params, "min", 0),
@@ -39,7 +40,6 @@
     {%- else %}
     {%- from "govuk/components/character-count/macro.njk" import govukCharacterCount %}
      {%- from "govuk/components/input/macro.njk" import govukInput %}
-
 
        {# {{- govukInput(args) }}  #}
        {{ govukCharacterCount({
@@ -56,7 +56,16 @@
          },
          hint: {
            text: args.hint.html
-         }
+         },
+         charactersUnderLimitText: {
+           other: args.i18n.charactersUnderLimitTextOther,
+           one: args.i18n.charactersUnderLimitTextOne
+         },
+         charactersOverLimitText: {
+           one: args.i18n.charactersOverLimitTextOne,
+           other: args.i18n.charactersOverLimitTextOther
+         },
+         charactersAtLimitText: args.i18n.charactersAtLimitText
        }) }}
     {%- endif %}
 {% endmacro %}

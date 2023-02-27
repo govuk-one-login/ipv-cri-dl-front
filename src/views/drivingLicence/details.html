@@ -14,17 +14,17 @@
 
 
 {% block mainContent %}
-    {% if values.showRetryMessage and not (ctx("errors") | length) %}
-    {# user is retrying #}
-    <h1 id="header" data-page="{{hmpoPageKey}}" class="govuk-heading-l">
-        {{ translate("drivingLicence.retryTitle") }}
-    </h1>
-    {% else %}
-    {# user's first attempt #}
-    <h1 id="header" data-page="{{hmpoPageKey}}" class="govuk-heading-l">
-        {{ translate("drivingLicence.title") }}
-    </h1>
- {% endif %}
+{% if values.showRetryMessage and not (ctx("errors") | length) %}
+{# user is retrying #}
+<h1 id="header" data-page="{{hmpoPageKey}}" class="govuk-heading-l">
+    {{ translate("drivingLicence.retryTitle") }}
+</h1>
+{% else %}
+{# user's first attempt #}
+<h1 id="header" data-page="{{hmpoPageKey}}" class="govuk-heading-l">
+    {{ translate("drivingLicence.title") }}
+</h1>
+{% endif %}
 
 {% if values.showRetryMessage and not (ctx("errors") | length) %}
 {# user is retrying, show more information about how to complete the form #}
@@ -32,9 +32,9 @@
 <h2>{{ translate("drivingLicence.retryMessageHeading") }}</h2>
 <p>
     {% if (values.licenceIssuer == "DVA") %}
-        {{ translate("drivingLicence.retryMessageParagraph1DVA") }}
+    {{ translate("drivingLicence.retryMessageParagraph1DVA") }}
     {% else %}
-        {{ translate("drivingLicence.retryMessageParagraph1") }}
+    {{ translate("drivingLicence.retryMessageParagraph1") }}
     {% endif %}
 </p>
 <p>
@@ -57,11 +57,11 @@ classes:'driving-licence-message'
 {% else %}
 {# user's first attempt #}
 
-    {% if (values.licenceIssuer == "DVA") %}
-        <p> {{ translate("drivingLicence.checkDetailsContextDVA") }}  </p>
-    {% else %}
-        <p> {{ translate("drivingLicence.checkDetailsContext") }}  </p>
-    {% endif %}
+{% if (values.licenceIssuer == "DVA") %}
+<p> {{ translate("drivingLicence.checkDetailsContextDVA") }} </p>
+{% else %}
+<p> {{ translate("drivingLicence.checkDetailsContext") }} </p>
+{% endif %}
 
 {% endif %}
 
@@ -69,21 +69,21 @@ classes:'driving-licence-message'
 html: translate("drivingLicence.drivingLicenceTryAnotherWay")
 }) }}
 
-    {% call hmpoForm(ctx, {attributes: {onsubmit: 'window.disableFormSubmit()'} }) %}
+{% call hmpoForm(ctx, {attributes: {onsubmit: 'window.disableFormSubmit()'} }) %}
 
-    {{ hmpoText(ctx, {
-    id: "surname",
-    label: {
-    classes: "govuk-label"
-    },
-    classes: "govuk-input"
-    }) }}
+{{ hmpoText(ctx, {
+id: "surname",
+label: {
+classes: "govuk-label"
+},
+classes: "govuk-input"
+}) }}
 
-    {%- set firstNameError = hmpoGetError(ctx, {id: 'firstName'}) %}
-    {%- set middleNameError = hmpoGetError(ctx, {id: 'middleNames'}) %}
+{%- set firstNameError = hmpoGetError(ctx, {id: 'firstName'}) %}
+{%- set middleNameError = hmpoGetError(ctx, {id: 'middleNames'}) %}
 
-    {% if firstNameError and middleNameError %}
-    <div class="govuk-form-group govuk-form-group--error">
+{% if firstNameError and middleNameError %}
+<div class="govuk-form-group govuk-form-group--error">
     {% else %}
     <div class="govuk-form-group ">
         {% endif %}
@@ -114,53 +114,53 @@ html: translate("drivingLicence.drivingLicenceTryAnotherWay")
         {% endcall %}
     </div>
 
-        {% if (values.licenceIssuer == "DVLA") %}
+    {% if (values.licenceIssuer == "DVLA") %}
 
-        {{ hmpoDate(ctx, {
-        id: "dateOfBirth",
-        legend: {
-        classes: "govuk-label"
-        }
-        }) }}
+    {{ hmpoDate(ctx, {
+    id: "dateOfBirth",
+    legend: {
+    classes: "govuk-label"
+    }
+    }) }}
 
-        {{ hmpoText(ctx, {
-        id: "dvlaDependent",
-        type: "hidden",
-        legend: "",
-        default: "DVLA"
-        }) }}
+    {{ hmpoText(ctx, {
+    id: "dvlaDependent",
+    type: "hidden",
+    legend: "",
+    default: "DVLA"
+    }) }}
 
-        {{ hmpoDate(ctx, {
-        id: "issueDate",
-        legend: {
-        classes: "govuk-label"
-        }
-        }) }}
+    {{ hmpoDate(ctx, {
+    id: "issueDate",
+    legend: {
+    classes: "govuk-label"
+    }
+    }) }}
 
-        {% else %}
+    {% else %}
 
-        {{ hmpoDate(ctx, {
-        id: "dvaDateOfBirth",
-        legend: {
-        classes: "govuk-label"
-        }
-        }) }}
+    {{ hmpoDate(ctx, {
+    id: "dvaDateOfBirth",
+    legend: {
+    classes: "govuk-label"
+    }
+    }) }}
 
-        {{ hmpoText(ctx, {
-        id: "dvaDependent",
-        type: "hidden",
-        legend: "",
-        default: "DVA"
-        }) }}
+    {{ hmpoText(ctx, {
+    id: "dvaDependent",
+    type: "hidden",
+    legend: "",
+    default: "DVA"
+    }) }}
 
-        {{ hmpoDate(ctx, {
-        id: "dateOfIssue",
-        legend: {
-        classes: "govuk-label"
-        }
-        }) }}
+    {{ hmpoDate(ctx, {
+    id: "dateOfIssue",
+    legend: {
+    classes: "govuk-label"
+    }
+    }) }}
 
-        {% endif %}
+    {% endif %}
 
     {{ hmpoDate(ctx, {
     id: "expiryDate",
@@ -171,33 +171,47 @@ html: translate("drivingLicence.drivingLicenceTryAnotherWay")
 
     {% if (values.licenceIssuer == "DVLA") %}
 
-        {{ hmpoCountText(ctx, {
-        id: "drivingLicenceNumber",
-        label: {
-            classes: "govuk-label"
-        }
-        }) }}
+    {{ hmpoCountText(ctx, {
+    id: "drivingLicenceNumber",
+    label: {
+    classes: "govuk-label"
+    },
+    i18n:{
+    charactersUnderLimitTextOther:translate("drivingLicence.charactersUnderLimitTextOther"),
+    charactersUnderLimitTextOne:translate("drivingLicence.charactersUnderLimitTextOne"),
+    charactersAtLimitText:translate("drivingLicence.charactersAtLimitText"),
+    charactersOverLimitTextOne:translate("drivingLicence.charactersOverLimitTextOne"),
+    charactersOverLimitTextOther:translate("drivingLicence.charactersOverLimitTextOther")
+    }
+    }) }}
 
-        {{ hmpoText(ctx, {
-        id: "issueNumber",
-        classes: "govuk-input--width-3",
-        label: {
-        classes: "govuk-label"
-        }
-        }) }}
+    {{ hmpoText(ctx, {
+    id: "issueNumber",
+    classes: "govuk-input--width-3",
+    label: {
+    classes: "govuk-label"
+    }
+    }) }}
 
     {% else %}
 
-        {{ hmpoCountText(ctx, {
-        id: "dvaLicenceNumber",
-        label: {
-        classes: "govuk-label"
-        }
-        }) }}
+    {{ hmpoCountText(ctx, {
+    id: "dvaLicenceNumber",
+    label: {
+    classes: "govuk-label"
+    },
+    i18n:{
+    charactersUnderLimitTextOther:translate("drivingLicence.charactersUnderLimitTextOther"),
+    charactersUnderLimitTextOne:translate("drivingLicence.charactersUnderLimitTextOne"),
+    charactersAtLimitText:translate("drivingLicence.charactersAtLimitText"),
+    charactersOverLimitTextOne:translate("drivingLicence.charactersOverLimitTextOne"),
+    charactersOverLimitTextOther:translate("drivingLicence.charactersOverLimitTextOther")
+    }
+    }) }}
 
     {% endif %}
 
-        {{ hmpoText(ctx, {
+    {{ hmpoText(ctx, {
     id: "postcode",
     label: {
     classes: "govuk-label"
@@ -205,54 +219,56 @@ html: translate("drivingLicence.drivingLicenceTryAnotherWay")
     }) }}
 
     {% if values.showRetryMessage and not (ctx("errors") | length) %}
-        {# user is retrying, show warning message they have run out of attempts #}
-                {{ govukWarningText({
-                text: translate("drivingLicence.retryWarningText"),
-                iconFallbackText: translate("drivingLicence.retryWarningTitle")
-                }) }}
+    {# user is retrying, show warning message they have run out of attempts #}
+    {{ govukWarningText({
+    text: translate("drivingLicence.retryWarningText"),
+    iconFallbackText: translate("drivingLicence.retryWarningTitle")
+    }) }}
     {% endif %}
 
-        {{ hmpoSubmit(ctx, {id: "continue", text: translate("buttons.next")}) }}
+    {{ hmpoSubmit(ctx, {id: "continue", text: translate("buttons.next")}) }}
 
     {% endcall %}
 
-{% endblock %}
-{% block scripts %}
+    {% endblock %}
+    {% block scripts %}
 
-{{ super ()}}
+    {{ super ()}}
 
-<script nonce="{{ cspNonce }}">
-    var formSubmitted = false;
+    <script nonce="{{ cspNonce }}">
+        var formSubmitted = false;
 
-    submitSpinner()
+        submitSpinner()
 
-    function delayDisableButton (button) {
-        button.className += ' button--spinner'
-        setTimeout(function() {
-            button.setAttribute('disabled', 'disabled')
-        }, 200);
-    }
+        function delayDisableButton(button) {
+            button.className += ' button--spinner'
+            setTimeout(function () {
+                button.setAttribute('disabled', 'disabled')
+            }, 200);
+        }
 
 
-    function submitSpinner() {
-        var selects = document.getElementById('continue')
+        function submitSpinner() {
+            var selects = document.getElementById('continue')
 
-        selects.addEventListener('click', function (event) {
-            if(!formSubmitted) {
-                formSubmitted = true;
+            selects.addEventListener('click', function (event) {
+                if (!formSubmitted) {
+                    formSubmitted = true;
 
-                delayDisableButton(event.target);
-            } else {
-                event.preventDefault()
-            }
-        })
-    }
-</script>
+                    delayDisableButton(event.target);
+                } else {
+                    event.preventDefault()
+                }
+            })
+        }
 
-{% endblock %}
-{# generate the specific footer items required for the PYI flows #}
-{% set footerNavItems = translate("govuk.footerNavItems") %}
 
-{% block footer %}
+    </script>
+
+    {% endblock %}
+    {# generate the specific footer items required for the PYI flows #}
+    {% set footerNavItems = translate("govuk.footerNavItems") %}
+
+    {% block footer %}
     {{ govukFooter( footerNavItems ) }}
-{% endblock %}
+    {% endblock %}
