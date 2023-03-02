@@ -31,7 +31,7 @@ govuk:
         paragraph2:  unrhyw bryd.
       buttonAcceptText: Derbyn cwcis dadansoddi
       buttonRejectText: Gwrthod cwcis dadansoddi
-      linkViewCookies: Gweld cwcis
+      linkViewCookiesText: Gweld cwcis
       cookieBannerHideLink: Cuddio'r neges yma
   footerNavItems:
     meta:

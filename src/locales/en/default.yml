@@ -68,9 +68,9 @@ drivingLicence:
   retryMessageList4: you’ve left the middle names section blank if you do not have any middle names
   charactersUnderLimitTextOther: You have %{count} characters remaining
   charactersUnderLimitTextOne: You have %{count} character remaining
-  charactersAtLimitText: The Licence number is the correct length
-  charactersOverLimitTextOne: You have %{count} too many characters
-  charactersOverLimitTextOther: You have %{count} too many characters
+  charactersAtLimitText: You have %{count} characters remaining
+  charactersOverLimitTextOne: You have %{count} character too many
+  charactersOverLimitTextOther: You have %{count} characters too many
 
 prove-another-way:
   title: Prove your identity another way

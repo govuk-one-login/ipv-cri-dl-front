@@ -26,6 +26,7 @@ issueNumber:
     default: "Enter the issue number as it appears on your driving licence"
     exactlength: "Your issue number should be 2 numbers long"
     regexSpecialCharacters: "Your issue number should not include any symbols or spaces"
+    numeric: "Enter the number exactly as it appears on your driving licence"
 
 surname:
   label: Last name
