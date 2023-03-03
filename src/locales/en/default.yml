@@ -68,7 +68,7 @@ drivingLicence:
   retryMessageList4: you’ve left the middle names section blank if you do not have any middle names
   charactersUnderLimitTextOther: You have %{count} characters remaining
   charactersUnderLimitTextOne: You have %{count} character remaining
-  charactersAtLimitText: You have %{count} characters remaining
+  charactersAtLimitText: You have 0 characters remaining
   charactersOverLimitTextOne: You have %{count} character too many
   charactersOverLimitTextOther: You have %{count} characters too many
 
