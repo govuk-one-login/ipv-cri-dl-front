@@ -31,7 +31,7 @@ govuk:
         paragraph2:  unrhyw bryd.
       buttonAcceptText: Derbyn cwcis dadansoddi
       buttonRejectText: Gwrthod cwcis dadansoddi
-      linkViewCookies: Gweld cwcis
+      linkViewCookiesText: Gweld cwcis
       cookieBannerHideLink: Cuddio'r neges yma
   footerNavItems:
     meta:
@@ -66,6 +66,11 @@ drivingLicence:
   retryMessageList2: rydych wedi rhoi eich rhif trwydded yrru yn gywir
   retryMessageList3: bod dyddiau a misoedd yn y drefn gywir yn eich dyddiad geni, dyddiad cyhoeddi a dyddiad dilys tan
   retryMessageList4: you’ve left the middle names section blank if you do not have any middle names
+  charactersUnderLimitTextOther: Mae gennych %{count} nod ar ôl
+  charactersUnderLimitTextOne: Mae gennych %{count} nod ar ôl
+  charactersAtLimitText: Mae gennych 0 nod ar ôl
+  charactersOverLimitTextOne: Mae gennych %{count} nod yn ormod
+  charactersOverLimitTextOther: Mae gennych %{count} nod yn ormod
 
 prove-another-way:
   title: Profi pwy ydych chi mewn ffordd arall

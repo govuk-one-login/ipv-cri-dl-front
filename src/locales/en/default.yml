@@ -66,6 +66,11 @@ drivingLicence:
   retryMessageList2: you’ve entered your driving licence number correctly
   retryMessageList3: days and months are in the right order in your date of birth, issue date and valid to date
   retryMessageList4: you’ve left the middle names section blank if you do not have any middle names
+  charactersUnderLimitTextOther: You have %{count} characters remaining
+  charactersUnderLimitTextOne: You have %{count} character remaining
+  charactersAtLimitText: You have 0 characters remaining
+  charactersOverLimitTextOne: You have %{count} character too many
+  charactersOverLimitTextOther: You have %{count} characters too many
 
 prove-another-way:
   title: Prove your identity another way

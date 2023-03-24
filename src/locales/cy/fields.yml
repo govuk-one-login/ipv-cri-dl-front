@@ -1,6 +1,7 @@
 drivingLicenceNumber:
   label: Rhif trwydded
   hint: "Dyma'r rhif hir yn adran 5 ar eich trwydded er enghraifft HARRI559146MJ931"
+  maxlength: false
   validation:
     default: "Rhowch y rhif yn union fel mae’n ymddangos ar eich trwydded yrru"
     exactlength: "Dylai rhif eich trwydded fod yn 16 nod o hyd"
@@ -8,6 +9,7 @@ drivingLicenceNumber:
     limit: "Driving licence numbers do not start with 16 – enter the number as it appears on your driving licence"
     dvlaChecker: "Rhowch y rhif yn union fel mae’n ymddangos ar eich trwydded yrru"
     regexSpecialCharacters: "Ni ddylai rhif eich trwydded gynnwys unrhyw symbolau neu ofodau"
+
 dvaLicenceNumber:
   label: Rhif trwydded
   hint: "Dyma'r rhif hir yn adran 5 ar eich trwydded"
@@ -15,6 +17,8 @@ dvaLicenceNumber:
     default: "Rhowch y rhif yn union fel mae’n ymddangos ar eich trwydded yrru"
     exactlength: "Dylai rhif eich trwydded fod yn 8 nod o hyd"
     numeric: "Ni ddylai rhif eich trwydded gynnwys unrhyw symbolau neu ofodau"
+    regexSpecialCharacters: "Ni ddylai rhif eich trwydded gynnwys unrhyw symbolau neu ofodau"
+
 issueNumber:
   label: Rhif cyhoeddi
   hint: "Dyma'r rhif 2 ddigid ar ôl y gofod yn adran 5 o'ch trwydded"
@@ -22,6 +26,7 @@ issueNumber:
     default: "Rhowch y rhif cyhoeddi fel y mae'n ymddangos ar eich trwydded yrru"
     exactlength: "Dylai eich rhif cyhoeddi fod yn 2 rif o hyd"
     numeric: "Ni ddylai eich rhif cyhoeddi gynnwys unrhyw symbolau neu ofodau"
+    regexSpecialCharacters: "Ni ddylai rhif eich trwydded gynnwys unrhyw symbolau neu ofodau"
 
 surname:
   label: Enw olaf
@@ -54,6 +59,7 @@ dateOfBirth:
     default: "Rhowch eich dyddiad geni fel y mae'n ymddangos ar eich trwydded yrru"
     before: "Rhaid i'ch dyddiad geni fod yn y gorffennol"
     dvlaChecker: "Gwiriwch eich bod wedi rhoi eich dyddiad geni yn gywir"
+
 dvaDateOfBirth:
   legend: Dyddiad geni
   hint: "Er enghraifft, 5 9 1973"
