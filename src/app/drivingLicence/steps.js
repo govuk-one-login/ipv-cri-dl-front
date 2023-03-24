@@ -34,6 +34,7 @@ module.exports = {
       "dvlaDependent",
       "dvaDependent",
       "consentDVACheckbox",
+      "consentCheckbox",
     ],
     controller: details,
     next: "validate",

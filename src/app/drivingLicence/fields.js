@@ -179,13 +179,20 @@ module.exports = {
     ],
     classes: "govuk-input--width-10",
   },
-consentDVACheckbox: {
+  consentDVACheckbox: {
       type: "text",
       journeyKey: "consentDVACheckbox",
       validate: [
+         "required",
+         ],
+  },
+  consentCheckbox: {
+      type: "text",
+      journeyKey: "consentCheckbox",
+      validate: [
         "required",
         ],
-    },
+  },
   proveAnotherWayRadio: {
     type: "radios",
     items: ["proveAnotherWay", "retry"],

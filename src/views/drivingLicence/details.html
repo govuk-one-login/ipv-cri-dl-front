@@ -201,6 +201,7 @@ classes: "govuk-input"
     }
     }) }}
 
+
     {% if (values.licenceIssuer == "DVA") %}
     <h2>{{ translate("drivingLicence.consentDVA") }}</h2>
 
@@ -209,6 +210,24 @@ classes: "govuk-input"
     hint: {
     classes: "govuk-label"
     }
+    }) }}
+
+    {% if (values.licenceIssuer == "DVLA") %}
+    <h2>{{ translate("drivingLicence.consentDVLA") }}</h2>
+
+    {{ hmpoCheckboxes(ctx, {
+    id: "consentCheckbox",
+    hint: {
+    classes: "govuk-label"
+    }
+    }) }}
+    {% endif %}
+
+    {% if values.showRetryMessage and not (ctx("errors") | length) %}
+    {# user is retrying, show warning message they have run out of attempts #}
+    {{ govukWarningText({
+    text: translate("drivingLicence.retryWarningText"),
+    iconFallbackText: translate("drivingLicence.retryWarningTitle")
     }) }}
     {% endif %}
 

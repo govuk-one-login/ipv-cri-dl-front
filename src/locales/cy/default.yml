@@ -66,6 +66,7 @@ drivingLicence:
   retryMessageList2: rydych wedi rhoi eich rhif trwydded yrru yn gywir
   retryMessageList3: bod dyddiau a misoedd yn y drefn gywir yn eich dyddiad geni, dyddiad cyhoeddi a dyddiad dilys tan
   consentDVA: Caniatau DVA i wirio eich manylion trwydded yrru
+  consentDVLA: Caniatau DVLA i wirio eich manylion trwydded yrru
 
 prove-another-way:
   title: Profi pwy ydych chi mewn ffordd arall
