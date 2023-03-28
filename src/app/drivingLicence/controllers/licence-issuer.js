@@ -4,11 +4,13 @@ const logger = require("hmpo-logger").get();
 class LicenceIssuerController extends BaseController {
   async saveValues(req, res, next) {
     try {
+      req.sessionModel.reset()
       logger.info("user submitting licence issuer", { req, res });
       req.sessionModel.set("redirect_url", undefined);
 
-      const action = req.form.values.licenceIssuerRadio;
+      const action = req.form.values.licenceIssuer;
       req.sessionModel.set("licenceIssuer", action);
+      req.sessionModel.set("issuerDependent", action);
 
       switch (action) {
       //TODO needs updated

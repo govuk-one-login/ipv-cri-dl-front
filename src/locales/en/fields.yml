@@ -135,7 +135,7 @@ proveAnotherWayRadio:
       label: Try to enter your driving licence details and prove your identity with a GOV.UK account
       value: retry
 
-licenceIssuerRadio:
+licenceIssuer:
   validation:
     required: You must choose an option to continue
   items:

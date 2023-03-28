@@ -46,7 +46,7 @@ module.exports = {
         ...dvlaValidatorObj,
       }
     ],
-    dependent: {field: "dvlaDependent", value: "DVLA"}
+    dependent: {field: "issuerDependent", value: "DVLA"}
   },
   dvaDateOfBirth: {
        type: "date",
@@ -56,7 +56,7 @@ module.exports = {
          "date",
          { type: "before", arguments: [new Date().toISOString().split("T")[0]] }
        ],
-       dependent: {field: "dvaDependent", value: "DVA"}
+       dependent: {field: "issuerDependent", value: "DVA"}
      },
   issueDate: {
     type: "date",
@@ -74,7 +74,7 @@ module.exports = {
             .split("T")[0],
         ] }
     ],
-    dependent: {field: "dvlaDependent", value: "DVLA"}
+    dependent: {field: "issuerDependent", value: "DVLA"}
   },
   dateOfIssue: {
     type: "date",
@@ -92,19 +92,12 @@ module.exports = {
             .split("T")[0],
         ] }
     ],
-    dependent: {field: "dvaDependent", value: "DVA"}
+    dependent: {field: "issuerDependent", value: "DVA"}
   },
-  dvlaDependent: {
+  issuerDependent: {
      type: "hidden",
      label: "",
-     legend: "",
-     default: "DVLA"
-  },
-  dvaDependent: {
-     type: "hidden",
-     label: "",
-     legend: "",
-     default: "DVA"
+     legend: ""
   },
   expiryDate: {
     type: "date",
@@ -136,7 +129,7 @@ module.exports = {
         ...dvlaValidatorObj,
       }
     ],
-    dependent: {field: "dvlaDependent", value: "DVLA"},
+    dependent: {field: "issuerDependent", value: "DVLA"},
     classes: "govuk-input--width-10",
   },
   dvaLicenceNumber: {
@@ -149,7 +142,7 @@ module.exports = {
       { type: "exactlength", arguments: [8] },
       { type: "regexDrivingLicence", fn: (value) => value.match(/^[0-9]{8}$/) }
     ],
-    dependent: {field: "dvaDependent", value: "DVA"},
+    dependent: {field: "issuerDependent", value: "DVA"},
     classes: "govuk-input--width-10",
   },
   issueNumber: {
@@ -162,7 +155,7 @@ module.exports = {
       { type: "numeric"}
       //{ type: "regexIssueNumber", fn: (value) => value.match(/^[0-9]{2}$/) }
     ],
-    dependent: {field: "dvlaDependent", value: "DVLA"},
+    dependent: {field: "issuerDependent", value: "DVLA"},
     classes: "govuk-input--width-10",
   },
   postcode: {
@@ -185,6 +178,7 @@ module.exports = {
       validate: [
          "required",
          ],
+      dependent: {field: "issuerDependent", value: "DVA"}
   },
   consentCheckbox: {
       type: "text",
@@ -192,17 +186,18 @@ module.exports = {
       validate: [
         "required",
         ],
+      dependent: {field: "issuerDependent", value: "DVLA"}
   },
   proveAnotherWayRadio: {
     type: "radios",
     items: ["proveAnotherWay", "retry"],
     validate: ["required"],
   },
-    licenceIssuerRadio: {
+    licenceIssuer: {
       type: "radios",
       label: "",
       legend: "",
-      items: [{value:"DVLA"}, {value:"DVA"}, {divider: true, key: "fields.licenceIssuerRadio.items.or.label"}, {value:"noLicence"}],
+      items: [{value:"DVLA"}, {value:"DVA"}, {divider: true, key: "fields.licenceIssuer.items.or.label"}, {value:"noLicence"}],
       validate: ["required"],
     },
 };
