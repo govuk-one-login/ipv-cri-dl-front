@@ -23,6 +23,7 @@ issueNumber:
     default: "Enter the issue number as it appears on your driving licence"
     exactlength: "Your issue number should be 2 numbers long"
     regexSpecialCharacters: "Your issue number should not include any symbols or spaces"
+    numeric: "Enter the issue number as it appears on your driving licence"
 
 surname:
   label: Last name
@@ -104,6 +105,14 @@ postcode:
     regexPostcodeNumeric: "Your postcode should include numbers and letters"
     regexPostcodeSymbol: "Your postcode should only include numbers and letters"
     regexPostcodeUK: "Enter a UK postcode"
+
+consentDVACheckbox:
+  label: Give DVA your consent to check your driving licence details
+  hint:
+    <p>DVA needs your consent to check your driving licence details before you can continue. They will make sure your licence has not been cancelled or reported as lost or stolen.</p>
+    <p><a href="https://signin.account.gov.uk/privacy-notice" class="govuk-link" rel="noopener" target="_blank">Read the GOV.UK One Login privacy notice (opens in a new tab)</a> to find out more about how your driving licence details are checked.</p>
+  validation:
+    default: "You must give your consent to continue"
 
 proveAnotherWayRadio:
   label: What would you like to do?

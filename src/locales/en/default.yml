@@ -65,7 +65,7 @@ drivingLicence:
   retryMessageList1: your driving licence is a UK driving licence
   retryMessageList2: you’ve entered your driving licence number correctly
   retryMessageList3: days and months are in the right order in your date of birth, issue date and valid to date
-  retryMessageList4: you’ve left the middle names section blank if you do not have any middle names
+  consentDVA: Allow DVA to check your driving licence details
 
 prove-another-way:
   title: Prove your identity another way

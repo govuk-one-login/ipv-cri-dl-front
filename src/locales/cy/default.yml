@@ -31,7 +31,7 @@ govuk:
         paragraph2:  unrhyw bryd.
       buttonAcceptText: Derbyn cwcis dadansoddi
       buttonRejectText: Gwrthod cwcis dadansoddi
-      linkViewCookies: Gweld cwcis
+      linkViewCookiesText: Gweld cwcis
       cookieBannerHideLink: Cuddio'r neges yma
   footerNavItems:
     meta:
@@ -65,7 +65,7 @@ drivingLicence:
   retryMessageList1: bod eich trwydded yrru yn drwydded yrru y DU
   retryMessageList2: rydych wedi rhoi eich rhif trwydded yrru yn gywir
   retryMessageList3: bod dyddiau a misoedd yn y drefn gywir yn eich dyddiad geni, dyddiad cyhoeddi a dyddiad dilys tan
-  retryMessageList4: you’ve left the middle names section blank if you do not have any middle names
+  consentDVA: Caniatau DVA i wirio eich manylion trwydded yrru
 
 prove-another-way:
   title: Profi pwy ydych chi mewn ffordd arall
