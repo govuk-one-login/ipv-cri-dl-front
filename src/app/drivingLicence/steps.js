@@ -33,6 +33,7 @@ module.exports = {
       "postcode",
       "dvlaDependent",
       "dvaDependent",
+      "consentDVACheckbox",
     ],
     controller: details,
     next: "validate",
