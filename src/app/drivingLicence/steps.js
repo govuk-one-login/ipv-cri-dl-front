@@ -14,7 +14,7 @@ module.exports = {
   },
   "/licence-issuer": {
     controller: licenceIssuer,
-    fields: ["licenceIssuerRadio"],
+    fields: ["licenceIssuer"],
     next: licenceIssuer.prototype.next,
   },
   "/details": {
@@ -31,9 +31,9 @@ module.exports = {
       "dvaLicenceNumber",
       "issueNumber",
       "postcode",
-      "dvlaDependent",
-      "dvaDependent",
+      "issuerDependent",
       "consentDVACheckbox",
+      "consentCheckbox",
     ],
     controller: details,
     next: "validate",

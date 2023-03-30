@@ -124,7 +124,7 @@ classes: "govuk-input"
     }) }}
 
     {{ hmpoText(ctx, {
-    id: "dvlaDependent",
+    id: "issuerDependent",
     type: "hidden",
     legend: "",
     default: "DVLA"
@@ -147,7 +147,7 @@ classes: "govuk-input"
     }) }}
 
     {{ hmpoText(ctx, {
-    id: "dvaDependent",
+    id: "issuerDependent",
     type: "hidden",
     legend: "",
     default: "DVA"
@@ -212,6 +212,17 @@ classes: "govuk-input"
     }) }}
     {% endif %}
 
+    {% if (values.licenceIssuer == "DVLA") %}
+    <h2>{{ translate("drivingLicence.consentDVLA") }}</h2>
+
+    {{ hmpoCheckboxes(ctx, {
+    id: "consentCheckbox",
+    hint: {
+    classes: "govuk-label"
+    }
+    }) }}
+    {% endif %}
+
     {% if values.showRetryMessage and not (ctx("errors") | length) %}
     {# user is retrying, show warning message they have run out of attempts #}
     {{ govukWarningText({
@@ -219,6 +230,7 @@ classes: "govuk-input"
     iconFallbackText: translate("drivingLicence.retryWarningTitle")
     }) }}
     {% endif %}
+
 
     {{ hmpoSubmit(ctx, {id: "continue", text: translate("buttons.next")}) }}
 

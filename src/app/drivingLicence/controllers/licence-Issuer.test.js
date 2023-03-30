@@ -30,7 +30,7 @@ describe("licence issuer controller", () => {
     req.session.sessionId = sessionId;
     req.form = {
       values: {
-        licenceIssuerRadio: "fake action",
+        licenceIssuer: "fake action",
       },
     };
 
@@ -40,7 +40,7 @@ describe("licence issuer controller", () => {
       sinon.match.has(
         "message",
         "licence-issuer: Invalid action " +
-          req.form.values.licenceIssuerRadio
+          req.form.values.licenceIssuer
       )
     );
   });
@@ -51,7 +51,7 @@ describe("licence issuer controller", () => {
 
     req.form = {
       values: {
-        licenceIssuerRadio: "retry",
+        licenceIssuer: "retry",
       },
     };
 

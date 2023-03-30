@@ -114,6 +114,14 @@ consentDVACheckbox:
   validation:
     default: "Mae'n rhaid i chi roi eich caniatâd i barhau"
 
+consentCheckbox:
+  label: Rhoi eich caniatâd i DVLA i wirio eich manylion trwydded yrru
+  hint:
+    <p>Mae DVLA angen eich caniatâd i wirio eich manylion trwydded yrru cyn y gallwch barhau. Byddant yn sicrhau nad yw eich trwydded wedi cael ei chanslo na'i hadrodd fel un sydd ar goll neu wedi'i dwyn.</p>
+    <p><a href="https://signin.account.gov.uk/privacy-notice" class="govuk-link" rel="noopener" target="_blank">Darllenwch hysbysiad preifatrwydd GOV.UK One Login (agor mewn tab newydd)</a> i ddarganfod mwy am sut mae'ch manylion trwydded yrru yn cael eu gwirio.</p>
+  validation:
+    default: "Mae'n rhaid i chi roi eich caniatâd i barhau"
+
 proveAnotherWayRadio:
   label: Beth hoffech chi ei wneud?
   validation:
@@ -126,7 +134,7 @@ proveAnotherWayRadio:
       label: Ceisiwch roi manylion eich pasbort a phrofi pwy ydych chi gyda chyfrif GOV.UK
       value: retry
 
-licenceIssuerRadio:
+licenceIssuer:
   validation:
     required: Mae'n rhaid i chi ddewis opsiwn i barhau
   items:
