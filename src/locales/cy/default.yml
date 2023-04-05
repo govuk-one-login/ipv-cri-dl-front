@@ -25,10 +25,10 @@ govuk:
       changeCookiePreferencesLink: newid eich gosodiadau cwcis"
       cookieBannerAccept:
         paragraph1: Rydych wedi derbyn cwcis ychwanegol. Gallwch
-        paragraph2:  unrhyw bryd."
+        paragraph2: unrhyw bryd."
       cookieBannerReject:
         paragraph1: Rydych wedi gwrthod cwcis ychwanegol. Gallwch
-        paragraph2:  unrhyw bryd.
+        paragraph2: unrhyw bryd.
       buttonAcceptText: Derbyn cwcis dadansoddi
       buttonRejectText: Gwrthod cwcis dadansoddi
       linkViewCookiesText: Gweld cwcis
@@ -52,7 +52,7 @@ drivingLicence:
   drivingLicenceInformationContext: Your driving licence includes a lot of information that we can check to make sure that you are who you say you are.
   checkDetailsContext: Byddwn yn gwirio eich manylion gyda'r DVLA i sicrhau nad yw eich trwydded yrru wedi cael ei chanslo na'i hadrodd fel un sydd ar goll neu wedi ei dwyn.
   checkDetailsContextDVA: Byddwn yn gwirio eich manylion gyda'r DVA i sicrhau nad yw eich trwydded yrru wedi cael ei chanslo na'i hadrodd fel un sydd ar goll neu wedi ei dwyn.
-  drivingLicenceTryAnotherWay: Os nad oes gennych drwydded yrru y DU neu os na allwch gofio'ch manylion, gallwch <a href="/oauth2/callback" class="govuk-link">brofi pwy ydych chi mewn ffordd arall</a> yn lle.
+  drivingLicenceTryAnotherWay: Os nad oes gennych drwydded yrru y DU neu os na allwch gofio'ch manylion, gallwch <a href="/prove-another-way" class="govuk-link">brofi pwy ydych chi mewn ffordd arall</a> yn lle.
   drivingLicenceGivenNames: Enwau a roddwyd
   retryBannerTitle: Gwall
   retryTitle: Gwiriwch bod eich manylion yn paru gyda beth sydd ar eich trwydded yrru y DU

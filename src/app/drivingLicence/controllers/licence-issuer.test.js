@@ -1,10 +1,9 @@
 const BaseController = require("hmpo-form-wizard").Controller;
 const LicenceIssuerController = require("./licence-issuer");
-const axios = require("axios");
 
 describe("licence issuer controller", () => {
   const licenceIssuerController = new LicenceIssuerController({
-    route: "/test"
+    route: "/test",
   });
 
   let req;
@@ -39,45 +38,50 @@ describe("licence issuer controller", () => {
     expect(next).to.have.been.calledWith(
       sinon.match.has(
         "message",
-        "licence-issuer: Invalid action " +
-          req.form.values.licenceIssuer
+        "licence-issuer: Invalid action " + req.form.values.licenceIssuer
       )
     );
   });
 
-  it("should not store redirect_url in session when users selects retry", async () => {
-    req.session.sessionId = "drivingLicence123";
-    req.sessionModel.set("redirect_url", "url");
-
+  it("should set noLicence to true in sessionModel when licenceIssuer has 'noLicence' value", async () => {
+    const sessionId = "drivingLicence123";
+    req.session.sessionId = sessionId;
     req.form = {
       values: {
-        licenceIssuer: "retry",
+        licenceIssuer: "noLicence",
       },
     };
-
-    const data = {
-      client: {
-        redirectUrl:
-          "https://client.example.com/cb?id=DrivingLicenceIssuer&code=1234",
-      },
-    };
-
-    const resolvedPromise = new Promise((resolve) => resolve({ data }));
-    sandbox.stub(axios, "post").returns(resolvedPromise);
 
     await licenceIssuerController.saveValues(req, res, next);
 
-    expect(req.session.test.redirect_url).to.eq(undefined);
+    expect(req.sessionModel.get("noLicence")).to.eq(true);
   });
 
-  it("should return oauth url when sessionModel has a redirect_url value", () => {
-    req.sessionModel.set("noLicence", true);
-    const result = licenceIssuerController.next(req);
-    expect(result).to.eq("/oauth2/callback");
+  it("should not have noLicence in sessionModel when licenceIssuer has 'DVLA' value", async () => {
+    const sessionId = "drivingLicence123";
+    req.session.sessionId = sessionId;
+    req.form = {
+      values: {
+        licenceIssuer: "DVLA",
+      },
+    };
+
+    await licenceIssuerController.saveValues(req, res, next);
+
+    expect(req.sessionModel.get("noLicence")).to.eq(undefined);
   });
 
-  it("should return url for driving licence details value when sessionModel has a redirect_url value", () => {
-    const result = licenceIssuerController.next(req);
-    expect(result).to.eq("/details");
+  it("should not have noLicence in sessionModel when licenceIssuer has 'DVA' value", async () => {
+    const sessionId = "drivingLicence123";
+    req.session.sessionId = sessionId;
+    req.form = {
+      values: {
+        licenceIssuer: "DVA",
+      },
+    };
+
+    await licenceIssuerController.saveValues(req, res, next);
+
+    expect(req.sessionModel.get("noLicence")).to.eq(undefined);
   });
 });

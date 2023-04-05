@@ -35,5 +35,4 @@ describe("details controller", () => {
     const showRetryMessage = req.sessionModel.get("showRetryMessage");
     expect(showRetryMessage).to.equal(false);
   });
-
 });
