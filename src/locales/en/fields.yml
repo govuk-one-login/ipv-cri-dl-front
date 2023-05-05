@@ -122,7 +122,11 @@ consentCheckbox:
   label: Give DVLA your consent to check your driving licence details
   hint:
     <P>DVLA needs your consent to check your driving licence details before you can continue. They will make sure your licence has not been cancelled or reported as lost or stolen.</P>
-    <P><a href="https://signin.account.gov.uk/privacy-notice" class="govuk-link" rel="noopener" target="_blank">Read the GOV.UK One Login privacy notice (opens in a new tab)</a> to find out more about how your driving licence details are checked.</P>
+    <p>To find out more about how your driving licence details will be used, you can read:</p>
+    <ul class="govuk-list govuk-list--bullet">
+    <li class="govuk-body govuk-!-margin-left-2"><a href="https://signin.account.gov.uk/privacy-notice" class="govuk-link" rel="noopener" target="_blank" class="govuk-body govuk-!-margin-left-4">the GOV.UK One Login privacy notice (opens in a new tab)</a></li>
+    <li class="govuk-body govuk-!-margin-left-2"><a href="https://www.gov.uk/government/publications/dvla-privacy-policy" class="govuk-link" rel="noopener" target="_blank">the DVLA privacy notice (opens in a new tab)</a></li>
+    </ul>
   validation:
     default: "You must give your consent to continue"
 
