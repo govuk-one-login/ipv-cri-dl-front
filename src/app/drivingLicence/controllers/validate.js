@@ -27,8 +27,7 @@ class ValidateController extends BaseController {
         req.sessionModel.get("dvaDateOfBirth") ||
         req.sessionModel.get("dateOfBirth"),
       expiryDate: req.sessionModel.get("expiryDate"),
-      issueDate: req.sessionModel.get("issueDate") || null,
-      dateOfIssue: req.sessionModel.get("dateOfIssue"),
+      issueDate: req.sessionModel.get("issueDate") || req.sessionModel.get("dateOfIssue"),
       licenceIssuer: req.sessionModel.get("licenceIssuer"),
     };
 
