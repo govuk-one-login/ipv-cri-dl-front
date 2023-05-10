@@ -112,8 +112,8 @@ consentDVACheckbox:
     <p>Mae DVA angen eich caniatâd i wirio eich manylion trwydded yrru cyn y gallwch barhau. Byddant yn sicrhau nad yw eich trwydded wedi cael ei chanslo na'i hadrodd fel un sydd ar goll neu wedi'i dwyn.</p>
     <p>I ddarganfod mwy am sut bydd eich manylion trwydded yrru yn cael eu defnyddio, gallwch ddarllen:</p>
     <ul class="govuk-list govuk-list--bullet">
-    <li class="govuk-body govuk-!-margin-left-4"><a href="https://signin.account.gov.uk/privacy-notice" class="govuk-link" rel="noopener" target="_blank">hysbysiad preifatrwydd GOV.UK One Login (agor mewn tab newydd)</a></li>
-    <li class="govuk-body govuk-!-margin-left-4"><a href="https://www.infrastructure-ni.gov.uk/sites/default/files/publications/infrastructure/dva-driver-licensing-privacy-notice.pdf" class="govuk-link" rel="noopener" target="_blank">hysbysiad preifatrwydd DVA (agor mewn tab newydd)</a></li>
+    <li class="govuk-body govuk-!-margin-left-2"><a href="https://signin.account.gov.uk/privacy-notice" class="govuk-link" rel="noopener" target="_blank">hysbysiad preifatrwydd GOV.UK One Login (agor mewn tab newydd)</a></li>
+    <li class="govuk-body govuk-!-margin-left-2"><a href="https://www.infrastructure-ni.gov.uk/sites/default/files/publications/infrastructure/dva-driver-licensing-privacy-notice.pdf" class="govuk-link" rel="noopener" target="_blank">hysbysiad preifatrwydd DVA (agor mewn tab newydd)</a></li>
     </ul>
   validation:
     default: "Mae'n rhaid i chi roi eich caniatâd i barhau"
@@ -122,7 +122,11 @@ consentCheckbox:
   label: Rhoi eich caniatâd i DVLA i wirio eich manylion trwydded yrru
   hint:
     <p>Mae DVLA angen eich caniatâd i wirio eich manylion trwydded yrru cyn y gallwch barhau. Byddant yn sicrhau nad yw eich trwydded wedi cael ei chanslo na'i hadrodd fel un sydd ar goll neu wedi'i dwyn.</p>
-    <p><a href="https://signin.account.gov.uk/privacy-notice" class="govuk-link" rel="noopener" target="_blank">Darllenwch hysbysiad preifatrwydd GOV.UK One Login (agor mewn tab newydd)</a> i ddarganfod mwy am sut mae'ch manylion trwydded yrru yn cael eu gwirio.</p>
+    <p>I ddarganfod mwy am sut bydd eich manylion trwydded yrru yn cael eu defnyddio, gallwch ddarllen:</p>
+    <ul class="govuk-list govuk-list--bullet">
+    <li class="govuk-body govuk-!-margin-left-2"><a href="https://signin.account.gov.uk/privacy-notice" class="govuk-link" rel="noopener" target="_blank">hysbysiad preifatrwydd GOV.UK One Login (agor mewn tab newydd)</a></li>
+    <li class="govuk-body govuk-!-margin-left-2"><a href="https://www.gov.uk/government/publications/dvla-privacy-policy.cy" class="govuk-link" rel="noopener" target="_blank">hysbysiad preifatrwydd DVLA (agor mewn tab newydd)</a></li>
+    </ul>
   validation:
     default: "Mae'n rhaid i chi roi eich caniatâd i barhau"
 
