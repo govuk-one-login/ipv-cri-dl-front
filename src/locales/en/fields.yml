@@ -113,7 +113,7 @@ consentDVACheckbox:
     <p>To find out more about how your driving licence details will be used, you can read:</p>
     <ul class="govuk-list govuk-list--bullet">
     <li class="govuk-body govuk-!-margin-left-2"><a href="https://signin.account.gov.uk/privacy-notice" class="govuk-link" rel="noopener" target="_blank" class="govuk-body govuk-!-margin-left-4">the GOV.UK One Login privacy notice (opens in a new tab)</a></li>
-    <li class="govuk-body govuk-!-margin-left-2"><a href="https://www.infrastructure-ni.gov.uk/sites/default/files/publications/infrastructure/dva-driver-licensing-privacy-notice.pdf" class="govuk-link" rel="noopener" target="_blank">the DVA privacy notice (opens in a new tab)</a></li>
+    <li class="govuk-body govuk-!-margin-left-2"><a href="https://www.infrastructure-ni.gov.uk/sites/default/files/publications/infrastructure/dva-driver-licensing-privacy-notice-may-2023.pdf" class="govuk-link" rel="noopener" target="_blank">the DVA privacy notice (opens in a new tab)</a></li>
     </ul>
   validation:
     default: "You must give your consent to continue"
