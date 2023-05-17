@@ -69,7 +69,7 @@ classes:'driving-licence-message'
 html: translate("drivingLicence.drivingLicenceTryAnotherWay")
 }) }}
 
-{% call hmpoForm(ctx, {attributes: {onsubmit: 'window.disableFormSubmit()'} }) %}
+{% call hmpoForm(ctx) %}
 
 {{ hmpoText(ctx, {
 id: "surname",
@@ -242,6 +242,15 @@ classes: "govuk-input"
     {{ super ()}}
 
     <script nonce="{{ cspNonce }}">
+
+<!--    Disable enter button from submitting the form-->
+    var form = document.getElementsByTagName('form')[0];
+    form.addEventListener("keydown", function (event) {
+        if (event.code === 'Enter'){
+            event.preventDefault();
+        }
+    });
+
     var formSubmitted = false;
 
     submitSpinner()
@@ -252,7 +261,6 @@ classes: "govuk-input"
             button.setAttribute('disabled', 'disabled')
         }, 200);
     }
-
 
     function submitSpinner() {
         var selects = document.getElementById('continue')

@@ -65,7 +65,6 @@ describe("validate controller", () => {
         expiryDate: "15/01/2035",
         issueDate: "10/02/2005",
         licenceIssuer: "DVLA",
-        dateOfIssue: "10/02/2005",
       },
       {
         headers: {
@@ -88,7 +87,6 @@ describe("validate controller", () => {
     req.sessionModel.set("expiryDate", "15/01/2035");
     req.sessionModel.set("issueDate", "10/02/2005");
     req.sessionModel.set("licenceIssuer", "DVLA");
-    req.sessionModel.set("dateOfIssue", "10/02/2005");
 
     const data = {
       redirectUrl: undefined,
