@@ -243,10 +243,14 @@ classes: "govuk-input"
 
     <script nonce="{{ cspNonce }}">
 
-<!--    Disable enter button from submitting the form-->
+<!--    Disable enter button from submitting the form but allow if form submit button is focused-->
     var form = document.getElementsByTagName('form')[0];
     form.addEventListener("keydown", function (event) {
-        if (event.code === 'Enter'){
+
+        var submitButton = document.getElementById('continue')
+        var submitButtonIsNotFocused = document.activeElement !== submitButton;
+
+        if ((event.code === 'Enter') && submitButtonIsNotFocused){
             event.preventDefault();
         }
     });
