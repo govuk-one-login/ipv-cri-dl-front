@@ -2,7 +2,7 @@ const fields = require("./fieldsHelper");
 
 const dvlaValidatorObj = {
   fn: fields.dvlaValidator,
-  arguments: ["dateOfBirth", "drivingLicenceNumber"],
+  arguments: ["firstName","middleName","surname","dateOfBirth", "drivingLicenceNumber"],
 };
 
 module.exports = {

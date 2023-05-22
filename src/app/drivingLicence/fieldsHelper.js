@@ -19,30 +19,36 @@ module.exports = {
   },
   dvlaValidator(
     _value,
-    //    firstNameField,
-    //    middleNameField,
-    //    lastNameField,
+    firstNameField,
+    middleNameField,
+    surnameField,
     dobField,
     licenceField
   ) {
-    //    const firstName = this.values[firstNameField];
-    //    const middleName = this.values[middleNameField];
-    //    const lastName = this.values[lastNameField];
+
+    const firstName = this.values[firstNameField];
+    const middleName = this.values[middleNameField];
+    const surname = this.values[surnameField];
     const dob = this.values[dobField];
     const licence = this.values[licenceField];
 
-    //    const nameShort = lastName.length > 5 ? lastName.slice(0,5) : lastName.padEnd(5, '9')
+    const nameShort = surname.length >= 5 ? surname.slice(0,5) : surname.padEnd(5, '9')
     const splitDate = dob.split("-");
-    //    const initialsShort = firstName.slice(0, 2) + (middleName.length > 0 ? middleName.slice(0, 2) : '99')
+    if (firstName) {
+      var initialsShort = firstName.slice(0, 1)
+      if (middleName) {
+        initialsShort += middleName.length > 0 ? middleName.slice(0, 1) : '9'
+      }
+    }
 
-    //    const firstCheck = licence.slice(0,5) === nameShort
+    const firstCheck = licence.slice(0,5) === nameShort.toUpperCase();
     const secondCheck =
       licence.slice(5, 6) + licence.slice(10, 11) === splitDate[0].slice(2);
     const thirdCheck =
       licence.slice(6, 8) === splitDate[1] ||
-      licence.slice(6, 8) === String(parseInt(splitDate[1]) + 50);
+      licence.slice(6, 8) === String(parseInt(splitDate[1].slice(0,1)) + 5);
     const fourthCheck = licence.slice(8, 10) === splitDate[2];
 
-    return secondCheck && thirdCheck && fourthCheck;
+    return firstCheck && secondCheck && thirdCheck && fourthCheck;
   },
 };

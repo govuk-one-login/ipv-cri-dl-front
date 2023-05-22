@@ -28,11 +28,11 @@ describe("validate controller", () => {
   it("should retrieve redirect url from cri-driving-permit-api and store in session", async () => {
     const sessionId = "drivingLicence123";
 
-    req.sessionModel.set("drivingLicenceNumber", "123456789");
-    req.sessionModel.set("issueNumber", "123456789");
+    req.sessionModel.set("drivingLicenceNumber", "SMITH9702105LN99");
+    req.sessionModel.set("issueNumber", "12");
     req.sessionModel.set("postcode", "SW1 EQR");
     req.session.tokenId = sessionId;
-    req.sessionModel.set("surname", "Jones Smith");
+    req.sessionModel.set("surname", "Smith");
     req.sessionModel.set("firstName", "Dan");
     req.sessionModel.set("middleNames", "Joe");
     req.sessionModel.set("dateOfBirth", "10/02/1975");
@@ -56,10 +56,10 @@ describe("validate controller", () => {
       stub,
       "check-driving-licence",
       {
-        drivingLicenceNumber: "123456789",
-        issueNumber: "123456789",
+        drivingLicenceNumber: "SMITH9702105LN99",
+        issueNumber: "12",
         postcode: "SW1 EQR",
-        surname: "Jones Smith",
+        surname: "Smith",
         forenames: ["Dan", "Joe"],
         dateOfBirth: "10/02/1975",
         expiryDate: "15/01/2035",
@@ -77,10 +77,10 @@ describe("validate controller", () => {
   });
 
   it("should set an error object in the session if redirect url is missing", async () => {
-    req.sessionModel.set("drivingLicenceNumber:", "123456789");
-    req.sessionModel.set("issueNumber", "123456789");
-    req.sessionModel.set("postcode:", "SW1 EQR");
-    req.sessionModel.set("surname", "Jones Smith");
+    req.sessionModel.set("drivingLicenceNumber", "SMITH9702105LN99");
+    req.sessionModel.set("issueNumber", "12");
+    req.sessionModel.set("postcode", "SW1 EQR");
+    req.sessionModel.set("surname", "Smith");
     req.sessionModel.set("firstName", "Dan");
     req.sessionModel.set("middleNames", "Joe");
     req.sessionModel.set("dateOfBirth", "10/02/1975");
@@ -105,10 +105,10 @@ describe("validate controller", () => {
   });
 
   it("should save error in session when error caught from cri-back", async () => {
-    req.sessionModel.set("drivingLicenceNumber:", "123456789");
-    req.sessionModel.set("issueNumber", "123456789");
+    req.sessionModel.set("drivingLicenceNumber", "SMITH9702105LN99");
+    req.sessionModel.set("issueNumber", "12");
     req.sessionModel.set("postcode:", "SW1 EQR");
-    req.sessionModel.set("surname", "Jones Smith");
+    req.sessionModel.set("surname", "Smith");
     req.sessionModel.set("firstName", "Dan");
     req.sessionModel.set("middleNames", "Joe");
     req.sessionModel.set("dateOfBirth", "10/02/1975");
@@ -139,10 +139,10 @@ describe("validate controller", () => {
   });
 
   it("should have showRetryMessage in sessionModel when api response 'retry' is true", async () => {
-    req.sessionModel.set("drivingLicenceNumber:", "123456789");
-    req.sessionModel.set("issueNumber", "123456789");
+    req.sessionModel.set("drivingLicenceNumber", "SMITH9702105LN99");
+    req.sessionModel.set("issueNumber", "12");
     req.sessionModel.set("postcode:", "SW1 EQR");
-    req.sessionModel.set("surname", "Jones Smith");
+    req.sessionModel.set("surname", "Smith");
     req.sessionModel.set("firstName", "Dan");
     req.sessionModel.set("middleNames", "Joe");
     req.sessionModel.set("dateOfBirth", "10/02/1975");
@@ -165,10 +165,10 @@ describe("validate controller", () => {
   });
 
   it("should not have showRetryMessage in sessionModel when api response 'retry' is false", async () => {
-    req.sessionModel.set("drivingLicenceNumber:", "123456789");
-    req.sessionModel.set("issueNumber", "123456789");
+    req.sessionModel.set("drivingLicenceNumber:", "SMITH9702105LN99");
+    req.sessionModel.set("issueNumber", "12");
     req.sessionModel.set("postcode:", "SW1 EQR");
-    req.sessionModel.set("surname", "Jones Smith");
+    req.sessionModel.set("surname", "Smith");
     req.sessionModel.set("firstName", "Dan");
     req.sessionModel.set("middleNames", "Joe");
     req.sessionModel.set("dateOfBirth", "10/02/1975");
