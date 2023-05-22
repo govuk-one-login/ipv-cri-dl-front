@@ -31,6 +31,7 @@ module.exports = {
     const dob = this.values[dobField];
     const licence = this.values[licenceField];
 
+    // eslint-disable-next-line no-unused-vars
     const nameShort =
       surname.length >= 5 ? surname.slice(0, 5) : surname.padEnd(5, "9");
     const splitDate = dob.split("-");
@@ -39,18 +40,26 @@ module.exports = {
       if (middleName) {
         initialsShort += middleName.slice(0, 1);
       } else {
-        initialsShort += "9";
+        initialsShort += "9"; // eslint-disable-line
       }
     }
 
-    const firstCheck = licence.slice(0, 5) === nameShort.toUpperCase();
+    // Checking the user surname matches licence number
+    //const firstCheck = licence.slice(0, 5) === nameShort.toUpperCase();
+
     const secondCheck =
       licence.slice(5, 6) + licence.slice(10, 11) === splitDate[0].slice(2);
     const thirdCheck =
       licence.slice(6, 8) === splitDate[1] ||
-      licence.slice(6, 8) === String(parseInt(splitDate[1].slice(0, 1)) + 5);
+      licence.slice(6, 8) ===
+        String(
+          parseInt(splitDate[1].slice(0, 1)) + 5 + splitDate[1].slice(1, 2)
+        );
     const fourthCheck = licence.slice(8, 10) === splitDate[2];
-    const fifthCheck = initialsShort.toUpperCase() === licence.slice(11, 13);
-    return firstCheck && secondCheck && thirdCheck && fourthCheck && fifthCheck;
+
+    // Checking intials in licence number
+    // const fifthCheck = initialsShort.toUpperCase() === licence.slice(11, 13);
+
+    return secondCheck && thirdCheck && fourthCheck;
   },
 };

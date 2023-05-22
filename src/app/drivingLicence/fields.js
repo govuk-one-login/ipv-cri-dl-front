@@ -4,7 +4,7 @@ const dvlaValidatorObj = {
   fn: fields.dvlaValidator,
   arguments: [
     "firstName",
-    "middleName",
+    "middleNames",
     "surname",
     "dateOfBirth",
     "drivingLicenceNumber",
