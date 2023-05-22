@@ -34,7 +34,7 @@ describe("custom validation fields test", () => {
   });
 
   it("should be true when licence number matches DOB", () => {
-    const licenceNo = "HARRI509146MJ931";
+    const licenceNo = "HARRI509146J9L31";
     const validator = fields.dvlaValidator.bind({
       values: {
         firstName: "John",
@@ -51,7 +51,7 @@ describe("custom validation fields test", () => {
   });
 
   it("should be false when licence number does not match DOB year", () => {
-    const licenceNo = "HARRI509146MJ931";
+    const licenceNo = "HARRI509146J9L31";
     const validator = fields.dvlaValidator.bind({
       values: {
         firstName: "john",
@@ -68,7 +68,7 @@ describe("custom validation fields test", () => {
   });
 
   it("should be false when licence number does not match DOB month", () => {
-    const licenceNo = "HARRI509146MJ931";
+    const licenceNo = "HARRI509146J9L31";
     const validator = fields.dvlaValidator.bind({
       values: {
         firstName: "john",
@@ -85,7 +85,7 @@ describe("custom validation fields test", () => {
   });
 
   it("should be false when licence number does not match DOB date", () => {
-    const licenceNo = "HARRI509146MJ931";
+    const licenceNo = "HARRI509146J9L31";
     const validator = fields.dvlaValidator.bind({
       values: {
         firstName: "john",

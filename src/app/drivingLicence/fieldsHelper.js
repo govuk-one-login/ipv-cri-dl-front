@@ -37,7 +37,9 @@ module.exports = {
     if (firstName) {
       var initialsShort = firstName.slice(0, 1);
       if (middleName) {
-        initialsShort += middleName.length > 0 ? middleName.slice(0, 1) : "9";
+        initialsShort += middleName.slice(0, 1);
+      } else {
+        initialsShort += "9";
       }
     }
 
@@ -48,7 +50,7 @@ module.exports = {
       licence.slice(6, 8) === splitDate[1] ||
       licence.slice(6, 8) === String(parseInt(splitDate[1].slice(0, 1)) + 5);
     const fourthCheck = licence.slice(8, 10) === splitDate[2];
-
-    return firstCheck && secondCheck && thirdCheck && fourthCheck;
+    const fifthCheck = initialsShort.toUpperCase() === licence.slice(11, 13);
+    return firstCheck && secondCheck && thirdCheck && fourthCheck && fifthCheck;
   },
 };
