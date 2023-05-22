@@ -45,7 +45,9 @@ describe("custom validation fields test", () => {
       },
     });
 
-    expect(validator(1,"firstName","middleNames","surname", "dob", "licence")).to.be.true;
+    expect(
+      validator(1, "firstName", "middleNames", "surname", "dob", "licence")
+    ).to.be.true;
   });
 
   it("should be false when licence number does not match DOB year", () => {
@@ -60,7 +62,9 @@ describe("custom validation fields test", () => {
       },
     });
 
-    expect(validator(1, "firstName","middleNames","surname", "dob", "licence")).to.be.false;
+    expect(
+      validator(1, "firstName", "middleNames", "surname", "dob", "licence")
+    ).to.be.false;
   });
 
   it("should be false when licence number does not match DOB month", () => {
@@ -75,7 +79,9 @@ describe("custom validation fields test", () => {
       },
     });
 
-    expect(validator(1, "firstName","middleNames","surname", "dob", "licence")).to.be.false;
+    expect(
+      validator(1, "firstName", "middleNames", "surname", "dob", "licence")
+    ).to.be.false;
   });
 
   it("should be false when licence number does not match DOB date", () => {
@@ -90,21 +96,25 @@ describe("custom validation fields test", () => {
       },
     });
 
-    expect(validator(1, "firstName","middleNames","surname", "dob", "licence")).to.be.false;
+    expect(
+      validator(1, "firstName", "middleNames", "surname", "dob", "licence")
+    ).to.be.false;
   });
 
-    it("should be true when licence number does match DOB date kenneth", () => {
-      const licenceNo = "DECER607085K99LN";
-      const validator = fields.dvlaValidator.bind({
-        values: {
-          firstName: "KENNETH",
-          middleNames: "",
-          surname: "DECERQUEIRA",
-          dob: "1965-07-08",
-          licence: licenceNo,
-        },
-      });
-
-      expect(validator(1, "firstName","middleNames","surname", "dob", "licence")).to.be.true;
+  it("should be true when licence number does match DOB date kenneth", () => {
+    const licenceNo = "DECER607085K99LN";
+    const validator = fields.dvlaValidator.bind({
+      values: {
+        firstName: "KENNETH",
+        middleNames: "",
+        surname: "DECERQUEIRA",
+        dob: "1965-07-08",
+        licence: licenceNo,
+      },
     });
+
+    expect(
+      validator(1, "firstName", "middleNames", "surname", "dob", "licence")
+    ).to.be.true;
+  });
 });

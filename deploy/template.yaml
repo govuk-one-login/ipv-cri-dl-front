@@ -30,11 +30,11 @@ Parameters:
 
 Conditions:
   IsNotDevelopment: !Or
-    - !Equals [ !Ref Environment, build ]
-    - !Equals [ !Ref Environment, staging ]
-    - !Equals [ !Ref Environment, integration ]
-    - !Equals [ !Ref Environment, production ]
-  IsProduction: !Equals [ !Ref Environment, production ]
+    - !Equals [!Ref Environment, build]
+    - !Equals [!Ref Environment, staging]
+    - !Equals [!Ref Environment, integration]
+    - !Equals [!Ref Environment, production]
+  IsProduction: !Equals [!Ref Environment, production]
   UsePermissionsBoundary:
     Fn::Not:
       - Fn::Equals:
@@ -50,7 +50,7 @@ Mappings:
 Resources:
   # Security Groups for the ECS service and load balancer
   LoadBalancerSG:
-    Type: 'AWS::EC2::SecurityGroup'
+    Type: "AWS::EC2::SecurityGroup"
     Properties:
       GroupDescription: >-
         Driving Permit Front LoadBalancer Security Group
@@ -62,11 +62,10 @@ Resources:
           IpProtocol: tcp
           ToPort: 80
       VpcId:
-        Fn::ImportValue:
-          !Sub "${VpcStackName}-VpcId"
+        Fn::ImportValue: !Sub "${VpcStackName}-VpcId"
 
   LoadBalancerSGEgressToECSSecurityGroup:
-    Type: 'AWS::EC2::SecurityGroupEgress'
+    Type: "AWS::EC2::SecurityGroupEgress"
     Properties:
       GroupId: !GetAtt LoadBalancerSG.GroupId
       IpProtocol: tcp
@@ -78,7 +77,7 @@ Resources:
       ToPort: 8080
 
   ECSSecurityGroup:
-    Type: 'AWS::EC2::SecurityGroup'
+    Type: "AWS::EC2::SecurityGroup"
     Properties:
       GroupDescription: >-
         Driving Permit Front ECS Security Group permitting outbound
@@ -86,13 +85,12 @@ Resources:
       SecurityGroupEgress:
         - CidrIp: 0.0.0.0/0
           Description: Allow all outbound traffic by default
-          IpProtocol: '-1'
+          IpProtocol: "-1"
       VpcId:
-        Fn::ImportValue:
-          !Sub "${VpcStackName}-VpcId"
+        Fn::ImportValue: !Sub "${VpcStackName}-VpcId"
 
   ECSSecurityGroupIngressFromLoadBalancer:
-    Type: 'AWS::EC2::SecurityGroupIngress'
+    Type: "AWS::EC2::SecurityGroupIngress"
     Properties:
       IpProtocol: tcp
       Description: >-
@@ -134,7 +132,12 @@ Resources:
             Principal:
               AWS: !Sub
                 - "arn:aws:iam::${ElbAccountId}:root"
-                - ElbAccountId: !FindInMap [ ElasticLoadBalancerAccountIds, !Ref AWS::Region, AccountId ]
+                - ElbAccountId:
+                    !FindInMap [
+                      ElasticLoadBalancerAccountIds,
+                      !Ref AWS::Region,
+                      AccountId,
+                    ]
             Action:
               - s3:PutObject
             Resource:
@@ -142,17 +145,15 @@ Resources:
 
   # Private Application Load Balancer
   LoadBalancer:
-    Type: 'AWS::ElasticLoadBalancingV2::LoadBalancer'
+    Type: "AWS::ElasticLoadBalancingV2::LoadBalancer"
     #checkov:skip=CKV_AWS_91:ALB access logging is disabled in developer environments to make them easier to manage.
     Properties:
       Scheme: internal
       SecurityGroups:
         - !GetAtt LoadBalancerSG.GroupId
       Subnets:
-        - Fn::ImportValue:
-            !Sub "${VpcStackName}-PrivateSubnetIdA"
-        - Fn::ImportValue:
-            !Sub "${VpcStackName}-PrivateSubnetIdB"
+        - Fn::ImportValue: !Sub "${VpcStackName}-PrivateSubnetIdA"
+        - Fn::ImportValue: !Sub "${VpcStackName}-PrivateSubnetIdB"
         # This is an alternative implementation if you want to split across all PrivateSubnets (but don't know how many there are)
         # Fn::Split:
         #   [ ",", Fn::ImportValue: !Sub "${VpcStackName}-PrivateSubnets" ]
@@ -168,7 +169,7 @@ Resources:
         - !Ref AWS::NoValue
 
   LoadBalancerListenerTargetGroupECS:
-    Type: 'AWS::ElasticLoadBalancingV2::TargetGroup'
+    Type: "AWS::ElasticLoadBalancingV2::TargetGroup"
     Properties:
       HealthCheckEnabled: TRUE
       HealthCheckProtocol: HTTP
@@ -179,14 +180,13 @@ Resources:
       Protocol: HTTP
       TargetType: ip
       VpcId:
-        Fn::ImportValue:
-          !Sub "${VpcStackName}-VpcId"
+        Fn::ImportValue: !Sub "${VpcStackName}-VpcId"
       TargetGroupAttributes:
         - Key: deregistration_delay.timeout_seconds
           Value: 60
 
   LoadBalancerListener:
-    Type: 'AWS::ElasticLoadBalancingV2::Listener'
+    Type: "AWS::ElasticLoadBalancingV2::Listener"
     # checkov:skip=CKV_AWS_2:Certificate generation must be resolved before the listener can use HTTPS.
     # checkov:skip=CKV_AWS_103:The load balancer cannot use TLS v1.2 until HTTPS is enabled
     Properties:
@@ -206,10 +206,8 @@ Resources:
     Properties:
       Description: SubnetGroup for ElastiCache
       SubnetIds:
-        - Fn::ImportValue:
-            !Sub "${VpcStackName}-PrivateSubnetIdA"
-        - Fn::ImportValue:
-            !Sub "${VpcStackName}-PrivateSubnetIdB"
+        - Fn::ImportValue: !Sub "${VpcStackName}-PrivateSubnetIdA"
+        - Fn::ImportValue: !Sub "${VpcStackName}-PrivateSubnetIdB"
       Tags:
         - Key: Name
           Value: !Sub "${AWS::StackName}-SubnetGroup"
@@ -238,7 +236,7 @@ Resources:
           Value: !Sub "${Environment}"
 
   ElastiCacheSecurityGroup:
-    Type: 'AWS::EC2::SecurityGroup'
+    Type: "AWS::EC2::SecurityGroup"
     Properties:
       GroupDescription: >-
         Driving Permit Front Redis Security Group
@@ -249,8 +247,7 @@ Resources:
           IpProtocol: tcp
           ToPort: 6379
       VpcId:
-        Fn::ImportValue:
-          !Sub "${VpcStackName}-VpcId"
+        Fn::ImportValue: !Sub "${VpcStackName}-VpcId"
 
   ElastiCacheReplicationGroup:
     Type: AWS::ElastiCache::ReplicationGroup
@@ -279,7 +276,7 @@ Resources:
 
   # ECS cluster, service and task definition
   DrivingPermitFrontEcsCluster:
-    Type: 'AWS::ECS::Cluster'
+    Type: "AWS::ECS::Cluster"
     Properties:
       ClusterSettings:
         - Name: containerInsights
@@ -295,7 +292,7 @@ Resources:
           Value: !Sub "${Environment}"
 
   DrivingPermitFrontEcsService:
-    Type: 'AWS::ECS::Service'
+    Type: "AWS::ECS::Service"
     Properties:
       Cluster: !Ref DrivingPermitFrontEcsCluster
       DeploymentConfiguration:
@@ -318,10 +315,8 @@ Resources:
           SecurityGroups:
             - !GetAtt ECSSecurityGroup.GroupId
           Subnets:
-            - Fn::ImportValue:
-                !Sub "${VpcStackName}-PrivateSubnetIdA"
-            - Fn::ImportValue:
-                !Sub "${VpcStackName}-PrivateSubnetIdB"
+            - Fn::ImportValue: !Sub "${VpcStackName}-PrivateSubnetIdA"
+            - Fn::ImportValue: !Sub "${VpcStackName}-PrivateSubnetIdB"
         # This is an alternative implementation if you want to split across all PrivateSubnets (but don't know how many there are)
         # Fn::Split:
         #   [ ",", Fn::ImportValue: !Sub "${VpcStackName}-PrivateSubnets" ]
@@ -344,16 +339,16 @@ Resources:
       LogGroupName: !Sub /aws/ecs/${AWS::StackName}-DrivingPermitFront-ECS
       RetentionInDays: 14
 
-#  ECSAccessLogsGroupSubscriptionFilter:
-#    Type: AWS::Logs::SubscriptionFilter
-#    Condition: IsNotDevelopment
-#    Properties:
-#      DestinationArn: "arn:aws:logs:eu-west-2:885513274347:destination:csls_cw_logs_destination_prodpython"
-#      FilterPattern: ""
-#      LogGroupName: !Sub "/aws/ecs/${AWS::StackName}-DrivingPermitFront-ECS"
+  #  ECSAccessLogsGroupSubscriptionFilter:
+  #    Type: AWS::Logs::SubscriptionFilter
+  #    Condition: IsNotDevelopment
+  #    Properties:
+  #      DestinationArn: "arn:aws:logs:eu-west-2:885513274347:destination:csls_cw_logs_destination_prodpython"
+  #      FilterPattern: ""
+  #      LogGroupName: !Sub "/aws/ecs/${AWS::StackName}-DrivingPermitFront-ECS"
 
   ECSServiceTaskDefinition:
-    Type: 'AWS::ECS::TaskDefinition'
+    Type: "AWS::ECS::TaskDefinition"
     Properties:
       ContainerDefinitions:
         - Essential: true
@@ -375,19 +370,24 @@ Resources:
             - Name: GTM_ID
               Value: !If [IsProduction, "GTM-TT5HDKV", "GTM-TK92W68"]
             - Name: ANALYTICS_DOMAIN
-              Value: !If [IsProduction, "account.gov.uk", !Sub "${Environment}.account.gov.uk"]
+              Value:
+                !If [
+                  IsProduction,
+                  "account.gov.uk",
+                  !Sub "${Environment}.account.gov.uk",
+                ]
           PortMappings:
             - ContainerPort: 8080
               Protocol: tcp
           LogConfiguration:
             LogDriver: awslogs
             Options:
-              awslogs-group : !Ref ECSAccessLogsGroup
-              awslogs-region : !Sub ${AWS::Region}
-              awslogs-stream-prefix : !Sub driving-permit-front-${Environment}
-      Cpu: '256'
+              awslogs-group: !Ref ECSAccessLogsGroup
+              awslogs-region: !Sub ${AWS::Region}
+              awslogs-stream-prefix: !Sub driving-permit-front-${Environment}
+      Cpu: "256"
       ExecutionRoleArn: !GetAtt ECSTaskExecutionRole.Arn
-      Memory: '512'
+      Memory: "512"
       NetworkMode: awsvpc
       RequiresCompatibilities:
         - FARGATE
@@ -403,11 +403,11 @@ Resources:
           Value: !Sub "${Environment}"
 
   ECSTaskExecutionRole:
-    Type: 'AWS::IAM::Role'
+    Type: "AWS::IAM::Role"
     Properties:
       AssumeRolePolicyDocument:
         Statement:
-          - Action: 'sts:AssumeRole'
+          - Action: "sts:AssumeRole"
             Effect: Allow
             Principal:
               Service: ecs-tasks.amazonaws.com
@@ -423,7 +423,7 @@ Resources:
                   - "ecr:GetDownloadUrlForLayer"
                   - "ecr:GetAuthorizationToken"
                 Resource:
-                  - '*'
+                  - "*"
               - Effect: Allow
                 Action:
                   - "logs:CreateLogStream"
@@ -437,11 +437,11 @@ Resources:
         - !Ref AWS::NoValue
 
   ECSTaskRole:
-    Type: 'AWS::IAM::Role'
+    Type: "AWS::IAM::Role"
     Properties:
       AssumeRolePolicyDocument:
         Statement:
-          - Action: 'sts:AssumeRole'
+          - Action: "sts:AssumeRole"
             Effect: Allow
             Principal:
               Service: ecs-tasks.amazonaws.com
@@ -470,36 +470,35 @@ Resources:
         - !Ref AWS::NoValue
 
   ApiGwHttpEndpoint:
-      Type: 'AWS::ApiGatewayV2::Api'
-      Properties:
-          Name: !Sub driving-permit-front-${Environment}
-          ProtocolType: HTTP
+    Type: "AWS::ApiGatewayV2::Api"
+    Properties:
+      Name: !Sub driving-permit-front-${Environment}
+      ProtocolType: HTTP
 
   ApiGwHttpEndpointIntegration:
-      Type: 'AWS::ApiGatewayV2::Integration'
-      Properties:
-        ApiId: !Ref ApiGwHttpEndpoint
-        IntegrationType: HTTP_PROXY
-        ConnectionId:
-          Fn::ImportValue:
-            !Sub "${VpcStackName}-VpcLinkId"
-        ConnectionType: VPC_LINK
-        IntegrationMethod: ANY
-        IntegrationUri: !Ref LoadBalancerListener
-        PayloadFormatVersion: '1.0'
-
-  APIGWRoute:
-    Type: 'AWS::ApiGatewayV2::Route'
+    Type: "AWS::ApiGatewayV2::Integration"
     Properties:
       ApiId: !Ref ApiGwHttpEndpoint
-      RouteKey: 'ANY /{proxy+}'
+      IntegrationType: HTTP_PROXY
+      ConnectionId:
+        Fn::ImportValue: !Sub "${VpcStackName}-VpcLinkId"
+      ConnectionType: VPC_LINK
+      IntegrationMethod: ANY
+      IntegrationUri: !Ref LoadBalancerListener
+      PayloadFormatVersion: "1.0"
+
+  APIGWRoute:
+    Type: "AWS::ApiGatewayV2::Route"
+    Properties:
+      ApiId: !Ref ApiGwHttpEndpoint
+      RouteKey: "ANY /{proxy+}"
       Target: !Join
         - /
         - - integrations
           - !Ref ApiGwHttpEndpointIntegration
 
   APIStageDefault:
-    Type: 'AWS::ApiGatewayV2::Stage'
+    Type: "AWS::ApiGatewayV2::Stage"
     Properties:
       ApiId: !Ref ApiGwHttpEndpoint
       StageName: $default
@@ -525,17 +524,17 @@ Resources:
     Properties:
       LogGroupName: !Sub /aws/apigateway/${AWS::StackName}-DrivingPermitFront-API-GW-AccessLogs
 
-#  APIGWAccessLogsGroupSubscriptionFilter:
-#    Type: AWS::Logs::SubscriptionFilter
-#    Condition: IsNotDevelopment
-#    Properties:
-#      DestinationArn: "arn:aws:logs:eu-west-2:885513274347:destination:csls_cw_logs_destination_prodpython"
-#      FilterPattern: ""
-#      LogGroupName: !Sub "/aws/apigateway/${AWS::StackName}-DrivingPermitFront-API-GW-AccessLogs"
+  #  APIGWAccessLogsGroupSubscriptionFilter:
+  #    Type: AWS::Logs::SubscriptionFilter
+  #    Condition: IsNotDevelopment
+  #    Properties:
+  #      DestinationArn: "arn:aws:logs:eu-west-2:885513274347:destination:csls_cw_logs_destination_prodpython"
+  #      FilterPattern: ""
+  #      LogGroupName: !Sub "/aws/apigateway/${AWS::StackName}-DrivingPermitFront-API-GW-AccessLogs"
 
-# ECS Autoscaling
-# The number of pods will increase when the configured CPU utilization is breached for more than 3 minutes.
-# Scaling down will occur after 15 minutes of 90% utilization of the configured CPU utilization.
+  # ECS Autoscaling
+  # The number of pods will increase when the configured CPU utilization is breached for more than 3 minutes.
+  # Scaling down will occur after 15 minutes of 90% utilization of the configured CPU utilization.
 
   ECSAutoScalingTarget:
     Condition: IsProduction
@@ -544,9 +543,9 @@ Resources:
       MaxCapacity: 3
       MinCapacity: 1
       ResourceId: !Join
-        - '/'
+        - "/"
         - - "service"
-          - !Ref   DrivingPermitFrontEcsCluster
+          - !Ref DrivingPermitFrontEcsCluster
           - !GetAtt DrivingPermitFrontEcsService.Name
       RoleARN: !Sub "arn:aws:iam::${AWS::AccountId}:role/aws-service-role/ecs.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_ECSService"
       ScalableDimension: ecs:service:DesiredCount
@@ -560,9 +559,9 @@ Resources:
       PolicyName: ECSAutoScalingPolicy
       PolicyType: TargetTrackingScaling
       ResourceId: !Join
-        - '/'
+        - "/"
         - - "service"
-          - !Ref   DrivingPermitFrontEcsCluster
+          - !Ref DrivingPermitFrontEcsCluster
           - !GetAtt DrivingPermitFrontEcsService.Name
       ScalableDimension: ecs:service:DesiredCount
       ServiceNamespace: ecs
@@ -684,7 +683,7 @@ Resources:
       TopicArn:
         Ref: AlarmTopicDL
       Endpoint:
-        Fn::Sub: '{{resolve:ssm:/alerting/pagerduty-dl/url}}'
+        Fn::Sub: "{{resolve:ssm:/alerting/pagerduty-dl/url}}"
       Protocol: https
     Metadata:
       SamResourceId: AlarmTopicSubscriptionPagerDutyDL
@@ -708,7 +707,6 @@ Resources:
                   Fn::Sub: arn:aws:cloudwatch:${AWS::Region}:${AWS::AccountId}:alarm:*
     Metadata:
       SamResourceId: AlarmPublishToTopicPolicyDL
-
 
 # Outputs
 
