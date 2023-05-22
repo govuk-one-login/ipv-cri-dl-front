@@ -20,9 +20,7 @@ yarn install
 - `PORT` - Default port to run webserver on. (Default to `5030`)
 
 ## Running Locally
+
 ```bash
 yarn run dev
 ```
-
-
-

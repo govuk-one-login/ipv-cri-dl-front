@@ -34,50 +34,87 @@ describe("custom validation fields test", () => {
   });
 
   it("should be true when licence number matches DOB", () => {
-    const licenceNo = "HARRI559146MJ931";
+    const licenceNo = "HARRI509146J9L31";
     const validator = fields.dvlaValidator.bind({
       values: {
+        firstName: "John",
+        middleNames: "",
+        surname: "Harris",
         dob: "1956-09-14",
         licence: licenceNo,
       },
     });
 
-    expect(validator(1, "dob", "licence")).to.be.true;
+    expect(
+      validator(1, "firstName", "middleNames", "surname", "dob", "licence")
+    ).to.be.true;
   });
 
   it("should be false when licence number does not match DOB year", () => {
-    const licenceNo = "HARRI559146MJ931";
+    const licenceNo = "HARRI509146J9L31";
     const validator = fields.dvlaValidator.bind({
       values: {
+        firstName: "john",
+        middleNames: "",
+        surname: "Harris",
         dob: "1958-09-14",
         licence: licenceNo,
       },
     });
 
-    expect(validator(1, "dob", "licence")).to.be.false;
+    expect(
+      validator(1, "firstName", "middleNames", "surname", "dob", "licence")
+    ).to.be.false;
   });
 
   it("should be false when licence number does not match DOB month", () => {
-    const licenceNo = "HARRI559146MJ931";
+    const licenceNo = "HARRI509146J9L31";
     const validator = fields.dvlaValidator.bind({
       values: {
+        firstName: "john",
+        middleNames: "",
+        surname: "Harris",
         dob: "1956-10-14",
         licence: licenceNo,
       },
     });
 
-    expect(validator(1, "dob", "licence")).to.be.false;
+    expect(
+      validator(1, "firstName", "middleNames", "surname", "dob", "licence")
+    ).to.be.false;
   });
 
   it("should be false when licence number does not match DOB date", () => {
-    const licenceNo = "HARRI559146MJ931";
+    const licenceNo = "HARRI509146J9L31";
     const validator = fields.dvlaValidator.bind({
       values: {
+        firstName: "john",
+        middleNames: "",
+        surname: "Harris",
         dob: "1956-09-16",
         licence: licenceNo,
       },
     });
 
-    expect(validator(1, "dob", "licence")).to.be.false;
+    expect(
+      validator(1, "firstName", "middleNames", "surname", "dob", "licence")
+    ).to.be.false;
+  });
+
+  it("should be true when licence number does match DOB date kenneth", () => {
+    const licenceNo = "DECER607085K99LN";
+    const validator = fields.dvlaValidator.bind({
+      values: {
+        firstName: "KENNETH",
+        middleNames: "",
+        surname: "DECERQUEIRA",
+        dob: "1965-07-08",
+        licence: licenceNo,
+      },
+    });
+
+    expect(
+      validator(1, "firstName", "middleNames", "surname", "dob", "licence")
+    ).to.be.true;
   });
 });
