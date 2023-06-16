@@ -1,0 +1,54 @@
+{
+  "mappings": [
+    {
+      "scenarioName": "dl-check-error",
+      "newScenarioState": "Started",
+      "request": {
+        "method": "GET",
+        "url": "/__reset/drivingLicence-check-error"
+      },
+      "response": {
+        "status": 200
+      }
+    },
+    {
+      "scenarioName": "dl-check-error",
+      "requiredScenarioState": "Started",
+      "newScenarioState": "DrivingLicenceCheck",
+      "request": {
+        "method": "POST",
+        "urlPath": "/session",
+        "headers": {
+          "x-scenario-id": {
+            "equalTo": "drivingLicence-check-error"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "session_id": "ABADCAFE",
+          "state": "sT@t3",
+          "redirect_uri": "http://example.net/return"
+        }
+      }
+    },
+    {
+      "scenarioName": "drivingLicence-check-error",
+      "requiredScenarioState": "DrivingLicenceCheck",
+      "newScenarioState": "AuthCode",
+      "request": {
+        "method": "POST",
+        "urlPath": "/check-driving-licence",
+        "headers": {
+          "x-scenario-id": {
+            "equalTo": "drivingLicence-check-error"
+          }
+        }
+      },
+      "response": {
+        "status": 500
+      }
+    }
+  ]
+}
