@@ -17,7 +17,7 @@ class UniversalSteps {
     if (header.includes(text)) {
         assertTrue(this.driver.getTitle().includes(text));
     } else {
-        fail("Page Title Does Not Match " ${text} "But was " ${this.Driver.getTitle()});
+        fail("Page Title Does Not Match " + text + "But was " + this.Driver.getTitle());
     }
   }
 
@@ -31,6 +31,6 @@ class UniversalSteps {
   }
 
     async changeLanguageTo(language) {
-      this.driver.get(this.driver.currentUrl + "?lang="language);
+      this.driver.get(this.driver.currentUrl + "?lang=" + language);
     }
 }
