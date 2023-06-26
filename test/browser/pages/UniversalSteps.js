@@ -1,12 +1,7 @@
 const { assertTrue, fail } = require("assert");
-const { By, until } = require("selenium-webdriver");
 
-class UniversalSteps {
-  constructor() {
-    this.driver = Driver.get();
-    this.wait = new this.driver.WebDriverWait(this.driver, 10);
-    PageFactory.initElements(this.driver, this);
-  }
+module.exports = class PlaywrightDevPage {
+  constructor() {}
 
   async waitForTextToAppear(text) {
     const header = await this.driver.getTitle();
@@ -24,10 +19,6 @@ class UniversalSteps {
     }
   }
 
-  driverClose() {
-    Driver.closeDriver();
-  }
-
   async assertURLContains(expected) {
     const url = await this.driver.getCurrentUrl();
     assertTrue(url.contains(expected));
@@ -36,4 +27,4 @@ class UniversalSteps {
   async changeLanguageTo(language) {
     this.driver.get(this.driver.currentUrl + "?lang=" + language);
   }
-}
+};

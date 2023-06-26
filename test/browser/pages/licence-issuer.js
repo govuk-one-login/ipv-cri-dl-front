@@ -21,7 +21,6 @@ module.exports = class PlaywrightDevPage {
   }
 
   async clickOnDVLARadioButton() {
-    console.log("TITLE " + (await this.page.title()));
     expect(await this.page.title()).to.equal(
       "Who was your UK driving licence issued by? – Prove your identity – GOV.UK"
     );
@@ -34,7 +33,6 @@ module.exports = class PlaywrightDevPage {
   }
 
   async clickOnDVARadioButton() {
-    console.log("TITLE " + (await this.page.title()));
     expect(await this.page.title()).to.equal(
       "Who was your UK driving licence issued by? – Prove your identity – GOV.UK"
     );

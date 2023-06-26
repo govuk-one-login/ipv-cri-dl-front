@@ -1,7 +1,5 @@
-const { expect: expect_play } = require("@playwright/test");
 const { expect: expect } = require("chai");
 const TestDataCreator = require("../util/TestDataCreator");
-const DVADrivingLicenceSubject = require("../model/DVADrivingLicenceSubject.js");
 
 exports.DVADetailsEntryPage = class PlaywrightDevPage {
   constructor(page) {
@@ -81,7 +79,6 @@ exports.DVADetailsEntryPage = class PlaywrightDevPage {
 
   async assertDVAPageTitle(dvaDetailsEntryPageTitle) {
     await this.page.waitForLoadState("domcontentloaded");
-    console.log("TITLE " + (await this.page.title()));
     expect(await this.isCurrentPage()).to.be.true;
     expect(await this.page.title()).to.equal(dvaDetailsEntryPageTitle);
   }

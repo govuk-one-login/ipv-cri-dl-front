@@ -26,8 +26,6 @@ exports.getDVLATestUserFromMap = function (
   });
 
   if (issuer === "DVLA") {
-    console.log("123456789");
-
     if (drivingLicenceSubjectScenario === "DrivingLicenceSubjectHappyPeter") {
       return primaryDVLALicence;
     }
@@ -58,8 +56,6 @@ exports.getDVATestUserFromMap = function (
   });
 
   if (issuer === "DVA") {
-    console.log("123456789");
-
     if (drivingLicenceSubjectScenario === "DrivingLicenceSubjectHappyBilly") {
       return primaryDVALicence;
     }

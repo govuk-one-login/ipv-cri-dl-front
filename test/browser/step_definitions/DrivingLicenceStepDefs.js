@@ -1,14 +1,9 @@
 const { Given, When, Then } = require("@cucumber/cucumber");
-const { expect } = require("chai");
 
 const { DVADetailsEntryPage } = require("../pages/DVADetailsEntryPage");
 const { DrivingLicencePage } = require("../pages/DrivingLicencePage");
 
-Given(/^I check the page title is (.*)$/, async function (pageTitle) {});
-
-Then(/^I can see CTA {string}$/, async function () {
-  console.log("Ready to check for errors");
-});
+Then(/^I can see CTA {string}$/, async function () {});
 
 Then(
   /^I should be on the DVLA details entry page (.*)$/,

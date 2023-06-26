@@ -198,7 +198,10 @@ DVADrivingLicenceSubject.prototype.equals = function (
 
 DVADrivingLicenceSubject.prototype.fill = function (newFields) {
   for (var field in newFields) {
-    if (this.hasOwnProperty(field) && newFields.hasOwnProperty(field)) {
+    if (
+      Object.prototype.hasOwnProperty.call(this, field) &&
+      Object.prototype.hasOwnProperty.call(newFields, field)
+    ) {
       if (this[field] !== "undefined") {
         this[field] = newFields[field];
       }
