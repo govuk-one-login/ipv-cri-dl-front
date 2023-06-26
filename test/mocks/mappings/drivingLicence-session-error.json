@@ -1,0 +1,32 @@
+{
+  "mappings": [
+    {
+      "scenarioName": "dl-session-error",
+      "newScenarioState": "Started",
+      "request": {
+        "method": "GET",
+        "url": "/__reset/driving-licence-session-error"
+      },
+      "response": {
+        "status": 200
+      }
+    },
+    {
+      "scenarioName": "dl-session-error",
+      "requiredScenarioState": "Started",
+      "newScenarioState": "DLCheck",
+      "request": {
+        "method": "POST",
+        "urlPath": "/session",
+        "headers": {
+          "x-scenario-id": {
+            "equalTo": "drivingLicence-session-error"
+          }
+        }
+      },
+      "response": {
+        "status": 500
+      }
+    }
+  ]
+}

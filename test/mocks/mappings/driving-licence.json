@@ -1,0 +1,81 @@
+{
+  "mappings": [
+    {
+      "scenarioName": "dl-success",
+      "newScenarioState": "Started",
+      "request": {
+        "method": "GET",
+        "url": "/__reset/dl-success"
+      },
+      "response": {
+        "status": 200
+      }
+    },
+    {
+      "scenarioName": "dl-success",
+      "requiredScenarioState": "Started",
+      "newScenarioState": "DLCheck",
+      "request": {
+        "method": "POST",
+        "urlPath": "/session",
+        "headers": {
+          "x-scenario-id": {
+            "equalTo": "dl-success"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "session_id": "ABADCAFE",
+          "state": "sT@t3",
+          "redirect_uri": "http://example.net/return"
+        }
+      }
+    },
+    {
+      "scenarioName": "dl-success",
+      "requiredScenarioState": "DLCheck",
+      "newScenarioState": "AuthCode",
+      "request": {
+        "method": "POST",
+        "urlPath": "/check-driving-licence",
+        "headers": {
+          "x-scenario-id": {
+            "equalTo": "dl-success"
+          },
+          "session_id": {
+            "equalTo": "ABADCAFE"
+          }
+        }
+      },
+      "response": {
+        "status": 200
+      }
+    },
+    {
+      "scenarioName": "dl-success",
+      "requiredScenarioState": "AuthCode",
+      "request": {
+        "method": "GET",
+        "urlPath": "/authorization",
+        "headers": {
+          "x-scenario-id": {
+            "equalTo": "dl-success"
+          },
+          "session-id": {
+            "equalTo": "ABADCAFE"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "authorizationCode": {
+            "value": "FACEFEED"
+          }
+        }
+      }
+    }
+  ]
+}
