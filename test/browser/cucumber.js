@@ -6,6 +6,6 @@ module.exports = {
       "./test/browser/support/**/*.js",
       "./test/browser/step_definitions/**/*.js",
     ],
-    format: ['html:cucumber-report.html']
+    format: ['html:results/cucumber-report.html', 'json:results/cucumber-report.json']
   },
 };

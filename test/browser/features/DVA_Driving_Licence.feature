@@ -1,4 +1,4 @@
-@mock-api:dl-success @success
+@mock-api:dl-success @success @DVA
 Feature: DVA Driving licence CRI Error Validations
 
   Background:
@@ -8,7 +8,7 @@ Feature: DVA Driving licence CRI Error Validations
     And I click on DVA radio button and Continue
     And I should be on the DVA details entry page Enter your details exactly as they appear on your UK driving licence – Prove your identity – GOV.UK
 
-  @mock-api:dva-invalidDrivingLicenceNumber
+  @mock-api:dva-invalidDrivingLicenceNumber @validation-regression @build @staging
   Scenario Outline: DVA Driving Licence number less than 8 characters error validation
     Given User enters DVA data as a <DVADrivingLicenceSubject>
     And User re-enters drivingLicenceNumber as <InvalidLicenceNumber>
@@ -19,7 +19,7 @@ Feature: DVA Driving licence CRI Error Validations
       |DVADrivingLicenceSubject       |InvalidLicenceNumber|
       |DrivingLicenceSubjectHappyBilly|5566778             |
 
-  @mock-api:dva-invalidDrivingLicenceNumber
+  @mock-api:dva-invalidDrivingLicenceNumber @validation-regression @build @staging
   Scenario Outline: DVA Driving Licence number with special characters and spaces error validation
     Given User enters DVA data as a <DVADrivingLicenceSubject>
     And User re-enters drivingLicenceNumber as <InvalidLicenceNumber>
@@ -31,7 +31,7 @@ Feature: DVA Driving licence CRI Error Validations
       |DrivingLicenceSubjectHappyBilly|55667^&*            |
 
 ##### DrivingLicenceNumberWithAlphaNumericChar, DrivingLicenceNumberWithAlphaChar, NoDrivingLicenceNumber #####
-  @mock-api:dva-invalidDrivingLicenceNumber
+  @mock-api:dva-invalidDrivingLicenceNumber @validation-regression @build @staging
   Scenario Outline: DVA Driving Licence number with alpha numeric characters or alpha characters or no licence number error validation
     Given User enters DVA data as a <DVADrivingLicenceSubject>
     And User re-enters drivingLicenceNumber as <InvalidLicenceNumber>
@@ -44,7 +44,7 @@ Feature: DVA Driving licence CRI Error Validations
       |DrivingLicenceSubjectHappyBilly|XYZabdAB            |
       |DrivingLicenceSubjectHappyBilly|                    |
 
-  @mock-api:dva-invalidPostcode
+  @mock-api:dva-invalidPostcode @validation-regression @build @staging
   Scenario Outline: DVA Driving Licence Postcode less than 5 characters error validation
     Given User enters DVA data as a <DVADrivingLicenceSubject>
     And User re-enters postcode as <InvalidPostcode>
@@ -55,7 +55,7 @@ Feature: DVA Driving licence CRI Error Validations
       |DVADrivingLicenceSubject       |InvalidPostcode   |
       |DrivingLicenceSubjectHappyBilly|E20A              |
 
-  @mock-api:dva-invalidPostcode
+  @mock-api:dva-invalidPostcode @validation-regression @build @staging
   Scenario Outline: DVA Driving Licence - No Postcode in the Postcode field error validation
     Given User enters DVA data as a <DVADrivingLicenceSubject>
     And User re-enters postcode as <InvalidPostcode>
@@ -66,7 +66,7 @@ Feature: DVA Driving licence CRI Error Validations
       |DVADrivingLicenceSubject       |InvalidPostcode   |
       |DrivingLicenceSubjectHappyBilly|                  |
 
-  @mock-api:dva-invalidPostcode
+  @mock-api:dva-invalidPostcode @validation-regression @build @staging
   Scenario Outline: DVA Driving Licence International Postcode error validation
     Given User enters DVA data as a <DVADrivingLicenceSubject>
     And User re-enters postcode as <InvalidPostcode>
@@ -78,7 +78,7 @@ Feature: DVA Driving licence CRI Error Validations
       |DrivingLicenceSubjectHappyBilly|CA 95128          |
 
 ###### PostcodeWithSpecialChar #####
-  @mock-api:dva-invalidPostcode
+  @mock-api:dva-invalidPostcode @validation-regression @build @staging
   Scenario Outline: DVA Driving Licence Postcode with special characters error validation
     Given User enters DVA data as a <DVADrivingLicenceSubject>
     And User re-enters postcode as <InvalidPostcode>
@@ -90,7 +90,7 @@ Feature: DVA Driving licence CRI Error Validations
       |DrivingLicenceSubjectHappyBilly|NW* ^%G           |
 
 ####### PostcodeWithNumericChar, PostcodeWithAlphaChar #####
-  @mock-api:dva-invalidPostcode
+  @mock-api:dva-invalidPostcode @validation-regression @build @staging
   Scenario Outline: DVA Driving Licence Postcode with numeric characters or alpha characters error validation
     Given User enters DVA data as a <DVADrivingLicenceSubject>
     And User re-enters postcode as <InvalidPostcode>
@@ -103,7 +103,7 @@ Feature: DVA Driving licence CRI Error Validations
       |DrivingLicenceSubjectHappyBilly|ABC XYZ           |
 
 ######  InvalidLastNameWithNumbers, InvalidLastNameWithSpecialCharacters, NoLastName #####
-  @mock-api:dva-invalidLastName
+  @mock-api:dva-invalidLastName @validation-regression @build @staging
   Scenario Outline: DVA Driving Licence Last name with numbers or special characters or no last name error validation
     Given User enters DVA data as a <DVADrivingLicenceSubject>
     And User re-enters last name as <InvalidLastName>
@@ -117,7 +117,7 @@ Feature: DVA Driving licence CRI Error Validations
       |DrivingLicenceSubjectHappyBilly|                |
 
 ######  InvalidFirstNameWithNumbers, InvalidFirstNameWithSpecialCharacters, NoFirstName #####
-  @mock-api:dva-invalidFirstName
+  @mock-api:dva-invalidFirstName @validation-regression @build @staging
   Scenario Outline: DVA Driving Licence First name with numbers or special characters or no first name error validation
     Given User enters DVA data as a <DVADrivingLicenceSubject>
     And User re-enters first name as <InvalidFirstName>
@@ -131,7 +131,7 @@ Feature: DVA Driving licence CRI Error Validations
       |DrivingLicenceSubjectHappyBilly|                |
 
 #######  InvalidMiddleNamesWithNumbers, InvalidMiddleNamesWithSpecialCharacters #####
-  @mock-api:dva-invalidMiddleNames
+  @mock-api:dva-invalidMiddleNames @validation-regression @build @staging
   Scenario Outline: DVA Driving Licence Middle names with numbers or special characters error validation
     Given User enters DVA data as a <DVADrivingLicenceSubject>
     And User re-enters middle names as <InvalidMiddleNames>
@@ -144,7 +144,7 @@ Feature: DVA Driving licence CRI Error Validations
       |DrivingLicenceSubjectHappyBilly|SELINA%$@       |
 
 #####  DateOfBirthNotReal, DateOfBirthWithSpecialCharacters, NoDateOfBirth #####
-  @mock-api:dva-invalidDateOfBirth
+  @mock-api:dva-invalidDateOfBirth @validation-regression @build @staging
   Scenario Outline: DVA Driving Licence Date of birth that are not real or with special characters or no date of birth error validation
     Given User enters DVA data as a <DVADrivingLicenceSubject>
     And DVA user re-enters day of birth as <InvalidDayOfBirth>
@@ -159,7 +159,7 @@ Feature: DVA Driving licence CRI Error Validations
       |DrivingLicenceSubjectHappyBilly|         @       |     *&            |         19 7     |
       |DrivingLicenceSubjectHappyBilly|                 |                   |                  |
 
-  @mock-api:dva-invalidDateOfBirth
+  @mock-api:dva-invalidDateOfBirth @validation-regression @build @staging
   Scenario Outline: DVA Driving Licence Date of birth in the future error validation
     Given User enters DVA data as a <DVADrivingLicenceSubject>
     And DVA user re-enters day of birth as <InvalidDayOfBirth>
@@ -173,7 +173,7 @@ Feature: DVA Driving licence CRI Error Validations
       |DrivingLicenceSubjectHappyBilly|         10      |     10            |         2042     |
 
 #####  IssueDateWithAlphaCharacters, IssueDateWithSpecialCharacters, NoIssueDate #####
-  @mock-api:dva-invalidIssueDate
+  @mock-api:dva-invalidIssueDate @validation-regression @build @staging
   Scenario Outline: DVA Driving Licence Issue date that are not real or with special characters or no issue date error validation
     Given User enters DVA data as a <DVADrivingLicenceSubject>
     And DVA user re-enters day of issue as <InvalidDayOfIssue>
@@ -188,7 +188,7 @@ Feature: DVA Driving licence CRI Error Validations
       |DrivingLicenceSubjectHappyBilly|         &       |     ^%            |         £$ ^     |
       |DrivingLicenceSubjectHappyBilly|                 |                   |                  |
 
-  @mock-api:dva-invalidIssueDate
+  @mock-api:dva-invalidIssueDate @validation-regression @build @staging
   Scenario Outline: DVA Driving Licence Issue date in the future error validation
     Given User enters DVA data as a <DVADrivingLicenceSubject>
     And DVA user re-enters day of issue as <InvalidDayOfIssue>
@@ -202,7 +202,7 @@ Feature: DVA Driving licence CRI Error Validations
       |DrivingLicenceSubjectHappyBilly|         01      |     10            |         2043     |
 
 #####  InvalidValidToDate, ValidToDateWithSpecialCharacters, NoValidToDate  #####
-  @mock-api:dva-invalidExpiryDate
+  @mock-api:dva-invalidExpiryDate @validation-regression @build @staging
   Scenario Outline: DVA Driving Licence Valid to date that are not real or with special characters or no valid to date error validation
     Given User enters DVA data as a <DVADrivingLicenceSubject>
     And User re-enters valid to day as <InvalidValidToDay>
@@ -217,7 +217,7 @@ Feature: DVA Driving licence CRI Error Validations
       |DrivingLicenceSubjectHappyBilly|         !@      |     £$            |         %^ *     |
       |DrivingLicenceSubjectHappyBilly|                 |                   |                  |
 
-  @mock-api:dva-invalidExpiryDate
+  @mock-api:dva-invalidExpiryDate @validation-regression @build @staging
   Scenario Outline: DVA Driving Licence Valid to date in the past error validation
     Given User enters DVA data as a <DVADrivingLicenceSubject>
     And User re-enters valid to day as <InvalidValidToDay>
