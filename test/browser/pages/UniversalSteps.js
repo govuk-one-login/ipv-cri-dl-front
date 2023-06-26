@@ -1,8 +1,6 @@
 const { assertTrue, fail } = require("assert");
 const { By, until } = require("selenium-webdriver");
 
-
-
 class UniversalSteps {
   constructor() {
     this.driver = Driver.get();
@@ -15,9 +13,14 @@ class UniversalSteps {
     await this.driver.manage().setTimeouts({ implicit: 10000 });
 
     if (header.includes(text)) {
-        assertTrue(this.driver.getTitle().includes(text));
+      assertTrue(this.driver.getTitle().includes(text));
     } else {
-        fail("Page Title Does Not Match " + text + "But was " + this.Driver.getTitle());
+      fail(
+        "Page Title Does Not Match " +
+          text +
+          "But was " +
+          this.Driver.getTitle()
+      );
     }
   }
 
@@ -30,7 +33,7 @@ class UniversalSteps {
     assertTrue(url.contains(expected));
   }
 
-    async changeLanguageTo(language) {
-      this.driver.get(this.driver.currentUrl + "?lang=" + language);
-    }
+  async changeLanguageTo(language) {
+    this.driver.get(this.driver.currentUrl + "?lang=" + language);
+  }
 }

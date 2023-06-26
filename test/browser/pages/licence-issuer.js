@@ -12,7 +12,7 @@ module.exports = class PlaywrightDevPage {
     this.radioBtnDVA = this.page.getByLabel("DVA");
 
     this.CTButton = this.page.locator("button", {
-      hasText: " Continue "
+      hasText: " Continue ",
     });
   }
 
@@ -21,10 +21,12 @@ module.exports = class PlaywrightDevPage {
   }
 
   async clickOnDVLARadioButton() {
-   console.log("TITLE " + await this.page.title())
-   expect(await this.page.title()).to.equal("Who was your UK driving licence issued by? – Prove your identity – GOV.UK");
-   await this.radioBtnDVLA.click();
-   await this.CTButton.click();
+    console.log("TITLE " + (await this.page.title()));
+    expect(await this.page.title()).to.equal(
+      "Who was your UK driving licence issued by? – Prove your identity – GOV.UK"
+    );
+    await this.radioBtnDVLA.click();
+    await this.CTButton.click();
   }
 
   async continue() {
@@ -32,10 +34,11 @@ module.exports = class PlaywrightDevPage {
   }
 
   async clickOnDVARadioButton() {
-   console.log("TITLE " + await this.page.title())
-   expect(await this.page.title()).to.equal("Who was your UK driving licence issued by? – Prove your identity – GOV.UK");
-   await this.radioBtnDVA.click();
-   await this.CTButton.click();
+    console.log("TITLE " + (await this.page.title()));
+    expect(await this.page.title()).to.equal(
+      "Who was your UK driving licence issued by? – Prove your identity – GOV.UK"
+    );
+    await this.radioBtnDVA.click();
+    await this.CTButton.click();
   }
-
 };

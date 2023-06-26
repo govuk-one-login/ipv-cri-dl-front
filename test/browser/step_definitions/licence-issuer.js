@@ -21,19 +21,17 @@ Given(/^they (?:have )?continue(?:d)? to DL check$/, async function () {
 });
 
 Given(/^I click on DVLA radio button and Continue$/, async function () {
-    const licenceIssuerPage = new LicenceIssuerPage(this.page);
+  const licenceIssuerPage = new LicenceIssuerPage(this.page);
 
-    expect(licenceIssuerPage.isCurrentPage()).to.be.true;
+  expect(licenceIssuerPage.isCurrentPage()).to.be.true;
 
-    await licenceIssuerPage.clickOnDVLARadioButton();
-  }
-);
+  await licenceIssuerPage.clickOnDVLARadioButton();
+});
 
 Given(/^I click on DVA radio button and Continue$/, async function () {
-    const licenceIssuerPage = new LicenceIssuerPage(this.page);
+  const licenceIssuerPage = new LicenceIssuerPage(this.page);
 
-    expect(licenceIssuerPage.isCurrentPage()).to.be.true;
+  expect(licenceIssuerPage.isCurrentPage()).to.be.true;
 
-    await licenceIssuerPage.clickOnDVARadioButton();
-  }
-);
+  await licenceIssuerPage.clickOnDVARadioButton();
+});
