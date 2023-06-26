@@ -88,6 +88,6 @@
     "http-cache-semantics": "4.1.1",
     "json5": "2.2.2",
     "jsonwebtoken": "9.0.0",
-    "nunjucks": "3.2.3"
+    "nunjucks": "3.2.4"
   }
 }
