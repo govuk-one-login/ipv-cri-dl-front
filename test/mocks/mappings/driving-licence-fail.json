@@ -1,0 +1,96 @@
+{
+  "mappings": [{
+    "scenarioName": "dl-failed",
+    "newScenarioState": "Started",
+    "request": {
+      "method": "GET",
+      "url": "/__reset/dl-failed"
+    },
+    "response": {
+      "status": 200
+    }
+  },
+    {
+      "scenarioName": "dl-failed",
+      "requiredScenarioState": "Started",
+      "newScenarioState": "DLCheck",
+      "request": {
+        "method": "POST",
+        "urlPath": "/session",
+        "headers": {
+          "x-scenario-id": {
+            "equalTo": "dl-failed"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "session_id": "ABADCAFE",
+          "state": "sT@t3",
+          "redirect_uri": "http://example.net/return"
+        }
+      }
+    },
+    {
+      "scenarioName": "dl-failed",
+      "requiredScenarioState": "DLCheck",
+      "newScenarioState": "AuthCode",
+      "request": {
+        "method": "POST",
+        "urlPath": "/check-driving-licence",
+        "headers": {
+          "x-scenario-id": {
+            "equalTo": "dl-failed"
+          },
+          "session_id": {
+            "equalTo": "ABADCAFE"
+          }
+        },
+        "bodyPatterns": [{
+          "equalToJson": {
+            "drivingLicenceNumber": "PARKE610112PBFHH",
+            "postcode": "NW35RG",
+            "licenceIssuer": "DVA",
+            "surname": "BATSON",
+            "forenames": "BILLY",
+            "dateOfBirth": "1981-07-26",
+            "issueDate": "2001-04-19",
+            "expiryDate": "2042-10-01"
+          }
+        }]
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "retry": false
+
+        }
+      }
+    },
+    {
+      "scenarioName": "dl-failed",
+      "requiredScenarioState": "AuthCode",
+      "request": {
+        "method": "GET",
+        "urlPath": "/authorization",
+        "headers": {
+          "x-scenario-id": {
+            "equalTo": "dl-failed"
+          },
+          "session-id": {
+            "equalTo": "ABADCAFE"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "authorizationCode": {
+            "value": "FACEFEED"
+          }
+        }
+      }
+    }
+  ]
+}

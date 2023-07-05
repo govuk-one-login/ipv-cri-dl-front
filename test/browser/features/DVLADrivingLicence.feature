@@ -19,6 +19,7 @@ Feature: DVLA Driving licence CRI Error Validations
     And I can see the licence number error in the field as Enter the number exactly as it appears on your driving licence
     Then I see the date of birth error summary as Check you have entered your date of birth correctly
     And  I see the date of birth error in the field as Check you have entered your date of birth correctly
+    And I check the page Title Error: Enter your details exactly as they appear on your UK driving licence – Prove your identity – GOV.UK
     Examples:
       |DrivingLicenceSubject          |InvalidDayOfBirth|InvalidMonthOfBirth|InvalidYearOfBirth|
       |DrivingLicenceSubjectHappyPeter|         12      |     08            |       1985       |
@@ -30,6 +31,7 @@ Feature: DVLA Driving licence CRI Error Validations
     When User clicks on continue
     Then I see the licence number error in the summary as Your licence number should be 16 characters long
     And I can see the licence number error in the field as Your licence number should be 16 characters long
+    And I check the page Title Error: Enter your details exactly as they appear on your UK driving licence – Prove your identity – GOV.UK
     Examples:
       |DrivingLicenceSubject          |InvalidLicenceNumber|
       |DrivingLicenceSubjectHappyPeter|PARKE610112PBF      |
@@ -41,6 +43,7 @@ Feature: DVLA Driving licence CRI Error Validations
     When User clicks on continue
     Then I see the licence number error in the summary as Your licence number should not include any symbols or spaces
     And I can see the licence number error in the field as Your licence number should not include any symbols or spaces
+    And I check the page Title Error: Enter your details exactly as they appear on your UK driving licence – Prove your identity – GOV.UK
     Examples:
       |DrivingLicenceSubject          |InvalidLicenceNumber|
       |DrivingLicenceSubjectHappyPeter|12345678901112@@    |
@@ -53,6 +56,7 @@ Feature: DVLA Driving licence CRI Error Validations
     When User clicks on continue
     Then I see the licence number error in the summary as Enter the number exactly as it appears on your driving licence
     And I can see the licence number error in the field as Enter the number exactly as it appears on your driving licence
+    And I check the page Title Error: Enter your details exactly as they appear on your UK driving licence – Prove your identity – GOV.UK
     Examples:
       |DrivingLicenceSubject          |InvalidLicenceNumber|
       |DrivingLicenceSubjectHappyPeter|1234567890111213    |
@@ -66,6 +70,7 @@ Feature: DVLA Driving licence CRI Error Validations
     When User clicks on continue
     Then I see the issue number error in summary as Your issue number should be 2 numbers long
     And I see the issue number error in field as Your issue number should be 2 numbers long
+    And I check the page Title Error: Enter your details exactly as they appear on your UK driving licence – Prove your identity – GOV.UK
     Examples:
       |DrivingLicenceSubject          |InvalidIssueNumber|
       |DrivingLicenceSubjectHappyPeter|1                 |
@@ -77,6 +82,7 @@ Feature: DVLA Driving licence CRI Error Validations
     When User clicks on continue
     Then I see the issue number error in summary as Your issue number should not include any symbols or spaces
     And I see the issue number error in field as Your issue number should not include any symbols or spaces
+    And I check the page Title Error: Enter your details exactly as they appear on your UK driving licence – Prove your identity – GOV.UK
     Examples:
       |DrivingLicenceSubject          |InvalidIssueNumber|
       |DrivingLicenceSubjectHappyPeter|A@                |
@@ -89,6 +95,7 @@ Feature: DVLA Driving licence CRI Error Validations
     When User clicks on continue
     Then I see the issue number error in summary as Enter the issue number as it appears on your driving licence
     And I see the issue number error in field as Enter the issue number as it appears on your driving licence
+    And I check the page Title Error: Enter your details exactly as they appear on your UK driving licence – Prove your identity – GOV.UK
     Examples:
       |DrivingLicenceSubject          |InvalidIssueNumber|
       |DrivingLicenceSubjectHappyPeter|A1                |
@@ -102,6 +109,7 @@ Feature: DVLA Driving licence CRI Error Validations
     When User clicks on continue
     Then I see the postcode error in summary as Your postcode should be between 5 and 7 characters
     And I see the postcode error in field as Your postcode should be between 5 and 7 characters
+    And I check the page Title Error: Enter your details exactly as they appear on your UK driving licence – Prove your identity – GOV.UK
     Examples:
       |DrivingLicenceSubject          |InvalidPostcode   |
       |DrivingLicenceSubjectHappyPeter|E20A              |
@@ -113,6 +121,7 @@ Feature: DVLA Driving licence CRI Error Validations
     When User clicks on continue
     Then I see the postcode error in summary as Enter your postcode
     And I see the postcode error in field as Enter your postcode
+    And I check the page Title Error: Enter your details exactly as they appear on your UK driving licence – Prove your identity – GOV.UK
     Examples:
       |DrivingLicenceSubject          |InvalidPostcode   |
       |DrivingLicenceSubjectHappyPeter|                  |
@@ -124,6 +133,7 @@ Feature: DVLA Driving licence CRI Error Validations
     When User clicks on continue
     Then I see the postcode error in summary as Enter a UK postcode
     And I see the postcode error in field as Enter a UK postcode
+    And I check the page Title Error: Enter your details exactly as they appear on your UK driving licence – Prove your identity – GOV.UK
     Examples:
       |DrivingLicenceSubject          |InvalidPostcode   |
       |DrivingLicenceSubjectHappyPeter|CA 95128          |
@@ -136,18 +146,20 @@ Feature: DVLA Driving licence CRI Error Validations
     When User clicks on continue
     Then I see the postcode error in summary as Your postcode should only include numbers and letters
     And I see the postcode error in field as Your postcode should only include numbers and letters
+    And I check the page Title Error: Enter your details exactly as they appear on your UK driving licence – Prove your identity – GOV.UK
     Examples:
       |DrivingLicenceSubject          |InvalidPostcode   |
       |DrivingLicenceSubjectHappyPeter|NW* ^%G           |
 
 ###### PostcodeWithNumericChar, PostcodeWithAlphaChar #####
   @mock-api:dvla-invalidPostcode @validation-regression @build @staging
-  Scenario Outline: DVLA Driving Licence Postcode with numeric characters or alpha characters error validation
+  Scenario Outline: DVLA Driving Licence Postcode with numeric characters or Postcode with numeric characterss error validation
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters postcode as <InvalidPostcode>
     When User clicks on continue
     Then I see the postcode error in summary as Your postcode should include numbers and letters
     And I see the postcode error in field as Your postcode should include numbers and letters
+    And I check the page Title Error: Enter your details exactly as they appear on your UK driving licence – Prove your identity – GOV.UK
     Examples:
       |DrivingLicenceSubject          |InvalidPostcode   |
       |DrivingLicenceSubjectHappyPeter|123 456           |
@@ -161,6 +173,7 @@ Feature: DVLA Driving licence CRI Error Validations
     When User clicks on continue
     Then I see the Lastname error in the error summary as Enter your last name as it appears on your driving licence
     And I see the Lastname error in the error field as Enter your last name as it appears on your driving licence
+    And I check the page Title Error: Enter your details exactly as they appear on your UK driving licence – Prove your identity – GOV.UK
     Examples:
       |DrivingLicenceSubject          |InvalidLastName |
       |DrivingLicenceSubjectHappyPeter|KYLE123         |
@@ -175,6 +188,7 @@ Feature: DVLA Driving licence CRI Error Validations
     When User clicks on continue
     Then I see the Firstname error summary as Enter your first name as it appears on your driving licence
     And I see the Firstname error in the error field as Enter your first name as it appears on your driving licence
+    And I check the page Title Error: Enter your details exactly as they appear on your UK driving licence – Prove your identity – GOV.UK
     Examples:
       |DrivingLicenceSubject          |InvalidFirstName|
       |DrivingLicenceSubjectHappyPeter|SELINA987       |
@@ -189,6 +203,7 @@ Feature: DVLA Driving licence CRI Error Validations
     When User clicks on continue
     Then I see the middlenames error summary as Enter any middle names as they appear on your driving licence
     And I see the middlenames error in the error field as Enter any middle names as they appear on your driving licence
+    And I check the page Title Error: Enter your details exactly as they appear on your UK driving licence – Prove your identity – GOV.UK
     Examples:
       |DrivingLicenceSubject          |InvalidMiddleNames|
       |DrivingLicenceSubjectHappyPeter|SELINA987       |
@@ -204,6 +219,7 @@ Feature: DVLA Driving licence CRI Error Validations
     When User clicks on continue
     Then I see the date of birth error summary as Enter your date of birth as it appears on your driving licence
     And I see the date of birth error in the field as Enter your date of birth as it appears on your driving licence
+    And I check the page Title Error: Enter your details exactly as they appear on your UK driving licence – Prove your identity – GOV.UK
     Examples:
       |DrivingLicenceSubject          |InvalidDayOfBirth|InvalidMonthOfBirth|InvalidYearOfBirth|
       |DrivingLicenceSubjectHappyPeter|         @       |     *&            |       19 7     |
@@ -220,6 +236,7 @@ Feature: DVLA Driving licence CRI Error Validations
     When User clicks on continue
     Then I see the date of birth error summary as Your date of birth must be in the past
     And I see the date of birth error in the field as Your date of birth must be in the past
+    And I check the page Title Error: Enter your details exactly as they appear on your UK driving licence – Prove your identity – GOV.UK
     Examples:
       |DrivingLicenceSubject          |InvalidDayOfBirth|InvalidMonthOfBirth|InvalidYearOfBirth|
       |DrivingLicenceSubjectHappyPeter|         10      |     10            |         2042     |
@@ -234,6 +251,7 @@ Feature: DVLA Driving licence CRI Error Validations
     When User clicks on continue
     Then I see issue date error in summary as Enter the date as it appears on your driving licence
     And I see invalid issue date field error as Enter the date as it appears on your driving licence
+    And I check the page Title Error: Enter your details exactly as they appear on your UK driving licence – Prove your identity – GOV.UK
     Examples:
       |DrivingLicenceSubject          |InvalidDayOfIssue|InvalidMonthOfIssue|InvalidYearOfIssue|
       |DrivingLicenceSubjectHappyPeter|         AA      |     BB            |         AABC     |
@@ -249,6 +267,7 @@ Feature: DVLA Driving licence CRI Error Validations
     When User clicks on continue
     Then I see issue date error in summary as The issue date must be in the past
     And I see invalid issue date field error as The issue date must be in the past
+    And I check the page Title Error: Enter your details exactly as they appear on your UK driving licence – Prove your identity – GOV.UK
     Examples:
       |DrivingLicenceSubject          |InvalidDayOfIssue|InvalidMonthOfIssue|InvalidYearOfIssue|
       |DrivingLicenceSubjectHappyPeter|         01      |     10            |         2043     |
@@ -263,6 +282,7 @@ Feature: DVLA Driving licence CRI Error Validations
     When User clicks on continue
     Then I can see the valid to date error in the error summary as Enter the date as it appears on your driving licence
     And I can see the Valid to date field error as Enter the date as it appears on your driving licence
+    And I check the page Title Error: Enter your details exactly as they appear on your UK driving licence – Prove your identity – GOV.UK
     Examples:
       |DrivingLicenceSubject          |InvalidValidToDay|InvalidValidToMonth|InvalidValidToYear|
       |DrivingLicenceSubjectHappyPeter|         AA      |     BC            |         AABD     |
@@ -278,6 +298,20 @@ Feature: DVLA Driving licence CRI Error Validations
     When User clicks on continue
     Then I can see the valid to date error in the error summary as You cannot use an expired driving licence
     And I can see the Valid to date field error as You cannot use an expired driving licence
+    And I check the page Title Error: Enter your details exactly as they appear on your UK driving licence – Prove your identity – GOV.UK
     Examples:
       |DrivingLicenceSubject          |InvalidValidToDay|InvalidValidToMonth|InvalidValidToYear|
       |DrivingLicenceSubjectHappyPeter|         10      |     01            |         2010     |
+
+  @mock-api:dl-failed @validation-regression @build @staging
+  Scenario Outline: DVLA Driving Licence number validation test - Correct licence number structure - error validation: We Could not find your details
+    Given User enters DVLA data as a <DrivingLicenceSubject>
+    And User re-enters drivingLicenceNumber as <InvalidLicenceNumber>
+    When User clicks on continue
+    Then Proper error message is displayed as We Could not find your details
+    Examples:
+      |DrivingLicenceSubject          |InvalidLicenceNumber|
+      |DrivingLicenceSubjectHappyPeter|PARKE610112PBFHH|
+
+
+

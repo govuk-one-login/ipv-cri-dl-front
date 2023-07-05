@@ -98,6 +98,9 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
     this.drivingLicenceFieldError = this.page.locator(
       'xpath=//*[@id="drivingLicenceNumber-error"]'
     );
+
+    this.drivingLicenceRetryMessageHeading = this.page.getByLabel(" We could not find your details ");
+
     this.invalidIssueNumberFieldError = this.page.locator(
       'xpath=//*[@id="issueNumber-error"]'
     );
@@ -301,6 +304,14 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
       fieldErrorText
     );
   }
+
+  async assertRetryErrorMessage(retryMessageHeading) {
+      await this.page.waitForLoadState("domcontentloaded");
+      expect(await this.isCurrentPage()).to.be.true;
+      expect(await this.drivingLicenceRetryMessageHeading.innerText()).to.contains(
+            retryMessageHeading
+          );
+    }
 
   async assertInvalidIssueNumberInErrorSummary(errorSummaryText) {
     await this.page.waitForLoadState("domcontentloaded");

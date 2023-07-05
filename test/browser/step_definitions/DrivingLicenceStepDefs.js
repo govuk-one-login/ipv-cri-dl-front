@@ -239,6 +239,14 @@ Then(
 );
 
 Then(
+  /^Proper error message is displayed as (.*)$/,
+  async function (retryMessageHeading) {
+    const drivingLicencePage = new DrivingLicencePage(this.page);
+    await drivingLicencePage.assertRetryErrorMessage(retryMessageHeading);
+  }
+);
+
+Then(
   /^I see the issue number error in summary as (.*)$/,
   async function (errorSummaryText) {
     const drivingLicencePage = new DrivingLicencePage(this.page);
@@ -343,6 +351,14 @@ Given(
       "DVA",
       dvaDrivingLicenceSubject
     );
+  }
+);
+
+Then(
+  /^I check the page Title (.*)$/,
+  async function (dvaErrorPageTitle) {
+    const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
+    await dvaDetailsEntryPage.assertDVAErrorPageTitle(dvaErrorPageTitle);
   }
 );
 

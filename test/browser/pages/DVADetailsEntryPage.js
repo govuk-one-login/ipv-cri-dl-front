@@ -83,6 +83,12 @@ exports.DVADetailsEntryPage = class PlaywrightDevPage {
     expect(await this.page.title()).to.equal(dvaDetailsEntryPageTitle);
   }
 
+  async assertDVAErrorPageTitle(dvaErrorPageTitle) {
+      await this.page.waitForLoadState("domcontentloaded");
+      expect(await this.isCurrentPage()).to.be.true;
+      expect(await this.page.title()).to.equal(dvaErrorPageTitle);
+    }
+
   async userEntersDVAData(issuer, drivingLicenceSubjectScenario) {
     var dvaDrivingLicenceSubject = TestDataCreator.getDVATestUserFromMap(
       issuer,
