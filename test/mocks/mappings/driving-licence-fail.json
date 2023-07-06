@@ -1,7 +1,6 @@
 {
   "mappings": [{
     "scenarioName": "dl-failed",
-    "newScenarioState": "Started",
     "request": {
       "method": "GET",
       "url": "/__reset/dl-failed"
@@ -12,8 +11,6 @@
   },
     {
       "scenarioName": "dl-failed",
-      "requiredScenarioState": "Started",
-      "newScenarioState": "DLCheck",
       "request": {
         "method": "POST",
         "urlPath": "/session",
@@ -26,7 +23,7 @@
       "response": {
         "status": 200,
         "jsonBody": {
-          "session_id": "ABADCAFE",
+          "session_id": "ABCDEF",
           "state": "sT@t3",
           "redirect_uri": "http://example.net/return"
         }
@@ -34,8 +31,6 @@
     },
     {
       "scenarioName": "dl-failed",
-      "requiredScenarioState": "DLCheck",
-      "newScenarioState": "AuthCode",
       "request": {
         "method": "POST",
         "urlPath": "/check-driving-licence",
@@ -44,33 +39,22 @@
             "equalTo": "dl-failed"
           },
           "session_id": {
-            "equalTo": "ABADCAFE"
+            "equalTo": "ABCDEF"
           }
         },
         "bodyPatterns": [{
-          "equalToJson": {
-            "drivingLicenceNumber": "PARKE610112PBFHH",
-            "postcode": "NW35RG",
-            "licenceIssuer": "DVA",
-            "surname": "BATSON",
-            "forenames": "BILLY",
-            "dateOfBirth": "1981-07-26",
-            "issueDate": "2001-04-19",
-            "expiryDate": "2042-10-01"
-          }
+          "matchesJsonPath": "$.[?($.drivingLicenceNumber == 'PARKE610112PBFHH')]"
         }]
       },
       "response": {
         "status": 200,
         "jsonBody": {
-          "retry": false
-
+          "retry": true
         }
       }
     },
     {
       "scenarioName": "dl-failed",
-      "requiredScenarioState": "AuthCode",
       "request": {
         "method": "GET",
         "urlPath": "/authorization",
@@ -79,7 +63,7 @@
             "equalTo": "dl-failed"
           },
           "session-id": {
-            "equalTo": "ABADCAFE"
+            "equalTo": "ABCDEF"
           }
         }
       },

@@ -99,7 +99,9 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
       'xpath=//*[@id="drivingLicenceNumber-error"]'
     );
 
-    this.drivingLicenceRetryMessageHeading = this.page.getByLabel(" We could not find your details ");
+    this.drivingLicenceRetryMessageHeading = this.page.locator(
+      'xpath=//*[@id="main-content"]/div/div/div[1]/div[2]'
+    );
 
     this.invalidIssueNumberFieldError = this.page.locator(
       'xpath=//*[@id="issueNumber-error"]'

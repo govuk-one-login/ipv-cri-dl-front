@@ -2,7 +2,6 @@
   "mappings": [
     {
       "scenarioName": "dl-success",
-      "newScenarioState": "Started",
       "request": {
         "method": "GET",
         "url": "/__reset/dl-success"
@@ -13,8 +12,6 @@
     },
     {
       "scenarioName": "dl-success",
-      "requiredScenarioState": "Started",
-      "newScenarioState": "DLCheck",
       "request": {
         "method": "POST",
         "urlPath": "/session",
@@ -35,8 +32,6 @@
     },
     {
       "scenarioName": "dl-success",
-      "requiredScenarioState": "DLCheck",
-      "newScenarioState": "AuthCode",
       "request": {
         "method": "POST",
         "urlPath": "/check-driving-licence",
@@ -55,7 +50,6 @@
     },
     {
       "scenarioName": "dl-success",
-      "requiredScenarioState": "AuthCode",
       "request": {
         "method": "GET",
         "urlPath": "/authorization",
