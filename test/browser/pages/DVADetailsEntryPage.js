@@ -75,7 +75,7 @@ exports.DVADetailsEntryPage = class PlaywrightDevPage {
     this.invalidDvaIssueDateFieldError = this.page.locator(
       'xpath=//*[@id="dateOfIssue-error"]'
     );
-    this.invalidDvaIssueDateFieldError = this.page.locator(
+    this.invalidConsentDVAFieldError = this.page.locator(
        'xpath=//*[@id="consentDVACheckbox-error"]'
     );
   }
@@ -229,7 +229,7 @@ exports.DVADetailsEntryPage = class PlaywrightDevPage {
       async assertConsentDVAErrorOnField(fieldErrorText) {
           await this.page.waitForLoadState("domcontentloaded");
           expect(await this.isCurrentPage()).to.be.true;
-          expect(await this.invalidDvaIssueDateFieldError.innerText()).to.contains(
+          expect(await this.invalidConsentDVAFieldError.innerText()).to.contains(
             fieldErrorText
       );
   }
