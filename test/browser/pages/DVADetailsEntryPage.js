@@ -60,6 +60,10 @@ exports.DVADetailsEntryPage = class PlaywrightDevPage {
       'xpath=//*[@class="govuk-error-summary error-summary"]//*[@class="govuk-error-summary__body"]//*[@class="govuk-list govuk-error-summary__list"]//*[contains(@href,"#dateOfIssue-day")]'
     );
 
+    this.invalidDVAConsentErrorSummary = this.page.locator("a", {
+       hasText: "You must give your consent to continue",
+    });
+
     //  DVA Field errors
 
     this.dvaDrivingLicenceFieldError = this.page.locator(
@@ -70,6 +74,9 @@ exports.DVADetailsEntryPage = class PlaywrightDevPage {
     );
     this.invalidDvaIssueDateFieldError = this.page.locator(
       'xpath=//*[@id="dateOfIssue-error"]'
+    );
+    this.invalidDvaIssueDateFieldError = this.page.locator(
+       'xpath=//*[@id="consentDVACheckbox-error"]'
     );
   }
 
@@ -203,5 +210,27 @@ exports.DVADetailsEntryPage = class PlaywrightDevPage {
     expect(await this.invalidDvaIssueDateFieldError.innerText()).to.contains(
       fieldErrorText
     );
+  }
+
+   async consentDVACheckBoxUnselect() {
+        await this.page.waitForLoadState("domcontentloaded");
+        expect(await this.isCurrentPage()).to.be.true;
+        return await this.consentDVACheckbox.click();
+   }
+
+    async assertConsentDVAErrorSummary(errorSummaryText) {
+         await this.page.waitForLoadState("domcontentloaded");
+         expect(await this.isCurrentPage()).to.be.true;
+         expect(await this.invalidDVAConsentErrorSummary.innerText()).to.contains(
+           errorSummaryText
+     );
+   }
+
+      async assertConsentDVAErrorOnField(fieldErrorText) {
+          await this.page.waitForLoadState("domcontentloaded");
+          expect(await this.isCurrentPage()).to.be.true;
+          expect(await this.invalidDvaIssueDateFieldError.innerText()).to.contains(
+            fieldErrorText
+      );
   }
 };

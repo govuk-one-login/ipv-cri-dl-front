@@ -83,6 +83,9 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
     this.invalidValidToDateFieldError = this.page.locator(
       'xpath=//*[@id="expiryDate-error"]'
     );
+    this.invalidConsentErrorSummary = this.page.locator("a", {
+       hasText: "You must give your consent to continue",
+    });
 
     // Field errors
 
@@ -122,6 +125,10 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
     this.Continue = this.page.locator("button", {
       hasText: " Continue ",
     });
+
+    this.invalidConsentErrorFieldError = this.page.locator(
+       'xpath=//*[@id="consentCheckbox-error"]'
+    );
   }
 
   isCurrentPage() {
@@ -394,4 +401,26 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
       fieldErrorText
     );
   }
+
+  async consentCheckBoxUnselect() {
+      await this.page.waitForLoadState("domcontentloaded");
+      expect(await this.isCurrentPage()).to.be.true;
+      return await this.consentDVLACheckbox.click();
+  }
+
+  async assertConsentErrorSummary(errorSummaryText) {
+       await this.page.waitForLoadState("domcontentloaded");
+       expect(await this.isCurrentPage()).to.be.true;
+       expect(await this.invalidConsentErrorSummary.innerText()).to.contains(
+         errorSummaryText
+       );
+    }
+
+  async assertConsentErrorOnField(fieldErrorText) {
+      await this.page.waitForLoadState("domcontentloaded");
+      expect(await this.isCurrentPage()).to.be.true;
+      expect(await this.invalidConsentErrorFieldError.innerText()).to.contains(
+          fieldErrorText
+      );
+   }
 };

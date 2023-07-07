@@ -43,7 +43,7 @@
           }
         },
         "bodyPatterns": [{
-          "matchesJsonPath": "$.[?($.drivingLicenceNumber == 'PARKE610112PBFHH')]"
+          "matchesJsonPath": "$.drivingLicenceNumber"
         }]
       },
       "response": {

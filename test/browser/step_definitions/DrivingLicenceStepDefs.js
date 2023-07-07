@@ -332,6 +332,29 @@ Then(
   }
 );
 
+Then(/^DVLA consent checkbox is unselected$/, async function () {
+  const drivingLicencePage = new DrivingLicencePage(this.page);
+  await drivingLicencePage.consentCheckBoxUnselect();
+});
+
+Then(
+  /^I can see the DVLA consent error summary as (.*)$/,
+  { timeout: 2 * 5000 },
+  async function (errorSummaryText) {
+    const drivingLicencePage = new DrivingLicencePage(this.page);
+    await drivingLicencePage.assertConsentErrorSummary(errorSummaryText);
+  }
+);
+
+Then(
+  /^I can see the DVLA consent error on the checkbox as (.*)$/,
+   { timeout: 2 * 5000 },
+  async function (fieldErrorText) {
+    const drivingLicencePage = new DrivingLicencePage(this.page);
+    await drivingLicencePage.assertConsentErrorOnField(fieldErrorText);
+  }
+);
+
 //##################### DVA ##########################
 
 Then(
@@ -460,6 +483,7 @@ Then(
 
 Then(
   /^I see DVA issue date error in summary as (.*)$/,
+  { timeout: 3 * 5000 },
   async function (errorSummaryText) {
     const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
     await dvaDetailsEntryPage.assertInvalidDVAIssueInErrorSummary(
@@ -470,8 +494,32 @@ Then(
 
 Then(
   /^I see DVA invalid issue date field error as (.*)$/,
+  { timeout: 2 * 5000 },
   async function (fieldErrorText) {
     const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
     await dvaDetailsEntryPage.assertInvalidDVAIssueOnField(fieldErrorText);
+  }
+);
+
+Then(/^DVA consent checkbox is unselected$/, async function () {
+  const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
+  await dvaDetailsEntryPage.consentDVACheckBoxUnselect();
+});
+
+Then(
+  /^I can see the DVA consent error summary as (.*)$/,
+  { timeout: 2 * 5000 },
+  async function (errorSummaryText) {
+    const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
+    await dvaDetailsEntryPage.assertConsentDVAErrorSummary(errorSummaryText);
+  }
+);
+
+Then(
+  /^I can see the DVA consent error on the checkbox as (.*)$/,
+   { timeout: 2 * 5000 },
+  async function (fieldErrorText) {
+    const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
+    await dvaDetailsEntryPage.assertConsentDVAErrorOnField(fieldErrorText);
   }
 );

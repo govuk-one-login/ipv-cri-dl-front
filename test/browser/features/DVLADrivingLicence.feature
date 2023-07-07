@@ -303,8 +303,19 @@ Feature: DVLA Driving licence CRI Error Validations
       |DrivingLicenceSubject          |InvalidValidToDay|InvalidValidToMonth|InvalidValidToYear|
       |DrivingLicenceSubjectHappyPeter|         10      |     01            |         2010     |
 
+  @mock-api:dl-success @validation-regression @build @staging
+  Scenario Outline:  DVLA Driving Licence error validation when DVLA consent checkbox is unselected
+    Given User enters DVLA data as a <DrivingLicenceSubject>
+    And DVLA consent checkbox is unselected
+    When User clicks on continue
+    And I can see the DVLA consent error on the checkbox as Error: You must give your consent to continue
+    Then I can see the DVLA consent error summary as You must give your consent to continue
+    Examples:
+      |DrivingLicenceSubject             |
+      |DrivingLicenceSubjectHappyPeter   |
+
   @mock-api:dl-failed @validation-regression @build @staging
-  Scenario Outline: DVLA Driving Licence number validation test - Correct licence number structure - error validation: We Could not find your details
+  Scenario Outline: DVLA Driving Licence number validation test - Correct licence number structure - error validation
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters drivingLicenceNumber as <InvalidLicenceNumber>
     When User clicks on continue
@@ -313,5 +324,79 @@ Feature: DVLA Driving licence CRI Error Validations
       |DrivingLicenceSubject          | InvalidLicenceNumber  |
       |DrivingLicenceSubjectHappyPeter| PARKE610112PBFHH      |
 
+  @mock-api:dl-failed @validation-regression @build @staging
+  Scenario Outline:  DVLA Driving Licence number validation test - (VALID, female licenceNumber DOB Jan)
+    Given User enters DVLA data as a <DrivingLicenceSubject>
+    And User re-enters drivingLicenceNumber as <InvalidLicenceNumber>
+    And User re-enters day of birth as <InvalidDayOfBirth>
+    And User re-enters month of birth as <InvalidMonthOfBirth>
+    And User re-enters year of birth as <InvalidYearOfBirth>
+    When User clicks on continue
+    Then Proper error message is displayed as We could not find your details
+    Examples:
+      |DrivingLicenceSubject          |InvalidLicenceNumber|InvalidDayOfBirth|InvalidMonthOfBirth|InvalidYearOfBirth|
+      |DrivingLicenceSubjectHappyPeter| PARKE601112PBFGH   |           11      |        01       |        1962      |
+
+  @mock-api:dl-failed @validation-regression @build @staging
+  Scenario Outline:  DVLA Driving Licence number validation test - (VALID, female licenceNumber DOB Dec)
+    Given User enters DVLA data as a <DrivingLicenceSubject>
+    And User re-enters drivingLicenceNumber as <InvalidLicenceNumber>
+    And User re-enters day of birth as <InvalidDayOfBirth>
+    And User re-enters month of birth as <InvalidMonthOfBirth>
+    And User re-enters year of birth as <InvalidYearOfBirth>
+    When User clicks on continue
+    Then Proper error message is displayed as We could not find your details
+    Examples:
+      |DrivingLicenceSubject          |InvalidLicenceNumber|InvalidDayOfBirth|InvalidMonthOfBirth|InvalidYearOfBirth|
+      |DrivingLicenceSubjectHappyPeter| PARKE662112PBFGH   |           11    |        12         |        1962      |
+
+  @mock-api:dl-failed @validation-regression @build @staging
+  Scenario Outline:  DVLA Driving Licence number validation test - (VALID, licenceNumber DOB Dec)
+    Given User enters DVLA data as a <DrivingLicenceSubject>
+    And User re-enters drivingLicenceNumber as <InvalidLicenceNumber>
+    And User re-enters day of birth as <InvalidDayOfBirth>
+    And User re-enters month of birth as <InvalidMonthOfBirth>
+    And User re-enters year of birth as <InvalidYearOfBirth>
+    When User clicks on continue
+    Then Proper error message is displayed as We could not find your details
+    Examples:
+      |DrivingLicenceSubject          |InvalidLicenceNumber|InvalidDayOfBirth|InvalidMonthOfBirth|InvalidYearOfBirth|
+      |DrivingLicenceSubjectHappyPeter| PARKE612112PBFGH   |           11    |        12         |        1962      |
 
 
+  @mock-api:dl-failed @validation-regression @build @staging
+  Scenario Outline:  DVLA Driving Licence number validation test - (VALID, 1 forename)
+    Given User enters DVLA data as a <DrivingLicenceSubject>
+    And User re-enters drivingLicenceNumber as <InvalidLicenceNumber>
+    And User re-enters last name as <InvalidLastName>
+    And User re-enters first name as <InvalidFirstName>
+    When User clicks on continue
+    Then Proper error message is displayed as We could not find your details
+    Examples:
+      |DrivingLicenceSubject          |InvalidLicenceNumber|InvalidLastName|InvalidFirstName|
+      |DrivingLicenceSubjectHappyPeter|JOHNE610112PBFGH    |       JOHN    |     SMITH      |
+
+  @mock-api:dl-failed @validation-regression @build @staging
+  Scenario Outline:  DVLA Driving Licence number validation test - (VALID, surname < 5)
+    Given User enters DVLA data as a <DrivingLicenceSubject>
+    And User re-enters drivingLicenceNumber as <InvalidLicenceNumber>
+    And User re-enters last name as <InvalidLastName>
+    And User re-enters first name as <InvalidFirstName>
+    When User clicks on continue
+    Then Proper error message is displayed as We could not find your details
+    Examples:
+      |DrivingLicenceSubject          |InvalidLicenceNumber|InvalidLastName|InvalidFirstName|
+      |DrivingLicenceSubjectHappyPeter|JOHNE610112PBFGH    |       JOHN    |     AB         |
+
+  @mock-api:dl-failed @validation-regression @build @staging
+  Scenario Outline:  DVLA Driving Licence number validation test - (VALID, 2 forenames)
+    Given User enters DVLA data as a <DrivingLicenceSubject>
+    And User re-enters drivingLicenceNumber as <InvalidLicenceNumber>
+    And User re-enters last name as <InvalidLastName>
+    And User re-enters first name as <InvalidFirstName>
+    And User re-enters middle names as <InvalidMiddleNames>
+    When User clicks on continue
+    Then Proper error message is displayed as We could not find your details
+    Examples:
+      |DrivingLicenceSubject          |InvalidLicenceNumber|InvalidLastName|InvalidFirstName|InvalidMiddleNames|
+      |DrivingLicenceSubjectHappyPeter|JOHNE610112PBFGH    |       JOHN    |     SMITH      |           A      |
