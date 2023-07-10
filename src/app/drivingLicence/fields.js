@@ -49,7 +49,20 @@ module.exports = {
     validate: [
       "required",
       "date",
-      { type: "before", arguments: [new Date().toISOString().split("T")[0]] },
+      {
+        type: "before",
+        arguments: [
+          new Date(
+            Date.UTC(
+              new Date().getUTCFullYear(),
+              new Date().getUTCMonth(),
+              new Date().getUTCDate()
+            )
+          )
+            .toISOString()
+            .split("T")[0],
+        ],
+      },
       {
         type: "dvlaChecker",
         ...dvlaValidatorObj,
@@ -63,7 +76,20 @@ module.exports = {
     validate: [
       "required",
       "date",
-      { type: "before", arguments: [new Date().toISOString().split("T")[0]] },
+      {
+        type: "before",
+        arguments: [
+          new Date(
+            Date.UTC(
+              new Date().getUTCFullYear(),
+              new Date().getUTCMonth(),
+              new Date().getUTCDate()
+            )
+          )
+            .toISOString()
+            .split("T")[0],
+        ],
+      },
     ],
     dependent: { field: "issuerDependent", value: "DVA" },
   },
@@ -77,9 +103,11 @@ module.exports = {
         type: "before",
         arguments: [
           new Date(
-            new Date().getFullYear(),
-            new Date().getMonth(),
-            new Date().getDate()
+            Date.UTC(
+              new Date().getUTCFullYear(),
+              new Date().getUTCMonth(),
+              new Date().getUTCDate()
+            )
           )
             .toISOString()
             .split("T")[0],
@@ -98,9 +126,11 @@ module.exports = {
         type: "before",
         arguments: [
           new Date(
-            new Date().getFullYear(),
-            new Date().getMonth(),
-            new Date().getDate()
+            Date.UTC(
+              new Date().getUTCFullYear(),
+              new Date().getUTCMonth(),
+              new Date().getUTCDate()
+            )
           )
             .toISOString()
             .split("T")[0],
@@ -124,9 +154,11 @@ module.exports = {
         type: "after",
         arguments: [
           new Date(
-            new Date().getFullYear(),
-            new Date().getMonth(),
-            new Date().getDate()
+            Date.UTC(
+              new Date().getUTCFullYear(),
+              new Date().getUTCMonth(),
+              new Date().getUTCDate()
+            )
           )
             .toISOString()
             .split("T")[0],
