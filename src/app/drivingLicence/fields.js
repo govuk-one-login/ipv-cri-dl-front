@@ -14,6 +14,7 @@ const dvlaValidatorObj = {
 module.exports = {
   firstNameMiddleNameLengthValidator: fields.firstNameMiddleNameLengthValidator,
   dvlaValidator: fields.dvlaValidator,
+  getToday: fields.getToday,
   surname: {
     type: "text",
     validate: [
@@ -51,17 +52,7 @@ module.exports = {
       "date",
       {
         type: "before",
-        arguments: [
-          new Date(
-            Date.UTC(
-              new Date().getUTCFullYear(),
-              new Date().getUTCMonth(),
-              new Date().getUTCDate()
-            )
-          )
-            .toISOString()
-            .split("T")[0],
-        ],
+        arguments: [fields.getToday()],
       },
       {
         type: "dvlaChecker",
@@ -78,17 +69,7 @@ module.exports = {
       "date",
       {
         type: "before",
-        arguments: [
-          new Date(
-            Date.UTC(
-              new Date().getUTCFullYear(),
-              new Date().getUTCMonth(),
-              new Date().getUTCDate()
-            )
-          )
-            .toISOString()
-            .split("T")[0],
-        ],
+        arguments: [fields.getToday()],
       },
     ],
     dependent: { field: "issuerDependent", value: "DVA" },
@@ -101,17 +82,7 @@ module.exports = {
       "date",
       {
         type: "before",
-        arguments: [
-          new Date(
-            Date.UTC(
-              new Date().getUTCFullYear(),
-              new Date().getUTCMonth(),
-              new Date().getUTCDate()
-            )
-          )
-            .toISOString()
-            .split("T")[0],
-        ],
+        arguments: [fields.getToday()],
       },
     ],
     dependent: { field: "issuerDependent", value: "DVLA" },
@@ -124,17 +95,7 @@ module.exports = {
       "date",
       {
         type: "before",
-        arguments: [
-          new Date(
-            Date.UTC(
-              new Date().getUTCFullYear(),
-              new Date().getUTCMonth(),
-              new Date().getUTCDate()
-            )
-          )
-            .toISOString()
-            .split("T")[0],
-        ],
+        arguments: [fields.getToday()],
       },
     ],
     dependent: { field: "issuerDependent", value: "DVA" },
@@ -152,17 +113,7 @@ module.exports = {
       "date",
       {
         type: "after",
-        arguments: [
-          new Date(
-            Date.UTC(
-              new Date().getUTCFullYear(),
-              new Date().getUTCMonth(),
-              new Date().getUTCDate()
-            )
-          )
-            .toISOString()
-            .split("T")[0],
-        ],
+        arguments: [fields.getToday()],
       },
     ],
   },

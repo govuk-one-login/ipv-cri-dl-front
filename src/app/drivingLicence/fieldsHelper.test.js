@@ -1,4 +1,6 @@
 const fields = require("./fieldsHelper");
+const validators = require("hmpo-form-wizard/lib/validation/validators");
+const moment = require("moment");
 
 describe("custom validation fields test", () => {
   it("should be false when first and middle name combined greater than 30 characters", () => {
@@ -116,5 +118,59 @@ describe("custom validation fields test", () => {
     expect(
       validator(1, "firstName", "middleNames", "surname", "dob", "licence")
     ).to.be.true;
+  });
+
+  it("get today - check before", () => {
+    const result = validators.before(
+      moment().utc().subtract(1, "days").toISOString(),
+      fields.getToday()
+    );
+
+    expect(result).to.be.true;
+  });
+
+  it("get today - check before - future", () => {
+    const result = validators.before(
+      moment().utc().add(1, "days").toISOString(),
+      fields.getToday()
+    );
+
+    expect(result).to.be.false;
+  });
+
+  it("get today - check before - today", () => {
+    const result = validators.before(
+      moment().utc().toISOString(),
+      fields.getToday()
+    );
+
+    expect(result).to.be.false;
+  });
+
+  it("get today - check after", () => {
+    const result = validators.after(
+      moment().utc().add(1, "days").toISOString(),
+      fields.getToday()
+    );
+
+    expect(result).to.be.true;
+  });
+
+  it("get today - check after - past", () => {
+    const result = validators.after(
+      moment().utc().subtract(1, "days").toISOString(),
+      fields.getToday()
+    );
+
+    expect(result).to.be.false;
+  });
+
+  it("get today - check after - today", () => {
+    const result = validators.after(
+      moment().utc().toISOString(),
+      fields.getToday()
+    );
+
+    expect(result).to.be.false;
   });
 });
