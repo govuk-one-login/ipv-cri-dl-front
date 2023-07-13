@@ -153,7 +153,7 @@ Feature: DVLA Driving licence CRI Error Validations
 
 ###### PostcodeWithNumericChar, PostcodeWithAlphaChar #####
   @mock-api:dl-success @validation-regression @build @staging
-  Scenario Outline: DVLA Driving Licence Postcode with numeric characters or Postcode with numeric characterss error validation
+  Scenario Outline: DVLA Driving Licence Postcode with numeric characters or Postcode with numeric characters error validation
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters postcode as <InvalidPostcode>
     When User clicks on continue
@@ -322,7 +322,7 @@ Feature: DVLA Driving licence CRI Error Validations
     Then Proper error message is displayed as We could not find your details
     Examples:
       |DrivingLicenceSubject          | InvalidLicenceNumber  |
-      |DrivingLicenceSubjectHappyPeter| PARKE610112PBFHH      |
+      |DrivingLicenceSubjectHappyKenneth| DECER657085K99LN      |
 
   @mock-api:dl-failed @validation-regression @build @staging
   Scenario Outline:  DVLA Driving Licence number validation test - (VALID, female licenceNumber DOB Jan)
@@ -334,8 +334,8 @@ Feature: DVLA Driving licence CRI Error Validations
     When User clicks on continue
     Then Proper error message is displayed as We could not find your details
     Examples:
-      |DrivingLicenceSubject          |InvalidLicenceNumber|InvalidDayOfBirth|InvalidMonthOfBirth|InvalidYearOfBirth|
-      |DrivingLicenceSubjectHappyPeter| PARKE601112PBFGH   |           11      |        01       |        1962      |
+      |DrivingLicenceSubject            |InvalidLicenceNumber|InvalidDayOfBirth|InvalidMonthOfBirth|InvalidYearOfBirth|
+      |DrivingLicenceSubjectHappyKenneth| DECER651085K99LN |         08      |        01       |        1965      |
 
   @mock-api:dl-failed @validation-regression @build @staging
   Scenario Outline:  DVLA Driving Licence number validation test - (VALID, female licenceNumber DOB Dec)
@@ -347,8 +347,8 @@ Feature: DVLA Driving licence CRI Error Validations
     When User clicks on continue
     Then Proper error message is displayed as We could not find your details
     Examples:
-      |DrivingLicenceSubject          |InvalidLicenceNumber|InvalidDayOfBirth|InvalidMonthOfBirth|InvalidYearOfBirth|
-      |DrivingLicenceSubjectHappyPeter| PARKE662112PBFGH   |           11    |        12         |        1962      |
+      |DrivingLicenceSubject            |InvalidLicenceNumber|InvalidDayOfBirth|InvalidMonthOfBirth|InvalidYearOfBirth|
+      |DrivingLicenceSubjectHappyKenneth| DECER662085K99LN   |         08      |        12         |        1965      |
 
   @mock-api:dl-failed @validation-regression @build @staging
   Scenario Outline:  DVLA Driving Licence number validation test - (VALID, licenceNumber DOB Dec)
@@ -360,9 +360,8 @@ Feature: DVLA Driving licence CRI Error Validations
     When User clicks on continue
     Then Proper error message is displayed as We could not find your details
     Examples:
-      |DrivingLicenceSubject          |InvalidLicenceNumber|InvalidDayOfBirth|InvalidMonthOfBirth|InvalidYearOfBirth|
-      |DrivingLicenceSubjectHappyPeter| PARKE612112PBFGH   |           11    |        12         |        1962      |
-
+      |DrivingLicenceSubject            |InvalidLicenceNumber|InvalidDayOfBirth |InvalidMonthOfBirth|InvalidYearOfBirth|
+      |DrivingLicenceSubjectHappyKenneth| DECER612085KE9LN   |           08     |        12         |        1965      |
 
   @mock-api:dl-failed @validation-regression @build @staging
   Scenario Outline:  DVLA Driving Licence number validation test - (VALID, 1 forename)
@@ -373,8 +372,8 @@ Feature: DVLA Driving licence CRI Error Validations
     When User clicks on continue
     Then Proper error message is displayed as We could not find your details
     Examples:
-      |DrivingLicenceSubject          |InvalidLicenceNumber|InvalidLastName|InvalidFirstName|
-      |DrivingLicenceSubjectHappyPeter|JOHNE610112PBFGH    |       JOHN    |     SMITH      |
+      |DrivingLicenceSubject            |InvalidLicenceNumber|InvalidLastName|InvalidFirstName|
+      |DrivingLicenceSubjectHappyKenneth|AB999607085J9AAA    |       JOHN    |     SMITH      |
 
   @mock-api:dl-failed @validation-regression @build @staging
   Scenario Outline:  DVLA Driving Licence number validation test - (VALID, surname < 5)
@@ -385,8 +384,8 @@ Feature: DVLA Driving licence CRI Error Validations
     When User clicks on continue
     Then Proper error message is displayed as We could not find your details
     Examples:
-      |DrivingLicenceSubject          |InvalidLicenceNumber|InvalidLastName|InvalidFirstName|
-      |DrivingLicenceSubjectHappyPeter|JOHNE610112PBFGH    |       JOHN    |     AB         |
+      |DrivingLicenceSubject            |InvalidLicenceNumber|InvalidLastName|InvalidFirstName|
+      |DrivingLicenceSubjectHappyKenneth|AB999607085J9AAA    |       JOHN    |     AB         |
 
   @mock-api:dl-failed @validation-regression @build @staging
   Scenario Outline:  DVLA Driving Licence number validation test - (VALID, 2 forenames)
@@ -398,5 +397,5 @@ Feature: DVLA Driving licence CRI Error Validations
     When User clicks on continue
     Then Proper error message is displayed as We could not find your details
     Examples:
-      |DrivingLicenceSubject          |InvalidLicenceNumber|InvalidLastName|InvalidFirstName|InvalidMiddleNames|
-      |DrivingLicenceSubjectHappyPeter|JOHNE610112PBFGH    |       JOHN    |     SMITH      |           A      |
+      |DrivingLicenceSubject             |InvalidLicenceNumber |InvalidLastName|InvalidFirstName|InvalidMiddleNames|
+      |DrivingLicenceSubjectHappyKenneth |AB999607085JAAAA     |       JOHN    |     SMITH      |           A      |
