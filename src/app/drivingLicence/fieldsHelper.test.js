@@ -122,7 +122,7 @@ describe("custom validation fields test", () => {
 
   it("get today - check before", () => {
     const result = validators.before(
-      moment().utc().subtract(1, "days").toISOString(),
+      moment.utc().subtract(1, "days").toISOString(),
       fields.getToday()
     );
 
@@ -131,7 +131,7 @@ describe("custom validation fields test", () => {
 
   it("get today - check before - future", () => {
     const result = validators.before(
-      moment().utc().add(1, "days").toISOString(),
+      moment.utc().add(1, "days").toISOString(),
       fields.getToday()
     );
 
@@ -140,7 +140,7 @@ describe("custom validation fields test", () => {
 
   it("get today - check before - today", () => {
     const result = validators.before(
-      moment().utc().toISOString(),
+      moment.utc().toISOString(),
       fields.getToday()
     );
 
@@ -149,7 +149,7 @@ describe("custom validation fields test", () => {
 
   it("get today - check after", () => {
     const result = validators.after(
-      moment().utc().add(1, "days").toISOString(),
+      moment.utc().add(1, "days").toISOString(),
       fields.getToday()
     );
 
@@ -158,7 +158,7 @@ describe("custom validation fields test", () => {
 
   it("get today - check after - past", () => {
     const result = validators.after(
-      moment().utc().subtract(1, "days").toISOString(),
+      moment.utc().subtract(1, "days").toISOString(),
       fields.getToday()
     );
 
@@ -167,7 +167,7 @@ describe("custom validation fields test", () => {
 
   it("get today - check after - today", () => {
     const result = validators.after(
-      moment().utc().toISOString(),
+      moment.utc().toISOString(),
       fields.getToday()
     );
 

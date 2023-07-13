@@ -1,4 +1,4 @@
-const validators = require("hmpo-form-wizard/lib/validation");
+const { validators } = require("hmpo-form-wizard/lib/validation");
 const moment = require("moment");
 
 module.exports = {
@@ -64,9 +64,9 @@ module.exports = {
     return secondCheck && thirdCheck && fourthCheck;
   },
   getToday(_value, offset) {
-    return moment()
+    return moment
       .utc()
       .add(offset || 0, "days")
-      .toISOString();
+      .format("YYYY-MM-DD");
   },
 };
