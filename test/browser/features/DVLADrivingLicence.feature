@@ -153,7 +153,7 @@ Feature: DVLA Driving licence CRI Error Validations
 
 ###### PostcodeWithNumericChar, PostcodeWithAlphaChar #####
   @mock-api:dl-success @validation-regression @build @staging
-  Scenario Outline: DVLA Driving Licence Postcode with numeric characters or Postcode with numeric characters error validation
+  Scenario Outline: DVLA Driving Licence Postcode with numeric characters or alpha characters error validation
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters postcode as <InvalidPostcode>
     When User clicks on continue
