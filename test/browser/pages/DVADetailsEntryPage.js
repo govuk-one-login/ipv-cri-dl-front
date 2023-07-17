@@ -76,7 +76,7 @@ exports.DVADetailsEntryPage = class PlaywrightDevPage {
       'xpath=//*[@id="dateOfIssue-error"]'
     );
     this.invalidConsentDVAFieldError = this.page.locator(
-       'xpath=//*[@id="consentDVACheckbox-error"]'
+      'xpath=//*[@id="consentDVACheckbox-error"]'
     );
   }
 
@@ -91,10 +91,10 @@ exports.DVADetailsEntryPage = class PlaywrightDevPage {
   }
 
   async assertDVAErrorPageTitle(dvaErrorPageTitle) {
-      await this.page.waitForLoadState("domcontentloaded");
-      expect(await this.isCurrentPage()).to.be.true;
-      expect(await this.page.title()).to.equal(dvaErrorPageTitle);
-    }
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    expect(await this.page.title()).to.equal(dvaErrorPageTitle);
+  }
 
   async userEntersDVAData(issuer, drivingLicenceSubjectScenario) {
     var dvaDrivingLicenceSubject = TestDataCreator.getDVATestUserFromMap(
@@ -212,25 +212,25 @@ exports.DVADetailsEntryPage = class PlaywrightDevPage {
     );
   }
 
-   async consentDVACheckBoxUnselect() {
-        await this.page.waitForLoadState("domcontentloaded");
-        expect(await this.isCurrentPage()).to.be.true;
-        return await this.consentDVACheckbox.click();
-   }
+  async consentDVACheckBoxUnselect() {
+     await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    return await this.consentDVACheckbox.click();
+  }
 
-    async assertConsentDVAErrorSummary(errorSummaryText) {
-         await this.page.waitForLoadState("domcontentloaded");
-         expect(await this.isCurrentPage()).to.be.true;
-         expect(await this.invalidDVAConsentErrorSummary.innerText()).to.contains(
-           errorSummaryText
-     );
-   }
+  async assertConsentDVAErrorSummary(errorSummaryText) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    expect(await this.invalidDVAConsentErrorSummary.innerText()).to.contains(
+      errorSummaryText
+    );
+  }
 
-      async assertConsentDVAErrorOnField(fieldErrorText) {
-          await this.page.waitForLoadState("domcontentloaded");
-          expect(await this.isCurrentPage()).to.be.true;
-          expect(await this.invalidConsentDVAFieldError.innerText()).to.contains(
-            fieldErrorText
-      );
+  async assertConsentDVAErrorOnField(fieldErrorText) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    expect(await this.invalidConsentDVAFieldError.innerText()).to.contains(
+      fieldErrorText
+    );
   }
 };
