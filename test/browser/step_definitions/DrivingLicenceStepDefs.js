@@ -348,7 +348,7 @@ Then(
 
 Then(
   /^I can see the DVLA consent error on the checkbox as (.*)$/,
-   { timeout: 2 * 5000 },
+  { timeout: 2 * 5000 },
   async function (fieldErrorText) {
     const drivingLicencePage = new DrivingLicencePage(this.page);
     await drivingLicencePage.assertConsentErrorOnField(fieldErrorText);
@@ -377,13 +377,10 @@ Given(
   }
 );
 
-Then(
-  /^I check the page Title (.*)$/,
-  async function (dvaErrorPageTitle) {
-    const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
-    await dvaDetailsEntryPage.assertDVAErrorPageTitle(dvaErrorPageTitle);
-  }
-);
+Then(/^I check the page Title (.*)$/, async function (dvaErrorPageTitle) {
+  const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
+  await dvaDetailsEntryPage.assertDVAErrorPageTitle(dvaErrorPageTitle);
+});
 
 // Re-enter DVA test data step-defs
 
@@ -517,7 +514,7 @@ Then(
 
 Then(
   /^I can see the DVA consent error on the checkbox as (.*)$/,
-   { timeout: 2 * 5000 },
+  { timeout: 2 * 5000 },
   async function (fieldErrorText) {
     const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
     await dvaDetailsEntryPage.assertConsentDVAErrorOnField(fieldErrorText);

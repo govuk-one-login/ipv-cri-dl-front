@@ -1,14 +1,15 @@
 {
-  "mappings": [{
-    "scenarioName": "dl-failed",
-    "request": {
-      "method": "GET",
-      "url": "/__reset/dl-failed"
+  "mappings": [
+    {
+      "scenarioName": "dl-failed",
+      "request": {
+        "method": "GET",
+        "url": "/__reset/dl-failed"
+      },
+      "response": {
+        "status": 200
+      }
     },
-    "response": {
-      "status": 200
-    }
-  },
     {
       "scenarioName": "dl-failed",
       "request": {
@@ -42,9 +43,11 @@
             "equalTo": "ABCDEF"
           }
         },
-        "bodyPatterns": [{
-          "matchesJsonPath": "$.drivingLicenceNumber"
-        }]
+        "bodyPatterns": [
+          {
+            "matchesJsonPath": "$.drivingLicenceNumber"
+          }
+        ]
       },
       "response": {
         "status": 200,

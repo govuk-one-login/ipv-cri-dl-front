@@ -84,7 +84,7 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
       'xpath=//*[@id="expiryDate-error"]'
     );
     this.invalidConsentErrorSummary = this.page.locator("a", {
-       hasText: "You must give your consent to continue",
+      hasText: "You must give your consent to continue",
     });
 
     // Field errors
@@ -127,7 +127,7 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
     });
 
     this.invalidConsentErrorFieldError = this.page.locator(
-       'xpath=//*[@id="consentCheckbox-error"]'
+      'xpath=//*[@id="consentCheckbox-error"]'
     );
   }
 
@@ -315,12 +315,12 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
   }
 
   async assertRetryErrorMessage(retryMessageHeading) {
-      await this.page.waitForLoadState("domcontentloaded");
-      expect(await this.isCurrentPage()).to.be.true;
-      expect(await this.drivingLicenceRetryMessageHeading.innerText()).to.contains(
-            retryMessageHeading
-          );
-    }
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    expect(
+      await this.drivingLicenceRetryMessageHeading.innerText()
+    ).to.contains(retryMessageHeading);
+  }
 
   async assertInvalidIssueNumberInErrorSummary(errorSummaryText) {
     await this.page.waitForLoadState("domcontentloaded");
@@ -403,24 +403,24 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
   }
 
   async consentCheckBoxUnselect() {
-      await this.page.waitForLoadState("domcontentloaded");
-      expect(await this.isCurrentPage()).to.be.true;
-      return await this.consentDVLACheckbox.click();
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    return await this.consentDVLACheckbox.click();
   }
 
   async assertConsentErrorSummary(errorSummaryText) {
-       await this.page.waitForLoadState("domcontentloaded");
-       expect(await this.isCurrentPage()).to.be.true;
-       expect(await this.invalidConsentErrorSummary.innerText()).to.contains(
-         errorSummaryText
-       );
-    }
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    expect(await this.invalidConsentErrorSummary.innerText()).to.contains(
+      errorSummaryText
+    );
+  }
 
   async assertConsentErrorOnField(fieldErrorText) {
-      await this.page.waitForLoadState("domcontentloaded");
-      expect(await this.isCurrentPage()).to.be.true;
-      expect(await this.invalidConsentErrorFieldError.innerText()).to.contains(
-          fieldErrorText
-      );
-   }
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    expect(await this.invalidConsentErrorFieldError.innerText()).to.contains(
+      fieldErrorText
+    );
+  }
 };

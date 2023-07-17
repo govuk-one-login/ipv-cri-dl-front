@@ -61,7 +61,7 @@ exports.DVADetailsEntryPage = class PlaywrightDevPage {
     );
 
     this.invalidDVAConsentErrorSummary = this.page.locator("a", {
-       hasText: "You must give your consent to continue",
+      hasText: "You must give your consent to continue",
     });
 
     //  DVA Field errors
@@ -213,7 +213,7 @@ exports.DVADetailsEntryPage = class PlaywrightDevPage {
   }
 
   async consentDVACheckBoxUnselect() {
-     await this.page.waitForLoadState("domcontentloaded");
+    await this.page.waitForLoadState("domcontentloaded");
     expect(await this.isCurrentPage()).to.be.true;
     return await this.consentDVACheckbox.click();
   }
