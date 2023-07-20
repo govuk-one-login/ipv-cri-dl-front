@@ -20,7 +20,7 @@ Feature: DVA Driving licence CRI Error Validations
       |DVADrivingLicenceSubject       |InvalidLicenceNumber|
       |DrivingLicenceSubjectHappyBilly|5566778             |
 
-  @mock-api:dva-invalidDrivingLicenceNumberWithSplChar
+  @mock-api:dva-invalidDrivingLicenceNumber @validation-regression @build @staging
   Scenario Outline: DVA Driving Licence number with special characters and spaces error validation
     Given User enters DVA data as a <DVADrivingLicenceSubject>
     And User re-enters drivingLicenceNumber as <InvalidLicenceNumber>
