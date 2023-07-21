@@ -2,8 +2,9 @@ const { expect: expect } = require("chai");
 const { assertTrue, fail } = require("assert");
 
 exports.UniversalSteps = class PlaywrightDevPage {
-  constructor(page) { this.page = page;
-  this.url = "http://localhost:5030/details";
+  constructor(page, url) {
+  this.page = page;
+  this.url = url;
   }
 
   async waitForTextToAppear(text) {
@@ -28,6 +29,10 @@ exports.UniversalSteps = class PlaywrightDevPage {
   }
 
   async changeLanguageTo(language) {
-    this.driver.get(this.driver.currentUrl + "?lang=" + cy);
+    var languageIsoCode = "eng";
+    if (language === "Welsh") {
+      languageIsoCode = "cy";
+    }
+    await this.page.goto(this.page.url() + "?lang=" + languageIsoCode);
   }
 };
