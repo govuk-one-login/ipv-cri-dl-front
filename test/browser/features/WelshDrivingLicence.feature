@@ -28,7 +28,7 @@ Feature: DVLA Driving licence CRI Error Validations
       |DrivingLicenceSubject          |InvalidDayOfBirth|InvalidMonthOfBirth|InvalidYearOfBirth|
       |DrivingLicenceSubjectHappyPeter|         12      |     08            |       1985       |
 
-  @Language-regression
+#  @Language-regression
 #  Scenario: DVLA Name fields
 #    Given I click on DVLA radio button and Parhau
 #    When I can see the lastname as Enw olaf
