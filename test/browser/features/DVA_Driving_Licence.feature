@@ -254,6 +254,7 @@ Feature: DVA Driving licence CRI Error Validations
     When User clicks on continue
     Then I can see the DVA consent error summary as You must give your consent to continue
     And I can see the DVA consent error on the checkbox as Error: You must give your consent to continue
+    And I check the page Title Error: Enter your details exactly as they appear on your UK driving licence – Prove your identity – GOV.UK
     Examples:
       |DVADrivingLicenceSubject             |
       |DrivingLicenceSubjectHappyBilly|
