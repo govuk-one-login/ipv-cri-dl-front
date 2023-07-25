@@ -1,4 +1,5 @@
 const { validators } = require("hmpo-form-wizard/lib/validation");
+const moment = require("moment");
 
 module.exports = {
   firstNameMiddleNameLengthValidator(
@@ -62,4 +63,15 @@ module.exports = {
 
     return secondCheck && thirdCheck && fourthCheck;
   },
+  getTodayUtc(offset) {
+    return moment
+      .utc()
+      .add(offset || 0, "days")
+      .format("YYYY-MM-DD");
+  },
+  getToday(offset) {
+    return moment()
+      .add(offset || 0, "days")
+      .format("YYYY-MM-DD");
+  }
 };
