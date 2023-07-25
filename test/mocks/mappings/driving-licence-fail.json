@@ -1,65 +1,72 @@
 {
   "mappings": [
     {
-      "scenarioName": "dl-success-slow",
+      "scenarioName": "dl-failed",
       "request": {
         "method": "GET",
-        "url": "/__reset/driving-licence-success-slow"
+        "url": "/__reset/dl-failed"
       },
       "response": {
         "status": 200
       }
     },
     {
-      "scenarioName": "dl-success-slow",
+      "scenarioName": "dl-failed",
       "request": {
         "method": "POST",
         "urlPath": "/session",
         "headers": {
           "x-scenario-id": {
-            "equalTo": "dl-success-slow"
+            "equalTo": "dl-failed"
           }
         }
       },
       "response": {
         "status": 200,
         "jsonBody": {
-          "session_id": "ABADCAFE",
+          "session_id": "ABCDEF",
           "state": "sT@t3",
           "redirect_uri": "http://example.net/return"
         }
       }
     },
     {
-      "scenarioName": "driving-licence-success-slow",
+      "scenarioName": "dl-failed",
       "request": {
         "method": "POST",
         "urlPath": "/check-driving-licence",
         "headers": {
           "x-scenario-id": {
-            "equalTo": "driving-licence-success-slow"
+            "equalTo": "dl-failed"
           },
           "session_id": {
-            "equalTo": "ABADCAFE"
+            "equalTo": "ABCDEF"
           }
-        }
+        },
+        "bodyPatterns": [
+          {
+            "matchesJsonPath": "$.drivingLicenceNumber"
+          }
+        ]
       },
       "response": {
-        "fixedDelayMilliseconds": "5000",
-        "status": 200
+        "status": 200,
+        "jsonBody": {
+          "retry": true
+        }
       }
     },
     {
-      "scenarioName": "driving-licence-success-slow",
+      "scenarioName": "dl-failed",
       "request": {
         "method": "GET",
         "urlPath": "/authorization",
         "headers": {
           "x-scenario-id": {
-            "equalTo": "driving-licence-success-slow"
+            "equalTo": "dl-failed"
           },
           "session-id": {
-            "equalTo": "ABADCAFE"
+            "equalTo": "ABCDEF"
           }
         }
       },

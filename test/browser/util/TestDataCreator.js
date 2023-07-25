@@ -24,10 +24,33 @@ exports.getDVLATestUserFromMap = function (
     licenceValidToYear: "2062",
     postcode: "BS98 1TL",
   });
+  var primaryDVLAKennethLicence = new DrivingLicenceSubject();
+  primaryDVLAKennethLicence.fill({
+    licenceNumber: "DECER607085KE9LN",
+    birthDay: "08",
+    birthMonth: "07",
+    birthYear: "1965",
+    licenceIssueDay: "19",
+    licenceIssueMonth: "04",
+    licenceIssueYear: "2001",
+    issueNumber: "23",
+    consentDVLACheckbox: "true",
+    middleNames: " ",
+    lastName: "DECERQUEIRA",
+    firstName: "KENNETH",
+    licenceValidToDay: "01",
+    licenceValidToMonth: "10",
+    licenceValidToYear: "2042",
+    postcode: "BA2 5AA",
+  });
 
   if (issuer === "DVLA") {
     if (drivingLicenceSubjectScenario === "DrivingLicenceSubjectHappyPeter") {
       return primaryDVLALicence;
+    }
+
+    if (drivingLicenceSubjectScenario === "DrivingLicenceSubjectHappyKenneth") {
+      return primaryDVLAKennethLicence;
     }
   }
 };

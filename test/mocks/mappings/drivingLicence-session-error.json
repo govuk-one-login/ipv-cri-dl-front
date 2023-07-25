@@ -2,7 +2,6 @@
   "mappings": [
     {
       "scenarioName": "dl-session-error",
-      "newScenarioState": "Started",
       "request": {
         "method": "GET",
         "url": "/__reset/driving-licence-session-error"
@@ -13,8 +12,6 @@
     },
     {
       "scenarioName": "dl-session-error",
-      "requiredScenarioState": "Started",
-      "newScenarioState": "DLCheck",
       "request": {
         "method": "POST",
         "urlPath": "/session",
