@@ -13,7 +13,9 @@ Then(
   }
 );
 
-Then(/^User clicks on continue$/, async function () {
+Then(/^User clicks on continue$/,
+  { timeout: 2 * 5000 },
+  async function () {
   const drivingLicencePage = new DrivingLicencePage(this.page);
   await drivingLicencePage.clickOnContinue();
 });
