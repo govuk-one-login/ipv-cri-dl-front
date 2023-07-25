@@ -51,7 +51,7 @@
     "eslint-config-prettier": "8.5.0",
     "eslint-plugin-prettier": "4.2.1",
     "husky": "8.0.1",
-    "lint-staged": "13.0.3",
+    "lint-staged": "13.2.3",
     "mocha": "10.0.0",
     "nodemon": "2.0.22",
     "npm-run-all": "4.1.5",
@@ -75,19 +75,19 @@
     "copyfiles": "2.4.1",
     "di-ipv-cri-common-express": "alphagov/di-ipv-cri-common-express.git#v1.0.0",
     "dotenv": "^16.3.1",
-    "express": "4.18.1",
+    "express": "4.18.2",
     "express-async-errors": "^3.1.1",
     "express-session": "^1.17.3",
     "govuk-frontend": "4.6.0",
     "hmpo-app": "2.4.0",
-    "hmpo-components": "5.7.0",
-    "hmpo-config": "2.2.1",
+    "hmpo-components": "6.3.0",
+    "hmpo-config": "3.0.0",
     "hmpo-form-wizard": "12.0.6",
     "hmpo-i18n": "5.0.2",
     "hmpo-logger": "6.1.1",
     "http-cache-semantics": "4.1.1",
     "json5": "2.2.2",
     "jsonwebtoken": "9.0.0",
-    "nunjucks": "3.2.3"
+    "nunjucks": "3.2.4"
   }
 }
