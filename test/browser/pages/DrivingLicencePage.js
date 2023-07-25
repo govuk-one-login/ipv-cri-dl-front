@@ -6,11 +6,11 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
     this.page = page;
     this.url = "http://localhost:5030/details";
 
-    this.licenceNumber = this.page.getByLabel(" Licence number ");
+    this.licenceNumber = this.page.locator('xpath=//*[@id="drivingLicenceNumber"]');
 
-    this.lastName = this.page.getByLabel(" Last name ");
-    this.firstName = this.page.getByLabel(" First name ");
-    this.middleNames = this.page.getByLabel(" Middle names ");
+    this.lastName = this.page.locator('xpath=//*[@id="surname"]');
+    this.firstName = this.page.locator('xpath=//*[@id="firstName"]');
+    this.middleNames = this.page.locator('xpath=//*[@id="middleNames"]');
 
     this.birthDay = this.page.locator('xpath=//*[@id="dateOfBirth-day"]');
     this.birthMonth = this.page.locator('xpath=//*[@id="dateOfBirth-month"]');
@@ -34,13 +34,11 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
       'xpath=//*[@id="issueDate-year"]'
     );
 
-    this.issueNumber = this.page.getByLabel(" Issue number ");
+    this.issueNumber = this.page.locator('xpath=//*[@id="issueNumber"]');
 
-    this.postcode = this.page.getByLabel(" Postcode ");
+    this.postcode = this.page.locator('xpath=//*[@id="postcode"]');
 
-    this.consentDVLACheckbox = this.page.getByLabel(
-      "Give DVLA your consent to check your driving licence details"
-    );
+    this.consentDVLACheckbox = this.page.locator('xpath=//*[@id="consentCheckbox"]');
 
     // Error summary items
 
@@ -122,17 +120,16 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
       'xpath=//*[@id="expiryDate-error"]'
     );
 
-    this.Continue = this.page.locator("button", {
-      hasText: " Continue ",
-    });
+    this.Continue = this.page.locator('xpath=//*[@id="continue"]');
 
-    this.invalidConsentErrorFieldError = this.page.locator(
-      'xpath=//*[@id="consentCheckbox-error"]'
-    );
+     this.invalidConsentErrorFieldError = this.page.locator(
+          'xpath=//*[@id="consentCheckbox-error"]'
+        );
   }
 
   isCurrentPage() {
     return this.page.url() === this.url;
+
   }
 
   async assertDVLAPageTitle(dvlaDetailsEntryPageTitle) {
