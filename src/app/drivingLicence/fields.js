@@ -49,7 +49,7 @@ module.exports = {
     validate: [
       "required",
       "date",
-      { type: "before", arguments: [new Date().toISOString().split("T")[0]] },
+      { type: "before", arguments: [] },
       {
         type: "dvlaChecker",
         ...dvlaValidatorObj,
@@ -60,11 +60,7 @@ module.exports = {
   dvaDateOfBirth: {
     type: "date",
     journeyKey: "dvaDateOfBirth",
-    validate: [
-      "required",
-      "date",
-      { type: "before", arguments: [new Date().toISOString().split("T")[0]] },
-    ],
+    validate: ["required", "date", { type: "before", arguments: [] }],
     dependent: { field: "issuerDependent", value: "DVA" },
   },
   issueDate: {
@@ -75,15 +71,7 @@ module.exports = {
       "date",
       {
         type: "before",
-        arguments: [
-          new Date(
-            new Date().getFullYear(),
-            new Date().getMonth(),
-            new Date().getDate()
-          )
-            .toISOString()
-            .split("T")[0],
-        ],
+        arguments: [],
       },
     ],
     dependent: { field: "issuerDependent", value: "DVLA" },
@@ -96,15 +84,7 @@ module.exports = {
       "date",
       {
         type: "before",
-        arguments: [
-          new Date(
-            new Date().getFullYear(),
-            new Date().getMonth(),
-            new Date().getDate()
-          )
-            .toISOString()
-            .split("T")[0],
-        ],
+        arguments: [],
       },
     ],
     dependent: { field: "issuerDependent", value: "DVA" },
@@ -122,15 +102,7 @@ module.exports = {
       "date",
       {
         type: "after",
-        arguments: [
-          new Date(
-            new Date().getFullYear(),
-            new Date().getMonth(),
-            new Date().getDate()
-          )
-            .toISOString()
-            .split("T")[0],
-        ],
+        arguments: [],
       },
     ],
   },
