@@ -32,7 +32,7 @@ Feature: DVA Driving licence CRI Error Validations
       |DVADrivingLicenceSubject       |InvalidLicenceNumber|
       |DrivingLicenceSubjectHappyBilly|55667^&*            |
 
-##### DrivingLicenceNumberWithAlphaNumericChar, DrivingLicenceNumberWithAlphaChar, NoDrivingLicenceNumber #####
+###### DrivingLicenceNumberWithAlphaNumericChar, DrivingLicenceNumberWithAlphaChar, NoDrivingLicenceNumber #####
   @mock-api:dva-invalidDrivingLicenceNumber @validation-regression @build @staging
   Scenario Outline: DVA Driving Licence number with alpha numeric characters or alpha characters or no licence number error validation
     Given User enters DVA data as a <DVADrivingLicenceSubject>
@@ -83,7 +83,7 @@ Feature: DVA Driving licence CRI Error Validations
       |DVADrivingLicenceSubject       |InvalidPostcode   |
       |DrivingLicenceSubjectHappyBilly|CA 95128          |
 
-###### PostcodeWithSpecialChar #####
+##### PostcodeWithSpecialChar #####
   @mock-api:dva-invalidPostcode @validation-regression @build @staging
   Scenario Outline: DVA Driving Licence Postcode with special characters error validation
     Given User enters DVA data as a <DVADrivingLicenceSubject>

@@ -38,7 +38,9 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
 
     this.postcode = this.page.locator('xpath=//*[@id="postcode"]');
 
-    this.consentDVLACheckbox = this.page.locator('xpath=//*[@id="consentCheckbox"]');
+    this.consentDVLACheckbox = this.page.locator(
+      'xpath=//*[@id="consentCheckbox"]'
+    );
 
     // Error summary items
 
@@ -122,14 +124,30 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
 
     this.Continue = this.page.locator('xpath=//*[@id="continue"]');
 
-     this.invalidConsentErrorFieldError = this.page.locator(
-          'xpath=//*[@id="consentCheckbox-error"]'
-        );
+    // Welsh Translation
+    //this.lastNameWelsh = this.page.getByLabel(" Enw olaf ");
+    this.lastNameWelsh = this.page.locator('xpath=//*[@id="surname-label"]');
+    this.givenNameWelsh = this.page.locator(
+      'xpath=//*[@id="main-content"]/div/div/form/div[2]/fieldset/legend'
+    );
+    this.firstName = this.page.locator('xpath=//*[@id="firstName-label"]');
+    this.middleNames = this.page.locator('xpath=//*[@id="middleNames-label"]');
+    this.firstNameSentence = this.page.locator(
+      'xpath=//*[@id="firstName-hint"]'
+    );
+    this.middleNameSentence = this.page.locator(
+      'xpath=//*[@id="middleNames-hint"]'
+    );
+
+    this.betaBanner = this.page.getByLabel(" beta ");
+
+    this.invalidConsentErrorFieldError = this.page.locator(
+              'xpath=//*[@id="consentCheckbox-error"]'
+            );
   }
 
   isCurrentPage() {
     return this.page.url() === this.url;
-
   }
 
   async assertDVLAPageTitle(dvlaDetailsEntryPageTitle) {
@@ -400,24 +418,68 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
   }
 
   async consentCheckBoxUnselect() {
+      await this.page.waitForLoadState("domcontentloaded");
+      expect(await this.isCurrentPage()).to.be.true;
+      return await this.consentDVLACheckbox.click();
+    }
+
+    async assertConsentErrorSummary(errorSummaryText) {
+      await this.page.waitForLoadState("domcontentloaded");
+      expect(await this.isCurrentPage()).to.be.true;
+      expect(await this.invalidConsentErrorSummary.innerText()).to.contains(
+        errorSummaryText
+      );
+    }
+
+    async assertConsentErrorOnField(fieldErrorText) {
+      await this.page.waitForLoadState("domcontentloaded");
+      expect(await this.isCurrentPage()).to.be.true;
+      expect(await this.invalidConsentErrorFieldError.innerText()).to.contains(
+        fieldErrorText
+      );
+    }
+
+  // Welsh Language
+
+  async assertLastName(dvlaLastNameWelsh) {
     await this.page.waitForLoadState("domcontentloaded");
     expect(await this.isCurrentPage()).to.be.true;
-    return await this.consentDVLACheckbox.click();
+    //await expect(lastNameWelsh).toHaveText(/Enw olaf/);
+    await expect(page.getByText('Last name')).toBeVisible();
+     //expect(await this.lastNameWelsh.innerText()).to.contains(dvlaLastNameWelsh );
   }
 
-  async assertConsentErrorSummary(errorSummaryText) {
+  async assertGivenName(dvlaGivenNameWelsh) {
     await this.page.waitForLoadState("domcontentloaded");
     expect(await this.isCurrentPage()).to.be.true;
-    expect(await this.invalidConsentErrorSummary.innerText()).to.contains(
-      errorSummaryText
+    expect(await this.givenNameWelsh.textContent()).toEqual(dvlaGivenNameWelsh);
+  }
+
+  async assertFirstName(dvlaFirstNameWelsh) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    expect(await this.firstName.textContent()).to.equal(dvlaFirstNameWelsh);
+  }
+
+  async assertMiddleName(dvlaMiddleNameWelsh) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    expect(await this.middleNames.textContent()).to.contain(dvlaMiddleNameWelsh);
+  }
+
+  async assertFirstNameSentence(dvlaFirstNameSentWelsh) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    expect(await this.firstNameSentence.innerText()).to.equal(
+      dvlaFirstNameSentWelsh
     );
   }
 
-  async assertConsentErrorOnField(fieldErrorText) {
+  async assertMiddleNameSentence(dvlaMiddleNameSentenceWelsh) {
     await this.page.waitForLoadState("domcontentloaded");
     expect(await this.isCurrentPage()).to.be.true;
-    expect(await this.invalidConsentErrorFieldError.innerText()).to.contains(
-      fieldErrorText
+    expect(await this.middleNameSentence.innerText()).to.equal(
+      dvlaMiddleNameSentenceWelsh
     );
   }
 };
