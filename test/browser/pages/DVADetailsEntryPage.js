@@ -6,11 +6,11 @@ exports.DVADetailsEntryPage = class PlaywrightDevPage {
     this.page = page;
     this.url = "http://localhost:5030/details";
 
-    this.licenceNumber = this.page.getByLabel(" Licence number ");
+    this.licenceNumber = this.page.locator('xpath=//*[@id="dvaLicenceNumber"]');
 
-    this.lastName = this.page.getByLabel(" Last name ");
-    this.firstName = this.page.getByLabel(" First name ");
-    this.middleNames = this.page.getByLabel(" Middle names ");
+    this.lastName = this.page.locator('xpath=//*[@id="surname"]');
+    this.firstName = this.page.locator('xpath=//*[@id="firstName"]');
+    this.middleNames = this.page.locator('xpath=//*[@id="middleNames"]');
 
     this.dvaBirthDay = this.page.locator('xpath=//*[@id="dvaDateOfBirth-day"]');
     this.dvaBirthMonth = this.page.locator(
@@ -40,10 +40,10 @@ exports.DVADetailsEntryPage = class PlaywrightDevPage {
       'xpath=//*[@id="dateOfIssue-year"]'
     );
 
-    this.postcode = this.page.getByLabel(" Postcode ");
+    this.postcode = this.page.locator('xpath=//*[@id="postcode"]');
 
-    this.consentDVACheckbox = this.page.getByLabel(
-      "Give DVA your consent to check your driving licence details"
+    this.consentDVACheckbox = this.page.locator(
+      'xpath=//*[@id="consentDVACheckbox"]'
     );
 
     // DVA Error summary items
@@ -124,6 +124,10 @@ exports.DVADetailsEntryPage = class PlaywrightDevPage {
   }
 
   // Re-enter test data
+
+  async dvaUserReEntersLicenceNumber(InvalidLicenceNumber) {
+    await this.licenceNumber.fill(InvalidLicenceNumber);
+  }
 
   async dvaUserReEntersDayOfBirth(InvalidDayOfBirth) {
     await this.dvaBirthDay.fill(InvalidDayOfBirth);
