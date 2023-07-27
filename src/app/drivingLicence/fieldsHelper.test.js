@@ -1,4 +1,6 @@
 const fields = require("./fieldsHelper");
+const { validators } = require("hmpo-form-wizard/lib/validation");
+const moment = require("moment");
 
 describe("custom validation fields test", () => {
   it("should be false when first and middle name combined greater than 30 characters", () => {
@@ -116,5 +118,61 @@ describe("custom validation fields test", () => {
     expect(
       validator(1, "firstName", "middleNames", "surname", "dob", "licence")
     ).to.be.true;
+  });
+});
+
+describe("date validation test", () => {
+  it("check before validation when date is in the past", () => {
+    const result = validators.before(
+      moment().subtract(1, "day").format("YYYY-MM-DD"),
+      moment().format("YYYY-MM-DD")
+    );
+
+    expect(result).to.be.true;
+  });
+
+  it("check before validation when date is today", () => {
+    const result = validators.before(
+      moment().format("YYYY-MM-DD"),
+      moment().format("YYYY-MM-DD")
+    );
+
+    expect(result).to.be.false;
+  });
+
+  it("check before validation when date is in the future", () => {
+    const result = validators.before(
+      moment().add(1, "day").format("YYYY-MM-DD"),
+      moment().format("YYYY-MM-DD")
+    );
+
+    expect(result).to.be.false;
+  });
+
+  it("check after validation when date is in the past", () => {
+    const result = validators.after(
+      moment().subtract(1, "day").format("YYYY-MM-DD"),
+      moment().format("YYYY-MM-DD")
+    );
+
+    expect(result).to.be.false;
+  });
+
+  it("check after validation when date is today", () => {
+    const result = validators.after(
+      moment().format("YYYY-MM-DD"),
+      moment().format("YYYY-MM-DD")
+    );
+
+    expect(result).to.be.false;
+  });
+
+  it("check after validation when date is in the future", () => {
+    const result = validators.after(
+      moment().add(1, "day").format("YYYY-MM-DD"),
+      moment().format("YYYY-MM-DD")
+    );
+
+    expect(result).to.be.true;
   });
 });
