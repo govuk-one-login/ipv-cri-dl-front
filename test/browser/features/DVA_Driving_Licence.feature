@@ -11,7 +11,7 @@ Feature: DVA Driving licence CRI Error Validations
   @mock-api:dva-invalidDrivingLicenceNumber @validation-regression @build @staging
   Scenario Outline: DVA Driving Licence number less than 8 characters error validation
     Given User enters DVA data as a <DVADrivingLicenceSubject>
-    And User re-enters drivingLicenceNumber as <InvalidLicenceNumber>
+    And DVA User re-enters drivingLicenceNumber as <InvalidLicenceNumber>
     When User clicks on continue
     Then I see the DVA licence number error in the summary as Your licence number should be 8 characters long
     And I can see the DVA licence number error in the field as Your licence number should be 8 characters long
@@ -22,7 +22,7 @@ Feature: DVA Driving licence CRI Error Validations
   @mock-api:dva-invalidDrivingLicenceNumber @validation-regression @build @staging
   Scenario Outline: DVA Driving Licence number with special characters and spaces error validation
     Given User enters DVA data as a <DVADrivingLicenceSubject>
-    And User re-enters drivingLicenceNumber as <InvalidLicenceNumber>
+    And DVA User re-enters drivingLicenceNumber as <InvalidLicenceNumber>
     When User clicks on continue
     Then I see the DVA licence number error in the summary as Your licence number should not include any symbols or spaces
     And I can see the DVA licence number error in the field as Your licence number should not include any symbols or spaces
@@ -34,7 +34,7 @@ Feature: DVA Driving licence CRI Error Validations
   @mock-api:dva-invalidDrivingLicenceNumber @validation-regression @build @staging
   Scenario Outline: DVA Driving Licence number with alpha numeric characters or alpha characters or no licence number error validation
     Given User enters DVA data as a <DVADrivingLicenceSubject>
-    And User re-enters drivingLicenceNumber as <InvalidLicenceNumber>
+    And DVA User re-enters drivingLicenceNumber as <InvalidLicenceNumber>
     When User clicks on continue
     Then I see the DVA licence number error in the summary as Enter the number exactly as it appears on your driving licence
     And I can see the DVA licence number error in the field as Enter the number exactly as it appears on your driving licence
