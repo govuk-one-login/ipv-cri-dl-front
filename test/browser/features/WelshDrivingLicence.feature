@@ -16,7 +16,7 @@ Feature: DVLA Driving licence CRI Error Validations
 
   @mock-api:dvla-NameField @validation-regression @build @staging
   Scenario: DVLA Name fields
-    Given I can see the lastname as Last name
+    Given I can see the lastname as Enw olaf
     And I can see the givenName as Enwau a roddwyd
     And I can see the firstName as Enw cyntaf
     And I can see the middleName as Enwau canol

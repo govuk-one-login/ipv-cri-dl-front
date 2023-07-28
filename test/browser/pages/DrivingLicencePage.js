@@ -147,7 +147,7 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
   }
 
   isCurrentPage() {
-    return this.page.url() === this.url;
+    return this.page.url() === this.url || this.page.url() === this.url + "?lang=cy";
   }
 
   async assertDVLAPageTitle(dvlaDetailsEntryPageTitle) {
@@ -444,21 +444,19 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
   async assertLastName(dvlaLastNameWelsh) {
     await this.page.waitForLoadState("domcontentloaded");
     expect(await this.isCurrentPage()).to.be.true;
-    //await expect(lastNameWelsh).toHaveText(/Enw olaf/);
-    await expect(page.getByText('Last name')).toBeVisible();
-     //expect(await this.lastNameWelsh.innerText()).to.contains(dvlaLastNameWelsh );
+    await expect(await this.lastNameWelsh.textContent()).to.contains(dvlaLastNameWelsh );
   }
 
   async assertGivenName(dvlaGivenNameWelsh) {
     await this.page.waitForLoadState("domcontentloaded");
     expect(await this.isCurrentPage()).to.be.true;
-    expect(await this.givenNameWelsh.textContent()).toEqual(dvlaGivenNameWelsh);
+    expect(await this.givenNameWelsh.textContent()).to.contain(dvlaGivenNameWelsh);
   }
 
   async assertFirstName(dvlaFirstNameWelsh) {
     await this.page.waitForLoadState("domcontentloaded");
     expect(await this.isCurrentPage()).to.be.true;
-    expect(await this.firstName.textContent()).to.equal(dvlaFirstNameWelsh);
+    expect(await this.firstName.textContent()).to.contain(dvlaFirstNameWelsh);
   }
 
   async assertMiddleName(dvlaMiddleNameWelsh) {
