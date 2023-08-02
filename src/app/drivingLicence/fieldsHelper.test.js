@@ -101,6 +101,32 @@ describe("custom validation fields test", () => {
     ).to.be.false;
   });
 
+  it("should be false when licence issued greater than 10 years ago", () => {
+    const issueDate = "2013-08-01";
+    const validator = fields.beforeNow.bind({
+      values: {
+        issueDate: issueDate,
+      },
+    });
+
+    expect(
+      validator(issueDate, 10, "years")
+    ).to.be.false;
+  });
+
+    it("should be true when licence issued less than 10 years ago", () => {
+      const issueDate = "2013-08-04";
+      const validator = fields.beforeNow.bind({
+        values: {
+          issueDate: issueDate,
+        },
+      });
+
+      expect(
+        validator(issueDate, 10, "years")
+      ).to.be.true;
+    });
+
   it("should be true when licence number does match DOB date kenneth", () => {
     const licenceNo = "DECER607085K99LN";
     const validator = fields.dvlaValidator.bind({

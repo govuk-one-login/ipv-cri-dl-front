@@ -1,4 +1,5 @@
 const { validators } = require("hmpo-form-wizard/lib/validation");
+const moment = require('moment');
 
 module.exports = {
   firstNameMiddleNameLengthValidator(
@@ -62,4 +63,16 @@ module.exports = {
 
     return secondCheck && thirdCheck && fourthCheck;
   },
+  beforeNow(
+      _value,
+      timePeriod,
+      timeUnit,
+    ) {
+        let dateFormat = 'YYYY-MM-DD';
+        let test = moment(_value, dateFormat);
+        let comparator;
+        comparator = moment().subtract(timePeriod, timeUnit);
+
+        return _value === '' || validators.date(_value) && test.isAfter(comparator);
+    }
 };
