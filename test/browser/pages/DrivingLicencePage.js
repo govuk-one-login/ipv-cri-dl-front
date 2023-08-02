@@ -125,13 +125,23 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
     this.Continue = this.page.locator('xpath=//*[@id="continue"]');
 
     // Welsh Translation
-    //this.lastNameWelsh = this.page.getByLabel(" Enw olaf ");
+
+   this.betaBannerReads = this.page.locator(
+     'xpath=/html/body/div[2]/div/p/span'
+      );
+
+    this.betaBanner = this.page.locator('xpath=/html/body/div[2]/div/p/strong');
+
     this.lastNameWelsh = this.page.locator('xpath=//*[@id="surname-label"]');
+
     this.givenNameWelsh = this.page.locator(
       'xpath=//*[@id="main-content"]/div/div/form/div[2]/fieldset/legend'
     );
+
     this.firstName = this.page.locator('xpath=//*[@id="firstName-label"]');
+
     this.middleNames = this.page.locator('xpath=//*[@id="middleNames-label"]');
+
     this.firstNameSentence = this.page.locator(
       'xpath=//*[@id="firstName-hint"]'
     );
@@ -139,11 +149,93 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
       'xpath=//*[@id="middleNames-hint"]'
     );
 
-    this.betaBanner = this.page.getByLabel(" beta ");
+    this.dobFieldTitleWelsh = this.page.locator(
+      'xpath=//*[@id="dateOfBirth-fieldset"]/legend'
+    );
+
+    this.dobExample = this.page.locator(
+      'xpath=//*[@id="dateOfBirth-hint"]'
+    );
+
+    this.dayInWelsh = this.page.locator(
+      'xpath=//*[@id="dateOfBirth"]/div[1]/div/label'
+    );
+
+    this.monthInWelsh = this.page.locator(
+          'xpath=//*[@id="dateOfBirth"]/div[2]/div/label'
+    );
+
+    this.yearInWelsh = this.page.locator(
+      'xpath=//*[@id="dateOfBirth"]/div[3]/div/label'
+    );
+
+   this.issueFieldTitleWelsh = this.page.locator(
+         'xpath=//*[@id="issueDate-fieldset"]/legend'
+   );
+   this.issueFieldExample = this.page.locator(
+         'xpath=//*[@id="issueDate-hint"]'
+   );
+
+   this.issueDayInWelsh = this.page.locator(
+     'xpath=//*[@id="issueDate"]/div[1]/div/label'
+   );
+
+   this.issueMonthInWelsh = this.page.locator(
+     'xpath=//*[@id="issueDate"]/div[2]/div/label'
+   );
+this.issueYearInWelsh = this.page.locator(
+     'xpath=//*[@id="issueDate"]/div[3]/div/label'
+   );
+
+   this.validToFieldTitleWelsh = this.page.locator(
+      'xpath=//*[@id="expiryDate-fieldset"]/legend'
+   );
+
+   this.validToFieldExample = this.page.locator(
+     'xpath=//*[@id="expiryDate-hint"]'
+   );
+
+   this.validToDayInWelsh = this.page.locator(
+    'xpath=//*[@id="expiryDate"]/div[1]/div/label'
+   );
+
+   this.validToMonthInWelsh = this.page.locator(
+    'xpath=//*[@id="expiryDate"]/div[2]/div/label'
+   );
+
+   this.validToYearInWelsh = this.page.locator(
+     'xpath=//*[@id="expiryDate"]/div[3]/div/label'
+   );
+
+   this.licenceTitleWelsh = this.page.locator(
+          'xpath=//*[@id="drivingLicenceNumber-label"]'
+   );
+
+   this.licenceExampleWelsh = this.page.locator(
+          'xpath=//*[@id="drivingLicenceNumber-hint"]'
+   );
+
+   this.issueNumberTitleWelsh = this.page.locator(
+      'xpath=//*[@id="issueNumber-label"]'
+   );
+
+   this.issueNumberExampleWelsh = this.page.locator(
+      'xpath=//*[@id="issueNumber-hint"]'
+   );
+
+   this.postcodeLabelWelsh = this.page.locator(
+         'xpath=//*[@id="postcode-label"]'
+   );
+
+   this.postcodeLabelExampleWelsh = this.page.locator(
+      'xpath=//*[@id="postcode-hint"]'
+   );
+
 
     this.invalidConsentErrorFieldError = this.page.locator(
               'xpath=//*[@id="consentCheckbox-error"]'
             );
+
   }
 
   isCurrentPage() {
@@ -440,24 +532,56 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
     }
 
   // Welsh Language
+ async assertBetaBanner(betaBannerLabel) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    await expect(await this.betaBanner.textContent()).to.contains(betaBannerLabel);
+  }
 
+//  async assertBetaBanner() {
+//      await this.page.waitForLoadState("domcontentloaded");
+//      expect(await this.isCurrentPage()).to.be.true;
+//      /expect(await this.page.betaBanner).toHaveText( ' Beta ' );
+//
+//      expect(await this.betaBanner.innerText()).to.contains(
+//            fieldErrorText
+//          );
+//    }
+
+async assertLastName(dvlaLastNameWelsh) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    await expect(await this.lastNameWelsh.textContent()).to.contains(dvlaLastNameWelsh );
+  }
   async assertLastName(dvlaLastNameWelsh) {
     await this.page.waitForLoadState("domcontentloaded");
     expect(await this.isCurrentPage()).to.be.true;
     await expect(await this.lastNameWelsh.textContent()).to.contains(dvlaLastNameWelsh );
   }
 
-  async assertGivenName(dvlaGivenNameWelsh) {
-    await this.page.waitForLoadState("domcontentloaded");
-    expect(await this.isCurrentPage()).to.be.true;
-    expect(await this.givenNameWelsh.textContent()).to.contain(dvlaGivenNameWelsh);
-  }
+  async assertBetaBannerText(assertBetaBannerText) {
+      await this.page.waitForLoadState("domcontentloaded");
+      expect(await this.isCurrentPage()).to.be.true;
+      await expect(await this.betaBannerReads.textContent()).to.contains(assertBetaBannerText);
+   }
 
-  async assertFirstName(dvlaFirstNameWelsh) {
-    await this.page.waitForLoadState("domcontentloaded");
-    expect(await this.isCurrentPage()).to.be.true;
-    expect(await this.firstName.textContent()).to.contain(dvlaFirstNameWelsh);
-  }
+   async assertLastName(dvlaLastNameWelsh) {
+     await this.page.waitForLoadState("domcontentloaded");
+     expect(await this.isCurrentPage()).to.be.true;
+     await expect(await this.lastNameWelsh.textContent()).to.contains(dvlaLastNameWelsh );
+   }
+
+ async assertGivenName(dvlaGivenNameWelsh) {
+   await this.page.waitForLoadState("domcontentloaded");
+   expect(await this.isCurrentPage()).to.be.true;
+   expect(await this.givenNameWelsh.textContent()).to.contain(dvlaGivenNameWelsh);
+ }
+
+ async assertFirstName(dvlaFirstNameWelsh) {
+   await this.page.waitForLoadState("domcontentloaded");
+   expect(await this.isCurrentPage()).to.be.true;
+   expect(await this.firstName.textContent()).to.contain(dvlaFirstNameWelsh);
+ }
 
   async assertMiddleName(dvlaMiddleNameWelsh) {
     await this.page.waitForLoadState("domcontentloaded");
@@ -480,4 +604,151 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
       dvlaMiddleNameSentenceWelsh
     );
   }
+
+  async assertDoBFieldTitle(dobFieldTitleWelsh) {
+      await this.page.waitForLoadState("domcontentloaded");
+      expect(await this.isCurrentPage()).to.be.true;
+      expect(await this.dobFieldTitleWelsh.innerText()).to.equal(
+        dobFieldTitleWelsh);
+    }
+
+  async assertDobExample(dobExampleWelsh) {
+      await this.page.waitForLoadState("domcontentloaded");
+      expect(await this.isCurrentPage()).to.be.true;
+      expect(await this.dobExample.innerText()).to.equal(
+        dobExampleWelsh);
+   }
+
+  async assertDayWelsh(dayWelsh) {
+     await this.page.waitForLoadState("domcontentloaded");
+     expect(await this.isCurrentPage()).to.be.true;
+     await expect(await this.dayInWelsh.innerText()).to.equal(
+       dayWelsh);
+  }
+
+  async assertMonthWelsh(monthWelsh) {
+       await this.page.waitForLoadState("domcontentloaded");
+       expect(await this.isCurrentPage()).to.be.true;
+       await expect(await this.monthInWelsh.innerText()).to.equal(
+         monthWelsh);
+  }
+
+   async assertYearWelsh(yearWelsh) {
+         await this.page.waitForLoadState("domcontentloaded");
+         expect(await this.isCurrentPage()).to.be.true;
+         await expect(await this.yearInWelsh.innerText()).to.equal(
+           yearWelsh);
+    }
+
+    async assertIssueDateFieldTitleWelsh(issueFieldTitleWelsh) {
+          await this.page.waitForLoadState("domcontentloaded");
+          expect(await this.isCurrentPage()).to.be.true;
+          expect(await this.issueFieldTitleWelsh.innerText()).to.equal(
+            issueFieldTitleWelsh);
+    }
+
+      async assertIssueDateExample(issueDateExampleWelsh) {
+          await this.page.waitForLoadState("domcontentloaded");
+          expect(await this.isCurrentPage()).to.be.true;
+          expect(await this.issueFieldExample.innerText()).to.equal(
+            issueDateExampleWelsh);
+    }
+
+   async assertValidDateFieldTitleWelsh(validDateFieldTitleWelsh) {
+         await this.page.waitForLoadState("domcontentloaded");
+         expect(await this.isCurrentPage()).to.be.true;
+         expect(await this.validToFieldTitleWelsh.innerText()).to.equal(
+             validDateFieldTitleWelsh);
+   }
+
+  async assertValidDateExample(validDateExampleWelsh) {
+         await this.page.waitForLoadState("domcontentloaded");
+         expect(await this.isCurrentPage()).to.be.true;
+         expect(await this.validToFieldExample.innerText()).to.equal(
+            validDateExampleWelsh);
+  }
+
+  async assertLicenceTitle(validLicenceTitleWelsh) {
+     await this.page.waitForLoadState("domcontentloaded");
+     expect(await this.isCurrentPage()).to.be.true;
+     expect(await this.licenceTitleWelsh.innerText()).to.equal(
+       validLicenceTitleWelsh);
+  }
+
+  async assertLicenceExample(validLicenceExampleWelsh) {
+     await this.page.waitForLoadState("domcontentloaded");
+     expect(await this.isCurrentPage()).to.be.true;
+     expect(await this.licenceExampleWelsh.innerText()).to.equal(
+        validLicenceExampleWelsh);
+  }
+
+  async assertIssueNumberTitle(issueNumberTitleWelsh) {
+     await this.page.waitForLoadState("domcontentloaded");
+     expect(await this.isCurrentPage()).to.be.true;
+     expect(await this.issueNumberTitleWelsh.innerText()).to.equal(
+       issueNumberTitleWelsh);
+    }
+
+  async assertIssueSentenceExample(issueNumberSentenceWelsh) {
+     await this.page.waitForLoadState("domcontentloaded");
+     expect(await this.isCurrentPage()).to.be.true;
+     expect(await this.issueNumberExampleWelsh.innerText()).to.equal(
+       issueNumberSentenceWelsh);
+    }
+
+  async assertPostcodeTitle(postcodeTitleWelsh) {
+       await this.page.waitForLoadState("domcontentloaded");
+       expect(await this.isCurrentPage()).to.be.true;
+       expect(await this.postcodeLabelWelsh.innerText()).to.equal(
+         postcodeTitleWelsh);
+      }
+
+    async assertPostcodeSentence(postcodeSentenceWelsh) {
+       await this.page.waitForLoadState("domcontentloaded");
+       expect(await this.isCurrentPage()).to.be.true;
+       expect(await this.postcodeLabelExampleWelsh.innerText()).to.equal(
+         postcodeSentenceWelsh);
+      }
+
+  async assertIssueDayWelsh(issueDayWelsh) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    expect(await this.issueDayInWelsh.innerText()).to.equal(
+        issueDayWelsh);
+  }
+
+  async assertIssueMonthWelsh(issueMonthWelsh) {
+     await this.page.waitForLoadState("domcontentloaded");
+     expect(await this.isCurrentPage()).to.be.true;
+     expect(await this.issueMonthInWelsh.innerText()).to.equal(
+        issueMonthWelsh);
+  }
+
+  async assertIssueYearWelsh(issueYearWelsh) {
+     await this.page.waitForLoadState("domcontentloaded");
+     expect(await this.isCurrentPage()).to.be.true;
+      expect(await this.issueYearInWelsh.innerText()).to.equal(
+         issueYearWelsh);
+  }
+
+  async assertValidToDayWelsh(validToDayWelsh) {
+      await this.page.waitForLoadState("domcontentloaded");
+      expect(await this.isCurrentPage()).to.be.true;
+      expect(await this.validToDayInWelsh.innerText()).to.equal(
+          validToDayWelsh);
+    }
+
+  async assertValidToMonthWelsh(validToMonthWelsh) {
+     await this.page.waitForLoadState("domcontentloaded");
+     expect(await this.isCurrentPage()).to.be.true;
+     expect(await this.validToMonthInWelsh.innerText()).to.equal(
+        validToMonthWelsh);
+  }
+
+ async assertValidToYearWelsh(validToYearWelsh) {
+   await this.page.waitForLoadState("domcontentloaded");
+   expect(await this.isCurrentPage()).to.be.true;
+   expect(await this.validToYearInWelsh.innerText()).to.equal(
+      validToYearWelsh);
+ }
 };

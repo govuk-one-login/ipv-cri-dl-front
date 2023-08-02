@@ -46,7 +46,7 @@ exports.DVADetailsEntryPage = class PlaywrightDevPage {
       'xpath=//*[@id="consentDVACheckbox"]'
     );
 
-    // DVA Error summary items
+   // DVA Error summary items
 
     this.dvaErrorSummaryBoxLicenceNumber = this.page.locator(
       'xpath=//*[@class="govuk-error-summary error-summary"]//*[@class="govuk-error-summary__body"]//*[@class="govuk-list govuk-error-summary__list"]//*[contains(@href,"#dvaLicenceNumber")]'
@@ -69,19 +69,79 @@ exports.DVADetailsEntryPage = class PlaywrightDevPage {
     this.dvaDrivingLicenceFieldError = this.page.locator(
       'xpath=//*[@id="dvaLicenceNumber-error"]'
     );
+
     this.invalidDobDvaFieldError = this.page.locator(
       'xpath=//*[@id="dvaDateOfBirth-error"]'
     );
+
     this.invalidDvaIssueDateFieldError = this.page.locator(
       'xpath=//*[@id="dateOfIssue-error"]'
     );
+
     this.invalidConsentDVAFieldError = this.page.locator(
-      'xpath=//*[@id="consentDVACheckbox-error"]'
+          'xpath=//*[@id="consentDVACheckbox-error"]'
+        );
+
+   //Welsh - DVA
+    this.headingDVAWelsh = this.page.locator(
+      'xpath=//*[@id="header"]'
+     );
+
+    this.dVADobFieldTitleWelsh = this.page.locator(
+      'xpath=//*[@id="dvaDateOfBirth-fieldset"]/legend'
+    );
+
+    this.dVADobHintWelsh = this.page.locator(
+     'xpath=//*[@id="dvaDateOfBirth-hint"]'
+    );
+
+    this.dayInWelshDVA = this.page.locator(
+     'xpath=//*[@id="dvaDateOfBirth"]/div[1]/div/label'
+    );
+
+    this.monthInWelshDVA = this.page.locator(
+      'xpath=//*[@id="dvaDateOfBirth"]/div[2]/div/label'
+    );
+
+    this.yearInWelshDVA = this.page.locator(
+      'xpath=//*[@id="dvaDateOfBirth"]/div[3]/div/label'
+    );
+
+    this.issueDVAFieldTitleWelsh = this.page.locator(
+      'xpath=//*[@id="dateOfIssue-fieldset"]/legend'
+    );
+
+    this.issueDVAFieldHint = this.page.locator(
+      'xpath=//*[@id="dateOfIssue-hint"]'
+    );
+
+    this.issueDVADayInWelsh = this.page.locator(
+     'xpath=//*[@id="dateOfIssue"]/div[1]/div/label'
+    );
+
+    this.issueDVAMonthInWelsh = this.page.locator(
+      'xpath=//*[@id="dateOfIssue"]/div[2]/div/label'
+    );
+
+    this.issueDVAYearInWelsh = this.page.locator(
+      'xpath=//*[@id="dateOfIssue"]/div[3]/div/label'
+    );
+
+    this.licenceDVATitleWelsh = this.page.locator(
+      'xpath=//*[@id="dvaLicenceNumber-label"]'
+    );
+
+    this.licenceDVAExampleWelsh = this.page.locator(
+      'xpath=//*[@id="dvaLicenceNumber-hint"]'
+    );
+
+    this.headingDVASentenceWelsh = this.page.locator(
+      'xpath=//*[@id="main-content"]/div/div/div'
     );
   }
 
   isCurrentPage() {
-    return this.page.url() === this.url;
+    return this.page.url() === this.url || this.page.url() === this.url + "?lang=cy";
   }
 
   async assertDVAPageTitle(dvaDetailsEntryPageTitle) {
@@ -217,24 +277,130 @@ exports.DVADetailsEntryPage = class PlaywrightDevPage {
   }
 
   async consentDVACheckBoxUnselect() {
-    await this.page.waitForLoadState("domcontentloaded");
-    expect(await this.isCurrentPage()).to.be.true;
-    return await this.consentDVACheckbox.click();
+      await this.page.waitForLoadState("domcontentloaded");
+      expect(await this.isCurrentPage()).to.be.true;
+      return await this.consentDVACheckbox.click();
+    }
+
+    async assertConsentDVAErrorSummary(errorSummaryText) {
+      await this.page.waitForLoadState("domcontentloaded");
+      expect(await this.isCurrentPage()).to.be.true;
+      expect(await this.invalidDVAConsentErrorSummary.innerText()).to.contains(
+        errorSummaryText
+      );
+    }
+
+    async assertConsentDVAErrorOnField(fieldErrorText) {
+      await this.page.waitForLoadState("domcontentloaded");
+      expect(await this.isCurrentPage()).to.be.true;
+      expect(await this.invalidConsentDVAFieldError.innerText()).to.contains(
+        fieldErrorText
+      );
+    }
+
+  // Welsh DVA
+
+  async assertDVAPageTitleWelsh(dvaPageTitle) {
+     await this.page.waitForLoadState("domcontentloaded");
+     expect(await this.isCurrentPage()).to.be.true;
+     expect(await this.page.title()).to.equal(dvaPageTitle);
   }
 
-  async assertConsentDVAErrorSummary(errorSummaryText) {
+  async assertDVAPageHeading(pageHeadingDVA) {
     await this.page.waitForLoadState("domcontentloaded");
     expect(await this.isCurrentPage()).to.be.true;
-    expect(await this.invalidDVAConsentErrorSummary.innerText()).to.contains(
-      errorSummaryText
-    );
+    expect(await this.headingDVAWelsh.innerText()).to.equal(
+       pageHeadingDVA);
   }
 
-  async assertConsentDVAErrorOnField(fieldErrorText) {
+  async assertDVAPageHeadingSentence(pageHeadingDVASentence) {
     await this.page.waitForLoadState("domcontentloaded");
     expect(await this.isCurrentPage()).to.be.true;
-    expect(await this.invalidConsentDVAFieldError.innerText()).to.contains(
-      fieldErrorText
-    );
+    expect(await this.headingDVASentenceWelsh.innerText()).to.equal(
+       pageHeadingDVASentence);
+  }
+
+  async assertDVADoBFieldTitle(dobFieldTitleWelsh) {
+     await this.page.waitForLoadState("domcontentloaded");
+     expect(await this.isCurrentPage()).to.be.true;
+     expect(await this.dVADobFieldTitleWelsh.innerText()).to.equal(
+       dobFieldTitleWelsh);
+  }
+
+  async assertDVADobExample(dobExampleWelsh) {
+     await this.page.waitForLoadState("domcontentloaded");
+     expect(await this.isCurrentPage()).to.be.true;
+     expect(await this.dVADobHintWelsh.innerText()).to.equal(
+        dobExampleWelsh);
+  }
+
+  async assertDVADayWelsh(dayWelsh) {
+     await this.page.waitForLoadState("domcontentloaded");
+     expect(await this.isCurrentPage()).to.be.true;
+     await expect(await this.dayInWelshDVA.innerText()).to.equal(
+       dayWelsh);
+  }
+
+  async assertDVAMonthWelsh(monthWelsh) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    await expect(await this.monthInWelshDVA.innerText()).to.equal(
+       monthWelsh);
+  }
+
+  async assertDVAYearWelsh(yearWelsh) {
+     await this.page.waitForLoadState("domcontentloaded");
+     expect(await this.isCurrentPage()).to.be.true;
+     await expect(await this.yearInWelshDVA.innerText()).to.equal(
+         yearWelsh);
+  }
+
+  async assertDVAIssueDateFieldTitleWelsh(issueFieldTitleWelsh) {
+     await this.page.waitForLoadState("domcontentloaded");
+     expect(await this.isCurrentPage()).to.be.true;
+     expect(await this.issueDVAFieldTitleWelsh.innerText()).to.equal(
+        issueFieldTitleWelsh);
+  }
+
+  async assertDVAIssueDateExample(issueDateExampleWelsh) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    expect(await this.issueDVAFieldHint.innerText()).to.equal(
+       issueDateExampleWelsh);
+  }
+
+  async assertDVAIssueDayWelsh(issueDayWelsh) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    expect(await this.issueDVADayInWelsh.innerText()).to.equal(
+       issueDayWelsh);
+  }
+
+  async assertDVAIssueMonthWelsh(issueMonthWelsh) {
+     await this.page.waitForLoadState("domcontentloaded");
+     expect(await this.isCurrentPage()).to.be.true;
+     expect(await this.issueDVAMonthInWelsh.innerText()).to.equal(
+      issueMonthWelsh);
+  }
+
+  async assertDVAIssueYearWelsh(issueYearWelsh) {
+     await this.page.waitForLoadState("domcontentloaded");
+     expect(await this.isCurrentPage()).to.be.true;
+     expect(await this.issueDVAYearInWelsh.innerText()).to.equal(
+        issueYearWelsh);
+  }
+
+  async assertDVALicenceTitle(validLicenceTitleWelsh) {
+     await this.page.waitForLoadState("domcontentloaded");
+     expect(await this.isCurrentPage()).to.be.true;
+     expect(await this.licenceDVATitleWelsh.innerText()).to.equal(
+       validLicenceTitleWelsh);
+  }
+
+  async assertDVALicenceExample(validLicenceExampleWelsh) {
+     await this.page.waitForLoadState("domcontentloaded");
+     expect(await this.isCurrentPage()).to.be.true;
+     expect(await this.licenceDVAExampleWelsh.innerText()).to.equal(
+          validLicenceExampleWelsh);
   }
 };
