@@ -122,13 +122,17 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
       'xpath=//*[@id="expiryDate-error"]'
     );
 
+    this.invalidConsentErrorFieldError = this.page.locator(
+       'xpath=//*[@id="consentCheckbox-error"]'
+    );
+
     this.Continue = this.page.locator('xpath=//*[@id="continue"]');
 
     // Welsh Translation
 
    this.betaBannerReads = this.page.locator(
      'xpath=/html/body/div[2]/div/p/span'
-      );
+    );
 
     this.betaBanner = this.page.locator('xpath=/html/body/div[2]/div/p/strong');
 
@@ -183,7 +187,7 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
    this.issueMonthInWelsh = this.page.locator(
      'xpath=//*[@id="issueDate"]/div[2]/div/label'
    );
-this.issueYearInWelsh = this.page.locator(
+   this.issueYearInWelsh = this.page.locator(
      'xpath=//*[@id="issueDate"]/div[3]/div/label'
    );
 
@@ -230,13 +234,7 @@ this.issueYearInWelsh = this.page.locator(
    this.postcodeLabelExampleWelsh = this.page.locator(
       'xpath=//*[@id="postcode-hint"]'
    );
-
-
-    this.invalidConsentErrorFieldError = this.page.locator(
-              'xpath=//*[@id="consentCheckbox-error"]'
-            );
-
-  }
+ }
 
   isCurrentPage() {
     return this.page.url() === this.url || this.page.url() === this.url + "?lang=cy";
@@ -513,23 +511,23 @@ this.issueYearInWelsh = this.page.locator(
       await this.page.waitForLoadState("domcontentloaded");
       expect(await this.isCurrentPage()).to.be.true;
       return await this.consentDVLACheckbox.click();
-    }
+  }
 
-    async assertConsentErrorSummary(errorSummaryText) {
-      await this.page.waitForLoadState("domcontentloaded");
-      expect(await this.isCurrentPage()).to.be.true;
-      expect(await this.invalidConsentErrorSummary.innerText()).to.contains(
+  async assertConsentErrorSummary(errorSummaryText) {
+     await this.page.waitForLoadState("domcontentloaded");
+     expect(await this.isCurrentPage()).to.be.true;
+     expect(await this.invalidConsentErrorSummary.innerText()).to.contains(
         errorSummaryText
       );
-    }
+  }
 
-    async assertConsentErrorOnField(fieldErrorText) {
-      await this.page.waitForLoadState("domcontentloaded");
-      expect(await this.isCurrentPage()).to.be.true;
-      expect(await this.invalidConsentErrorFieldError.innerText()).to.contains(
+  async assertConsentErrorOnField(fieldErrorText) {
+     await this.page.waitForLoadState("domcontentloaded");
+     expect(await this.isCurrentPage()).to.be.true;
+     expect(await this.invalidConsentErrorFieldError.innerText()).to.contains(
         fieldErrorText
       );
-    }
+  }
 
   // Welsh Language
  async assertBetaBanner(betaBannerLabel) {
@@ -538,38 +536,17 @@ this.issueYearInWelsh = this.page.locator(
     await expect(await this.betaBanner.textContent()).to.contains(betaBannerLabel);
   }
 
-//  async assertBetaBanner() {
-//      await this.page.waitForLoadState("domcontentloaded");
-//      expect(await this.isCurrentPage()).to.be.true;
-//      /expect(await this.page.betaBanner).toHaveText( ' Beta ' );
-//
-//      expect(await this.betaBanner.innerText()).to.contains(
-//            fieldErrorText
-//          );
-//    }
+ async assertBetaBannerText(assertBetaBannerText) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    await expect(await this.betaBannerReads.textContent()).to.contains(assertBetaBannerText);
+ }
 
-async assertLastName(dvlaLastNameWelsh) {
+ async assertLastName(dvlaLastNameWelsh) {
     await this.page.waitForLoadState("domcontentloaded");
     expect(await this.isCurrentPage()).to.be.true;
     await expect(await this.lastNameWelsh.textContent()).to.contains(dvlaLastNameWelsh );
   }
-  async assertLastName(dvlaLastNameWelsh) {
-    await this.page.waitForLoadState("domcontentloaded");
-    expect(await this.isCurrentPage()).to.be.true;
-    await expect(await this.lastNameWelsh.textContent()).to.contains(dvlaLastNameWelsh );
-  }
-
-  async assertBetaBannerText(assertBetaBannerText) {
-      await this.page.waitForLoadState("domcontentloaded");
-      expect(await this.isCurrentPage()).to.be.true;
-      await expect(await this.betaBannerReads.textContent()).to.contains(assertBetaBannerText);
-   }
-
-   async assertLastName(dvlaLastNameWelsh) {
-     await this.page.waitForLoadState("domcontentloaded");
-     expect(await this.isCurrentPage()).to.be.true;
-     await expect(await this.lastNameWelsh.textContent()).to.contains(dvlaLastNameWelsh );
-   }
 
  async assertGivenName(dvlaGivenNameWelsh) {
    await this.page.waitForLoadState("domcontentloaded");
@@ -727,7 +704,7 @@ async assertLastName(dvlaLastNameWelsh) {
   async assertIssueYearWelsh(issueYearWelsh) {
      await this.page.waitForLoadState("domcontentloaded");
      expect(await this.isCurrentPage()).to.be.true;
-      expect(await this.issueYearInWelsh.innerText()).to.equal(
+     expect(await this.issueYearInWelsh.innerText()).to.equal(
          issueYearWelsh);
   }
 

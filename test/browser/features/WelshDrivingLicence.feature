@@ -81,7 +81,7 @@ Feature: DVLA Driving licence CRI Error Validations
     And I can see the licence number error in the field as Rhowch y rhif yn union fel mae’n ymddangos ar eich trwydded yrru
     Then I see the date of birth error summary as Gwiriwch eich bod wedi rhoi eich dyddiad geni yn gywir
     And  I see the date of birth error in the field as Gwiriwch eich bod wedi rhoi eich dyddiad geni yn gywir
-  # And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – Profi pwy ydych chi – GOV.UK
+    And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – Profi pwy ydych chi – GOV.UK
     Examples:
       |DrivingLicenceSubject          |InvalidDayOfBirth|InvalidMonthOfBirth|InvalidYearOfBirth|
       |DrivingLicenceSubjectHappyPeter|         12      |     08            |       1985       |
@@ -94,7 +94,7 @@ Feature: DVLA Driving licence CRI Error Validations
     When User clicks on continue
     Then I see the Lastname error in the error summary as Rhowch eich enw olaf fel y mae'n ymddangos ar eich trwydded yrru
     And I see the Lastname error in the error field as Rhowch eich enw olaf fel y mae'n ymddangos ar eich trwydded yrru
-    #And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – Profi pwy ydych chi – GOV.UK
+    And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – Profi pwy ydych chi – GOV.UK
     Examples:
       |DrivingLicenceSubject          |InvalidLastName |
       |DrivingLicenceSubjectHappyPeter|KYLE123         |
@@ -109,7 +109,7 @@ Feature: DVLA Driving licence CRI Error Validations
     When User clicks on continue
     Then I see the Firstname error summary as Rhowch eich enw cyntaf fel y mae'n ymddangos ar eich trwydded yrru
     And I see the Firstname error in the error field as Rhowch eich enw cyntaf fel y mae'n ymddangos ar eich trwydded yrru
-    #And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – Profi pwy ydych chi – GOV.UK
+    And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – Profi pwy ydych chi – GOV.UK
     Examples:
       |DrivingLicenceSubject          |InvalidFirstName|
       |DrivingLicenceSubjectHappyPeter|SELINA987       |
@@ -124,7 +124,7 @@ Feature: DVLA Driving licence CRI Error Validations
     When User clicks on continue
     Then I see the middlenames error summary as Rhowch unrhyw enwau canol fel y maent yn ymddangos ar eich trwydded yrru
     And I see the middlenames error in the error field as Rhowch unrhyw enwau canol fel y maent yn ymddangos ar eich trwydded yrru
-    #And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – Profi pwy ydych chi – GOV.UK
+    And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – Profi pwy ydych chi – GOV.UK
     Examples:
       |DrivingLicenceSubject          |InvalidMiddleNames|
       |DrivingLicenceSubjectHappyPeter|SELINA987         |
@@ -140,7 +140,7 @@ Feature: DVLA Driving licence CRI Error Validations
     When User clicks on continue
     Then I see the date of birth error summary as Rhowch eich dyddiad geni fel y mae'n ymddangos ar eich trwydded yrru
     And I see the date of birth error in the field as Rhowch eich dyddiad geni fel y mae'n ymddangos ar eich trwydded yrru
-    #And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – Profi pwy ydych chi – GOV.UK
+    And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – Profi pwy ydych chi – GOV.UK
     Examples:
       |DrivingLicenceSubject          |InvalidDayOfBirth|InvalidMonthOfBirth|InvalidYearOfBirth|
       |DrivingLicenceSubjectHappyPeter|         @       |     *&            |       19 7     |
@@ -157,7 +157,7 @@ Feature: DVLA Driving licence CRI Error Validations
     When User clicks on continue
     Then I see the date of birth error summary as Rhaid i'ch dyddiad geni fod yn y gorffennol
     And I see the date of birth error in the field as Rhaid i'ch dyddiad geni fod yn y gorffennol
-    #And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – Profi pwy ydych chi – GOV.UK
+    And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – Profi pwy ydych chi – GOV.UK
     Examples:
       |DrivingLicenceSubject          |InvalidDayOfBirth|InvalidMonthOfBirth|InvalidYearOfBirth|
       |DrivingLicenceSubjectHappyPeter|         10      |     10            |         2042     |
@@ -172,7 +172,7 @@ Feature: DVLA Driving licence CRI Error Validations
     When User clicks on continue
     Then I see issue date error in summary as Rhowch y dyddiad fel y mae'n ymddangos ar eich trwydded yrru
     And I see invalid issue date field error as Rhowch y dyddiad fel y mae'n ymddangos ar eich trwydded yrru
-    #And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – Profi pwy ydych chi – GOV.UK
+    And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – Profi pwy ydych chi – GOV.UK
 
     Examples:
       |DrivingLicenceSubject          |InvalidDayOfIssue|InvalidMonthOfIssue|InvalidYearOfIssue|
@@ -189,7 +189,7 @@ Feature: DVLA Driving licence CRI Error Validations
     When User clicks on continue
     Then I see issue date error in summary as Rhaid i ddyddiad cyhoeddi fod yn y gorffennol
     And I see invalid issue date field error as Rhaid i ddyddiad cyhoeddi fod yn y gorffennol
-   #And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – Profi pwy ydych chi – GOV.UK
+    And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – Profi pwy ydych chi – GOV.UK
     Examples:
       |DrivingLicenceSubject          |InvalidDayOfIssue|InvalidMonthOfIssue|InvalidYearOfIssue|
       |DrivingLicenceSubjectHappyPeter|         01      |     10            |         2043     |
@@ -204,7 +204,7 @@ Feature: DVLA Driving licence CRI Error Validations
     When User clicks on continue
     Then I can see the valid to date error in the error summary as Rhowch y dyddiad fel y mae'n ymddangos ar eich trwydded yrru
     And I can see the Valid to date field error as Rhowch y dyddiad fel y mae'n ymddangos ar eich trwydded yrru
-  # And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – Profi pwy ydych chi – GOV.UK
+    And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – Profi pwy ydych chi – GOV.UK
     Examples:
       |DrivingLicenceSubject          |InvalidValidToDay|InvalidValidToMonth|InvalidValidToYear|
       |DrivingLicenceSubjectHappyPeter|         AA      |     BC            |         AABD     |
@@ -220,7 +220,7 @@ Feature: DVLA Driving licence CRI Error Validations
     When User clicks on continue
     Then I can see the valid to date error in the error summary as Ni allwch ddefnyddio trwydded yrru sydd wedi dod i ben
     And I can see the Valid to date field error as Ni allwch ddefnyddio trwydded yrru sydd wedi dod i ben
-   #And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – Profi pwy ydych chi – GOV.UK
+    And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – Profi pwy ydych chi – GOV.UK
     Examples:
       |DrivingLicenceSubject          |InvalidValidToDay|InvalidValidToMonth|InvalidValidToYear|
       |DrivingLicenceSubjectHappyPeter|         10      |     01            |         2010     |
@@ -233,7 +233,7 @@ Feature: DVLA Driving licence CRI Error Validations
     When User clicks on continue
     Then I see the licence number error in the summary as Dylai rhif eich trwydded fod yn 16 nod o hyd
     And I can see the licence number error in the field as Dylai rhif eich trwydded fod yn 16 nod o hyd
-  # And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – Profi pwy ydych chi – GOV.UK
+    And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – Profi pwy ydych chi – GOV.UK
     Examples:
       |DrivingLicenceSubject          |InvalidLicenceNumber|
       |DrivingLicenceSubjectHappyPeter|PARKE610112PBF      |
@@ -245,7 +245,7 @@ Feature: DVLA Driving licence CRI Error Validations
     When User clicks on continue
     Then I see the licence number error in the summary as Ni ddylai rhif eich trwydded gynnwys unrhyw symbolau neu ofodau
     And I can see the licence number error in the field as Ni ddylai rhif eich trwydded gynnwys unrhyw symbolau neu ofodau
-  # And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – Profi pwy ydych chi – GOV.UK
+    And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – Profi pwy ydych chi – GOV.UK
     Examples:
       |DrivingLicenceSubject          |InvalidLicenceNumber|
       |DrivingLicenceSubjectHappyPeter|12345678901112@@    |
@@ -258,7 +258,7 @@ Feature: DVLA Driving licence CRI Error Validations
     When User clicks on continue
     Then I see the licence number error in the summary as Rhowch y rhif yn union fel mae’n ymddangos ar eich trwydded yrru
     And I can see the licence number error in the field as Rhowch y rhif yn union fel mae’n ymddangos ar eich trwydded yrru
-   # And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – Profi pwy ydych chi – GOV.UK
+    And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – Profi pwy ydych chi – GOV.UK
     Examples:
       |DrivingLicenceSubject          |InvalidLicenceNumber|
       |DrivingLicenceSubjectHappyPeter|1234567890111213    |
@@ -272,7 +272,7 @@ Feature: DVLA Driving licence CRI Error Validations
     When User clicks on continue
     Then I see the issue number error in summary as Dylai eich rhif cyhoeddi fod yn 2 rif o hyd
     And I see the issue number error in field as Dylai eich rhif cyhoeddi fod yn 2 rif o hyd
-   # And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – Profi pwy ydych chi – GOV.UK
+    And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – Profi pwy ydych chi – GOV.UK
     Examples:
       |DrivingLicenceSubject          |InvalidIssueNumber|
       |DrivingLicenceSubjectHappyPeter|1                 |
@@ -284,7 +284,7 @@ Feature: DVLA Driving licence CRI Error Validations
     When User clicks on continue
     Then I see the issue number error in summary as Ni ddylai eich rhif cyhoeddi gynnwys unrhyw symbolau neu ofodau
     And I see the issue number error in field as Ni ddylai eich rhif cyhoeddi gynnwys unrhyw symbolau neu ofodau
-  # And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – Profi pwy ydych chi – GOV.UK
+    And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – Profi pwy ydych chi – GOV.UK
     Examples:
       |DrivingLicenceSubject          |InvalidIssueNumber|
       |DrivingLicenceSubjectHappyPeter|A@                |
@@ -297,7 +297,7 @@ Feature: DVLA Driving licence CRI Error Validations
     When User clicks on continue
     Then I see the issue number error in summary as Rhowch y rhif cyhoeddi fel y mae'n ymddangos ar eich trwydded yrru
     And I see the issue number error in field as Rhowch y rhif cyhoeddi fel y mae'n ymddangos ar eich trwydded yrru
-  # And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – Profi pwy ydych chi – GOV.UK
+    And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – Profi pwy ydych chi – GOV.UK
     Examples:
       |DrivingLicenceSubject          |InvalidIssueNumber|
 #     |DrivingLicenceSubjectHappyPeter|A1                |bug raised -LIME-751
@@ -311,7 +311,7 @@ Feature: DVLA Driving licence CRI Error Validations
     When User clicks on continue
     Then I see the postcode error in summary as Dylai eich rhowch eich cod post fod rhwng 5 a 7 nod
     And I see the postcode error in field as Dylai eich rhowch eich cod post fod rhwng 5 a 7 nod
-   # And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – Profi pwy ydych chi – GOV.UK
+    And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – Profi pwy ydych chi – GOV.UK
     Examples:
       |DrivingLicenceSubject          |InvalidPostcode   |
       |DrivingLicenceSubjectHappyPeter|E20A              |
@@ -323,7 +323,7 @@ Feature: DVLA Driving licence CRI Error Validations
     When User clicks on continue
     Then I see the postcode error in summary as Rhowch eich cod post
     And I see the postcode error in field as Rhowch eich cod post
-   # And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – Profi pwy ydych chi – GOV.UK
+    And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – Profi pwy ydych chi – GOV.UK
     Examples:
       |DrivingLicenceSubject          |InvalidPostcode   |
       |DrivingLicenceSubjectHappyPeter|                  |
@@ -335,7 +335,7 @@ Feature: DVLA Driving licence CRI Error Validations
     When User clicks on continue
     Then I see the postcode error in summary as Rhowch god post yn y DU
     And I see the postcode error in field as Rhowch god post yn y DU
-   # And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – Profi pwy ydych chi – GOV.UK
+    And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – Profi pwy ydych chi – GOV.UK
     Examples:
       |DrivingLicenceSubject          |InvalidPostcode   |
       |DrivingLicenceSubjectHappyPeter|CA 95128          |
@@ -348,7 +348,7 @@ Feature: DVLA Driving licence CRI Error Validations
     When User clicks on continue
     Then I see the postcode error in summary as Dylai eich rhowch eich cod post ond cynnwys rhifau a llythrennau yn unig
     And I see the postcode error in field as Dylai eich rhowch eich cod post ond cynnwys rhifau a llythrennau yn unig
-   # And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – Profi pwy ydych chi – GOV.UK
+    And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – Profi pwy ydych chi – GOV.UK
     Examples:
       |DrivingLicenceSubject          |InvalidPostcode   |
       |DrivingLicenceSubjectHappyPeter|NW* ^%G           |
@@ -361,7 +361,7 @@ Feature: DVLA Driving licence CRI Error Validations
     When User clicks on continue
     Then I see the postcode error in summary as Dylai eich rhowch eich cod post ond cynnwys rhifau a llythrennau
     And I see the postcode error in field as Dylai eich rhowch eich cod post ond cynnwys rhifau a llythrennau
-  # And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – Profi pwy ydych chi – GOV.UK
+    And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – Profi pwy ydych chi – GOV.UK
     Examples:
       |DrivingLicenceSubject          |InvalidPostcode   |
       #|DrivingLicenceSubjectHappyPeter|123 456           | Bug raised -LIME-750
