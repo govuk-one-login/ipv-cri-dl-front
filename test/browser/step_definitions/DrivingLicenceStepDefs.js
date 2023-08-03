@@ -133,7 +133,9 @@ Then(
   { timeout: 2 * 5000 },
   async function (daysToSubtract) {
     const drivingLicencePage = new DrivingLicencePage(this.page);
-    await drivingLicencePage.userReEntersDayOfIssueAsCurrentDateMinus(daysToSubtract);
+    await drivingLicencePage.userReEntersDayOfIssueAsCurrentDateMinus(
+      daysToSubtract
+    );
   }
 );
 
@@ -169,7 +171,9 @@ Then(
   { timeout: 2 * 5000 },
   async function (yearsToSubtract) {
     const drivingLicencePage = new DrivingLicencePage(this.page);
-    await drivingLicencePage.userReEntersYearOfIssueAsCurrentDateMinus(yearsToSubtract);
+    await drivingLicencePage.userReEntersYearOfIssueAsCurrentDateMinus(
+      yearsToSubtract
+    );
   }
 );
 

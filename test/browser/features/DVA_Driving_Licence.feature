@@ -247,7 +247,7 @@ Feature: DVA Driving licence CRI Error Validations
       |DVADrivingLicenceSubject       |InvalidValidToDay|InvalidValidToMonth|InvalidValidToYear|
       |DrivingLicenceSubjectHappyBilly|         10      |     01            |         2010     |
 
-  @mock-api:dva-ConsentError @validation-regression @build @staging1
+  @mock-api:dva-ConsentError @validation-regression @build @staging
   Scenario Outline:  DVA Driving Licence error validation when DVA consent checkbox is unselected
     Given User enters DVA data as a <DVADrivingLicenceSubject>
     And DVA consent checkbox is unselected

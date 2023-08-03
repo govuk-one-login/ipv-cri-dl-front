@@ -76,7 +76,7 @@ module.exports = {
       {
         type: "beforeNow",
         fn: fields.beforeNow,
-        arguments: [10, "years"]
+        arguments: [10, "years"],
       },
     ],
     dependent: { field: "issuerDependent", value: "DVLA" },
@@ -88,13 +88,13 @@ module.exports = {
       "required",
       "date",
       {
-      type: "before",
-      arguments: [],
+        type: "before",
+        arguments: [],
       },
       {
         type: "beforeNow",
         fn: fields.beforeNow,
-        arguments: [10, "years"]
+        arguments: [10, "years"],
       },
     ],
     dependent: { field: "issuerDependent", value: "DVA" },

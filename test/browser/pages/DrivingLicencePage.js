@@ -1,5 +1,5 @@
 const { expect: expect } = require("chai");
-const moment = require('moment');
+const moment = require("moment");
 const TestDataCreator = require("../util/TestDataCreator");
 
 exports.DrivingLicencePage = class PlaywrightDevPage {
@@ -230,7 +230,9 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
   }
 
   async userReEntersDayOfIssueAsCurrentDateMinus(days) {
-    await this.licenceIssueDay.fill(moment().subtract(days, "days").format("DD"));
+    await this.licenceIssueDay.fill(
+      moment().subtract(days, "days").format("DD")
+    );
   }
 
   async userReEntersDayOfIssueAsCurrentDatePlus(days) {
@@ -242,7 +244,9 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
   }
 
   async userReEntersMonthOfIssueAsCurrentDateMinus(months) {
-    await this.licenceIssueMonth.fill(moment().subtract(months, "months").format("MM"));
+    await this.licenceIssueMonth.fill(
+      moment().subtract(months, "months").format("MM")
+    );
   }
 
   async userReEntersYearOfIssue(InvalidYearOfIssue) {
@@ -250,14 +254,15 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
   }
 
   async userReEntersYearOfIssueAsCurrentDateMinus(years) {
-    await this.licenceIssueYear.fill(moment().subtract(years, "years").format("YYYY"));
+    await this.licenceIssueYear.fill(
+      moment().subtract(years, "years").format("YYYY")
+    );
   }
 
   async userReEntersIssueDateAsCurrentDate() {
     await this.licenceIssueYear.fill(moment().format("YYYY"));
     await this.licenceIssueMonth.fill(moment().format("MM"));
     await this.licenceIssueDay.fill(moment().format("DD"));
-
   }
 
   async userReEntersValidToDay(InvalidValidToDay) {
