@@ -1,4 +1,5 @@
 const fields = require("./fieldsHelper");
+const moment = require('moment');
 
 describe("custom validation fields test", () => {
   it("should be false when first and middle name combined greater than 30 characters", () => {
@@ -102,7 +103,7 @@ describe("custom validation fields test", () => {
   });
 
   it("should be false when licence issued greater than 10 years ago", () => {
-    const issueDate = "2013-08-01";
+    const issueDate = moment().subtract(10, "years").subtract(1, "days").format("YYYY-MM-DD");
     const validator = fields.beforeNow.bind({
       values: {
         issueDate: issueDate,
@@ -115,7 +116,20 @@ describe("custom validation fields test", () => {
   });
 
     it("should be true when licence issued less than 10 years ago", () => {
-      const issueDate = "2013-08-04";
+      const issueDate = moment().subtract(10, "years").add(1, "days").format("YYYY-MM-DD");
+      const validator = fields.beforeNow.bind({
+        values: {
+          issueDate: issueDate,
+        },
+      });
+
+      expect(
+        validator(issueDate, 10, "years")
+      ).to.be.true;
+    });
+
+    it("should be true when licence issued is issued exactly 10 years ago", () => {
+      const issueDate = moment().subtract(10, "years").format("YYYY-MM-DD");
       const validator = fields.beforeNow.bind({
         values: {
           issueDate: issueDate,

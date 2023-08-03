@@ -71,7 +71,8 @@ module.exports = {
         let dateFormat = 'YYYY-MM-DD';
         let test = moment(_value, dateFormat);
         let comparator;
-        comparator = moment().subtract(timePeriod, timeUnit);
+        // One additional day subtracted so that the check is inclusive of the current date minus X time
+        comparator = moment().subtract(timePeriod, timeUnit).subtract(1, "days");
 
         return _value === '' || validators.date(_value) && test.isAfter(comparator);
     }

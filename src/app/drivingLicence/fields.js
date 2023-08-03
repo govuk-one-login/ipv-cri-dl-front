@@ -70,6 +70,10 @@ module.exports = {
       "required",
       "date",
       {
+        type: "before",
+        arguments: [],
+      },
+      {
         type: "beforeNow",
         fn: fields.beforeNow,
         arguments: [10, "years"]
@@ -83,6 +87,10 @@ module.exports = {
     validate: [
       "required",
       "date",
+      {
+      type: "before",
+      arguments: [],
+      },
       {
         type: "beforeNow",
         fn: fields.beforeNow,

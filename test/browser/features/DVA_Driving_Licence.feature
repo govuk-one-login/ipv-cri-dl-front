@@ -247,13 +247,13 @@ Feature: DVA Driving licence CRI Error Validations
       |DVADrivingLicenceSubject       |InvalidValidToDay|InvalidValidToMonth|InvalidValidToYear|
       |DrivingLicenceSubjectHappyBilly|         10      |     01            |         2010     |
 
-  @mock-api:dva-ConsentError @validation-regression @build @staging
+  @mock-api:dva-ConsentError @validation-regression @build @staging1
   Scenario Outline:  DVA Driving Licence error validation when DVA consent checkbox is unselected
     Given User enters DVA data as a <DVADrivingLicenceSubject>
     And DVA consent checkbox is unselected
     When User clicks on continue
     Then I can see the DVA consent error summary as You must give your consent to continue
-    And I can see the DVA consent error on the checkbox as Error: You must give your consent to continue
+    And I can see the DVA consent error on the checkbox as You must give your consent to continue
     And I check the page Title Error: Enter your details exactly as they appear on your UK driving licence – Prove your identity – GOV.UK
     Examples:
       |DVADrivingLicenceSubject             |
