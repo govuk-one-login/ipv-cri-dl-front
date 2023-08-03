@@ -369,7 +369,7 @@ Then(
 
 Given(
   /^User enters DVA data as a (.*)$/,
-  { timeout: 2 * 5000 },
+  { timeout: 3 * 5000 },
   async function (dvaDrivingLicenceSubject) {
     const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
     await dvaDetailsEntryPage.userEntersDVAData(

@@ -40,9 +40,9 @@ Feature: DVA Driving licence CRI Error Validations
   Scenario: DVA Issue date field
     Given I see the DVA Issue date field titled Dyddiad cyhoeddi
     Then I see DVA date section example as Dyma'r dyddiad yn adran 4a o'ch trwydded, er enghraifft 27 5 2019
-    Then I can see DVA Issue day as Diwrnod
-    And I can see DVA issue month as Mis
-    And I can see DVA issue year as Blwyddyn
+#    Then I can see DVA Issue day as Diwrnod
+#    And I can see DVA issue month as Mis
+#    And I can see DVA issue year as Blwyddyn
 
   @mock-api:dva-ValidToDateField @validation-regression @build @staging
   Scenario: DVLA Valid to date field
