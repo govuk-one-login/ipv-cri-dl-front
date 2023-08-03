@@ -1,4 +1,5 @@
 const { validators } = require("hmpo-form-wizard/lib/validation");
+const moment = require("moment");
 
 module.exports = {
   firstNameMiddleNameLengthValidator(
@@ -61,5 +62,16 @@ module.exports = {
     // const fifthCheck = initialsShort.toUpperCase() === licence.slice(11, 13);
 
     return secondCheck && thirdCheck && fourthCheck;
+  },
+  beforeNow(_value, timePeriod, timeUnit) {
+    let dateFormat = "YYYY-MM-DD";
+    let test = moment(_value, dateFormat);
+    let comparator;
+    // One additional day subtracted so that the check is inclusive of the current date minus X time
+    comparator = moment().subtract(timePeriod, timeUnit).subtract(1, "days");
+
+    return (
+      _value === "" || (validators.date(_value) && test.isAfter(comparator))
+    );
   },
 };

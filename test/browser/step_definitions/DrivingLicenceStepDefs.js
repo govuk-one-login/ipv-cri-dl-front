@@ -111,11 +111,40 @@ Then(
 );
 
 Then(
+  /^User enters date of issue as current date$/,
+  { timeout: 2 * 5000 },
+  async function () {
+    const drivingLicencePage = new DrivingLicencePage(this.page);
+    await drivingLicencePage.userReEntersIssueDateAsCurrentDate();
+  }
+);
+
+Then(
   /^User re-enters day of issue as (.*)$/,
   { timeout: 2 * 5000 },
   async function (InvalidDayOfIssue) {
     const drivingLicencePage = new DrivingLicencePage(this.page);
     await drivingLicencePage.userReEntersDayOfIssue(InvalidDayOfIssue);
+  }
+);
+
+Then(
+  /^User enters day of issue as current day minus (.*)$/,
+  { timeout: 2 * 5000 },
+  async function (daysToSubtract) {
+    const drivingLicencePage = new DrivingLicencePage(this.page);
+    await drivingLicencePage.userReEntersDayOfIssueAsCurrentDateMinus(
+      daysToSubtract
+    );
+  }
+);
+
+Then(
+  /^User enters day of issue as current day plus (.*)$/,
+  { timeout: 2 * 5000 },
+  async function (daysToAdd) {
+    const drivingLicencePage = new DrivingLicencePage(this.page);
+    await drivingLicencePage.userReEntersDayOfIssueAsCurrentDatePlus(daysToAdd);
   }
 );
 
@@ -134,6 +163,17 @@ Then(
   async function (InvalidYearOfBirth) {
     const drivingLicencePage = new DrivingLicencePage(this.page);
     await drivingLicencePage.userReEntersYearOfIssue(InvalidYearOfBirth);
+  }
+);
+
+Then(
+  /^User enters year of issue as current year minus (.*)$/,
+  { timeout: 2 * 5000 },
+  async function (yearsToSubtract) {
+    const drivingLicencePage = new DrivingLicencePage(this.page);
+    await drivingLicencePage.userReEntersYearOfIssueAsCurrentDateMinus(
+      yearsToSubtract
+    );
   }
 );
 

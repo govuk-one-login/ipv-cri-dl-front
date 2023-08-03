@@ -259,6 +259,34 @@ Feature: DVLA Driving licence CRI Error Validations
       |DrivingLicenceSubjectHappyPeter|                 |                   |                  |
 
   @mock-api:dl-success @validation-regression @build @staging
+  Scenario: DVLA Driving Licence Issue date that is greater than 10 years old date error validation
+    Given User enters DVLA data as a DrivingLicenceSubjectHappyPeter
+    Then User enters date of issue as current date
+    And User enters year of issue as current year minus 10
+    And User enters day of issue as current day minus 1
+    When User clicks on continue
+    Then I see issue date error in summary as Enter the date as it appears on your driving licence
+    And I see invalid issue date field error as Enter the date as it appears on your driving licence
+    And I check the page Title Error: Enter your details exactly as they appear on your UK driving licence – Prove your identity – GOV.UK
+
+  @mock-api:dl-success @validation-regression @build @staging
+  Scenario: DVLA Driving Licence Issue date that is exactly 10 years old date error validation
+    Given User enters DVLA data as a DrivingLicenceSubjectHappyPeter
+    Then User enters date of issue as current date
+    And User enters year of issue as current year minus 10
+    When User clicks on continue
+    Then Proper error message is displayed as We could not find your details
+
+  @mock-api:dl-success @validation-regression @build @staging
+  Scenario: DVLA Driving Licence Issue date that is 1 day under 10 years old date error validation
+    Given User enters DVLA data as a DrivingLicenceSubjectHappyPeter
+    Then User enters date of issue as current date
+    And User enters year of issue as current year minus 10
+    And User enters day of issue as current day plus 1
+    When User clicks on continue
+    Then Proper error message is displayed as We could not find your details
+
+  @mock-api:dl-success @validation-regression @build @staging
   Scenario Outline: DVLA Driving Licence Issue date in the future error validation
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters day of issue as <InvalidDayOfIssue>
@@ -308,7 +336,7 @@ Feature: DVLA Driving licence CRI Error Validations
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And DVLA consent checkbox is unselected
     When User clicks on continue
-    And I can see the DVLA consent error on the checkbox as Error: You must give your consent to continue
+    And I can see the DVLA consent error on the checkbox as You must give your consent to continue
     Then I can see the DVLA consent error summary as You must give your consent to continue
     And I check the page Title Error: Enter your details exactly as they appear on your UK driving licence – Prove your identity – GOV.UK
     Examples:
