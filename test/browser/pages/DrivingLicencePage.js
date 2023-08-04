@@ -277,6 +277,18 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
     await this.licenceValidToYear.fill(InvalidValidToYear);
   }
 
+  async userReEntersValidToDateAsCurrentDate() {
+    await this.licenceValidToYear.fill(moment().format("YYYY"));
+    await this.licenceValidToMonth.fill(moment().format("MM"));
+    await this.licenceValidToDay.fill(moment().format("DD"));
+  }
+
+  async userReEntersDayOfValidAsCurrentDateMinus(days) {
+      await this.licenceValidToDay.fill(
+        moment().subtract(days, "days").format("DD")
+      );
+  }
+
   // Summary box errors and field errors
 
   async assertInvalidLastNameInErrorSummary(errorSummaryText) {
@@ -452,4 +464,11 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
       fieldErrorText
     );
   }
+
+  async assertNoInvalidIssueOnField(fieldErrorText) {
+      await this.page.waitForLoadState("domcontentloaded");
+      expect(await this.isCurrentPage()).to.be.true;
+      const locator = await this.page.getByText('The issue date must be in the past');
+      await expect(this.page.locator).not.to.be.true;
+    }
 };

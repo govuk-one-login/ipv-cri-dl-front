@@ -204,6 +204,24 @@ Then(
   }
 );
 
+Then(
+  /^User enters date of valid to date as current date$/,
+  { timeout: 2 * 5000 },
+  async function () {
+    const drivingLicencePage = new DrivingLicencePage(this.page);
+    await drivingLicencePage.userReEntersValidToDateAsCurrentDate();
+  }
+);
+
+Then(
+  /^User enters day of valid to as current day minus (.*)$/,
+  { timeout: 2 * 5000 },
+  async function (daysToAdd) {
+    const drivingLicencePage = new DrivingLicencePage(this.page);
+    await drivingLicencePage.userReEntersDayOfValidAsCurrentDateMinus(daysToAdd);
+  }
+);
+
 // Summary box and field errors step-defs
 
 Then(
@@ -345,6 +363,14 @@ Then(
     await drivingLicencePage.assertInvalidIssueInErrorSummary(errorSummaryText);
   }
 );
+
+Then(
+  /^I see no issue date error as (.*) in the page$/,
+  async function (fieldErrorText) {
+    const drivingLicencePage = new DrivingLicencePage(this.page);
+    await drivingLicencePage.assertNoInvalidIssueOnField(fieldErrorText);
+  }
+ );
 
 Then(
   /^I see invalid issue date field error as (.*)$/,
@@ -560,3 +586,49 @@ Then(
     await dvaDetailsEntryPage.assertConsentDVAErrorOnField(fieldErrorText);
   }
 );
+
+  Then(
+    /^User enters DVA date of issue as current date$/,
+    { timeout: 2 * 5000 },
+    async function () {
+      const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
+      await dvaDetailsEntryPage.userReEntersDVAIssueDateAsCurrentDate();
+    }
+  );
+
+  Then(
+    /^User enters DVA day of issue as current day minus (.*)$/,
+    { timeout: 2 * 5000 },
+    async function (daysToSubtract) {
+      const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
+      await dvaDetailsEntryPage.userDVAReEntersDayOfIssueAsCurrentDateMinus(
+        daysToSubtract);
+    }
+  );
+
+  Then(
+    /^DVA Proper error message is displayed as (.*)$/,
+    { timeout: 2 * 5000 },
+    async function (retryMessageHeadingDva) {
+      const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
+      await dvaDetailsEntryPage.assertDVARetryErrorMessage(retryMessageHeadingDva);
+    }
+  );
+
+  Then(
+      /^User enters DVA date of valid to date as current date$/,
+      { timeout: 2 * 5000 },
+      async function () {
+        const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
+        await dvaDetailsEntryPage.userReEntersDVAValidDateAsCurrentDate();
+      }
+    );
+
+  Then(
+      /^User enters DVA day of valid to as current day minus (.*)$/,
+      { timeout: 2 * 5000 },
+      async function (daysToAdd) {
+        const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
+        await dvaDetailsEntryPage.userDVAReEntersDayOfValidToAsCurrentDateMinus(daysToAdd);
+      }
+    );

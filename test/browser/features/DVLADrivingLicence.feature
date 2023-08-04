@@ -300,6 +300,58 @@ Feature: DVLA Driving licence CRI Error Validations
       |DrivingLicenceSubject          |InvalidDayOfIssue|InvalidMonthOfIssue|InvalidYearOfIssue|
       |DrivingLicenceSubjectHappyPeter|         01      |     10            |         2043     |
 
+  @mock-api:dl-success @validation-regression @build @staging
+  Scenario Outline: DVLA Driving Licence Issue date on Current Date
+    Given User enters DVLA data as a <DrivingLicenceSubject>
+    And User enters date of issue as current date
+    When User clicks on continue
+    And I see no issue date error as The issue date must be in the past in the page
+    Then Proper error message is displayed as We could not find your details
+    And I should be on the DVLA details entry page Enter your details exactly as they appear on your UK driving licence – Prove your identity – GOV.UK
+
+    Examples:
+      |DrivingLicenceSubject          |
+      |DrivingLicenceSubjectHappyPeter|
+
+  @mock-api:dl-success @validation-regression @build @staging
+  Scenario Outline: DVLA Driving Licence Issue date (Current Date - 1)
+    Given User enters DVLA data as a <DrivingLicenceSubject>
+    And User enters date of issue as current date
+    And User enters day of issue as current day minus 1
+    When User clicks on continue
+    Then I see no issue date error as The issue date must be in the past in the page
+    Then Proper error message is displayed as We could not find your details
+    And I should be on the DVLA details entry page Enter your details exactly as they appear on your UK driving licence – Prove your identity – GOV.UK
+    Examples:
+      |DrivingLicenceSubject          |
+      |DrivingLicenceSubjectHappyPeter|
+
+  @mock-api:dl-success @validation-regression @build @staging
+  Scenario Outline: DVLA Driving Licence Issue date (Current Date - 2)
+    Given User enters DVLA data as a <DrivingLicenceSubject>
+    And User enters date of issue as current date
+    And User enters day of issue as current day minus 2
+    When User clicks on continue
+    Then I see no issue date error as The issue date must be in the past in the page
+    Then Proper error message is displayed as We could not find your details
+    And I should be on the DVLA details entry page Enter your details exactly as they appear on your UK driving licence – Prove your identity – GOV.UK
+    Examples:
+      |DrivingLicenceSubject          |
+      |DrivingLicenceSubjectHappyPeter|
+
+  @mock-api:dl-success @validation-regression @build @staging
+  Scenario Outline: DVLA Driving Licence Issue date (Current Date - 3)
+    Given User enters DVLA data as a <DrivingLicenceSubject>
+    And User enters date of issue as current date
+    And User enters day of issue as current day minus 3
+    When User clicks on continue
+    Then I see no issue date error as The issue date must be in the past in the page
+    Then Proper error message is displayed as We could not find your details
+    And I should be on the DVLA details entry page Enter your details exactly as they appear on your UK driving licence – Prove your identity – GOV.UK
+    Examples:
+      |DrivingLicenceSubject          |
+      |DrivingLicenceSubjectHappyPeter|
+
 #####  InvalidValidToDate, ValidToDateWithSpecialCharacters, NoValidToDate  #####
   @mock-api:dl-success @validation-regression @build @staging
   Scenario Outline: DVLA Driving Licence Valid to date that are not real or with special characters or no valid to date error validation
@@ -428,3 +480,121 @@ Feature: DVLA Driving licence CRI Error Validations
     Examples:
       |DrivingLicenceSubject             |InvalidLicenceNumber |InvalidLastName|InvalidFirstName|InvalidMiddleNames|
       |DrivingLicenceSubjectHappyKenneth |AB999607085JAAAA     |       JOHN    |     SMITH      |           A      |
+
+  @mock-api:dl-success @validation-regression @build @staging
+  Scenario Outline: DVLA Driving Licence Valid To date (Current Date)
+    Given User enters DVLA data as a <DrivingLicenceSubject>
+    And User enters date of valid to date as current date
+    When User clicks on continue
+    #Then I can see the valid to date error in the error summary as You cannot use an expired driving licence
+   # And I can see the Valid to date field error as You cannot use an expired driving licence
+   # And I check the page Title Error: Enter your details exactly as they appear on your UK driving licence – Prove your identity – GOV.UK
+    Examples:
+      |DrivingLicenceSubject          |
+      |DrivingLicenceSubjectHappyPeter|
+
+  @mock-api:dl-success @validation-regression @build @staging
+  Scenario Outline: DVLA Driving Licence Valid To date (Current Date - 1)
+    Given User enters DVLA data as a <DrivingLicenceSubject>
+    And User enters date of valid to date as current date
+    And User enters day of valid to as current day minus 1
+    When User clicks on continue
+    Then I can see the valid to date error in the error summary as You cannot use an expired driving licence
+    And I can see the Valid to date field error as You cannot use an expired driving licence
+    And I check the page Title Error: Enter your details exactly as they appear on your UK driving licence – Prove your identity – GOV.UK
+    Examples:
+      |DrivingLicenceSubject          |
+      |DrivingLicenceSubjectHappyPeter|
+
+  @mock-api:dl-success @validation-regression @build @staging
+  Scenario Outline: DVLA Driving Licence Valid To date (Current Date - 2)
+    Given User enters DVLA data as a <DrivingLicenceSubject>
+    And User enters date of valid to date as current date
+    And User enters day of valid to as current day minus 2
+    When User clicks on continue
+    Then I can see the valid to date error in the error summary as You cannot use an expired driving licence
+    And I can see the Valid to date field error as You cannot use an expired driving licence
+    And I check the page Title Error: Enter your details exactly as they appear on your UK driving licence – Prove your identity – GOV.UK
+    Examples:
+      |DrivingLicenceSubject          |
+      |DrivingLicenceSubjectHappyPeter|
+
+#    ########  Welsh Language DVA Valid To Date Current Date Validation (Needs to move to Welsh Feature file)##########
+#
+#  @mock-api:dl-success @validation-regression @build @staging
+#  Scenario Outline: DVLA Driving Licence Valid To date (Current Date)
+#    Given User enters DVLA data as a <DrivingLicenceSubject>
+#    And User enters date of valid to date as current date
+#    When User clicks on continue
+#    Then I can see the valid to date error in the error summary as Ni allwch ddefnyddio trwydded yrru sydd wedi dod i ben
+#    And I can see the Valid to date field error as Ni allwch ddefnyddio trwydded yrru sydd wedi dod i ben
+#    And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – Profi pwy ydych chi – GOV.UK
+#    Examples:
+#      |DrivingLicenceSubject          |
+#      |DrivingLicenceSubjectHappyPeter|
+#
+#  @mock-api:dl-success @validation-regression @build @staging
+#  Scenario Outline: DVLA Driving Licence Valid To date (Current Date - 1)
+#    Given User enters DVLA data as a <DrivingLicenceSubject>
+#    And User enters date of valid to date as current date
+#    And User enters day of valid to as current day minus 1
+#    When User clicks on continue
+#    Then I can see the valid to date error in the error summary as Ni allwch ddefnyddio trwydded yrru sydd wedi dod i ben
+#    And I can see the Valid to date field error as Ni allwch ddefnyddio trwydded yrru sydd wedi dod i ben
+#    And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – Profi pwy ydych chi – GOV.UK
+#    Examples:
+#      |DrivingLicenceSubject          |
+#      |DrivingLicenceSubjectHappyPeter|
+#
+#  @mock-api:dl-success @validation-regression @build @staging
+#  Scenario Outline: DVLA Driving Licence Valid To date (Current Date - 1)
+#    Given User enters DVLA data as a <DrivingLicenceSubject>
+#    And User enters date of valid to date as current date
+#    And User enters day of valid to as current day minus 2
+#    When User clicks on continue
+#    Then I can see the valid to date error in the error summary as Ni allwch ddefnyddio trwydded yrru sydd wedi dod i ben
+#    And I can see the Valid to date field error as Ni allwch ddefnyddio trwydded yrru sydd wedi dod i ben
+#    And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – Profi pwy ydych chi – GOV.UK
+#    Examples:
+#      |DrivingLicenceSubject          |
+#      |DrivingLicenceSubjectHappyPeter|
+#
+#  ########## Welsh DVLA Issue Date Current date Error Validation #########
+#
+#  @mock-api:dl-success @validation-regression @build @staging
+#  Scenario Outline: Welsh DVLA Driving Licence Issue date on Current Date
+#    Given User enters DVLA data as a <DrivingLicenceSubject>
+#    And User enters date of issue as current date
+#    When User clicks on continue
+#    Then Proper error message is displayed as Nid oeddem yn gallu dod o hyd i'ch manylion
+#    And I see no issue date error as Rhaid i ddyddiad cyhoeddi fod yn y gorffennol in the page
+#    And I should be on the DVLA details entry page Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – Profi pwy ydych chi – GOV.UK
+#    Examples:
+#      |DrivingLicenceSubject          |
+#      |DrivingLicenceSubjectHappyPeter|
+#
+#  @mock-api:dl-success @validation-regression @build @staging
+#  Scenario Outline: Welsh DVLA Driving Licence Issue date (Current Date - 1)
+#    Given User enters DVLA data as a <DrivingLicenceSubject>
+#    And User enters date of issue as current date
+#    And User enters day of issue as current day minus 1
+#    When User clicks on continue
+#    Then Proper error message is displayed as Nid oeddem yn gallu dod o hyd i'ch manylion
+#    Then I see no issue date error as Rhaid i ddyddiad cyhoeddi fod yn y gorffennol in the page
+#    And I should be on the DVLA details entry page Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – Profi pwy ydych chi – GOV.UK
+#    Examples:
+#      |DrivingLicenceSubject          |
+#      |DrivingLicenceSubjectHappyPeter|
+#
+#  @mock-api:dl-success @validation-regression @build @staging
+#  Scenario Outline: Welsh DVLA Driving Licence Issue date (Current Date - 2)
+#    Given User enters DVLA data as a <DrivingLicenceSubject>
+#    And User enters date of issue as current date
+#    And User enters day of issue as current day minus 2
+#    When User clicks on continue
+#    Then Proper error message is displayed as Nid oeddem yn gallu dod o hyd i'ch manylion
+#    Then I see no issue date error as Rhaid i ddyddiad cyhoeddi fod yn y gorffennol in the page
+#    And I should be on the DVLA details entry page Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – Profi pwy ydych chi – GOV.UK
+#    Examples:
+#      |DrivingLicenceSubject          |
+#      |DrivingLicenceSubjectHappyPeter|

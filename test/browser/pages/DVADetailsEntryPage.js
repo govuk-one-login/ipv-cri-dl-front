@@ -1,10 +1,15 @@
 const { expect: expect } = require("chai");
 const TestDataCreator = require("../util/TestDataCreator");
+const moment = require("moment");
 
 exports.DVADetailsEntryPage = class PlaywrightDevPage {
   constructor(page) {
     this.page = page;
     this.url = "http://localhost:5030/details";
+
+    this.drivingLicenceDVARetryMessageHeading = this.page.locator(
+          'xpath=//*[@id="main-content"]/div/div/div[1]/div[2]/h2'
+        );
 
     this.licenceNumber = this.page.getByLabel(" Licence number ");
 
@@ -233,4 +238,37 @@ exports.DVADetailsEntryPage = class PlaywrightDevPage {
       fieldErrorText
     );
   }
+
+  async userReEntersDVAIssueDateAsCurrentDate() {
+      await this.dvaLicenceIssueYear.fill(moment().format("YYYY"));
+      await this.dvaLicenceIssueMonth.fill(moment().format("MM"));
+      await this.dvaLicenceIssueDay.fill(moment().format("DD"));
+    }
+
+  async userDVAReEntersDayOfIssueAsCurrentDateMinus(days) {
+      await this.dvaLicenceIssueDay.fill(
+        moment().subtract(days, "days").format("DD")
+      );
+    }
+
+  async assertDVARetryErrorMessage(retryMessageHeadingDva) {
+      await this.page.waitForLoadState("domcontentloaded");
+      expect(await this.isCurrentPage()).to.be.true;
+      expect(await this.drivingLicenceDVARetryMessageHeading.innerText()).to.contains(
+        retryMessageHeadingDva
+      );
+    }
+
+  async userReEntersDVAValidDateAsCurrentDate() {
+        await this.licenceValidToYear.fill(moment().format("YYYY"));
+        await this.licenceValidToMonth.fill(moment().format("MM"));
+        await this.licenceValidToDay.fill(moment().format("DD"));
+      }
+
+   async userDVAReEntersDayOfValidToAsCurrentDateMinus(days) {
+        await this.licenceValidToDay.fill(
+          moment().subtract(days, "days").format("DD")
+        );
+    }
+
 };
