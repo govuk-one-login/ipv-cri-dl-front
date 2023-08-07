@@ -32,26 +32,26 @@ Feature: DVLA Driving licence CRI Error Validations
   Scenario: DVLA DoB Fields
     Given I can see the DoB fields titled Dyddiad geni
     When I can see example as Er enghraifft, 5 9 1973
-#   Then I can see date as Diwrnod
-#   And I can see month as Mis
-#   And I can see year as Blwyddyn
+#   Then I can see date as Diwrnod  // Assertion error occur though the actual and expected are same
+#   And I can see month as Mis      // Assertion error occur though the actual and expected are same
+#   And I can see year as Blwyddyn  // Assertion error occur though the actual and expected are same
 
   @mock-api:dvla-IssueDateField @validation-regression @build @staging
   @Language-regression
   Scenario: DVLA Issue date fields
     Given I can see the Issue date field titled Dyddiad cyhoeddi
     Then I can see Issue date sentence as Dyma'r dyddiad yn adran 4a o'ch trwydded, er enghraifft 27 5 2019
-#   And I can see issue day as Diwrnod
-#   Then I can see issue month as Mis
-#   And I can see issue year as Blwyddyn
+#   And I can see issue day as Diwrnod  // Assertion error occur though the actual and expected are same
+#   Then I can see issue month as Mis  // Assertion error occur though the actual and expected are same
+#   And I can see issue year as Blwyddyn  // Assertion error occur though the actual and expected are same
 
   @mock-api:dvla-ValidToDateField @validation-regression @build @staging
   Scenario: DVLA Valid to date field
     Given I can see the Valid to date field titled Yn ddilys tan
     And I can see Valid to date sentence as Dyma'r dyddiad yn adran 4b o'ch trwydded, er enghraifft 27 5 2019
-#   Then I can see Valid To day as Diwrnod
-#   And I can see Valid To month as Mis
-#   Then I can see Valid To year as Blwyddyn
+#   Then I can see Valid To day as Diwrnod  // Assertion error occur though the actual and expected are same
+#   And I can see Valid To month as Mis     // Assertion error occur though the actual and expected are same
+#   Then I can see Valid To year as Blwyddyn  // Assertion error occur though the actual and expected are same
 
   @mock-api:dvla-LicenceField @validation-regression @build @staging
   Scenario: DVLA Licence number
