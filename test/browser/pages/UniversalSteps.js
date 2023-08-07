@@ -3,8 +3,8 @@ const { assertTrue, fail } = require("assert");
 
 exports.UniversalSteps = class PlaywrightDevPage {
   constructor(page, url) {
-  this.page = page;
-  this.url = url;
+    this.page = page;
+    this.url = url;
   }
 
   async waitForTextToAppear(text) {
