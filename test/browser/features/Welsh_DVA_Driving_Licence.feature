@@ -32,25 +32,25 @@ Feature: DVA Driving licence CRI Error Validations
   Scenario: DVA DoB Field
     Given I can see the DVA DoB fields titled Dyddiad geni
     Then I can see DVA DoB example DVA as Er enghraifft, 5 9 1973
-#    Then I can see DVA day as Diwrnod
-#    And I can see DVA month as Mis
-#    And I can see DVA year as Blwyddyn
+#    Then I can see DVA day as Diwrnod // Assertion error occur though the actual and expected are same
+#    And I can see DVA month as Mis // Assertion error occur though the actual and expected are same
+#    And I can see DVA year as Blwyddyn // Assertion error occur though the actual and expected are same
 
   @mock-api:dva-IssueField @validation-regression @build @staging
   Scenario: DVA Issue date field
     Given I see the DVA Issue date field titled Dyddiad cyhoeddi
     Then I see DVA date section example as Dyma'r dyddiad yn adran 4a o'ch trwydded, er enghraifft 27 5 2019
-#    Then I can see DVA Issue day as Diwrnod
-#    And I can see DVA issue month as Mis
-#    And I can see DVA issue year as Blwyddyn
+#    Then I can see DVA Issue day as Diwrnod // Assertion error occur though the actual and expected are same
+#    And I can see DVA issue month as Mis // Assertion error occur though the actual and expected are same
+#    And I can see DVA issue year as Blwyddyn // Assertion error occur though the actual and expected are same
 
   @mock-api:dva-ValidToDateField @validation-regression @build @staging
   Scenario: DVLA Valid to date field
     Given I can see the Valid to date field titled Yn ddilys tan
     And I can see Valid to date sentence as Dyma'r dyddiad yn adran 4b o'ch trwydded, er enghraifft 27 5 2019
-#    Then I can see Valid To day as Diwrnod
-#    And I can see Valid To month as Mis
-#    Then I can see Valid To year as Blwyddyn
+#    Then I can see Valid To day as Diwrnod // Assertion error occur though the actual and expected are same
+#    And I can see Valid To month as Mis // Assertion error occur though the actual and expected are same
+#    Then I can see Valid To year as Blwyddyn // Assertion error occur though the actual and expected are same
 
   @mock-api:dva-LicenceField @validation-regression @build @staging
   Scenario: DVA Licence number
