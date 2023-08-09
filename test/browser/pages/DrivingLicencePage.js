@@ -7,11 +7,13 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
     this.page = page;
     this.url = "http://localhost:5030/details";
 
-    this.licenceNumber = this.page.getByLabel(" Licence number ");
+    this.licenceNumber = this.page.locator(
+      'xpath=//*[@id="drivingLicenceNumber"]'
+    );
 
-    this.lastName = this.page.getByLabel(" Last name ");
-    this.firstName = this.page.getByLabel(" First name ");
-    this.middleNames = this.page.getByLabel(" Middle names ");
+    this.lastName = this.page.locator('xpath=//*[@id="surname"]');
+    this.firstName = this.page.locator('xpath=//*[@id="firstName"]');
+    this.middleNames = this.page.locator('xpath=//*[@id="middleNames"]');
 
     this.birthDay = this.page.locator('xpath=//*[@id="dateOfBirth-day"]');
     this.birthMonth = this.page.locator('xpath=//*[@id="dateOfBirth-month"]');
@@ -35,12 +37,12 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
       'xpath=//*[@id="issueDate-year"]'
     );
 
-    this.issueNumber = this.page.getByLabel(" Issue number ");
+    this.issueNumber = this.page.locator('xpath=//*[@id="issueNumber"]');
 
-    this.postcode = this.page.getByLabel(" Postcode ");
+    this.postcode = this.page.locator('xpath=//*[@id="postcode"]');
 
-    this.consentDVLACheckbox = this.page.getByLabel(
-      "Give DVLA your consent to check your driving licence details"
+    this.consentDVLACheckbox = this.page.locator(
+      'xpath=//*[@id="consentCheckbox"]'
     );
 
     // Error summary items
@@ -130,10 +132,113 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
     this.invalidConsentErrorFieldError = this.page.locator(
       'xpath=//*[@id="consentCheckbox-error"]'
     );
+
+    this.Continue = this.page.locator('xpath=//*[@id="continue"]');
+
+    // Content Fields
+
+    this.betaBannerReads = this.page.locator(
+      "xpath=/html/body/div[2]/div/p/span"
+    );
+
+    this.betaBanner = this.page.locator("xpath=/html/body/div[2]/div/p/strong");
+
+    this.lastNameLabel = this.page.locator('xpath=//*[@id="surname-label"]');
+
+    this.givenNameLegend = this.page.locator(
+      'xpath=//*[@id="main-content"]/div/div/form/div[2]/fieldset/legend'
+    );
+
+    this.firstNameLabel = this.page.locator('xpath=//*[@id="firstName-label"]');
+
+    this.middleNames = this.page.locator('xpath=//*[@id="middleNames-label"]');
+
+    this.firstNameSentence = this.page.locator(
+      'xpath=//*[@id="firstName-hint"]'
+    );
+    this.middleNameSentence = this.page.locator(
+      'xpath=//*[@id="middleNames-hint"]'
+    );
+
+    this.dobFieldTitleLegend = this.page.locator(
+      'xpath=//*[@id="dateOfBirth-fieldset"]/legend'
+    );
+
+    this.dobExample = this.page.locator('xpath=//*[@id="dateOfBirth-hint"]');
+
+    this.dayLabel = this.page.locator(
+      'xpath=//*[@id="dateOfBirth"]/div[1]/div/label'
+    );
+
+    this.monthLabel = this.page.locator(
+      'xpath=//*[@id="dateOfBirth"]/div[2]/div/label'
+    );
+
+    this.yearLabel = this.page.locator(
+      'xpath=//*[@id="dateOfBirth"]/div[3]/div/label'
+    );
+
+    this.issueFieldTitleLegend = this.page.locator(
+      'xpath=//*[@id="issueDate-fieldset"]/legend'
+    );
+    this.issueFieldHint = this.page.locator('xpath=//*[@id="issueDate-hint"]');
+
+    this.issueDayLabel = this.page.locator(
+      'xpath=//*[@id="issueDate"]/div[1]/div/label'
+    );
+
+    this.issueMonthLabel = this.page.locator(
+      'xpath=//*[@id="issueDate"]/div[2]/div/label'
+    );
+    this.issueYearLabel = this.page.locator(
+      'xpath=//*[@id="issueDate"]/div[3]/div/label'
+    );
+
+    this.validToFieldTitleLegend = this.page.locator(
+      'xpath=//*[@id="expiryDate-fieldset"]/legend'
+    );
+
+    this.validToFieldHint = this.page.locator(
+      'xpath=//*[@id="expiryDate-hint"]'
+    );
+
+    this.validTodayLabel = this.page.locator(
+      'xpath=//*[@id="expiryDate"]/div[1]/div/label'
+    );
+
+    this.validToMonthLabel = this.page.locator(
+      'xpath=//*[@id="expiryDate"]/div[2]/div/label'
+    );
+
+    this.validToYearLabel = this.page.locator(
+      'xpath=//*[@id="expiryDate"]/div[3]/div/label'
+    );
+
+    this.licenceNumberLabel = this.page.locator(
+      'xpath=//*[@id="drivingLicenceNumber-label"]'
+    );
+
+    this.licenceNumberHint = this.page.locator(
+      'xpath=//*[@id="drivingLicenceNumber-hint"]'
+    );
+
+    this.issueNumberLabel = this.page.locator(
+      'xpath=//*[@id="issueNumber-label"]'
+    );
+
+    this.issueNumberHint = this.page.locator(
+      'xpath=//*[@id="issueNumber-hint"]'
+    );
+
+    this.postcodeLabel = this.page.locator('xpath=//*[@id="postcode-label"]');
+
+    this.postcodeHint = this.page.locator('xpath=//*[@id="postcode-hint"]');
   }
 
   isCurrentPage() {
-    return this.page.url() === this.url;
+    return (
+      this.page.url() === this.url || this.page.url() === this.url + "?lang=cy"
+    );
   }
 
   async assertDVLAPageTitle(dvlaDetailsEntryPageTitle) {
@@ -451,5 +556,204 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
     expect(await this.invalidConsentErrorFieldError.innerText()).to.contains(
       fieldErrorText
     );
+  }
+
+  //  Language
+  async assertBetaBanner(betaBannerLabel) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    await expect(await this.betaBanner.textContent()).to.contains(
+      betaBannerLabel
+    );
+  }
+
+  async assertBetaBannerText(assertBetaBannerText) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    await expect(await this.betaBannerReads.textContent()).to.contains(
+      assertBetaBannerText
+    );
+  }
+
+  async assertLastName(dvlalastNameLabel) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    await expect(await this.lastNameLabel.textContent()).to.contains(
+      dvlalastNameLabel
+    );
+  }
+
+  async assertGivenName(dvlagivenNameLegend) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    expect(await this.givenNameLegend.textContent()).to.contain(
+      dvlagivenNameLegend
+    );
+  }
+
+  async assertFirstName(dvlaFirstName) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    expect(await this.firstNameLabel.textContent()).to.contain(dvlaFirstName);
+  }
+
+  async assertMiddleName(dvlaMiddleName) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    expect(await this.middleNames.textContent()).to.contain(dvlaMiddleName);
+  }
+
+  async assertFirstNameSentence(dvlaFirstNameSent) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    expect(await this.firstNameSentence.innerText()).to.equal(
+      dvlaFirstNameSent
+    );
+  }
+
+  async assertMiddleNameSentence(dvlaMiddleNameSentence) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    expect(await this.middleNameSentence.innerText()).to.equal(
+      dvlaMiddleNameSentence
+    );
+  }
+
+  async assertDoBFieldTitle(dobFieldTitleLegend) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    expect(await this.dobFieldTitleLegend.innerText()).to.equal(
+      dobFieldTitleLegend
+    );
+  }
+
+  async assertDobExample(dobExample) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    expect(await this.dobExample.innerText()).to.equal(dobExample);
+  }
+
+  async assertDay(day) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    await expect(await this.dayLabel.innerText()).to.equal(day);
+  }
+
+  async assertMonth(month) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    await expect(await this.monthLabel.innerText()).to.equal(month);
+  }
+
+  async assertYear(year) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    await expect(await this.yearLabel.innerText()).to.equal(year);
+  }
+
+  async assertIssueDateFieldTitle(issueFieldTitleLegend) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    expect(await this.issueFieldTitleLegend.innerText()).to.equal(
+      issueFieldTitleLegend
+    );
+  }
+
+  async assertIssueDateExample(issueDateExample) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    expect(await this.issueFieldHint.innerText()).to.equal(issueDateExample);
+  }
+
+  async assertValidDateFieldTitle(validDateFieldTitle) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    expect(await this.validToFieldTitleLegend.innerText()).to.equal(
+      validDateFieldTitle
+    );
+  }
+
+  async assertValidDateExample(validDateExample) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    expect(await this.validToFieldHint.innerText()).to.equal(validDateExample);
+  }
+
+  async assertLicenceTitle(validlicenceNumberLabel) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    expect(await this.licenceNumberLabel.innerText()).to.equal(
+      validlicenceNumberLabel
+    );
+  }
+
+  async assertLicenceExample(validlicenceNumberHint) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    expect(await this.licenceNumberHint.innerText()).to.equal(
+      validlicenceNumberHint
+    );
+  }
+
+  async assertIssueNumberTitle(issueNumberLabel) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    expect(await this.issueNumberLabel.innerText()).to.equal(issueNumberLabel);
+  }
+
+  async assertIssueSentenceExample(issueNumberSentence) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    expect(await this.issueNumberHint.innerText()).to.equal(
+      issueNumberSentence
+    );
+  }
+
+  async assertPostcodeTitle(postcodeTitle) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    expect(await this.postcodeLabel.innerText()).to.equal(postcodeTitle);
+  }
+
+  async assertPostcodeSentence(postcodeSentence) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    expect(await this.postcodeHint.innerText()).to.equal(postcodeSentence);
+  }
+
+  async assertIssueDay(issueDay) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    expect(await this.issueDayLabel.innerText()).to.equal(issueDay);
+  }
+
+  async assertIssueMonth(issueMonth) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    expect(await this.issueMonthLabel.innerText()).to.equal(issueMonth);
+  }
+
+  async assertIssueYear(issueYear) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    expect(await this.issueYearLabel.innerText()).to.equal(issueYear);
+  }
+
+  async assertValidToDay(validToDay) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    expect(await this.validTodayLabel.innerText()).to.equal(validToDay);
+  }
+
+  async assertValidToMonth(validToMonth) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    expect(await this.validToMonthLabel.innerText()).to.equal(validToMonth);
+  }
+
+  async assertValidToYear(validToYear) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    expect(await this.validToYearLabel.innerText()).to.equal(validToYear);
   }
 };
