@@ -8,8 +8,8 @@ Feature: DVLA Driving licence CRI Error Validations
     And I click on DVLA radio button and Continue
     And I add a cookie to change the language to Welsh
 
-  @mock-api:dva-PageHeading @validation-regression @build @staging
-  Scenario:User Selects DVA and landed in DVA page and Page title and sub-text
+  @mock-api:dvla-PageHeading @validation-regression @build @staging
+  Scenario:User Selects DVLA and landed in DVLA page and Page title and sub-text
     Given I check the page title Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – Profi pwy ydych chi – GOV.UK
     Then I see the heading Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru
     And I see sentence Os nad oes gennych drwydded yrru y DU neu os na allwch gofio'ch manylion, gallwch brofi pwy ydych chi mewn ffordd arall yn lle.
