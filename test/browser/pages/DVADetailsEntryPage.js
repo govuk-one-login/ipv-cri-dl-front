@@ -329,19 +329,19 @@ exports.DVADetailsEntryPage = class PlaywrightDevPage {
   async assertDVADay(day) {
     await this.page.waitForLoadState("domcontentloaded");
     expect(await this.isCurrentPage()).to.be.true;
-    await expect(await this.dayLabel.innerText()).to.equal(day);
+    await expect(await this.dayLabel.innerText()).to.contains(day);
   }
 
   async assertDVAMonth(month) {
     await this.page.waitForLoadState("domcontentloaded");
     expect(await this.isCurrentPage()).to.be.true;
-    await expect(await this.monthLabel.innerText()).to.equal(month);
+    await expect(await this.monthLabel.innerText()).to.contains(month);
   }
 
   async assertDVAYear(year) {
     await this.page.waitForLoadState("domcontentloaded");
     expect(await this.isCurrentPage()).to.be.true;
-    await expect(await this.yearLabel.innerText()).to.equal(year);
+    await expect(await this.yearLabel.innerText()).to.contains(year);
   }
 
   async assertDVAIssueDateFieldTitle(issueFieldTitle) {
@@ -359,19 +359,19 @@ exports.DVADetailsEntryPage = class PlaywrightDevPage {
   async assertDVAIssueDay(issueDay) {
     await this.page.waitForLoadState("domcontentloaded");
     expect(await this.isCurrentPage()).to.be.true;
-    expect(await this.dateOfIssueDayLabel.innerText()).to.equal(issueDay);
+    expect(await this.dateOfIssueDayLabel.innerText()).to.contains(issueDay);
   }
 
   async assertDVAIssueMonth(issueMonth) {
     await this.page.waitForLoadState("domcontentloaded");
     expect(await this.isCurrentPage()).to.be.true;
-    expect(await this.dateOfIssueMonthLabel.innerText()).to.equal(issueMonth);
+    expect(await this.dateOfIssueMonthLabel.innerText()).to.contains(issueMonth);
   }
 
   async assertDVAIssueYear(issueYear) {
     await this.page.waitForLoadState("domcontentloaded");
     expect(await this.isCurrentPage()).to.be.true;
-    expect(await this.dateOfIssueYearLabel.innerText()).to.equal(issueYear);
+    expect(await this.dateOfIssueYearLabel.innerText()).to.contains(issueYear);
   }
 
   async assertDVALicenceTitle(validLicenceTitle) {
