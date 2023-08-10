@@ -13,7 +13,7 @@ Then(
   }
 );
 
-Then(/^User clicks on continue$/, async function () {
+Then(/^User clicks on continue$/, { timeout: 2 * 5000 }, async function () {
   const drivingLicencePage = new DrivingLicencePage(this.page);
   await drivingLicencePage.clickOnContinue();
 });
@@ -407,7 +407,7 @@ Then(
 
 Given(
   /^User enters DVA data as a (.*)$/,
-  { timeout: 2 * 5000 },
+  { timeout: 3 * 5000 },
   async function (dvaDrivingLicenceSubject) {
     const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
     await dvaDetailsEntryPage.userEntersDVAData(
@@ -423,6 +423,17 @@ Then(/^I check the page Title (.*)$/, async function (dvaErrorPageTitle) {
 });
 
 // Re-enter DVA test data step-defs
+
+Then(
+  /^DVA User re-enters drivingLicenceNumber as (.*)$/,
+  { timeout: 3 * 5000 },
+  async function (InvalidLicenceNumber) {
+    const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
+    await dvaDetailsEntryPage.dvaUserReEntersLicenceNumber(
+      InvalidLicenceNumber
+    );
+  }
+);
 
 Then(
   /^DVA user re-enters day of birth as (.*)$/,
@@ -558,5 +569,298 @@ Then(
   async function (fieldErrorText) {
     const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
     await dvaDetailsEntryPage.assertConsentDVAErrorOnField(fieldErrorText);
+  }
+);
+
+//################### Text content comparisons ########################
+
+Then(
+  /^I view the (.*) banner$/,
+  { timeout: 2 * 5000 },
+  async function (betaBannerLabel) {
+    const drivingLicencePage = new DrivingLicencePage(this.page);
+    await drivingLicencePage.assertBetaBanner(betaBannerLabel);
+  }
+);
+
+Then(/^the beta banner reads (.*)$/, async function (betaBannerText) {
+  const drivingLicencePage = new DrivingLicencePage(this.page);
+  await drivingLicencePage.assertBetaBannerText(betaBannerText);
+});
+
+Then(/^I can see the lastname as (.*)$/, async function (dvlaLastName) {
+  const drivingLicencePage = new DrivingLicencePage(this.page);
+  await drivingLicencePage.assertLastName(dvlaLastName);
+});
+
+Then(/^I can see the givenName as (.*)$/, async function (dvlaGivenName) {
+  const drivingLicencePage = new DrivingLicencePage(this.page);
+  await drivingLicencePage.assertGivenName(dvlaGivenName);
+});
+
+Then(/^I can see the firstName as (.*)$/, async function (dvlaFirstName) {
+  const drivingLicencePage = new DrivingLicencePage(this.page);
+  await drivingLicencePage.assertFirstName(dvlaFirstName);
+});
+
+Then(/^I can see the middleName as (.*)$/, async function (dvlaMiddleName) {
+  const drivingLicencePage = new DrivingLicencePage(this.page);
+  await drivingLicencePage.assertMiddleName(dvlaMiddleName);
+});
+
+Then(
+  /^I can see the first name sentence (.*)$/,
+  async function (dvlaFirstNameSent) {
+    const drivingLicencePage = new DrivingLicencePage(this.page);
+    await drivingLicencePage.assertFirstNameSentence(dvlaFirstNameSent);
+  }
+);
+
+Then(
+  /^I can see the middle name sentence (.*)$/,
+  async function (dvlaMiddleNameSentence) {
+    const drivingLicencePage = new DrivingLicencePage(this.page);
+    await drivingLicencePage.assertMiddleNameSentence(dvlaMiddleNameSentence);
+  }
+);
+
+Then(/^I can see the DoB fields titled (.*)$/, async function (dobFieldTitle) {
+  const drivingLicencePage = new DrivingLicencePage(this.page);
+  await drivingLicencePage.assertDoBFieldTitle(dobFieldTitle);
+});
+
+Then(/^I can see example as (.*)$/, async function (dobExample) {
+  const drivingLicencePage = new DrivingLicencePage(this.page);
+  await drivingLicencePage.assertDobExample(dobExample);
+});
+
+Then(/^I can see date as (.*)$/, async function (day) {
+  const drivingLicencePage = new DrivingLicencePage(this.page);
+  await drivingLicencePage.assertDay(day);
+});
+
+Then(/^I can see month as (.*)$/, async function (month) {
+  const drivingLicencePage = new DrivingLicencePage(this.page);
+  await drivingLicencePage.assertMonth(month);
+});
+
+Then(/^I can see year as (.*)$/, async function (year) {
+  const drivingLicencePage = new DrivingLicencePage(this.page);
+  await drivingLicencePage.assertYear(year);
+});
+
+Then(
+  /^I can see the Issue date field titled (.*)$/,
+  async function (issueFieldTitle) {
+    const drivingLicencePage = new DrivingLicencePage(this.page);
+    await drivingLicencePage.assertIssueDateFieldTitle(issueFieldTitle);
+  }
+);
+
+Then(
+  /^I can see Issue date sentence as (.*)$/,
+  async function (issueDateExample) {
+    const drivingLicencePage = new DrivingLicencePage(this.page);
+    await drivingLicencePage.assertIssueDateExample(issueDateExample);
+  }
+);
+
+Then(/^I can see issue day as (.*)$/, async function (issueDay) {
+  const drivingLicencePage = new DrivingLicencePage(this.page);
+  await drivingLicencePage.assertIssueDay(issueDay);
+});
+
+Then(/^I can see issue month as (.*)$/, async function (issueMonth) {
+  const drivingLicencePage = new DrivingLicencePage(this.page);
+  await drivingLicencePage.assertIssueMonth(issueMonth);
+});
+
+Then(/^I can see issue year as (.*)$/, async function (issueYear) {
+  const drivingLicencePage = new DrivingLicencePage(this.page);
+  await drivingLicencePage.assertIssueYear(issueYear);
+});
+
+Then(
+  /^I can see the Valid to date field titled (.*)$/,
+  async function (validDateFieldTitle) {
+    const drivingLicencePage = new DrivingLicencePage(this.page);
+    await drivingLicencePage.assertValidDateFieldTitle(validDateFieldTitle);
+  }
+);
+
+Then(
+  /^I can see Valid to date sentence as (.*)$/,
+  async function (validDateExample) {
+    const drivingLicencePage = new DrivingLicencePage(this.page);
+    await drivingLicencePage.assertValidDateExample(validDateExample);
+  }
+);
+
+Then(/^I can see Valid To day as (.*)$/, async function (validToDay) {
+  const drivingLicencePage = new DrivingLicencePage(this.page);
+  await drivingLicencePage.assertValidToDay(validToDay);
+});
+
+Then(/^I can see Valid To month as (.*)$/, async function (validToMonth) {
+  const drivingLicencePage = new DrivingLicencePage(this.page);
+  await drivingLicencePage.assertValidToMonth(validToMonth);
+});
+
+Then(/^I can see Valid To year as (.*)$/, async function (validToYear) {
+  const drivingLicencePage = new DrivingLicencePage(this.page);
+  await drivingLicencePage.assertValidToYear(validToYear);
+});
+
+Then(
+  /^I can see the licence number field titled (.*)$/,
+  async function (validLicenceTitle) {
+    const drivingLicencePage = new DrivingLicencePage(this.page);
+    await drivingLicencePage.assertLicenceTitle(validLicenceTitle);
+  }
+);
+
+Then(
+  /^I see the Licence number sentence (.*)$/,
+  async function (validLicenceExample) {
+    const drivingLicencePage = new DrivingLicencePage(this.page);
+    await drivingLicencePage.assertLicenceExample(validLicenceExample);
+  }
+);
+
+Then(
+  /^I can see the issue number field titled (.*)$/,
+  async function (issueNumberTitle) {
+    const drivingLicencePage = new DrivingLicencePage(this.page);
+    await drivingLicencePage.assertIssueNumberTitle(issueNumberTitle);
+  }
+);
+
+Then(
+  /^I can see issue sentence as (.*)$/,
+  async function (issueNumberSentence) {
+    const drivingLicencePage = new DrivingLicencePage(this.page);
+    await drivingLicencePage.assertIssueSentenceExample(issueNumberSentence);
+  }
+);
+
+Then(
+  /^I can see the postcode field titled (.*)$/,
+  async function (postcodeTitle) {
+    const drivingLicencePage = new DrivingLicencePage(this.page);
+    await drivingLicencePage.assertPostcodeTitle(postcodeTitle);
+  }
+);
+
+Then(
+  /^I can see postcode sentence as (.*)$/,
+  async function (postcodeSentence) {
+    const drivingLicencePage = new DrivingLicencePage(this.page);
+    await drivingLicencePage.assertPostcodeSentence(postcodeSentence);
+  }
+);
+
+//########### Text Content Comparisions - DVA ##############
+
+Then(
+  /^I see the heading (.*)$/,
+  { timeout: 2 * 5000 },
+  async function (pageHeadingDVA) {
+    const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
+    await dvaDetailsEntryPage.assertDVAPageHeading(pageHeadingDVA);
+  }
+);
+
+Then(/^I see sentence (.*)$/, async function (pageHeadingDVASentence) {
+  const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
+  await dvaDetailsEntryPage.assertDVAPageHeadingSentence(
+    pageHeadingDVASentence
+  );
+});
+
+Then(
+  /^I see We will check your details as (.*)$/,
+  async function (dVAPageSentence) {
+    const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
+    await dvaDetailsEntryPage.assertdvaPageSentenceTwo(dVAPageSentence);
+  }
+);
+
+Then(/^I check the page title (.*)$/, async function (dvaPageTitle) {
+  const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
+  await dvaDetailsEntryPage.assertDVAPageTitle(dvaPageTitle);
+});
+
+Then(
+  /^I can see the DVA DoB fields titled (.*)$/,
+  async function (dobFieldTitle) {
+    const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
+    await dvaDetailsEntryPage.assertDVADoBFieldTitle(dobFieldTitle);
+  }
+);
+
+Then(/^I can see DVA DoB example DVA as (.*)$/, async function (dobExample) {
+  const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
+  await dvaDetailsEntryPage.assertDVADobExample(dobExample);
+});
+
+Then(/^I can see DVA day as (.*)$/, async function (day) {
+  const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
+  await dvaDetailsEntryPage.assertDVADay(day);
+});
+
+Then(/^I can see DVA month as (.*)$/, async function (month) {
+  const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
+  await dvaDetailsEntryPage.assertDVAMonth(month);
+});
+
+Then(/^I can see DVA year as (.*)$/, async function (year) {
+  const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
+  await dvaDetailsEntryPage.assertDVAYear(year);
+});
+
+Then(
+  /^I see the DVA Issue date field titled (.*)$/,
+  async function (issueFieldTitle) {
+    const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
+    await dvaDetailsEntryPage.assertDVAIssueDateFieldTitle(issueFieldTitle);
+  }
+);
+
+Then(
+  /^I see DVA date section example as (.*)$/,
+  async function (issueDateExample) {
+    const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
+    await dvaDetailsEntryPage.assertDVAIssueDateExample(issueDateExample);
+  }
+);
+
+Then(/^I can see DVA Issue day as (.*)$/, async function (issueDay) {
+  const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
+  await dvaDetailsEntryPage.assertDVAIssueDay(issueDay);
+});
+
+Then(/^I can see DVA issue month as (.*)$/, async function (issueMonth) {
+  const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
+  await dvaDetailsEntryPage.assertDVAIssueMonth(issueMonth);
+});
+
+Then(/^I can see DVA issue year as (.*)$/, async function (issueYear) {
+  const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
+  await dvaDetailsEntryPage.assertDVAIssueYear(issueYear);
+});
+
+Then(
+  /^I can see DVA licence number field titled as (.*)$/,
+  async function (validLicenceTitle) {
+    const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
+    await dvaDetailsEntryPage.assertDVALicenceTitle(validLicenceTitle);
+  }
+);
+
+Then(
+  /^I see the DVA licence sentence as (.*)$/,
+  async function (validLicenceExample) {
+    const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
+    await dvaDetailsEntryPage.assertDVALicenceExample(validLicenceExample);
   }
 );
