@@ -365,7 +365,9 @@ exports.DVADetailsEntryPage = class PlaywrightDevPage {
   async assertDVAIssueMonth(issueMonth) {
     await this.page.waitForLoadState("domcontentloaded");
     expect(await this.isCurrentPage()).to.be.true;
-    expect(await this.dateOfIssueMonthLabel.innerText()).to.contains(issueMonth);
+    expect(await this.dateOfIssueMonthLabel.innerText()).to.contains(
+      issueMonth
+    );
   }
 
   async assertDVAIssueYear(issueYear) {
