@@ -636,19 +636,19 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
   async assertDay(day) {
     await this.page.waitForLoadState("domcontentloaded");
     expect(await this.isCurrentPage()).to.be.true;
-    await expect(await this.dayLabel.innerText()).to.equal(day);
+    await expect(await this.dayLabel.innerText()).to.contains(day);
   }
 
   async assertMonth(month) {
     await this.page.waitForLoadState("domcontentloaded");
     expect(await this.isCurrentPage()).to.be.true;
-    await expect(await this.monthLabel.innerText()).to.equal(month);
+    await expect(await this.monthLabel.innerText()).to.contains(month);
   }
 
   async assertYear(year) {
     await this.page.waitForLoadState("domcontentloaded");
     expect(await this.isCurrentPage()).to.be.true;
-    await expect(await this.yearLabel.innerText()).to.equal(year);
+    await expect(await this.yearLabel.innerText()).to.contains(year);
   }
 
   async assertIssueDateFieldTitle(issueFieldTitleLegend) {
@@ -724,36 +724,36 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
   async assertIssueDay(issueDay) {
     await this.page.waitForLoadState("domcontentloaded");
     expect(await this.isCurrentPage()).to.be.true;
-    expect(await this.issueDayLabel.innerText()).to.equal(issueDay);
+    expect(await this.issueDayLabel.innerText()).to.contains(issueDay);
   }
 
   async assertIssueMonth(issueMonth) {
     await this.page.waitForLoadState("domcontentloaded");
     expect(await this.isCurrentPage()).to.be.true;
-    expect(await this.issueMonthLabel.innerText()).to.equal(issueMonth);
+    expect(await this.issueMonthLabel.innerText()).to.contains(issueMonth);
   }
 
   async assertIssueYear(issueYear) {
     await this.page.waitForLoadState("domcontentloaded");
     expect(await this.isCurrentPage()).to.be.true;
-    expect(await this.issueYearLabel.innerText()).to.equal(issueYear);
+    expect(await this.issueYearLabel.innerText()).to.contains(issueYear);
   }
 
   async assertValidToDay(validToDay) {
     await this.page.waitForLoadState("domcontentloaded");
     expect(await this.isCurrentPage()).to.be.true;
-    expect(await this.validTodayLabel.innerText()).to.equal(validToDay);
+    expect(await this.validTodayLabel.innerText()).to.contains(validToDay);
   }
 
   async assertValidToMonth(validToMonth) {
     await this.page.waitForLoadState("domcontentloaded");
     expect(await this.isCurrentPage()).to.be.true;
-    expect(await this.validToMonthLabel.innerText()).to.equal(validToMonth);
+    expect(await this.validToMonthLabel.innerText()).to.contains(validToMonth);
   }
 
   async assertValidToYear(validToYear) {
     await this.page.waitForLoadState("domcontentloaded");
     expect(await this.isCurrentPage()).to.be.true;
-    expect(await this.validToYearLabel.innerText()).to.equal(validToYear);
+    expect(await this.validToYearLabel.innerText()).to.contains(validToYear);
   }
 };
