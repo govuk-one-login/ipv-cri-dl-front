@@ -302,3 +302,104 @@ Feature: DVA Driving licence CRI Error Validations
     Examples:
       |DVADrivingLicenceSubject       |InvalidValidToDay|InvalidValidToMonth|InvalidValidToYear|
       |DrivingLicenceSubjectHappyBilly|         10      |     01            |         2010     |
+
+    ########  Welsh Language DVA Valid To Date Current Date Validation ##########
+  @mock-api:dva-ValidToDate @validation-regression @build @staging
+  Scenario Outline: DVA Driving Licence Valid To date Welsh (Current Date)
+    Given User enters DVA data as a <DVADrivingLicenceSubject>
+    And User enters date of valid to date as current date
+    When User clicks on continue
+    Then I can see the valid to date error in the error summary as Ni allwch ddefnyddio trwydded yrru sydd wedi dod i ben
+    And I can see the Valid to date field error as Ni allwch ddefnyddio trwydded yrru sydd wedi dod i ben
+    And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – Profi pwy ydych chi – GOV.UK
+    Examples:
+      |DVADrivingLicenceSubject          |
+      |DrivingLicenceSubjectHappyBilly|
+
+  @mock-api:dva-ValidToDate @validation-regression @build @staging
+  Scenario Outline: Welsh DVA Driving Licence Valid To date Welsh (Current Date - 1)
+    Given User enters DVA data as a <DVADrivingLicenceSubject>
+    And User enters date of valid to date as current date
+    And User enters day of valid to as current day minus 1
+    When User clicks on continue
+    Then I can see the valid to date error in the error summary as Ni allwch ddefnyddio trwydded yrru sydd wedi dod i ben
+    And I can see the Valid to date field error as Ni allwch ddefnyddio trwydded yrru sydd wedi dod i ben
+    And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – Profi pwy ydych chi – GOV.UK
+    Examples:
+      |DVADrivingLicenceSubject          |
+      |DrivingLicenceSubjectHappyBilly|
+
+  @mock-api:dva-ValidToDate @validation-regression @build @staging
+  Scenario Outline: Welsh DVA Driving Licence Valid To date Welsh (Current Date - 2)
+    Given User enters DVA data as a <DVADrivingLicenceSubject>
+    And User enters date of valid to date as current date
+    And User enters day of valid to as current day minus 2
+    When User clicks on continue
+    Then I can see the valid to date error in the error summary as Ni allwch ddefnyddio trwydded yrru sydd wedi dod i ben
+    And I can see the Valid to date field error as Ni allwch ddefnyddio trwydded yrru sydd wedi dod i ben
+    And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – Profi pwy ydych chi – GOV.UK
+    Examples:
+      |DVADrivingLicenceSubject          |
+      |DrivingLicenceSubjectHappyBilly|
+
+   ########  Welsh Language DVA Issue Date Current Date Validation ##########
+  @mock-api:dva-IssueDate @validation-regression @build @staging
+  Scenario Outline: DVA Driving Licence Issue date (Current Date)
+    Given User enters DVA data as a <DVADrivingLicenceSubject>
+    And User enters DVA date of issue as current date
+    When User clicks on continue
+#    Then DVA Proper error message is displayed as Nid oeddem yn gallu dod o hyd i'ch manylion
+#    Then I see no issue date error as Rhaid i ddyddiad cyhoeddi fod yn y gorffennol in the page
+#    And I should be on the DVA details entry page Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – Profi pwy ydych chi – GOV.UK
+    Examples:
+      |DVADrivingLicenceSubject          |
+      |DrivingLicenceSubjectHappyBilly|
+
+  @mock-api:dva-IssueDate @validation-regression @build @staging
+  Scenario Outline: DVA Driving Licence Issue date (Current Date - 1)
+    Given User enters DVA data as a <DVADrivingLicenceSubject>
+    And User enters DVA date of issue as current date
+    And User enters DVA day of issue as current day minus 1
+    When User clicks on continue
+#    Then DVA Proper error message is displayed as Nid oeddem yn gallu dod o hyd i'ch manylion
+#    Then I see no issue date error as Rhaid i ddyddiad cyhoeddi fod yn y gorffennol in the page
+#    And I should be on the DVA details entry page Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – Profi pwy ydych chi – GOV.UK
+    Examples:
+      |DVADrivingLicenceSubject          |
+      |DrivingLicenceSubjectHappyBilly|
+
+   @mock-api:dva-IssueDate @validation-regression @build @staging
+   Scenario Outline: DVA Driving Licence Issue date (Current Date - 2)
+     Given User enters DVA data as a <DVADrivingLicenceSubject>
+     And User enters date of issue as current date
+     And User enters DVA day of issue as current day minus 2
+     When User clicks on continue
+#     Then DVA Proper error message is displayed as Nid oeddem yn gallu dod o hyd i'ch manylion
+#     Then I see no issue date error as Rhaid i ddyddiad cyhoeddi fod yn y gorffennol in the page
+#     And I should be on the DVA details entry page Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – Profi pwy ydych chi – GOV.UK
+     Examples:
+       |DVADrivingLicenceSubject          |
+       |DrivingLicenceSubjectHappyBilly|
+
+  @mock-api:dva-IssueDate @validation-regression @build @staging
+   Scenario Outline: DVA Driving Licence Issue date (Current Date - 3)
+     Given User enters DVA data as a <DVADrivingLicenceSubject>
+     And User enters date of issue as current date
+     And User enters DVA day of issue as current day minus 3
+     When User clicks on continue
+#     Then DVA Proper error message is displayed as Nid oeddem yn gallu dod o hyd i'ch manylion
+#     Then I see no issue date error as Rhaid i ddyddiad cyhoeddi fod yn y gorffennol in the page
+#     And I should be on the DVA details entry page Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – Profi pwy ydych chi – GOV.UK
+     Examples:
+       |DVADrivingLicenceSubject          |
+       |DrivingLicenceSubjectHappyBilly|
+
+   @mock-api:dva-ConsentSection @validation-regression @build @staging@Language-regression
+   Scenario: DVA Driving Licence privacy notice link to consent
+     Given I see the consent title section Caniatau DVA i wirio eich manylion trwydded yrru
+     And I see the DVA Consent first sentence Mae DVA angen eich caniatâd i wirio eich manylion trwydded yrru cyn y gallwch barhau. Byddant yn sicrhau nad yw eich trwydded wedi cael ei chanslo na'i hadrodd fel un sydd ar goll neu wedi'i dwyn.
+     And I see the DVA Consent second sentence I ddarganfod mwy am sut bydd eich manylion trwydded yrru yn cael eu defnyddio, gallwch ddarllen:
+     And I see One Login privacy notice link hysbysiad preifatrwydd GOV.UK One Login (agor mewn tab newydd)
+     Then I see DVA privacy notice link hysbysiad preifatrwydd DVA (agor mewn tab newydd)
+
+

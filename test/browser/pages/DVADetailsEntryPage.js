@@ -1,10 +1,15 @@
 const { expect: expect } = require("chai");
 const TestDataCreator = require("../util/TestDataCreator");
+const moment = require("moment");
 
 exports.DVADetailsEntryPage = class PlaywrightDevPage {
   constructor(page) {
     this.page = page;
     this.url = "http://localhost:5030/details";
+
+    this.drivingLicenceDVARetryMessageHeading = this.page.locator(
+       'xpath=//*[@id="main-content"]/div/div/div[1]/div[2]'
+    );
 
     this.licenceNumber = this.page.locator('xpath=//*[@id="dvaLicenceNumber"]');
 
@@ -136,6 +141,27 @@ exports.DVADetailsEntryPage = class PlaywrightDevPage {
     this.serviceDescription = this.page.locator(
       'xpath=//*[@id="main-content"]/div/div/div'
     );
+
+//    this.consentSectionTitleDVA= this.page.locator(
+//      'xpath=//*[@id="main-content"]/div/div/form/h2'
+//    );
+
+    this.consentSectionSentenceOneDVA = this.page.locator(
+      'xpath=//*[@id="consentDVACheckbox-hint"]/p[1]'
+    );
+
+    this.consentSectionSentenceTwoDVA = this.page.locator(
+      'xpath=//*[@id="consentDVACheckbox-hint"]/p[2]'
+    );
+
+//    this.oneLoginLinkDVA = this.page.locator("a", {
+//       hasText: "hysbysiad preifatrwydd GOV.UK One Login (agor mewn tab newydd)",
+//       hysbysiad preifatrwydd GOV.UK One Login (agor mewn tab newydd)
+//    });
+
+    this.privacyPolicyDVALink = this.page.locator("a", {
+      hasText: "hysbysiad preifatrwydd DVA (agor mewn tab newydd)",
+    });
   }
 
   isCurrentPage() {
@@ -391,4 +417,79 @@ exports.DVADetailsEntryPage = class PlaywrightDevPage {
       validLicenceExample
     );
   }
+
+ async userReEntersDVAIssueDateAsCurrentDate() {
+       await this.dvaLicenceIssueYear.fill(moment().format("YYYY"));
+       await this.dvaLicenceIssueMonth.fill(moment().format("MM"));
+       await this.dvaLicenceIssueDay.fill(moment().format("DD"));
+     }
+
+   async userDVAReEntersDayOfIssueAsCurrentDateMinus(days) {
+       await this.dvaLicenceIssueDay.fill(
+         moment().subtract(days, "days").format("DD")
+       );
+     }
+
+   async assertDVARetryErrorMessage(retryMessageHeadingDva) {
+       await this.page.waitForLoadState("domcontentloaded");
+       expect(await this.isCurrentPage()).to.be.true;
+       expect(await this.drivingLicenceDVARetryMessageHeading.innerText()).to.equal(
+         retryMessageHeadingDva
+       );
+     }
+
+   async userReEntersDVAValidDateAsCurrentDate() {
+     await this.licenceValidToYear.fill(moment().format("YYYY"));
+     await this.licenceValidToMonth.fill(moment().format("MM"));
+     await this.licenceValidToDay.fill(moment().format("DD"));
+   }
+
+   async userDVAReEntersDayOfValidToAsCurrentDateMinus(days) {
+     await this.licenceValidToDay.fill(
+     moment().subtract(days, "days").format("DD")
+     );
+   }
+
+//   async assertDVAConsent(consentTitle) {
+//     await this.page.waitForLoadState("domcontentloaded");
+//     expect(await this.isCurrentPage()).to.be.true;
+//     expect(await this.consentSectionTitleDVA.innerText()).to.equal(
+//      consentTitle
+//     );
+//   }
+
+   async assertDVAConsentSentenceOne(consentFirstSentence) {
+     await this.page.waitForLoadState("domcontentloaded");
+     expect(await this.isCurrentPage()).to.be.true;
+     expect(await this.consentSectionSentenceOneDVA.innerText()).to.contains(
+      consentFirstSentence
+     );
+   }
+
+   async assertDVAConsentSentenceTwo(consentSecondSentence) {
+     await this.page.waitForLoadState("domcontentloaded");
+     expect(await this.isCurrentPage()).to.be.true;
+     expect(await this.consentSectionSentenceTwoDVA.innerText()).to.contains(
+       consentSecondSentence
+      );
+   }
+
+//   async assertDVAConsentOneLoginLink(consentOneLoginLink) {
+//      await this.page.waitForLoadState("domcontentloaded");
+//      expect(await this.isCurrentPage()).to.be.true;
+//      expect(await this.oneLoginLinkDVA.innerText()).to.equal(
+//          consentOneLoginLink
+//      );
+//    }
+
+    async assertDVAConsentPrivacyLink(consentPrivacyLink) {
+      await this.page.waitForLoadState("domcontentloaded");
+      expect(await this.isCurrentPage()).to.be.true;
+      expect(await this.privacyPolicyDVALink.innerText()).to.equal(
+         consentPrivacyLink
+      );
+    }
+
+
+
 };

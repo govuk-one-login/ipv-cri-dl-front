@@ -395,6 +395,32 @@ Then(
   }
 );
 
+Then(
+  /^I see no issue date error as (.*) in the page$/,
+  async function (fieldErrorText) {
+    const drivingLicencePage = new DrivingLicencePage(this.page);
+    await drivingLicencePage.assertNoInvalidIssueOnField(fieldErrorText);
+  }
+ );
+
+ Then(
+   /^User enters date of valid to date as current date$/,
+   { timeout: 2 * 5000 },
+   async function () {
+     const drivingLicencePage = new DrivingLicencePage(this.page);
+     await drivingLicencePage.userReEntersValidToDateAsCurrentDate();
+   }
+ );
+
+ Then(
+   /^User enters day of valid to as current day minus (.*)$/,
+   { timeout: 2 * 5000 },
+   async function (daysToAdd) {
+     const drivingLicencePage = new DrivingLicencePage(this.page);
+     await drivingLicencePage.userReEntersDayOfValidAsCurrentDateMinus(daysToAdd);
+   }
+ );
+
 //##################### DVA ##########################
 
 Then(
@@ -570,6 +596,52 @@ Then(
     const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
     await dvaDetailsEntryPage.assertConsentDVAErrorOnField(fieldErrorText);
   }
+);
+
+Then(
+    /^User enters DVA date of issue as current date$/,
+    { timeout: 2 * 5000 },
+    async function () {
+      const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
+      await dvaDetailsEntryPage.userReEntersDVAIssueDateAsCurrentDate();
+    }
+  );
+
+  Then(
+    /^User enters DVA day of issue as current day minus (.*)$/,
+    { timeout: 2 * 5000 },
+    async function (daysToSubtract) {
+      const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
+      await dvaDetailsEntryPage.userDVAReEntersDayOfIssueAsCurrentDateMinus(
+        daysToSubtract);
+    }
+  );
+
+  Then(
+    /^DVA Proper error message is displayed as (.*)$/,
+    { timeout: 2 * 5000 },
+    async function (retryMessageHeadingDva) {
+      const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
+      await dvaDetailsEntryPage.assertDVARetryErrorMessage(retryMessageHeadingDva);
+    }
+  );
+
+  Then(
+      /^User enters DVA date of valid to date as current date$/,
+      { timeout: 2 * 5000 },
+      async function () {
+        const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
+        await dvaDetailsEntryPage.userReEntersDVAValidDateAsCurrentDate();
+      }
+    );
+
+  Then(
+      /^User enters DVA day of valid to as current day minus (.*)$/,
+      { timeout: 2 * 5000 },
+      async function (daysToAdd) {
+        const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
+        await dvaDetailsEntryPage.userDVAReEntersDayOfValidToAsCurrentDateMinus(daysToAdd);
+      }
 );
 
 //################### Text content comparisons ########################
@@ -759,6 +831,48 @@ Then(
   }
 );
 
+Then(
+  /^I see the consent title section (.*)$/,
+  async function (consentTitle) {
+    const drivingLicencePage = new DrivingLicencePage(this.page);
+    await drivingLicencePage.assertDVLAConsent(consentTitle);
+  }
+);
+
+Then(
+  /^I see the DVA Consent first sentence (.*)$/,
+  { timeout: 2 * 5000 },
+  async function (consentFirstSentence) {
+    const drivingLicencePage = new DrivingLicencePage(this.page);
+    await drivingLicencePage.assertDVLAConsentSentenceOne(consentFirstSentence);
+  }
+);
+
+Then(
+  /^I see the DVA Consent second sentence (.*)$/,
+  { timeout: 2 * 5000 },
+  async function (consentSecondSentence) {
+    const drivingLicencePage = new DrivingLicencePage(this.page);
+    await drivingLicencePage.assertDVLAConsentSentenceTwo(consentSecondSentence);
+  }
+);
+
+Then(
+  /^I see One Login privacy notice link (.*)$/,
+  async function (consentOneLoginLink) {
+    const drivingLicencePage = new DrivingLicencePage(this.page);
+    await drivingLicencePage.assertConsentOneLoginLink(consentOneLoginLink);
+  }
+);
+
+Then(
+  /^I see DVLA privacy notice link (.*)$/,
+  async function (consentPrivacyLink) {
+    const drivingLicencePage = new DrivingLicencePage(this.page);
+    await drivingLicencePage.assertConsentPrivacyLink(consentPrivacyLink);
+  }
+);
+
 //########### Text Content Comparisions - DVA ##############
 
 Then(
@@ -864,3 +978,46 @@ Then(
     await dvaDetailsEntryPage.assertDVALicenceExample(validLicenceExample);
   }
 );
+
+//Then(
+//  /^I see DVA consent title section (.*)$/,
+//  async function (consentTitle) {
+//    const drivingLicencePage = new DrivingLicencePage(this.page);
+//    await drivingLicencePage.assertDVAConsent(consentTitle);
+//  }
+//);
+
+Then(
+  /^II see the first sentence in DVA page (.*)$/,
+  { timeout: 2 * 5000 },
+  async function (consentFirstSentence) {
+    const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
+    await dvaDetailsEntryPage.assertDVAConsentSentenceOne(consentFirstSentence);
+  }
+);
+
+Then(
+  /^I see the second sentence in DVA page (.*)$/,
+  { timeout: 2 * 5000 },
+  async function (consentSecondSentence) {
+    const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
+    await dvaDetailsEntryPage.assertDVAConsentTwoSent(consentSecondSentence);
+  }
+);
+
+//Then(
+//  /^I see DVA One Login privacy notice link (.*)$/,
+//  async function (consentOneLoginLink) {
+//    const drivingLicencePage = new DrivingLicencePage(this.page);
+//    await drivingLicencePage.assertDVAConsentOneLogin(consentOneLoginLink);
+//  }
+//);
+
+Then(
+  /^I see DVA privacy notice link (.*)$/,
+  async function (consentPrivacyLink) {
+    const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
+    await dvaDetailsEntryPage.assertDVAConsentPrivacyLink(consentPrivacyLink);
+  }
+);
+

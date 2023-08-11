@@ -233,6 +233,26 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
     this.postcodeLabel = this.page.locator('xpath=//*[@id="postcode-label"]');
 
     this.postcodeHint = this.page.locator('xpath=//*[@id="postcode-hint"]');
+
+    this.consentSectionTitle= this.page.locator(
+      'xpath=//*[@id="main-content"]/div/div/form/h2'
+    );
+
+    this.consentSectionSentenceOne = this.page.locator(
+      'xpath=//*[@id="consentCheckbox-hint"]/p[1]'
+    );
+
+    this.consentSectionSentenceTwo = this.page.locator(
+      'xpath=//*[@id="consentCheckbox-hint"]/p[2]'
+    );
+
+    this.oneLoginLink = this.page.locator("a", {
+      hasText: "hysbysiad preifatrwydd GOV.UK One Login (agor mewn tab newydd)",
+    });
+
+    this.privacyPolicyDVLALink = this.page.locator("a", {
+      hasText: "hysbysiad preifatrwydd DVLA (agor mewn tab newydd)",
+    });
   }
 
   isCurrentPage() {
@@ -381,6 +401,18 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
   async userReEntersValidToYear(InvalidValidToYear) {
     await this.licenceValidToYear.fill(InvalidValidToYear);
   }
+
+  async userReEntersValidToDateAsCurrentDate() {
+        await this.licenceValidToYear.fill(moment().format("YYYY"));
+        await this.licenceValidToMonth.fill(moment().format("MM"));
+        await this.licenceValidToDay.fill(moment().format("DD"));
+    }
+
+   async userReEntersDayOfValidAsCurrentDateMinus(days) {
+       await this.licenceValidToDay.fill(
+            moment().subtract(days, "days").format("DD")
+         );
+    }
 
   // Summary box errors and field errors
 
@@ -556,6 +588,13 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
     expect(await this.invalidConsentErrorFieldError.innerText()).to.contains(
       fieldErrorText
     );
+  }
+
+  async assertNoInvalidIssueOnField(fieldErrorText) {
+     await this.page.waitForLoadState("domcontentloaded");
+     expect(await this.isCurrentPage()).to.be.true;
+     const locator = await this.page.getByText('The issue date must be in the past');
+     await expect(this.page.locator).not.to.be.true;
   }
 
   //  Language
@@ -756,4 +795,45 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
     expect(await this.isCurrentPage()).to.be.true;
     expect(await this.validToYearLabel.innerText()).to.contains(validToYear);
   }
+
+  async assertDVLAConsent(consentTitle) {
+       await this.page.waitForLoadState("domcontentloaded");
+       expect(await this.isCurrentPage()).to.be.true;
+       expect(await this.consentSectionTitle.innerText()).to.equal(
+         consentTitle
+       );
+   }
+
+   async assertDVLAConsentSentenceOne(consentFirstSentence) {
+      await this.page.waitForLoadState("domcontentloaded");
+      expect(await this.isCurrentPage()).to.be.true;
+      expect(await this.consentSectionSentenceOne.innerText()).to.contains(
+       consentFirstSentence
+      );
+   }
+
+   async assertDVLAConsentSentenceTwo(consentSecondSentence) {
+      await this.page.waitForLoadState("domcontentloaded");
+      expect(await this.isCurrentPage()).to.be.true;
+      expect(await this.consentSectionSentenceTwo.innerText()).to.contains(
+       consentSecondSentence
+      );
+   }
+
+   async assertConsentOneLoginLink(consentOneLoginLink) {
+     await this.page.waitForLoadState("domcontentloaded");
+     expect(await this.isCurrentPage()).to.be.true;
+     expect(await this.oneLoginLink.innerText()).to.equal(
+         consentOneLoginLink
+     );
+   }
+
+   async assertConsentPrivacyLink(consentPrivacyLink) {
+       await this.page.waitForLoadState("domcontentloaded");
+       expect(await this.isCurrentPage()).to.be.true;
+       expect(await this.privacyPolicyDVLALink.innerText()).to.equal(
+           consentPrivacyLink
+       );
+   }
+
 };

@@ -216,6 +216,58 @@ Feature: DVA Driving licence CRI Error Validations
       |DVADrivingLicenceSubject          |InvalidDayOfIssue|InvalidMonthOfIssue|InvalidYearOfIssue|
       |DrivingLicenceSubjectHappyBilly|         01      |     10            |         2043     |
 
+  ###### IssueDate Current date and 1 day and 2 days before current date return no error validation   #######
+   @mock-api:dva-IssueDate @validation-regression @build @staging
+   Scenario Outline: DVA Driving Licence Issue date on Current Date
+     Given User enters DVA data as a <DVADrivingLicenceSubject>
+     And User enters DVA date of issue as current date
+     When User clicks on continue
+#    Then DVA Proper error message is displayed as We could not find your details
+#    Then I see no issue date error as The issue date must be in the past in the page
+#    And I should be on the DVA details entry page Enter your details exactly as they appear on your UK driving licence – Prove your identity – GOV.UK
+     Examples:
+        |DVADrivingLicenceSubject          |
+        |DrivingLicenceSubjectHappyBilly   |
+
+   @mock-api:dva-IssueDate @validation-regression @build @staging
+   Scenario Outline: DVA Driving Licence Issue date (Current Date - 1)
+     Given User enters DVA data as a <DVADrivingLicenceSubject>
+     And User enters DVA date of issue as current date
+     And User enters DVA day of issue as current day minus 1
+     When User clicks on continue
+#     Then DVA Proper error message is displayed as We could not find your details
+#     Then I see no issue date error as The issue date must be in the past in the page
+#     And I should be on the DVA details entry page Enter your details exactly as they appear on your UK driving licence – Prove your identity – GOV.UK
+     Examples:
+        |DVADrivingLicenceSubject          |
+        |DrivingLicenceSubjectHappyBilly|
+#
+   @mock-api:dva-IssueDate @validation-regression @build @staging
+   Scenario Outline: DVA Driving Licence Issue date (Current Date - 2)
+     Given User enters DVA data as a <DVADrivingLicenceSubject>
+     And User enters DVA date of issue as current date
+     And User enters DVA day of issue as current day minus 2
+     When User clicks on continue
+#     Then I see no issue date error as The issue date must be in the past in the page
+#     Then DVA Proper error message is displayed as We could not find your details
+#     And I should be on the DVA details entry page Enter your details exactly as they appear on your UK driving licence – Prove your identity – GOV.UK
+     Examples:
+        |DVADrivingLicenceSubject          |
+        |DrivingLicenceSubjectHappyBilly|
+
+  @mock-api:dva-IssueDate @validation-regression @build @staging
+  Scenario Outline: DVA Driving Licence Issue date (Current Date - 3)
+    Given User enters DVA data as a <DVADrivingLicenceSubject>
+    And User enters DVA date of issue as current date
+    And User enters DVA day of issue as current day minus 3
+    When User clicks on continue
+#    Then I see no issue date error as The issue date must be in the past in the page
+#    Then DVA Proper error message is displayed as We could not find your details
+#    And I should be on the DVA details entry page Enter your details exactly as they appear on your UK driving licence – Prove your identity – GOV.UK
+    Examples:
+      |DVADrivingLicenceSubject          |
+      |DrivingLicenceSubjectHappyBilly|
+
 #####  InvalidValidToDate, ValidToDateWithSpecialCharacters, NoValidToDate  #####
   @mock-api:dva-invalidExpiryDate @validation-regression @build @staging
   Scenario Outline: DVA Driving Licence Valid to date that are not real or with special characters or no valid to date error validation
@@ -246,6 +298,45 @@ Feature: DVA Driving licence CRI Error Validations
     Examples:
       |DVADrivingLicenceSubject       |InvalidValidToDay|InvalidValidToMonth|InvalidValidToYear|
       |DrivingLicenceSubjectHappyBilly|         10      |     01            |         2010     |
+
+  ###### ValidToDate Current date and 1 day and 2 days before current date return error validation   #######
+  @mock-api:dva-ValidToDate @validation-regression @build @staging
+  Scenario Outline: DVA Driving Licence Valid To date (Current Date)
+    Given User enters DVA data as a <DVADrivingLicenceSubject>
+    And User enters date of valid to date as current date
+    When User clicks on continue
+    Then I can see the valid to date error in the error summary as You cannot use an expired driving licence
+    And I can see the Valid to date field error as You cannot use an expired driving licence
+    And I check the page Title Error: Enter your details exactly as they appear on your UK driving licence – Prove your identity – GOV.UK
+    Examples:
+      |DVADrivingLicenceSubject          |
+      |DrivingLicenceSubjectHappyBilly|
+
+  @mock-api:dva-ValidToDate @validation-regression @build @staging
+  Scenario Outline: DVA Driving Licence Valid To date (Current Date - 1)
+    Given User enters DVA data as a <DVADrivingLicenceSubject>
+    And User enters date of valid to date as current date
+    And User enters day of valid to as current day minus 1
+    When User clicks on continue
+    Then I can see the valid to date error in the error summary as You cannot use an expired driving licence
+    And I can see the Valid to date field error as You cannot use an expired driving licence
+    And I check the page Title Error: Enter your details exactly as they appear on your UK driving licence – Prove your identity – GOV.UK
+    Examples:
+      |DVADrivingLicenceSubject          |
+      |DrivingLicenceSubjectHappyBilly|
+
+  @mock-api:dva-ValidToDate @validation-regression @build @staging
+  Scenario Outline: DVA Driving Licence Valid To date (Current Date - 2)
+    Given User enters DVA data as a <DVADrivingLicenceSubject>
+    And User enters date of valid to date as current date
+    And User enters day of valid to as current day minus 2
+    When User clicks on continue
+    Then I can see the valid to date error in the error summary as You cannot use an expired driving licence
+    And I can see the Valid to date field error as You cannot use an expired driving licence
+    And I check the page Title Error: Enter your details exactly as they appear on your UK driving licence – Prove your identity – GOV.UK
+    Examples:
+      |DVADrivingLicenceSubject          |
+      |DrivingLicenceSubjectHappyBilly|
 
   @mock-api:dva-ConsentError @validation-regression @build @staging
   Scenario Outline:  DVA Driving Licence error validation when DVA consent checkbox is unselected
