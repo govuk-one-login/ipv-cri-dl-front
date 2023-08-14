@@ -259,6 +259,18 @@ Feature: DVLA Driving licence CRI Error Validations
       |DrivingLicenceSubjectHappyPeter|                 |                   |                  |
 
   @mock-api:dl-success @validation-regression @build @staging
+  Scenario Outline: DVLA Driving Licence Issue date that is previous days gets through successfully
+    Given User enters DVLA data as a DrivingLicenceSubjectHappyPeter
+    Then User enters date of issue as current date
+    And User enters day of issue as current day minus <daysToSubtract>
+    When User clicks on continue
+    Then Proper error message is displayed as We could not find your details
+    Examples:
+      |daysToSubtract|
+      |      1       |
+      |      3       |
+
+  @mock-api:dl-success @validation-regression @build @staging
   Scenario: DVLA Driving Licence Issue date that is greater than 10 years old date error validation
     Given User enters DVLA data as a DrivingLicenceSubjectHappyPeter
     Then User enters date of issue as current date
