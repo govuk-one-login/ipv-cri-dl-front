@@ -759,13 +759,10 @@ Then(
   }
 );
 
-Then(
-  /^I see the consent title section (.*)$/,
-  async function (consentTitle) {
-    const drivingLicencePage = new DrivingLicencePage(this.page);
-    await drivingLicencePage.assertDVLAConsent(consentTitle);
-  }
-);
+Then(/^I see the consent title section (.*)$/, async function (consentTitle) {
+  const drivingLicencePage = new DrivingLicencePage(this.page);
+  await drivingLicencePage.assertDVLAConsent(consentTitle);
+});
 
 Then(
   /^I see the DVLA Consent first sentence (.*)$/,
@@ -781,7 +778,9 @@ Then(
   { timeout: 2 * 5000 },
   async function (consentSecondSentence) {
     const drivingLicencePage = new DrivingLicencePage(this.page);
-    await drivingLicencePage.assertDVLAConsentSentenceTwo(consentSecondSentence);
+    await drivingLicencePage.assertDVLAConsentSentenceTwo(
+      consentSecondSentence
+    );
   }
 );
 
@@ -802,25 +801,27 @@ Then(
 );
 
 Then(
-/^I can see Check your details as (.*)$/,
- async function (checkDetailsTitle) {
-  const drivingLicencePage = new DrivingLicencePage(this.page);
-  await drivingLicencePage.assertRetryTitle(checkDetailsTitle);
-});
+  /^I can see Check your details as (.*)$/,
+  async function (checkDetailsTitle) {
+    const drivingLicencePage = new DrivingLicencePage(this.page);
+    await drivingLicencePage.assertRetryTitle(checkDetailsTitle);
+  }
+);
 
-Then(
-/^I see error word as (.*)$/,
- async function (errorPrefix) {
+Then(/^I see error word as (.*)$/, async function (errorPrefix) {
   const drivingLicencePage = new DrivingLicencePage(this.page);
   await drivingLicencePage.assertErrorPrefix(errorPrefix);
 });
 
 Then(
-/^I see Check your details as (.*)$/,
- async function (errorSummaryMessage) {
-  const drivingLicencePage = new DrivingLicencePage(this.page);
-  await drivingLicencePage.assertYouWillBeAbleToFindSentence(errorSummaryMessage);
-});
+  /^I see Check your details as (.*)$/,
+  async function (errorSummaryMessage) {
+    const drivingLicencePage = new DrivingLicencePage(this.page);
+    await drivingLicencePage.assertYouWillBeAbleToFindSentence(
+      errorSummaryMessage
+    );
+  }
+);
 
 //########### Text Content Comparisions - DVA ##############
 
@@ -942,7 +943,9 @@ Then(
   { timeout: 2 * 5000 },
   async function (consentSecondSentence) {
     const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
-    await dvaDetailsEntryPage.assertDVAConsentSentenceTwo(consentSecondSentence);
+    await dvaDetailsEntryPage.assertDVAConsentSentenceTwo(
+      consentSecondSentence
+    );
   }
 );
 

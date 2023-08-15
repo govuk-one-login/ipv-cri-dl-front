@@ -61,7 +61,7 @@ exports.DVADetailsEntryPage = class PlaywrightDevPage {
     );
 
     this.invalidDVAConsentErrorSummary = this.page.locator(
-    'xpath=//*[@class="govuk-error-summary error-summary"]//*[@class="govuk-error-summary__body"]//*[@class="govuk-list govuk-error-summary__list"]//*[contains(@href,"#consentDVACheckbox")]'
+      'xpath=//*[@class="govuk-error-summary error-summary"]//*[@class="govuk-error-summary__body"]//*[@class="govuk-list govuk-error-summary__list"]//*[contains(@href,"#consentDVACheckbox")]'
     );
 
     //  DVA Field errors
@@ -138,7 +138,7 @@ exports.DVADetailsEntryPage = class PlaywrightDevPage {
     );
 
     this.consentSectionSentenceOneDVA = this.page.locator(
-       'xpath=//*[@id="consentDVACheckbox-hint"]/p[1]'
+      'xpath=//*[@id="consentDVACheckbox-hint"]/p[1]'
     );
 
     this.consentSectionSentenceTwoDVA = this.page.locator(
@@ -146,8 +146,7 @@ exports.DVADetailsEntryPage = class PlaywrightDevPage {
     );
     this.privacyPolicyDVALink = this.page.locator("a", {
       hasText: "hysbysiad preifatrwydd DVA (agor mewn tab newydd)",
-      }
-    );
+    });
   }
 
   isCurrentPage() {
@@ -421,17 +420,18 @@ exports.DVADetailsEntryPage = class PlaywrightDevPage {
   }
 
   async assertDVAConsentPrivacyLink(consentPrivacyLink) {
-     await this.page.waitForLoadState("domcontentloaded");
-     expect(await this.isCurrentPage()).to.be.true;
-     expect(await this.privacyPolicyDVALink.innerText()).to.equal(
-       consentPrivacyLink
-     );
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    expect(await this.privacyPolicyDVALink.innerText()).to.equal(
+      consentPrivacyLink
+    );
   }
 
   async assertDVARetryErrorMessage(retryMessageHeading) {
     await this.page.waitForLoadState("domcontentloaded");
     expect(await this.isCurrentPage()).to.be.true;
-    expect(await this.drivingLicenceDVARetryMessageHeading.innerText())
-        .to.contains(retryMessageHeading);
+    expect(
+      await this.drivingLicenceDVARetryMessageHeading.innerText()
+    ).to.contains(retryMessageHeading);
   }
 };

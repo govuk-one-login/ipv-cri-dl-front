@@ -87,7 +87,7 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
       'xpath=//*[@id="expiryDate-error"]'
     );
     this.invalidConsentErrorSummary = this.page.locator(
-    'xpath=//*[@class="govuk-error-summary error-summary"]//*[@class="govuk-error-summary__body"]//*[@class="govuk-list govuk-error-summary__list"]//*[contains(@href,"#consentCheckbox")]'
+      'xpath=//*[@class="govuk-error-summary error-summary"]//*[@class="govuk-error-summary__body"]//*[@class="govuk-list govuk-error-summary__list"]//*[contains(@href,"#consentCheckbox")]'
     );
 
     // Field errors
@@ -125,9 +125,9 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
       'xpath=//*[@id="expiryDate-error"]'
     );
 
-//    this.Continue = this.page.locator("button", {
-//      hasText: " Continue ",
-//    });
+    //    this.Continue = this.page.locator("button", {
+    //      hasText: " Continue ",
+    //    });
 
     this.invalidConsentErrorFieldError = this.page.locator(
       'xpath=//*[@id="consentCheckbox-error"]'
@@ -234,7 +234,7 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
 
     this.postcodeHint = this.page.locator('xpath=//*[@id="postcode-hint"]');
 
-    this.consentSectionTitle= this.page.locator(
+    this.consentSectionTitle = this.page.locator(
       'xpath=//*[@id="main-content"]/div/div/form/h2'
     );
 
@@ -243,7 +243,7 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
     );
 
     this.consentSectionSentenceTwo = this.page.locator(
-     'xpath=//*[@id="consentCheckbox-hint"]/p[2]'
+      'xpath=//*[@id="consentCheckbox-hint"]/p[2]'
     );
 
     this.oneLoginLink = this.page.locator("a", {
@@ -255,15 +255,15 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
     });
 
     this.retryCheckDetailsTitleLabel = this.page.locator(
-     'xpath=//*[@id="header"]'
+      'xpath=//*[@id="header"]'
     );
 
     this.errorText = this.page.locator(
-     'xpath=//*[@id="govuk-notification-banner-title"]'
+      'xpath=//*[@id="govuk-notification-banner-title"]'
     );
 
     this.thereWasAProblemFirstSentence = this.page.locator(
-     'xpath=//*[@id="main-content"]/div/div/div[1]/div[2]/p[1]'
+      'xpath=//*[@id="main-content"]/div/div/div[1]/div[2]/p[1]'
     );
   }
 
@@ -483,7 +483,6 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
   async assertRetryErrorMessage(retryMessageHeading) {
     await this.page.waitForLoadState("domcontentloaded");
     expect(await this.isCurrentPage()).to.be.true;
-    console.log("text:" + this.drivingLicenceRetryMessageHeading);
     expect(
       await this.drivingLicenceRetryMessageHeading.innerText()
     ).to.contains(retryMessageHeading);
@@ -791,35 +790,31 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
   }
 
   async assertDVLAConsent(consentTitle) {
-     await this.page.waitForLoadState("domcontentloaded");
-     expect(await this.isCurrentPage()).to.be.true;
-     expect(await this.consentSectionTitle.innerText()).to.equal(
-       consentTitle
-     );
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    expect(await this.consentSectionTitle.innerText()).to.equal(consentTitle);
   }
 
   async assertDVLAConsentSentenceOne(consentFirstSentence) {
-     await this.page.waitForLoadState("domcontentloaded");
-     expect(await this.isCurrentPage()).to.be.true;
-     expect(await this.consentSectionSentenceOne.innerText()).to.contains(
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    expect(await this.consentSectionSentenceOne.innerText()).to.contains(
       consentFirstSentence
-     );
+    );
   }
 
   async assertDVLAConsentSentenceTwo(consentSecondSentence) {
     await this.page.waitForLoadState("domcontentloaded");
     expect(await this.isCurrentPage()).to.be.true;
     expect(await this.consentSectionSentenceTwo.innerText()).to.contains(
-     consentSecondSentence
-     );
+      consentSecondSentence
+    );
   }
 
   async assertConsentOneLoginLink(consentOneLoginLink) {
     await this.page.waitForLoadState("domcontentloaded");
     expect(await this.isCurrentPage()).to.be.true;
-    expect(await this.oneLoginLink.innerText()).to.equal(
-      consentOneLoginLink
-    );
+    expect(await this.oneLoginLink.innerText()).to.equal(consentOneLoginLink);
   }
 
   async assertConsentPrivacyLink(consentPrivacyLink) {
@@ -841,16 +836,14 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
   async assertErrorPrefix(errorPrefix) {
     await this.page.waitForLoadState("domcontentloaded");
     expect(await this.isCurrentPage()).to.be.true;
-    expect(await this.errorText.innerText()).to.equal(
-       errorPrefix
-    );
+    expect(await this.errorText.innerText()).to.equal(errorPrefix);
   }
 
-   async assertYouWillBeAbleToFindSentence(errorSummaryMessage) {
-      await this.page.waitForLoadState("domcontentloaded");
-      expect(await this.isCurrentPage()).to.be.true;
-      expect(await this.thereWasAProblemFirstSentence.innerText()).to.contains(
-        errorSummaryMessage
-      );
-   }
+  async assertYouWillBeAbleToFindSentence(errorSummaryMessage) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    expect(await this.thereWasAProblemFirstSentence.innerText()).to.contains(
+      errorSummaryMessage
+    );
+  }
 };
