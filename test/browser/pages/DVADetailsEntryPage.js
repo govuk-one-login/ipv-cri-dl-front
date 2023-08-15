@@ -60,9 +60,9 @@ exports.DVADetailsEntryPage = class PlaywrightDevPage {
       'xpath=//*[@class="govuk-error-summary error-summary"]//*[@class="govuk-error-summary__body"]//*[@class="govuk-list govuk-error-summary__list"]//*[contains(@href,"#dateOfIssue-day")]'
     );
 
-    this.invalidDVAConsentErrorSummary = this.page.locator("a", {
-      hasText: "You must give your consent to continue",
-    });
+    this.invalidDVAConsentErrorSummary = this.page.locator(
+    'xpath=//*[@class="govuk-error-summary error-summary"]//*[@class="govuk-error-summary__body"]//*[@class="govuk-list govuk-error-summary__list"]//*[contains(@href,"#consentDVACheckbox")]'
+    );
 
     //  DVA Field errors
 
@@ -135,6 +135,18 @@ exports.DVADetailsEntryPage = class PlaywrightDevPage {
 
     this.serviceDescription = this.page.locator(
       'xpath=//*[@id="main-content"]/div/div/div'
+    );
+
+    this.consentSectionSentenceOneDVA = this.page.locator(
+       'xpath=//*[@id="consentDVACheckbox-hint"]/p[1]'
+    );
+
+    this.consentSectionSentenceTwoDVA = this.page.locator(
+      'xpath=//*[@id="consentDVACheckbox-hint"]/p[2]'
+    );
+    this.privacyPolicyDVALink = this.page.locator("a", {
+      hasText: "hysbysiad preifatrwydd DVA (agor mewn tab newydd)",
+      }
     );
   }
 
@@ -390,5 +402,36 @@ exports.DVADetailsEntryPage = class PlaywrightDevPage {
     expect(await this.licenceNumberHint.innerText()).to.equal(
       validLicenceExample
     );
+  }
+
+  async assertDVAConsentSentenceOne(consentFirstSentence) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    expect(await this.consentSectionSentenceOneDVA.innerText()).to.contains(
+      consentFirstSentence
+    );
+  }
+
+  async assertDVAConsentSentenceTwo(consentSecondSentence) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    expect(await this.consentSectionSentenceTwoDVA.innerText()).to.contains(
+      consentSecondSentence
+    );
+  }
+
+  async assertDVAConsentPrivacyLink(consentPrivacyLink) {
+     await this.page.waitForLoadState("domcontentloaded");
+     expect(await this.isCurrentPage()).to.be.true;
+     expect(await this.privacyPolicyDVALink.innerText()).to.equal(
+       consentPrivacyLink
+     );
+  }
+
+  async assertDVARetryErrorMessage(retryMessageHeading) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    expect(await this.drivingLicenceDVARetryMessageHeading.innerText())
+        .to.contains(retryMessageHeading);
   }
 };
