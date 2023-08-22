@@ -246,13 +246,13 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
       'xpath=//*[@id="consentCheckbox-hint"]/p[2]'
     );
 
-    this.oneLoginLink = this.page.locator("a", {
-      hasText: "hysbysiad preifatrwydd GOV.UK One Login (agor mewn tab newydd)",
-    });
+    this.oneLoginLink = this.page.locator(
+      'xpath=//*[@id="consentCheckbox-hint"]/ul/li[1]/a'
+    );
 
-    this.privacyPolicyDVLALink = this.page.locator("a", {
-      hasText: "hysbysiad preifatrwydd DVLA (agor mewn tab newydd)",
-    });
+    this.privacyPolicyDVLALink = this.page.locator(
+      'xpath=//*[@id="consentCheckbox-hint"]/ul/li[2]/a'
+    );
 
     this.retryCheckDetailsTitleLabel = this.page.locator(
       'xpath=//*[@id="header"]'

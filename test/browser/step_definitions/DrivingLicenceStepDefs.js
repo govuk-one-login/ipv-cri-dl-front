@@ -956,3 +956,11 @@ Then(
     await dvaDetailsEntryPage.assertDVAConsentPrivacyLink(consentPrivacyLink);
   }
 );
+
+Then(
+  /^I see DVA One Login privacy notice link (.*)$/,
+  async function (consentOneLoginLink) {
+    const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
+    await dvaDetailsEntryPage.assertDVAConsentOneLoginLink(consentOneLoginLink);
+  }
+);

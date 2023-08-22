@@ -144,9 +144,13 @@ exports.DVADetailsEntryPage = class PlaywrightDevPage {
     this.consentSectionSentenceTwoDVA = this.page.locator(
       'xpath=//*[@id="consentDVACheckbox-hint"]/p[2]'
     );
-    this.privacyPolicyDVALink = this.page.locator("a", {
-      hasText: "hysbysiad preifatrwydd DVA (agor mewn tab newydd)",
-    });
+    this.privacyPolicyDVALink = this.page.locator(
+      'xpath=//*[@id="consentDVACheckbox-hint"]/ul/li[2]/a'
+    );
+
+    this.oneLoginLinkDVA = this.page.locator(
+      'xpath=//*[@id="consentDVACheckbox-hint"]/ul/li[1]/a'
+    );
   }
 
   isCurrentPage() {
@@ -427,11 +431,11 @@ exports.DVADetailsEntryPage = class PlaywrightDevPage {
     );
   }
 
-  async assertDVARetryErrorMessage(retryMessageHeading) {
+  async assertDVAConsentOneLoginLink(consentOneLoginLink) {
     await this.page.waitForLoadState("domcontentloaded");
     expect(await this.isCurrentPage()).to.be.true;
-    expect(
-      await this.drivingLicenceDVARetryMessageHeading.innerText()
-    ).to.contains(retryMessageHeading);
+    expect(await this.oneLoginLinkDVA.innerText()).to.equal(
+      consentOneLoginLink
+    );
   }
 };

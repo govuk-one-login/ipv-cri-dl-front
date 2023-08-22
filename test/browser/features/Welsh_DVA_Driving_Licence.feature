@@ -67,7 +67,7 @@ Feature: DVA Driving licence CRI Error Validations
     Given I see the consent title section Caniatau DVA i wirio eich manylion trwydded yrru
     And I see the DVA Consent first sentence Mae DVA angen eich caniatâd i wirio eich manylion trwydded yrru cyn y gallwch barhau. Byddant yn sicrhau nad yw eich trwydded wedi cael ei chanslo na'i hadrodd fel un sydd ar goll neu wedi'i dwyn.
     And I see the DVA Consent second sentence I ddarganfod mwy am sut bydd eich manylion trwydded yrru yn cael eu defnyddio, gallwch ddarllen:
-    And I see One Login privacy notice link hysbysiad preifatrwydd GOV.UK One Login (agor mewn tab newydd)
+    And I see DVA One Login privacy notice link hysbysiad preifatrwydd GOV.UK One Login (agor mewn tab newydd)
     Then I see DVA privacy notice link hysbysiad preifatrwydd DVA (agor mewn tab newydd)
 
     ##### Summary Error Validation ######
@@ -311,7 +311,7 @@ Feature: DVA Driving licence CRI Error Validations
       |DVADrivingLicenceSubject       |InvalidValidToDay|InvalidValidToMonth|InvalidValidToYear|
       |DrivingLicenceSubjectHappyBilly|         10      |     01            |         2010     |
 
-  @mock-api:dva-ConsentError @validation-regression @build @staging
+  @mock-api:dva-ConsentError @language-regression
   Scenario Outline:  DVA Driving Licence error validation when DVA consent checkbox is unselected
     Given User enters DVA data as a <DVADrivingLicenceSubject>
     And DVA consent checkbox is unselected

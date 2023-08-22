@@ -375,7 +375,7 @@ Feature: DVLA Driving licence CRI Error Validations
       |DrivingLicenceSubjectHappyPeter|ABC XYZ           |
 
     ##### Consent Checkbox Unselected error Validation ##### (passed)
-  @mock-api:dvla-Consent-checkbox-error @validation-regression @build @staging @language-regression
+  @mock-api:dvla-Consent-checkbox-error @language-regression
   Scenario Outline:  DVLA Driving Licence error validation when DVLA consent checkbox is unselected
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And DVLA consent checkbox is unselected
