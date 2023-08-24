@@ -388,7 +388,7 @@ Feature: DVLA Driving licence CRI Error Validations
       |DrivingLicenceSubjectHappyPeter   |
 
     ##### Retry message #####
-  @mock-api:dl-failed @build @staging @language-regression
+  @mock-api:dl-failed @language-regression
   Scenario Outline:Retry message
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters drivingLicenceNumber as <InvalidLicenceNumber>

@@ -62,7 +62,7 @@ Feature: DVA Driving licence CRI Error Validations
     Given I can see the postcode field titled Cod post
     Then I can see postcode sentence as Rhowch y cod post yn y cyfeiriad yn adran 8 o'ch trwydded
 
-  @mock-api:dva-ConsentSection @validation-regression @build @staging@Language-regression
+  @mock-api:dva-ConsentSection @validation-regression @Language-regression
   Scenario: DVA Driving Licence privacy notice link to consent
     Given I see the consent title section Caniatau DVA i wirio eich manylion trwydded yrru
     And I see the DVA Consent first sentence Mae DVA angen eich caniatâd i wirio eich manylion trwydded yrru cyn y gallwch barhau. Byddant yn sicrhau nad yw eich trwydded wedi cael ei chanslo na'i hadrodd fel un sydd ar goll neu wedi'i dwyn.
@@ -323,7 +323,7 @@ Feature: DVA Driving licence CRI Error Validations
       |DVADrivingLicenceSubject             |
       |DrivingLicenceSubjectHappyBilly|
 
-  @mock-api:dl-failed @build @staging @language-regression
+  @mock-api:dl-failed @language-regression
   Scenario Outline: DVA Retry Message
     Given User enters DVA data as a <DVADrivingLicenceSubject>
     And DVA User re-enters drivingLicenceNumber as <InvalidLicenceNumber>
