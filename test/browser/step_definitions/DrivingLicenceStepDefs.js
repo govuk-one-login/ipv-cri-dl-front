@@ -759,6 +759,70 @@ Then(
   }
 );
 
+Then(/^I see the consent title section (.*)$/, async function (consentTitle) {
+  const drivingLicencePage = new DrivingLicencePage(this.page);
+  await drivingLicencePage.assertDVLAConsent(consentTitle);
+});
+
+Then(
+  /^I see the DVLA Consent first sentence (.*)$/,
+  { timeout: 2 * 5000 },
+  async function (consentFirstSentence) {
+    const drivingLicencePage = new DrivingLicencePage(this.page);
+    await drivingLicencePage.assertDVLAConsentSentenceOne(consentFirstSentence);
+  }
+);
+
+Then(
+  /^I see the DVLA Consent second sentence (.*)$/,
+  { timeout: 2 * 5000 },
+  async function (consentSecondSentence) {
+    const drivingLicencePage = new DrivingLicencePage(this.page);
+    await drivingLicencePage.assertDVLAConsentSentenceTwo(
+      consentSecondSentence
+    );
+  }
+);
+
+Then(
+  /^I see One Login privacy notice link (.*)$/,
+  async function (consentOneLoginLink) {
+    const drivingLicencePage = new DrivingLicencePage(this.page);
+    await drivingLicencePage.assertConsentOneLoginLink(consentOneLoginLink);
+  }
+);
+
+Then(
+  /^I see DVLA privacy notice link (.*)$/,
+  async function (consentPrivacyLink) {
+    const drivingLicencePage = new DrivingLicencePage(this.page);
+    await drivingLicencePage.assertConsentPrivacyLink(consentPrivacyLink);
+  }
+);
+
+Then(
+  /^I can see Check your details as (.*)$/,
+  async function (checkDetailsTitle) {
+    const drivingLicencePage = new DrivingLicencePage(this.page);
+    await drivingLicencePage.assertRetryTitle(checkDetailsTitle);
+  }
+);
+
+Then(/^I see error word as (.*)$/, async function (errorPrefix) {
+  const drivingLicencePage = new DrivingLicencePage(this.page);
+  await drivingLicencePage.assertErrorPrefix(errorPrefix);
+});
+
+Then(
+  /^I see Check your details as (.*)$/,
+  async function (errorSummaryMessage) {
+    const drivingLicencePage = new DrivingLicencePage(this.page);
+    await drivingLicencePage.assertYouWillBeAbleToFindSentence(
+      errorSummaryMessage
+    );
+  }
+);
+
 //########### Text Content Comparisions - DVA ##############
 
 Then(
@@ -862,5 +926,41 @@ Then(
   async function (validLicenceExample) {
     const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
     await dvaDetailsEntryPage.assertDVALicenceExample(validLicenceExample);
+  }
+);
+
+Then(
+  /^I see the DVA Consent first sentence (.*)$/,
+  { timeout: 2 * 5000 },
+  async function (consentFirstSentence) {
+    const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
+    await dvaDetailsEntryPage.assertDVAConsentSentenceOne(consentFirstSentence);
+  }
+);
+
+Then(
+  /^I see the DVA Consent second sentence (.*)$/,
+  { timeout: 2 * 5000 },
+  async function (consentSecondSentence) {
+    const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
+    await dvaDetailsEntryPage.assertDVAConsentSentenceTwo(
+      consentSecondSentence
+    );
+  }
+);
+
+Then(
+  /^I see DVA privacy notice link (.*)$/,
+  async function (consentPrivacyLink) {
+    const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
+    await dvaDetailsEntryPage.assertDVAConsentPrivacyLink(consentPrivacyLink);
+  }
+);
+
+Then(
+  /^I see DVA One Login privacy notice link (.*)$/,
+  async function (consentOneLoginLink) {
+    const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
+    await dvaDetailsEntryPage.assertDVAConsentOneLoginLink(consentOneLoginLink);
   }
 );

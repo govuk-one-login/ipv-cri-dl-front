@@ -1,4 +1,4 @@
-@mock-api:dl-success @success @DVA
+@mock-api:dl-failed @mock-api:dl-success @success @DVA
 Feature: DVA Driving licence CRI Error Validations
 
   Background:
@@ -8,13 +8,13 @@ Feature: DVA Driving licence CRI Error Validations
     And I click on DVA radio button and Continue
     And I add a cookie to change the language to Welsh
 
-   @mock-api:dva-PageHeading @language-regression
-   Scenario:User Selects DVA and landed in DVA page and Page title and sub-text
-     Given I check the page title Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – Profi pwy ydych chi – GOV.UK
-     Then I see the heading Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru
-     And I see sentence Os nad oes gennych drwydded yrru y DU neu os na allwch gofio'ch manylion, gallwch brofi pwy ydych chi mewn ffordd arall yn lle.
+  @mock-api:dva-PageHeading @language-regression
+  Scenario:User Selects DVA and landed in DVA page and Page title and sub-text
+    Given I check the page title Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – Profi pwy ydych chi – GOV.UK
+    Then I see the heading Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru
+    And I see sentence Os nad oes gennych drwydded yrru y DU neu os na allwch gofio'ch manylion, gallwch brofi pwy ydych chi mewn ffordd arall yn lle.
 
-  @mock-api:dvla-WelshBetaBanner @validation-regression
+  @mock-api:dva-WelshBetaBanner @language-regression
   Scenario: Beta Banner
     Given I view the beta banner
     And the beta banner reads Mae hwn yn wasanaeth newydd – bydd eich adborth (agor mewn tab newydd) yn ein helpu i'w wella.
@@ -40,17 +40,17 @@ Feature: DVA Driving licence CRI Error Validations
   Scenario: DVA Issue date field
     Given I see the DVA Issue date field titled Dyddiad cyhoeddi
     Then I see DVA date section example as Dyma'r dyddiad yn adran 4a o'ch trwydded, er enghraifft 27 5 2019
-     Then I can see DVA Issue day as Diwrnod
-     And I can see DVA issue month as Mis
-     And I can see DVA issue year as Blwyddyn
+    Then I can see DVA Issue day as Diwrnod
+    And I can see DVA issue month as Mis
+    And I can see DVA issue year as Blwyddyn
 
   @mock-api:dva-ValidToDateField @language-regression
   Scenario: DVLA Valid to date field
     Given I can see the Valid to date field titled Yn ddilys tan
     And I can see Valid to date sentence as Dyma'r dyddiad yn adran 4b o'ch trwydded, er enghraifft 27 5 2019
-     Then I can see Valid To day as Diwrnod
-     And I can see Valid To month as Mis
-     Then I can see Valid To year as Blwyddyn
+    Then I can see Valid To day as Diwrnod
+    And I can see Valid To month as Mis
+    Then I can see Valid To year as Blwyddyn
 
   @mock-api:dva-LicenceField @language-regression
   Scenario: DVA Licence number
@@ -61,6 +61,14 @@ Feature: DVA Driving licence CRI Error Validations
   Scenario: DVA Postcode
     Given I can see the postcode field titled Cod post
     Then I can see postcode sentence as Rhowch y cod post yn y cyfeiriad yn adran 8 o'ch trwydded
+
+  @mock-api:dva-ConsentSection @validation-regression @Language-regression
+  Scenario: DVA Driving Licence privacy notice link to consent
+    Given I see the consent title section Caniatau DVA i wirio eich manylion trwydded yrru
+    And I see the DVA Consent first sentence Mae DVA angen eich caniatâd i wirio eich manylion trwydded yrru cyn y gallwch barhau. Byddant yn sicrhau nad yw eich trwydded wedi cael ei chanslo na'i hadrodd fel un sydd ar goll neu wedi'i dwyn.
+    And I see the DVA Consent second sentence I ddarganfod mwy am sut bydd eich manylion trwydded yrru yn cael eu defnyddio, gallwch ddarllen:
+    And I see DVA One Login privacy notice link hysbysiad preifatrwydd GOV.UK One Login (agor mewn tab newydd)
+    Then I see DVA privacy notice link hysbysiad preifatrwydd DVA (agor mewn tab newydd)
 
     ##### Summary Error Validation ######
 
@@ -302,3 +310,28 @@ Feature: DVA Driving licence CRI Error Validations
     Examples:
       |DVADrivingLicenceSubject       |InvalidValidToDay|InvalidValidToMonth|InvalidValidToYear|
       |DrivingLicenceSubjectHappyBilly|         10      |     01            |         2010     |
+
+  @mock-api:dva-ConsentError @language-regression
+  Scenario Outline:  DVA Driving Licence error validation when DVA consent checkbox is unselected
+    Given User enters DVA data as a <DVADrivingLicenceSubject>
+    And DVA consent checkbox is unselected
+    When User clicks on continue
+    Then I can see the DVA consent error summary as Mae'n rhaid i chi roi eich caniatâd i barhau
+    And I can see the DVA consent error on the checkbox as Mae'n rhaid i chi roi eich caniatâd i barhau
+    And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – Profi pwy ydych chi – GOV.UK
+    Examples:
+      |DVADrivingLicenceSubject             |
+      |DrivingLicenceSubjectHappyBilly|
+
+  @mock-api:dl-failed @language-regression
+  Scenario Outline: DVA Retry Message
+    Given User enters DVA data as a <DVADrivingLicenceSubject>
+    And DVA User re-enters drivingLicenceNumber as <InvalidLicenceNumber>
+    When User clicks on continue
+    And I can see Check your details as Gwiriwch bod eich manylion yn paru gyda beth sydd ar eich trwydded yrru y DU
+    Then I see error word as Gwall
+    Then Proper error message is displayed as Nid oeddem yn gallu dod o hyd i'ch manylion
+    And I see Check your details as Roedd yna broblem wrth i ni wirio eich manylion gyda'r DVA.
+    Examples:
+      |DVADrivingLicenceSubject       |InvalidLicenceNumber|
+      |DrivingLicenceSubjectHappyBilly|55667778             |
