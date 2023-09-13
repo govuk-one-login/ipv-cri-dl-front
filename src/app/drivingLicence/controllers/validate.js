@@ -38,6 +38,10 @@ class ValidateController extends BaseController {
         session_id: req.session.tokenId,
       };
 
+      if (req.session.featureSet === "direct") {
+        headers["document-checking-route"] = "direct";
+      }
+
       logger.info("validate: calling check-driving-licence lambda", {
         req,
         res,

@@ -76,6 +76,65 @@ describe("validate controller", () => {
     expect(req.sessionModel.get("redirect_url")).to.eq(data.redirectUrl);
   });
 
+  it("should add a document check routing header if a feature set has been set", async () => {
+    const sessionId = "drivingLicence123";
+
+    req.sessionModel.set("drivingLicenceNumber", "SMITH9702105LN99");
+    req.sessionModel.set("issueNumber", "12");
+    req.sessionModel.set("postcode", "SW1 EQR");
+    req.session.tokenId = sessionId;
+    req.sessionModel.set("surname", "Smith");
+    req.sessionModel.set("firstName", "Dan");
+    req.sessionModel.set("middleNames", "Joe");
+    req.sessionModel.set("dateOfBirth", "10/02/1975");
+    req.sessionModel.set("expiryDate", "15/01/2035");
+    req.sessionModel.set("issueDate", "10/02/2005");
+    req.sessionModel.set("dateOfIssue", "10/02/2005");
+    req.sessionModel.set("licenceIssuer", "DVLA");
+    req.session.authParams = {
+      redirect_uri: "https://client.example.com",
+      state: "A VALUE",
+    };
+    req.session.featureSet = "direct";
+
+    const data = {
+      redirectUrl:
+        "https://client.example.com/cb?id=DrivingLicenceIssuer&code=1234",
+      retry: false,
+    };
+
+    const resolvedPromise = new Promise((resolve) => resolve({ data }));
+    let stub = sandbox.stub(req.axios, "post").returns(resolvedPromise);
+
+    await validate.saveValues(req, res, next);
+
+    sandbox.assert.calledWith(
+      stub,
+      "check-driving-licence",
+      {
+        drivingLicenceNumber: "SMITH9702105LN99",
+        issueNumber: "12",
+        postcode: "SW1 EQR",
+        surname: "Smith",
+        forenames: ["Dan", "Joe"],
+        dateOfBirth: "10/02/1975",
+        expiryDate: "15/01/2035",
+        issueDate: "10/02/2005",
+        licenceIssuer: "DVLA",
+      },
+      {
+        headers: {
+          "document-checking-route": "direct",
+          session_id: sessionId,
+        },
+      }
+    );
+
+    expect(req.session.authParams.redirect_uri).to.eq(
+      "https://client.example.com"
+    );
+  });
+
   it("should set an error object in the session if redirect url is missing", async () => {
     req.sessionModel.set("drivingLicenceNumber", "SMITH9702105LN99");
     req.sessionModel.set("issueNumber", "12");
