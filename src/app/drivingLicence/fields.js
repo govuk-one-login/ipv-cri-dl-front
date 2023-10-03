@@ -1,4 +1,10 @@
+const { firstNameMiddleNameLengthValidator } = require("./fieldsHelper");
 const fields = require("./fieldsHelper");
+
+const firstNameMiddleNameLengthValidatorObj = {
+  fn: firstNameMiddleNameLengthValidator,
+  arguments: [38, "firstName", "middleNames"],
+};
 
 const dvlaValidatorObj = {
   fn: fields.dvlaValidator,
@@ -18,7 +24,7 @@ module.exports = {
     type: "text",
     validate: [
       "required",
-      { type: "maxlength", arguments: [30] },
+      { type: "maxlength", arguments: [43] },
       { type: "regexSurname", fn: (value) => value.match(/^[a-zA-Z .'-]*$/) },
     ],
     journeyKey: "surname",
@@ -27,8 +33,12 @@ module.exports = {
     type: "text",
     validate: [
       "required",
-      { type: "maxlength", arguments: [30] },
+      { type: "maxlength", arguments: [38] },
       { type: "regexFirstName", fn: (value) => value.match(/^[a-zA-Z .'-]*$/) },
+      {
+        type: "firstNameMiddleNameLength",
+        ...firstNameMiddleNameLengthValidatorObj,
+      },
     ],
     journeyKey: "firstName",
   },
@@ -36,10 +46,14 @@ module.exports = {
     type: "text",
     journeyKey: "middleNames",
     validate: [
-      { type: "maxlength", arguments: [30] },
+      { type: "maxlength", arguments: [38] },
       {
         type: "regexMiddleNames",
         fn: (value) => value.match(/^[a-zA-Z .'-]*$/),
+      },
+      {
+        type: "firstNameMiddleNameLength",
+        ...firstNameMiddleNameLengthValidatorObj,
       },
     ],
   },

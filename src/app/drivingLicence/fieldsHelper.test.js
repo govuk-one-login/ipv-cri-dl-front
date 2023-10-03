@@ -2,36 +2,47 @@ const fields = require("./fieldsHelper");
 const moment = require("moment");
 
 describe("custom validation fields test", () => {
-  it("should be false when first and middle name combined greater than 30 characters", () => {
+  it("should be false when first and middle name combined is greater than 38 characters", () => {
     const validator = fields.firstNameMiddleNameLengthValidator.bind({
       values: {
-        firstName: "jjjjjjjjjjjjjjjjjjjjj",
-        middleNames: "jjjjjjjjjj",
+        firstName: "jjjjjjjjjjjjjjjjjjjjjjjjjjjjjj",
+        middleNames: "jjjjjjjjj",
       },
     });
 
-    expect(validator(1, 30, "firstName", "middleNames")).to.be.false;
+    expect(validator(1, 38, "firstName", "middleNames")).to.be.false;
   });
 
-  it("should be true when first and middle name combined less or equal to 30 characters", () => {
+  it("should be false when first and middle name combined is 38 characters plus extra character", () => {
     const validator = fields.firstNameMiddleNameLengthValidator.bind({
       values: {
-        firstName: "jjjjjjjjjjjj",
-        middleNames: "jjjjjjjjjj",
+        firstName: "jjjjjjjjjjjjjjjjjjjjjjjjjjjjjj",
+        middleNames: "jjjjjjjj",
       },
     });
 
-    expect(validator(1, 30, "firstName", "middleNames")).to.be.true;
+    expect(validator(1, 38, "firstName", "middleNames")).to.be.false;
   });
 
-  it("should be false when firstname is only entered and is over 30 characters", () => {
+  it("should be true when first and middle name is 37 characters", () => {
     const validator = fields.firstNameMiddleNameLengthValidator.bind({
       values: {
-        firstName: "jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj",
+        firstName: "jjjjjjjjjjjjjjjjjjjjjjjjjjjjjj",
+        middleNames: "jjjjjjj",
       },
     });
 
-    expect(validator(1, 30, "firstName", "middleNames")).to.be.false;
+    expect(validator(1, 38, "firstName", "middleNames")).to.be.true;
+  });
+
+  it("should be true when firstname is only entered and is 38 characters", () => {
+    const validator = fields.firstNameMiddleNameLengthValidator.bind({
+      values: {
+        firstName: "jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj",
+      },
+    });
+
+    expect(validator(1, 38, "firstName", "middleNames")).to.be.true;
   });
 
   it("should be true when licence number matches DOB", () => {

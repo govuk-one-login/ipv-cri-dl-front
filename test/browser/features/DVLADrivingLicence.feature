@@ -274,8 +274,8 @@ Feature: DVLA Driving licence CRI Error Validations
   Scenario: DVLA Driving Licence Issue date that is greater than 10 years old date error validation
     Given User enters DVLA data as a DrivingLicenceSubjectHappyPeter
     Then User enters date of issue as current date
-    And User enters year of issue as current year minus 10
     And User enters day of issue as current day minus 1
+    And User enters year of issue as current year minus 10
     When User clicks on continue
     Then I see issue date error in summary as Enter the date as it appears on your driving licence
     And I see invalid issue date field error as Enter the date as it appears on your driving licence
