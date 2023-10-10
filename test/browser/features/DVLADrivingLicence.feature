@@ -441,7 +441,7 @@ Feature: DVLA Driving licence CRI Error Validations
       | DrivingLicenceSubject             | InvalidLicenceNumber | InvalidLastName | InvalidFirstName | InvalidMiddleNames |
       | DrivingLicenceSubjectHappyKenneth | AB999607085JAAAA     | JOHN            | SMITH            | A                  |
 
-#  @mock-api:dl-success @validation-regression @build @staging
+  @mock-api:dl-success @validation-regression @build @staging
   Scenario Outline:  DVLA Driving Licence last name validation test - 43 characters
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters last name as <InvalidLastName>
@@ -450,7 +450,7 @@ Feature: DVLA Driving licence CRI Error Validations
       | DrivingLicenceSubject             | InvalidLastName                             |
       | DrivingLicenceSubjectHappyKenneth | abcdefghijklmnopqrstuvwxyzabcdefghijklmnopq |
 
-#  @mock-api:dl-success @validation-regression @build @staging
+  @mock-api:dl-success @validation-regression @build @staging
   Scenario Outline:  DVLA Driving Licence last name validation test - 44 characters
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters last name as <InvalidLastName>
@@ -503,7 +503,7 @@ Feature: DVLA Driving licence CRI Error Validations
       | DrivingLicenceSubjectHappyKenneth |                  | abcdefghijklmnopqrstuvwxyzabcdefghijklm |
 
   @mock-api:dl-success @validation-regression @build @staging
-  Scenario Outline:  DVLA Driving Licence character limit happy path validation test
+  Scenario Outline:  DVLA Driving Licence character limit happy path validation test - first name
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters last name as <InvalidLastName>
     And User re-enters first name as <InvalidFirstName>
@@ -513,7 +513,7 @@ Feature: DVLA Driving licence CRI Error Validations
       | DrivingLicenceSubjectHappyKenneth | abcdefghijklmnopqrstuvwxyzabcdefghijklmnopq | abcdefghijklmnopqrstuvwxyzabcdefghijkl |
 
   @mock-api:dl-failed @validation-regression @build @staging
-  Scenario Outline:  DVLA Driving Licence character limit happy path validation test
+  Scenario Outline:  DVLA Driving Licence character limit happy path validation test - given names
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters last name as <InvalidLastName>
     And User re-enters first name as <InvalidFirstName>
@@ -526,7 +526,7 @@ Feature: DVLA Driving licence CRI Error Validations
       | DrivingLicenceSubjectHappyKenneth | abcdefghijklmnopqrstuvwxyzabcdefghijklmnopq |                  | abcdefghijklmnopqrstuvwxyzabcdefghijk |
 
   @mock-api:dl-failed @validation-regression @build @staging
-  Scenario Outline:  DVLA Driving Licence character limit happy path validation test
+  Scenario Outline:  DVLA Driving Licence character limit unhappy path validation test
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters last name as <InvalidLastName>
     And User re-enters middle names as <InvalidMiddleNames>
