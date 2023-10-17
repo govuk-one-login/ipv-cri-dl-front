@@ -16,7 +16,19 @@ module.exports = {
       : 0;
     const firstNameLength = validators.string(firstName) ? firstName.length : 0;
 
-    return middleNameLength + firstNameLength <= length;
+    const singleName = firstNameLength === 0 || middleNameLength === 0;
+
+    const extraCharacter = singleName ? 0 : 1;
+    //This logic will add an extra character to nameMax (see below) if both first and
+    //middle name fields are used, in order to ensure we remain within 38 characters limit
+
+    const firstNameMin = firstNameLength > 0;
+    const middleNameMin = middleNameLength > 0;
+    const nameMin = firstNameMin || middleNameMin;
+    const nameMax =
+      firstNameLength + extraCharacter + middleNameLength <= length;
+
+    return nameMin && nameMax;
   },
   dvlaValidator(
     _value,

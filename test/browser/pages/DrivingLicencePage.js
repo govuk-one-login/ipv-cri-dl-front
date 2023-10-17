@@ -367,9 +367,10 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
   }
 
   async userReEntersDayOfIssueAsCurrentDateMinus(days) {
-    await this.licenceIssueDay.fill(
-      moment().subtract(days, "days").format("DD")
-    );
+    var subtractedDate = moment().subtract(days, "days");
+    await this.licenceIssueDay.fill(subtractedDate.format("DD"));
+    await this.licenceIssueMonth.fill(subtractedDate.format("MM"));
+    await this.licenceIssueYear.fill(subtractedDate.format("YYYY"));
   }
 
   async userReEntersDayOfIssueAsCurrentDatePlus(days) {
