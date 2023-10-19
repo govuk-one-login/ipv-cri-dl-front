@@ -47,7 +47,12 @@ module.exports = {
     // eslint-disable-next-line no-unused-vars
     const nameShort =
       surname.length >= 5 ? surname.slice(0, 5) : surname.padEnd(5, "9");
+
+    if (!dob) {
+      return false;
+    }
     const splitDate = dob.split("-");
+
     if (firstName) {
       var initialsShort = firstName.slice(0, 1);
       if (middleName) {
