@@ -5,7 +5,7 @@ buttons:
 govuk:
   phaseBanner:
     tag: beta
-    content: This is a new service – your <a href="https://signin.account.gov.uk/contact-us" class="govuk-link" rel="noopener" target="_blank">feedback (opens in new tab)</a> will help us to improve it.
+    content: This is a new service – your <a href="https://home.account.gov.uk/contact-gov-uk-one-login?fromURL=dl-cri" class="govuk-link" rel="noopener" target="_blank">feedback (opens in new tab)</a> will help us to improve it.
   serviceName: Prove your identity
   backLink: Back
   errorSummaryTitle: There is a problem
@@ -15,7 +15,7 @@ govuk:
   betaBannerRequired: true
   betaBannerContent:
     betaBannerContentLabel: beta
-    betaBannerContentHTML: 'This is a new service – your <a class="govuk-link" rel="noopener" target="_blank" href="https://signin.account.gov.uk/contact-us">feedback (opens in new tab)</a>  will help us to improve it.'
+    betaBannerContentHTML: 'This is a new service – your <a class="govuk-link" rel="noopener" target="_blank" href="https://home.account.gov.uk/contact-gov-uk-one-login?fromURL=dl-cri">feedback (opens in new tab)</a>  will help us to improve it.'
   cookie:
     cookieBanner:
       title: Cookies on GOV.UK One Login
@@ -44,7 +44,7 @@ govuk:
           text: "Terms and conditions"
         - href: "https://signin.account.gov.uk/privacy-notice"
           text: "Privacy notice"
-        - href: "https://signin.account.gov.uk/contact-us"
+        - href: "https://home.account.gov.uk/contact-gov-uk-one-login?fromURL=dl-cri"
           text: "Support"
 drivingLicence:
   title: Enter your details exactly as they appear on your UK driving licence
@@ -87,7 +87,7 @@ error:
     - <h2 class="govuk-heading-m"> What you can do </h2>
     - Go back to the service you were trying to use and start again. You can look for the service using your search engine or find it from the GOV.UK homepage.
     - <a href="https://www.gov.uk/" class="govuk-button" data-module="govuk-button"> Go the GOV.UK homepage </a>
-    - <a href="https://signin.account.gov.uk/contact-us" class="govuk-link"> Contact the GOV.UK account team (opens in a new tab) </a>
+    - <a href="https://home.account.gov.uk/contact-gov-uk-one-login?fromURL=dl-cri" class="govuk-link"> Contact the GOV.UK account team (opens in a new tab) </a>
 
 pageNotFound:
   title: Page not found
@@ -99,7 +99,7 @@ pageNotFound:
     - If you pasted the web address, check you copied the entire address.
     - You can also go back to the service you were trying to use and start again. You can look for the service using your search engine or find it from the GOV.UK homepage.
     - <a href="https://www.gov.uk/" class="govuk-button" data-module="govuk-button">Go to the GOV.UK homepage</a>
-    - <a href="https://signin.account.gov.uk/contact-us" class="govuk-link">Contact the GOV.UK One Login team (opens in a new tab)</a>
+    - <a href="https://home.account.gov.uk/contact-gov-uk-one-login?fromURL=dl-cri" class="govuk-link">Contact the GOV.UK One Login team (opens in a new tab)</a>
 
 sessionEnded:
   title: Session expired
