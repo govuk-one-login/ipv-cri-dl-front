@@ -5,7 +5,7 @@ buttons:
 govuk:
   phaseBanner:
     tag: beta
-    content: Mae hwn yn wasanaeth newydd – <a href="https://signin.account.gov.uk/contact-us" class="govuk-link" rel="noopener" target="_blank">bydd eich adborth (agor mewn tab newydd)</a> yn ein helpu i'w wella.
+    content: Mae hwn yn wasanaeth newydd – <a href="https://home.account.gov.uk/contact-gov-uk-one-login" class="govuk-link" rel="noopener" target="_blank">bydd eich adborth (agor mewn tab newydd)</a> yn ein helpu i'w wella.
   serviceName: Profi pwy ydych chi
   backLink: Back
   errorSummaryTitle: Mae problem
@@ -15,7 +15,7 @@ govuk:
   betaBannerRequired: true
   betaBannerContent:
     betaBannerContentLabel: beta
-    betaBannerContentHTML: Mae hwn yn wasanaeth newydd – bydd eich <a class="govuk-link" rel="noopener" target="_blank" href="https://signin.account.gov.uk/contact-us">adborth (agor mewn tab newydd)</a>  yn ein helpu i''w wella.
+    betaBannerContentHTML: Mae hwn yn wasanaeth newydd – bydd eich <a class="govuk-link" rel="noopener" target="_blank" href="https://home.account.gov.uk/contact-gov-uk-one-login">adborth (agor mewn tab newydd)</a>  yn ein helpu i''w wella.
   cookie:
     cookieBanner:
       title: Cwcis ar GOV.UK One Login
@@ -44,7 +44,7 @@ govuk:
           text: "Terms and conditions"
         - href: "https://signin.account.gov.uk/privacy-notice"
           text: "Privacy notice"
-        - href: "https://signin.account.gov.uk/contact-us"
+        - href: "https://home.account.gov.uk/contact-gov-uk-one-login"
           text: "Support"
 drivingLicence:
   title: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru
@@ -87,7 +87,7 @@ error:
     - <h2 class="govuk-heading-m"> Beth allwch chi ei wneud </h2>
     - Ewch yn ôl i'r gwasanaeth roeddech yn ceisio ei ddefnyddio a dechrau eto. Gallwch chwilio am y gwasanaeth gan ddefnyddio'ch peiriant chwilio neu ddod o hyd iddo o hafan GOV.UK.
     - <a href="https://www.gov.uk/" class="govuk-button" data-module="govuk-button"> Ewch i hafan GOV.UK </a>
-    - <a href="https://signin.account.gov.uk/contact-us" class="govuk-link"> Cysylltu â thîm cyfrif GOV.UK (agor mewn tab newydd) </a>
+    - <a href="https://home.account.gov.uk/contact-gov-uk-one-login" class="govuk-link"> Cysylltu â thîm cyfrif GOV.UK (agor mewn tab newydd) </a>
 
 pageNotFound:
   title: Tudalen heb ei darganfod
@@ -99,7 +99,7 @@ pageNotFound:
     - Os ydych wedi gludo'r cyfeiriad gwe, edrychwch i weld eich bod wedi copïo'r cyfeiriad cyfan.
     - Gallwch hefyd fynd yn ôl i'r gwasanaeth roeddech yn ceisio ei ddefnyddio a dechrau eto. Gallwch chwilio am y gwasanaeth gan ddefnyddio'ch peiriant chwilio neu dewch o hyd iddo o hafan GOV.UK.
     - <a href="https://www.gov.uk/" class="govuk-button" data-module="govuk-button">Ewch i hafan GOV.UK</a>
-    - <a href="https://signin.account.gov.uk/contact-us" class="govuk-link">Cysylltwch â'r tîm GOV.UK One Login (agor mewn tab newydd)</a>
+    - <a href="https://home.account.gov.uk/contact-gov-uk-one-login" class="govuk-link">Cysylltwch â'r tîm GOV.UK One Login (agor mewn tab newydd)</a>
 
 sessionEnded:
   title: Sesiwn wedi dod i ben

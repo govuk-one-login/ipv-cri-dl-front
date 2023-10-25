@@ -45,6 +45,9 @@ exports.DVADetailsEntryPage = class PlaywrightDevPage {
     this.consentDVACheckbox = this.page.locator(
       'xpath=//*[@id="consentDVACheckbox"]'
     );
+    this.supportLink = this.page.locator(
+      "xpath=/html/body/footer/div/div/div[1]/ul/li[5]/a"
+    );
 
     // DVA Error summary items
 
@@ -436,6 +439,14 @@ exports.DVADetailsEntryPage = class PlaywrightDevPage {
     expect(await this.isCurrentPage()).to.be.true;
     expect(await this.oneLoginLinkDVA.innerText()).to.equal(
       consentOneLoginLink
+    );
+  }
+
+  async assertFooterLink() {
+    await this.supportLink.click();
+    await this.page.waitForTimeout(2000); //waitForNavigation and waitForLoadState do not work in this case
+    expect(await this.page.title()).to.not.equal(
+      "Page not found - GOV.UK One Login"
     );
   }
 };
