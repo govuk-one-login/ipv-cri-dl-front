@@ -258,3 +258,11 @@ Feature: DVA Driving licence CRI Error Validations
     Examples:
       |DVADrivingLicenceSubject             |
       |DrivingLicenceSubjectHappyBilly|
+
+  @mock-api:DVA-success
+  Scenario Outline: Check support links
+    And they click Footer <link> and assert I have been redirected correctly
+
+    Examples:
+      | link           |
+      | Support        |

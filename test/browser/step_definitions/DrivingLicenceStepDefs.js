@@ -2,6 +2,7 @@ const { Given, When, Then } = require("@cucumber/cucumber");
 
 const { DVADetailsEntryPage } = require("../pages/DVADetailsEntryPage");
 const { DrivingLicencePage } = require("../pages/DrivingLicencePage");
+const { expect } = require("chai");
 
 Then(/^I can see CTA {string}$/, async function () {});
 
@@ -962,5 +963,16 @@ Then(
   async function (consentOneLoginLink) {
     const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
     await dvaDetailsEntryPage.assertDVAConsentOneLoginLink(consentOneLoginLink);
+  }
+);
+
+Given(
+  /^they click Footer (.*) and assert I have been redirected correctly$/,
+  async function (linkName) {
+    const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
+
+    expect(dvaDetailsEntryPage.isCurrentPage()).to.be.true;
+
+    await dvaDetailsEntryPage.assertFooterLink(linkName);
   }
 );
