@@ -179,6 +179,18 @@ Then(
 );
 
 Then(
+  /^User enters year of issue as current year minus (.*) plus (.*) days $/,
+  { timeout: 2 * 5000 },
+  async function (yearsToSubtract, daysToAdd) {
+    const drivingLicencePage = new DrivingLicencePage(this.page);
+    await drivingLicencePage.userReEntersYearOfIssueAsCurrentPlusAndMinus(
+      yearsToSubtract,
+      daysToAdd
+    );
+  }
+);
+
+Then(
   /^User re-enters valid to day as (.*)$/,
   { timeout: 2 * 5000 },
   async function (InvalidValidToDay) {

@@ -374,7 +374,10 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
   }
 
   async userReEntersDayOfIssueAsCurrentDatePlus(days) {
-    await this.licenceIssueDay.fill(moment().add(days, "days").format("DD"));
+    var addedDate = moment().add(days, "days");
+    await this.licenceIssueDay.fill(addedDate.format("DD"));
+    await this.licenceIssueMonth.fill(addedDate.format("MM"));
+    await this.licenceIssueYear.fill(addedDate.format("YYYY"));
   }
 
   async userReEntersMonthOfIssue(InvalidMonthOfIssue) {
@@ -395,6 +398,14 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
     await this.licenceIssueYear.fill(
       moment().subtract(years, "years").format("YYYY")
     );
+  }
+
+  async userReEntersYearOfIssueAsCurrentPlusAndMinus(years, days) {
+    await this.licenceIssueYear.fill(
+      moment().subtract(years, "years").format("YYYY")
+    );
+    await this.licenceIssueMonth.fill(moment().format("MM"));
+    await this.licenceIssueDay.fill(moment().add(days, "days").format("DD"));
   }
 
   async userReEntersIssueDateAsCurrentDate() {
