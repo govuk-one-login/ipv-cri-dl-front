@@ -293,8 +293,7 @@ Feature: DVLA Driving licence CRI Error Validations
   Scenario: DVLA Driving Licence Issue date that is 1 day under 10 years old date error validation
     Given User enters DVLA data as a DrivingLicenceSubjectHappyPeter
     Then User enters date of issue as current date
-    And User enters year of issue as current year minus 10
-    And User enters day of issue as current day plus 1
+    And User enters year of issue as current year minus 10 plus 1 day
     When User clicks on continue
     Then Proper error message is displayed as We could not find your details
 
