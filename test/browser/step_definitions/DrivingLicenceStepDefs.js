@@ -988,3 +988,11 @@ Given(
     await dvaDetailsEntryPage.assertFooterLink(linkName);
   }
 );
+
+Given(
+  /^I see support link (.*) and assert the url$/,
+  async function (supportLink) {
+    const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
+    await dvaDetailsEntryPage.assertFooterLink(supportLink);
+  }
+);

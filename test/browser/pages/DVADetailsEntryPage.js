@@ -445,8 +445,8 @@ exports.DVADetailsEntryPage = class PlaywrightDevPage {
   async assertFooterLink() {
     await this.supportLink.click();
     await this.page.waitForTimeout(2000); //waitForNavigation and waitForLoadState do not work in this case
-    expect(await this.page.title()).to.not.equal(
-      "Page not found - GOV.UK One Login"
+    expect(await this.page.url()).to.equal(
+      "https://home.account.gov.uk/contact-gov-uk-one-login"
     );
   }
 };
