@@ -49,6 +49,18 @@ exports.DVADetailsEntryPage = class PlaywrightDevPage {
       "xpath=/html/body/footer/div/div/div[1]/ul/li[5]/a"
     );
 
+    this.betaBannerLink = this.page.locator(
+      "xpath=/html/body/div[2]/div/p/span/a"
+    );
+
+    this.errorLink = this.page.locator(
+      'xpath=//*[@id="main-content"]/div/div/p[6]/a'
+    );
+
+    this.notFoundLink = this.page.locator(
+      'xpath=//*[@id="main-content"]/div/div/p[8]/a'
+    );
+
     // DVA Error summary items
 
     this.dvaErrorSummaryBoxLicenceNumber = this.page.locator(
@@ -448,5 +460,63 @@ exports.DVADetailsEntryPage = class PlaywrightDevPage {
     expect(await this.page.url()).to.equal(
       "https://home.account.gov.uk/contact-gov-uk-one-login"
     );
+    expect(await this.page.title()).to.not.equal(
+      "Page not found - GOV.UK One Login"
+    );
+  }
+
+  async assertBannerLink() {
+    await this.betaBannerLink.click();
+    await this.page.waitForTimeout(2000); //waitForNavigation and waitForLoadState do not work in this case
+    let context = await this.page.context();
+    let pages = await context.pages();
+    expect(await pages[1].url()).to.equal(
+      "https://home.account.gov.uk/contact-gov-uk-one-login"
+    );
+    expect(await pages[1].title()).to.not.equal(
+      "Page not found - GOV.UK One Login"
+    );
+    await pages[1].close();
+  }
+
+  async assertErrorLink() {
+    await this.errorLink.click();
+    await this.page.waitForTimeout(2000); //waitForNavigation and waitForLoadState do not work in this case
+    let context = await this.page.context();
+    let pages = await context.pages();
+    expect(await pages[1].url()).to.equal(
+      "https://home.account.gov.uk/contact-gov-uk-one-login"
+    );
+    expect(await pages[1].title()).to.not.equal(
+      "Page not found - GOV.UK One Login"
+    );
+    await pages[1].close();
+  }
+
+  async assertNotFoundLink() {
+    await this.notFoundLink.click();
+    await this.page.waitForTimeout(2000); //waitForNavigation and waitForLoadState do not work in this case
+    let context = await this.page.context();
+    let pages = await context.pages();
+    expect(await pages[1].url()).to.equal(
+      "https://home.account.gov.uk/contact-gov-uk-one-login"
+    );
+    expect(await pages[1].title()).to.not.equal(
+      "Page not found - GOV.UK One Login"
+    );
+    await pages[1].close();
+  }
+
+  async deleteSessionCookie() {
+    const cookieName = "service_session";
+    const cookies = (await this.page.context().cookies()).filter(
+      (cookie) => cookie.name !== cookieName
+    );
+    await this.page.context().clearCookies();
+    await this.page.context().addCookies(cookies);
+  }
+
+  async goToPage(pageName) {
+    await this.page.goto(this.page.url() + pageName);
   }
 };

@@ -537,9 +537,3 @@ Feature: DVLA Driving licence CRI Error Validations
     Examples:
       | DrivingLicenceSubject             | InvalidLastName                             | InvalidMiddleNames                      |
       | DrivingLicenceSubjectHappyKenneth | abcdefghijklmnopqrstuvwxyzabcdefghijklmnopq | abcdefghijklmnopqrstuvwxyzabcdefghijklm |
-
-  @mock-api:DVA-success
-  Scenario: Check support links
-    Given I see support link Support and assert the url
-    And I view the beta banner
-    And the beta banner reads This is a new service – your feedback (opens in new tab) will help us to improve it.
