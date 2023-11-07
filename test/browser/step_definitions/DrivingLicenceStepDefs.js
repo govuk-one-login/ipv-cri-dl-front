@@ -988,3 +988,46 @@ Given(
     await dvaDetailsEntryPage.assertFooterLink(linkName);
   }
 );
+
+Given(
+  /^I see support link (.*) in the footer and assert the url is correct and live$/,
+  async function (supportLink) {
+    const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
+    await dvaDetailsEntryPage.assertFooterLink(supportLink);
+    await this.page.goBack();
+  }
+);
+
+Given(
+  /^I assert the link in the banner is correct and live$/,
+  async function () {
+    const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
+    await dvaDetailsEntryPage.assertBannerLink();
+  }
+);
+
+Given(
+  /^I assert the link on the error page is correct and live$/,
+  async function () {
+    const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
+    await dvaDetailsEntryPage.assertErrorLink();
+  }
+);
+
+Given(
+  /^I assert the link on the page not found page is correct and live$/,
+  async function () {
+    const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
+    await dvaDetailsEntryPage.assertNotFoundLink();
+  }
+);
+
+Given(/^I delete the session cookie$/, async function () {
+  const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
+  await dvaDetailsEntryPage.deleteSessionCookie();
+});
+
+Given(/^I go to page not found$/, async function () {
+  const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
+  await dvaDetailsEntryPage.goToPage("not-found");
+});
