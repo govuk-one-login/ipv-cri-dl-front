@@ -125,7 +125,7 @@ Feature: DVA Driving licence CRI Error Validations
       |DrivingLicenceSubjectHappyBilly|KYLE^&(         |
       |DrivingLicenceSubjectHappyBilly|                |
 
-######  InvalidFirstNameWithNumbers, InvalidFirstNameWithSpecialCharacters, NoFirstName #####
+######  InvalidFirstNameWithNumbers, InvalidFirstNameWithSpecialCharacters, NoFirstName, firstName exceeds maxlength #####
   @mock-api:dva-invalidFirstName @validation-regression @build @staging
   Scenario Outline: DVA Driving Licence First name with numbers or special characters or no first name error validation
     Given User enters DVA data as a <DVADrivingLicenceSubject>
@@ -135,10 +135,11 @@ Feature: DVA Driving licence CRI Error Validations
     And I see the Firstname error in the error field as Enter your first name as it appears on your driving licence
     And I check the page Title Error: Enter your details exactly as they appear on your UK driving licence – Prove your identity – GOV.UK
     Examples:
-      |DVADrivingLicenceSubject       |InvalidFirstName|
-      |DrivingLicenceSubjectHappyBilly|SELINA987       |
-      |DrivingLicenceSubjectHappyBilly|SELINA%$@       |
-      |DrivingLicenceSubjectHappyBilly|                |
+      | DVADrivingLicenceSubject        | InvalidFirstName                           |
+      | DrivingLicenceSubjectHappyBilly | aasdfghjklasdfghjklasdfghjklasdfghjklasdfg |
+      | DrivingLicenceSubjectHappyBilly | SELINA987                                  |
+      | DrivingLicenceSubjectHappyBilly | SELINA%$@                                  |
+      | DrivingLicenceSubjectHappyBilly |                                            |
 
 #######  InvalidMiddleNamesWithNumbers, InvalidMiddleNamesWithSpecialCharacters #####
   @mock-api:dva-invalidMiddleNames @validation-regression @build @staging
@@ -256,8 +257,8 @@ Feature: DVA Driving licence CRI Error Validations
     And I can see the DVA consent error on the checkbox as You must give your consent to continue
     And I check the page Title Error: Enter your details exactly as they appear on your UK driving licence – Prove your identity – GOV.UK
     Examples:
-      |DVADrivingLicenceSubject             |
-      |DrivingLicenceSubjectHappyBilly|
+      | DVADrivingLicenceSubject        |
+      | DrivingLicenceSubjectHappyBilly |
 
   @mock-api:DVA-success
   Scenario: Check support links

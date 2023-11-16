@@ -31,6 +31,7 @@ surname:
     default: "Enter your last name as it appears on your driving licence"
     maxlength: "Enter your last name as it appears on your driving licence"
     regexSurname: "Enter your last name as it appears on your driving licence"
+    surNameLength: "Enter your last name as it appears on your driving licence"
 
 firstName:
   label: First name
@@ -39,6 +40,7 @@ firstName:
     default: "Enter your first name as it appears on your driving licence"
     maxlength: "Enter your first name as it appears on your driving licence"
     regexFirstName: "Enter your first name as it appears on your driving licence"
+    firstNameLength: "Enter your first name as it appears on your driving licence"
     firstNameMiddleNameLength: "Enter your first name as it appears on your driving licence"
 
 middleNames:
@@ -47,6 +49,7 @@ middleNames:
   validation:
     maxlength: "Enter any middle names as they appear on your driving licence"
     regexMiddleNames: "Enter any middle names as they appear on your driving licence"
+    middleNamesLength: "Enter any middle names as they appear on your driving licence"
     firstNameMiddleNameLength: "Enter any middle names as they appear on your driving licence"
 
 dateOfBirth:
