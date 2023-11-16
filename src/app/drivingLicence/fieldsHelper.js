@@ -2,14 +2,74 @@ const { validators } = require("hmpo-form-wizard/lib/validation");
 const moment = require("moment");
 
 module.exports = {
+  surnameLengthValidator(_value, length, surnameField, licenceIssuerField) {
+    const surname = this.values[surnameField];
+    const issuer = this.values[licenceIssuerField];
+
+    if (issuer === "DVA") {
+      length = 25;
+      //max length (43) passed in as parameter from fields.js is for DVLAs api
+      //the above updates the max length to reflect what is expected for DVAs api
+    }
+
+    const surnameLength = validators.string(surname) ? surname.length : 0;
+
+    const surnameMin = surnameLength > 0;
+    const sNameMin = surnameMin;
+    const sNameMax = surnameLength <= length;
+
+    return sNameMin && sNameMax;
+  },
+  firstNameLengthValidator(_value, length, firstNameField, licenceIssuerField) {
+    const firstName = this.values[firstNameField];
+    const issuer = this.values[licenceIssuerField];
+
+    if (issuer === "DVA") {
+      length = 18;
+      //max length (43) passed in as parameter from fields.js is for DVLAs api
+      //the above updates the max length to reflect what is expected for DVAs api
+    }
+
+    const firstNameLength = validators.string(firstName) ? firstName.length : 0;
+
+    const firstNameMin = firstNameLength > 0;
+    const fNameMin = firstNameMin;
+    const fNameMax = firstNameLength <= length;
+
+    return fNameMin && fNameMax;
+  },
+  middleNamesLengthValidator(_value, length, middleNamesField, licenceIssuerField) {
+    const middleNames = this.values[middleNamesField];
+    const issuer = this.values[licenceIssuerField];
+
+    if (issuer === "DVA") {
+      length = 18;
+      //max length (43) passed in as parameter from fields.js is for DVLAs api
+      //the above updates the max length to reflect what is expected for DVAs api
+    }
+
+    const middleNamesLength = validators.string(middleNames) ? middleNames.length : 0;
+
+    const middleNamesMin = middleNamesLength > 0;
+    const mNameMin = middleNamesMin;
+    const mNameMax = middleNamesLength <= length;
+
+    return mNameMin && mNameMax
+  },
   firstNameMiddleNameLengthValidator(
     _value,
     length,
     firstNameField,
-    middleNameField
+    middleNameField,
+    licenceIssuerField,
   ) {
     const firstName = this.values[firstNameField];
     const middleName = this.values[middleNameField];
+    const issuer = this.values[licenceIssuerField];
+
+    if (issuer === "DVA") {
+      length = 36;
+    }
 
     const middleNameLength = validators.string(middleName)
       ? middleName.length
@@ -36,7 +96,7 @@ module.exports = {
     middleNameField,
     surnameField,
     dobField,
-    licenceField
+    licenceField,
   ) {
     const firstName = this.values[firstNameField];
     const middleName = this.values[middleNameField];
@@ -71,7 +131,7 @@ module.exports = {
       licence.slice(6, 8) === splitDate[1] ||
       licence.slice(6, 8) ===
         String(
-          parseInt(splitDate[1].slice(0, 1)) + 5 + splitDate[1].slice(1, 2)
+          parseInt(splitDate[1].slice(0, 1)) + 5 + splitDate[1].slice(1, 2),
         );
     const fourthCheck = licence.slice(8, 10) === splitDate[2];
 

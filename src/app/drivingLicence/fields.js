@@ -1,9 +1,27 @@
 const { firstNameMiddleNameLengthValidator } = require("./fieldsHelper");
+const { surnameLengthValidator } = require("./fieldsHelper");
+const { firstNameLengthValidator } = require("./fieldsHelper");
+const { middleNamesLengthValidator } = require("./fieldsHelper");
 const fields = require("./fieldsHelper");
 
 const firstNameMiddleNameLengthValidatorObj = {
   fn: firstNameMiddleNameLengthValidator,
-  arguments: [38, "firstName", "middleNames"],
+  arguments: [38, "firstName", "middleNames", "issuerDependent"],
+};
+
+const surnameLengthValidatorObj = {
+  fn: surnameLengthValidator,
+  arguments: [43, "surname", "issuerDependent"],
+};
+
+const firstNameLengthValidatorObj = {
+  fn: firstNameLengthValidator,
+  arguments: [38, "firstName", "issuerDependent"],
+};
+
+const middleNamesLengthValidatorObj = {
+  fn: middleNamesLengthValidator,
+  arguments: [38, "middleNames", "issuerDependent"],
 };
 
 const dvlaValidatorObj = {
@@ -13,12 +31,16 @@ const dvlaValidatorObj = {
     "middleNames",
     "surname",
     "dateOfBirth",
+    "issuerDependant",
     "drivingLicenceNumber",
   ],
 };
 
 module.exports = {
   firstNameMiddleNameLengthValidator: fields.firstNameMiddleNameLengthValidator,
+  surnameLengthValidator: fields.surnameLengthValidator,
+  firstNameLengthValidator: fields.firstNameLengthValidator,
+  middleNamesLengthValidator: fields.middleNamesLengthValidator,
   dvlaValidator: fields.dvlaValidator,
   surname: {
     type: "text",
@@ -26,6 +48,10 @@ module.exports = {
       "required",
       { type: "maxlength", arguments: [43] },
       { type: "regexSurname", fn: (value) => value.match(/^[a-zA-Z .'-]*$/) },
+      {
+        type: "surNameLength",
+        ...surnameLengthValidatorObj,
+      },
     ],
     journeyKey: "surname",
   },
@@ -35,6 +61,10 @@ module.exports = {
       "required",
       { type: "maxlength", arguments: [38] },
       { type: "regexFirstName", fn: (value) => value.match(/^[a-zA-Z .'-]*$/) },
+      {
+        type: "firstNameLength",
+        ...firstNameLengthValidatorObj,
+      },
       {
         type: "firstNameMiddleNameLength",
         ...firstNameMiddleNameLengthValidatorObj,
@@ -50,6 +80,10 @@ module.exports = {
       {
         type: "regexMiddleNames",
         fn: (value) => value.match(/^[a-zA-Z .'-]*$/),
+      },
+      {
+        type: "middleNamesLength",
+        ...middleNamesLengthValidatorObj,
       },
       {
         type: "firstNameMiddleNameLength",
@@ -144,7 +178,7 @@ module.exports = {
         type: "regexDrivingLicence",
         fn: (value) =>
           value.match(
-            /^(?=.{16}$)[A-Za-z]{1,5}9{0,4}[0-9](?:[05][1-9]|[16][0-2])(?:[0][1-9]|[12][0-9]|3[01])[0-9](?:99|[A-Za-z][A-Za-z9])(?![IOQYZioqyz01_])\w[A-Za-z]{2}$/
+            /^(?=.{16}$)[A-Za-z]{1,5}9{0,4}[0-9](?:[05][1-9]|[16][0-2])(?:[0][1-9]|[12][0-9]|3[01])[0-9](?:99|[A-Za-z][A-Za-z9])(?![IOQYZioqyz01_])\w[A-Za-z]{2}$/,
           ),
       },
       {
@@ -204,7 +238,7 @@ module.exports = {
         type: "regexPostcodeUK",
         fn: (value) =>
           value.match(
-            /([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9][A-Za-z]?))))\s?[0-9][A-Za-z]{2})/
+            /([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9][A-Za-z]?))))\s?[0-9][A-Za-z]{2})/,
           ),
       },
     ],
