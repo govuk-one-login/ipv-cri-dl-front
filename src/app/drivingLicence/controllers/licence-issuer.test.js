@@ -3,7 +3,7 @@ const LicenceIssuerController = require("./licence-issuer");
 
 describe("licence issuer controller", () => {
   const licenceIssuerController = new LicenceIssuerController({
-    route: "/test",
+    route: "/test"
   });
 
   let req;
@@ -29,8 +29,8 @@ describe("licence issuer controller", () => {
     req.session.sessionId = sessionId;
     req.form = {
       values: {
-        licenceIssuer: "fake action",
-      },
+        licenceIssuer: "fake action"
+      }
     };
 
     await licenceIssuerController.saveValues(req, res, next);
@@ -48,8 +48,8 @@ describe("licence issuer controller", () => {
     req.session.sessionId = sessionId;
     req.form = {
       values: {
-        licenceIssuer: "noLicence",
-      },
+        licenceIssuer: "noLicence"
+      }
     };
 
     await licenceIssuerController.saveValues(req, res, next);
@@ -62,8 +62,8 @@ describe("licence issuer controller", () => {
     req.session.sessionId = sessionId;
     req.form = {
       values: {
-        licenceIssuer: "DVLA",
-      },
+        licenceIssuer: "DVLA"
+      }
     };
 
     await licenceIssuerController.saveValues(req, res, next);
@@ -76,8 +76,8 @@ describe("licence issuer controller", () => {
     req.session.sessionId = sessionId;
     req.form = {
       values: {
-        licenceIssuer: "DVA",
-      },
+        licenceIssuer: "DVA"
+      }
     };
 
     await licenceIssuerController.saveValues(req, res, next);

@@ -2,8 +2,8 @@ const BaseController = require("hmpo-form-wizard").Controller;
 
 const {
   API: {
-    PATHS: { CHECK },
-  },
+    PATHS: { CHECK }
+  }
 } = require("../../../lib/config");
 const logger = require("hmpo-logger").get();
 
@@ -30,12 +30,12 @@ class ValidateController extends BaseController {
       issueDate:
         req.sessionModel.get("issueDate") ||
         req.sessionModel.get("dateOfIssue"),
-      licenceIssuer: req.sessionModel.get("licenceIssuer"),
+      licenceIssuer: req.sessionModel.get("licenceIssuer")
     };
 
     try {
       const headers = {
-        session_id: req.session.tokenId,
+        session_id: req.session.tokenId
       };
 
       if (req.session.featureSet === "direct") {
@@ -44,7 +44,7 @@ class ValidateController extends BaseController {
 
       logger.info("validate: calling check-driving-licence lambda", {
         req,
-        res,
+        res
       });
       const checkDrivingLicenceResponse = await req.axios.post(
         `${CHECK}`,
@@ -61,14 +61,14 @@ class ValidateController extends BaseController {
       const redirect_url = checkDrivingLicenceResponse?.data?.redirectUrl;
       logger.info("Validate: redirecting user to callBack with url ", {
         req,
-        res,
+        res
       });
 
       super.saveValues(req, res, () => {
         if (!redirect_url) {
           const error = {
             error: "server_error",
-            error_description: "Failed to retrieve authorization redirect url",
+            error_description: "Failed to retrieve authorization redirect url"
           };
           req.sessionModel.set("error", error);
           callback();

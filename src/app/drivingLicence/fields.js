@@ -6,22 +6,22 @@ const fields = require("./fieldsHelper");
 
 const firstNameMiddleNameLengthValidatorObj = {
   fn: firstNameMiddleNameLengthValidator,
-  arguments: [38, "firstName", "middleNames", "issuerDependent"],
+  arguments: [38, "firstName", "middleNames", "issuerDependent"]
 };
 
 const surnameLengthValidatorObj = {
   fn: surnameLengthValidator,
-  arguments: [43, "surname", "issuerDependent"],
+  arguments: [43, "surname", "issuerDependent"]
 };
 
 const firstNameLengthValidatorObj = {
   fn: firstNameLengthValidator,
-  arguments: [38, "firstName", "issuerDependent"],
+  arguments: [38, "firstName", "issuerDependent"]
 };
 
 const middleNamesLengthValidatorObj = {
   fn: middleNamesLengthValidator,
-  arguments: [38, "middleNames", "issuerDependent"],
+  arguments: [38, "middleNames", "issuerDependent"]
 };
 
 const dvlaValidatorObj = {
@@ -31,8 +31,8 @@ const dvlaValidatorObj = {
     "middleNames",
     "surname",
     "dateOfBirth",
-    "drivingLicenceNumber",
-  ],
+    "drivingLicenceNumber"
+  ]
 };
 
 module.exports = {
@@ -49,10 +49,10 @@ module.exports = {
       { type: "regexSurname", fn: (value) => value.match(/^[a-zA-Z .'-]*$/) },
       {
         type: "surNameLength",
-        ...surnameLengthValidatorObj,
-      },
+        ...surnameLengthValidatorObj
+      }
     ],
-    journeyKey: "surname",
+    journeyKey: "surname"
   },
   firstName: {
     type: "text",
@@ -62,14 +62,14 @@ module.exports = {
       { type: "regexFirstName", fn: (value) => value.match(/^[a-zA-Z .'-]*$/) },
       {
         type: "firstNameLength",
-        ...firstNameLengthValidatorObj,
+        ...firstNameLengthValidatorObj
       },
       {
         type: "firstNameMiddleNameLength",
-        ...firstNameMiddleNameLengthValidatorObj,
-      },
+        ...firstNameMiddleNameLengthValidatorObj
+      }
     ],
-    journeyKey: "firstName",
+    journeyKey: "firstName"
   },
   middleNames: {
     type: "text",
@@ -78,17 +78,17 @@ module.exports = {
       { type: "maxlength", arguments: [38] },
       {
         type: "regexMiddleNames",
-        fn: (value) => value.match(/^[a-zA-Z .'-]*$/),
+        fn: (value) => value.match(/^[a-zA-Z .'-]*$/)
       },
       {
         type: "middleNamesLength",
-        ...middleNamesLengthValidatorObj,
+        ...middleNamesLengthValidatorObj
       },
       {
         type: "firstNameMiddleNameLength",
-        ...firstNameMiddleNameLengthValidatorObj,
-      },
-    ],
+        ...firstNameMiddleNameLengthValidatorObj
+      }
+    ]
   },
   dateOfBirth: {
     type: "date",
@@ -99,16 +99,16 @@ module.exports = {
       { type: "before", arguments: [] },
       {
         type: "dvlaChecker",
-        ...dvlaValidatorObj,
-      },
+        ...dvlaValidatorObj
+      }
     ],
-    dependent: { field: "issuerDependent", value: "DVLA" },
+    dependent: { field: "issuerDependent", value: "DVLA" }
   },
   dvaDateOfBirth: {
     type: "date",
     journeyKey: "dvaDateOfBirth",
     validate: ["required", "date", { type: "before", arguments: [] }],
-    dependent: { field: "issuerDependent", value: "DVA" },
+    dependent: { field: "issuerDependent", value: "DVA" }
   },
   issueDate: {
     type: "date",
@@ -118,15 +118,15 @@ module.exports = {
       "date",
       {
         type: "before",
-        arguments: [],
+        arguments: []
       },
       {
         type: "beforeNow",
         fn: fields.beforeNow,
-        arguments: [10, "years"],
-      },
+        arguments: [10, "years"]
+      }
     ],
-    dependent: { field: "issuerDependent", value: "DVLA" },
+    dependent: { field: "issuerDependent", value: "DVLA" }
   },
   dateOfIssue: {
     type: "date",
@@ -136,20 +136,20 @@ module.exports = {
       "date",
       {
         type: "before",
-        arguments: [],
+        arguments: []
       },
       {
         type: "beforeNow",
         fn: fields.beforeNow,
-        arguments: [10, "years"],
-      },
+        arguments: [10, "years"]
+      }
     ],
-    dependent: { field: "issuerDependent", value: "DVA" },
+    dependent: { field: "issuerDependent", value: "DVA" }
   },
   issuerDependent: {
     type: "hidden",
     label: "",
-    legend: "",
+    legend: ""
   },
   expiryDate: {
     type: "date",
@@ -159,9 +159,9 @@ module.exports = {
       "date",
       {
         type: "after",
-        arguments: [],
-      },
-    ],
+        arguments: []
+      }
+    ]
   },
   drivingLicenceNumber: {
     type: "text",
@@ -171,22 +171,22 @@ module.exports = {
       { type: "exactlength", arguments: [16] },
       {
         type: "regexSpecialCharacters",
-        fn: (value) => value.match(/^[A-Za-z0-9]*$/),
+        fn: (value) => value.match(/^[A-Za-z0-9]*$/)
       },
       {
         type: "regexDrivingLicence",
         fn: (value) =>
           value.match(
             /^(?=.{16}$)[A-Za-z]{1,5}9{0,4}[0-9](?:[05][1-9]|[16][0-2])(?:[0][1-9]|[12][0-9]|3[01])[0-9](?:99|[A-Za-z][A-Za-z9])(?![IOQYZioqyz01_])\w[A-Za-z]{2}$/
-          ),
+          )
       },
       {
         type: "dvlaChecker",
-        ...dvlaValidatorObj,
-      },
+        ...dvlaValidatorObj
+      }
     ],
     dependent: { field: "issuerDependent", value: "DVLA" },
-    classes: "govuk-input--width-10",
+    classes: "govuk-input--width-10"
   },
   dvaLicenceNumber: {
     type: "text",
@@ -195,14 +195,14 @@ module.exports = {
       "required",
       {
         type: "regexSpecialCharacters",
-        fn: (value) => value.match(/^[A-Za-z0-9]*$/),
+        fn: (value) => value.match(/^[A-Za-z0-9]*$/)
       },
       { type: "numeric" },
       { type: "exactlength", arguments: [8] },
-      { type: "regexDrivingLicence", fn: (value) => value.match(/^[0-9]{8}$/) },
+      { type: "regexDrivingLicence", fn: (value) => value.match(/^[0-9]{8}$/) }
     ],
     dependent: { field: "issuerDependent", value: "DVA" },
-    classes: "govuk-input--width-10",
+    classes: "govuk-input--width-10"
   },
   issueNumber: {
     type: "text",
@@ -212,13 +212,13 @@ module.exports = {
       { type: "exactlength", arguments: [2] },
       {
         type: "regexSpecialCharacters",
-        fn: (value) => value.match(/^[A-Za-z0-9]*$/),
+        fn: (value) => value.match(/^[A-Za-z0-9]*$/)
       },
-      { type: "numeric" },
+      { type: "numeric" }
       //{ type: "regexIssueNumber", fn: (value) => value.match(/^[0-9]{2}$/) }
     ],
     dependent: { field: "issuerDependent", value: "DVLA" },
-    classes: "govuk-input--width-10",
+    classes: "govuk-input--width-10"
   },
   postcode: {
     type: "text",
@@ -229,7 +229,7 @@ module.exports = {
       { type: "minlength", arguments: [5] },
       {
         type: "regexPostcodeSymbol",
-        fn: (value) => value.match(/^[A-Za-z0-9 ]+$/),
+        fn: (value) => value.match(/^[A-Za-z0-9 ]+$/)
       },
       { type: "regexPostcodeAlpha", fn: (value) => value.match(/[A-Za-z]+/) },
       { type: "regexPostcodeNumeric", fn: (value) => value.match(/[0-9]+/) },
@@ -238,27 +238,27 @@ module.exports = {
         fn: (value) =>
           value.match(
             /([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9][A-Za-z]?))))\s?[0-9][A-Za-z]{2})/
-          ),
-      },
+          )
+      }
     ],
-    classes: "govuk-input--width-10",
+    classes: "govuk-input--width-10"
   },
   consentDVACheckbox: {
     type: "text",
     journeyKey: "consentDVACheckbox",
     validate: ["required"],
-    dependent: { field: "issuerDependent", value: "DVA" },
+    dependent: { field: "issuerDependent", value: "DVA" }
   },
   consentCheckbox: {
     type: "text",
     journeyKey: "consentCheckbox",
     validate: ["required"],
-    dependent: { field: "issuerDependent", value: "DVLA" },
+    dependent: { field: "issuerDependent", value: "DVLA" }
   },
   proveAnotherWayRadio: {
     type: "radios",
     items: ["proveAnotherWay", "retry"],
-    validate: ["required"],
+    validate: ["required"]
   },
   licenceIssuer: {
     type: "radios",
@@ -268,8 +268,8 @@ module.exports = {
       { value: "DVLA" },
       { value: "DVA" },
       { divider: true, key: "fields.licenceIssuer.items.or.label" },
-      { value: "noLicence" },
+      { value: "noLicence" }
     ],
-    validate: ["required"],
-  },
+    validate: ["required"]
+  }
 };

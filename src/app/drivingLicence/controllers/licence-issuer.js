@@ -26,7 +26,7 @@ class LicenceIssuerController extends BaseController {
             "licence-issuer: user selected DVLA : redirecting to driving licence details",
             {
               req,
-              res,
+              res
             }
           );
           return next();
@@ -36,7 +36,7 @@ class LicenceIssuerController extends BaseController {
             "licence-issuer: user selected DVA : redirecting to driving licence details",
             {
               req,
-              res,
+              res
             }
           );
           return next();
