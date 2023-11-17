@@ -12,13 +12,12 @@ module.exports = {
       //the above updates the max length to reflect what is expected for DVAs api
     }
 
-    const surnameLength = validators.string(surname) ? surname.length : 0;
+    const surnameLength = surname.length;
 
-    const surnameMin = surnameLength > 0;
-    const sNameMin = surnameMin;
-    const sNameMax = surnameLength <= length;
+    const surnameGreaterThanMin = surnameLength > 0;
+    const sNameMaxLessThanMax = surnameLength <= length;
 
-    return sNameMin && sNameMax;
+    return surnameGreaterThanMin && sNameMaxLessThanMax;
   },
   firstNameLengthValidator(_value, length, firstNameField, licenceIssuerField) {
     const firstName = this.values[firstNameField];
@@ -30,13 +29,12 @@ module.exports = {
       //the above updates the max length to reflect what is expected for DVAs api
     }
 
-    const firstNameLength = validators.string(firstName) ? firstName.length : 0;
+    const firstNameLength = firstName.length;
 
-    const firstNameMin = firstNameLength > 0;
-    const fNameMin = firstNameMin;
-    const fNameMax = firstNameLength <= length;
+    const firstNameGreaterThanMin = firstNameLength > 0;
+    const firstNameNameMaxLessThanMax = firstNameLength <= length;
 
-    return fNameMin && fNameMax;
+    return firstNameGreaterThanMin && firstNameNameMaxLessThanMax;
   },
   middleNamesLengthValidator(_value, length, middleNamesField, licenceIssuerField) {
     const middleNames = this.values[middleNamesField];
@@ -48,13 +46,11 @@ module.exports = {
       //the above updates the max length to reflect what is expected for DVAs api
     }
 
-    const middleNamesLength = validators.string(middleNames) ? middleNames.length : 0;
+    const middleNamesLength = middleNames.length;
 
-    const middleNamesMin = middleNamesLength > 0;
-    const mNameMin = middleNamesMin;
-    const mNameMax = middleNamesLength <= length;
+    const middleNamesLessThanMax = middleNamesLength <= length;
 
-    return mNameMin && mNameMax
+    return middleNamesLessThanMax
   },
   firstNameMiddleNameLengthValidator(
     _value,
@@ -68,7 +64,7 @@ module.exports = {
     const issuer = this.values[licenceIssuerField];
 
     if (issuer === "DVA") {
-      length = 36;
+      length = 38;
     }
 
     const middleNameLength = validators.string(middleName)
