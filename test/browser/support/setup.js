@@ -8,9 +8,9 @@ BeforeAll(async function () {
     ? await chromium.launch()
     : await chromium.launch({
         // Not headless so we can watch test runs
-        headless: false,
+        headless: true,
         // Slow so we can see things happening
-        slowMo: 500,
+        slowMo: 0
       });
 });
 
@@ -50,7 +50,7 @@ Before(async function () {
 
   if (this.SCENARIO_ID_HEADER) {
     await this.context.setExtraHTTPHeaders({
-      "x-scenario-id": this.SCENARIO_ID_HEADER,
+      "x-scenario-id": this.SCENARIO_ID_HEADER
     });
   }
 

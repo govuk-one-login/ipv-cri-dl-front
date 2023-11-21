@@ -14,7 +14,9 @@ module.exports = {
   root: true,
   extends: ["eslint:recommended", "prettier"],
   rules: {
+    "global-require": 0,
     "no-console": 2,
+    "comma-dangle": 0,
     "padding-line-between-statements": [
       "error",
       { blankLine: "any", prev: "*", next: "*" },

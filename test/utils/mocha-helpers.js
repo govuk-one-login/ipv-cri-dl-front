@@ -21,20 +21,20 @@ global.setupDefaultMocks = () => {
     form: { values: {} },
     axios: axios,
     ordnanceAxios: {
-      get: sinon.fake(),
-    },
+      get: sinon.fake()
+    }
   });
 
   req.journeyModel = new JourneyModel(null, {
     req,
-    key: "test",
+    key: "test"
   });
 
   req.sessionModel = new WizardModel(null, {
     req,
     key: "test",
     journeyModel: req.journeyModel,
-    fields: {},
+    fields: {}
   });
 
   const res = reqres.res({});
@@ -42,6 +42,6 @@ global.setupDefaultMocks = () => {
   return {
     req,
     res,
-    next,
+    next
   };
 };

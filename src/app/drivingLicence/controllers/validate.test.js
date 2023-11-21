@@ -44,7 +44,7 @@ describe("validate controller", () => {
     const data = {
       redirectUrl:
         "https://client.example.com/cb?id=DrivingLicenceIssuer&code=1234",
-      retry: false,
+      retry: false
     };
 
     const resolvedPromise = new Promise((resolve) => resolve({ data }));
@@ -64,12 +64,12 @@ describe("validate controller", () => {
         dateOfBirth: "10/02/1975",
         expiryDate: "15/01/2035",
         issueDate: "10/02/2005",
-        licenceIssuer: "DVLA",
+        licenceIssuer: "DVLA"
       },
       {
         headers: {
-          session_id: sessionId,
-        },
+          session_id: sessionId
+        }
       }
     );
 
@@ -93,14 +93,14 @@ describe("validate controller", () => {
     req.sessionModel.set("licenceIssuer", "DVLA");
     req.session.authParams = {
       redirect_uri: "https://client.example.com",
-      state: "A VALUE",
+      state: "A VALUE"
     };
     req.session.featureSet = "direct";
 
     const data = {
       redirectUrl:
         "https://client.example.com/cb?id=DrivingLicenceIssuer&code=1234",
-      retry: false,
+      retry: false
     };
 
     const resolvedPromise = new Promise((resolve) => resolve({ data }));
@@ -120,13 +120,13 @@ describe("validate controller", () => {
         dateOfBirth: "10/02/1975",
         expiryDate: "15/01/2035",
         issueDate: "10/02/2005",
-        licenceIssuer: "DVLA",
+        licenceIssuer: "DVLA"
       },
       {
         headers: {
           "document-checking-route": "direct",
-          session_id: sessionId,
-        },
+          session_id: sessionId
+        }
       }
     );
 
@@ -149,7 +149,7 @@ describe("validate controller", () => {
 
     const data = {
       redirectUrl: undefined,
-      retry: false,
+      retry: false
     };
     const resolvedPromise = new Promise((resolve) => resolve({ data }));
     sandbox.stub(req.axios, "post").returns(resolvedPromise);
@@ -181,9 +181,9 @@ describe("validate controller", () => {
       response: {
         data: {
           code: "access_denied",
-          error_description: "Permission denied to token endpoint",
-        },
-      },
+          error_description: "Permission denied to token endpoint"
+        }
+      }
     };
     const resolvedPromise = new Promise((resolve, error) => error(testError));
     sandbox.stub(req.axios, "post").returns(resolvedPromise);
@@ -213,7 +213,7 @@ describe("validate controller", () => {
     const data = {
       redirectUrl:
         "https://client.example.com/cb?id=DrivingLicenceIssuer&code=1234",
-      retry: true,
+      retry: true
     };
     const resolvedPromise = new Promise((resolve) => resolve({ data }));
     sandbox.stub(req.axios, "post").returns(resolvedPromise);
@@ -239,7 +239,7 @@ describe("validate controller", () => {
     const data = {
       redirectUrl:
         "https://client.example.com/cb?id=DrivingLicenceIssuer&code=1234",
-      retry: false,
+      retry: false
     };
     const resolvedPromise = new Promise((resolve) => resolve({ data }));
     sandbox.stub(req.axios, "post").returns(resolvedPromise);

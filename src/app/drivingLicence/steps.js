@@ -9,7 +9,7 @@ module.exports = {
     entryPoint: true,
     skip: true,
     controller: root,
-    next: "licence-issuer",
+    next: "licence-issuer"
   },
   "/licence-issuer": {
     controller: licenceIssuer,
@@ -18,10 +18,10 @@ module.exports = {
       {
         field: "noLicence",
         value: true,
-        next: "/prove-another-way",
+        next: "/prove-another-way"
       },
-      "/details",
-    ],
+      "/details"
+    ]
   },
   "/details": {
     fields: [
@@ -39,15 +39,15 @@ module.exports = {
       "postcode",
       "issuerDependent",
       "consentDVACheckbox",
-      "consentCheckbox",
+      "consentCheckbox"
     ],
     controller: details,
-    next: "validate",
+    next: "validate"
   },
   "/prove-another-way": {
     prereqs: ["/"],
     skip: true,
-    next: "/oauth2/callback",
+    next: "/oauth2/callback"
   },
   "/validate": {
     controller: validate,
@@ -56,9 +56,9 @@ module.exports = {
       {
         field: "showRetryMessage",
         value: true,
-        next: "/details",
+        next: "/details"
       },
-      "/oauth2/callback",
-    ],
-  },
+      "/oauth2/callback"
+    ]
+  }
 };

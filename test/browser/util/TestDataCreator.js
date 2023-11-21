@@ -22,7 +22,7 @@ exports.getDVLATestUserFromMap = function (
     licenceValidToDay: "09",
     licenceValidToMonth: "12",
     licenceValidToYear: "2062",
-    postcode: "BS98 1TL",
+    postcode: "BS98 1TL"
   });
   var primaryDVLAKennethLicence = new DrivingLicenceSubject();
   primaryDVLAKennethLicence.fill({
@@ -41,7 +41,7 @@ exports.getDVLATestUserFromMap = function (
     licenceValidToDay: "01",
     licenceValidToMonth: "10",
     licenceValidToYear: "2042",
-    postcode: "BA2 5AA",
+    postcode: "BA2 5AA"
   });
 
   if (issuer === "DVLA") {
@@ -75,7 +75,7 @@ exports.getDVATestUserFromMap = function (
     licenceValidToDay: "01",
     licenceValidToMonth: "10",
     licenceValidToYear: "2042",
-    postcode: "NW3 5RG",
+    postcode: "NW3 5RG"
   });
 
   if (issuer === "DVA") {

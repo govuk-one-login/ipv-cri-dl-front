@@ -12,7 +12,7 @@ module.exports = class PlaywrightDevPage {
     this.radioBtnDVA = this.page.getByLabel("DVA");
 
     this.CTButton = this.page.locator("button", {
-      hasText: " Continue ",
+      hasText: " Continue "
     });
   }
 

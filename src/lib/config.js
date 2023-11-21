@@ -6,18 +6,20 @@ module.exports = {
     PATHS: {
       SESSION: "session",
       CHECK: "check-driving-licence",
-      AUTHORIZATION: "authorization",
-    },
+      AUTHORIZATION: "authorization"
+    }
   },
   APP: {
     BASE_URL: process.env.EXTERNAL_WEBSITE_HOST || "http://localhost:5030",
     PATHS: {
-      DRIVING_LICENCE: "/",
+      DRIVING_LICENCE: "/"
     },
     ANALYTICS: {
-      ID: process.env.GTM_ID,
       COOKIE_DOMAIN: process.env.ANALYTICS_DOMAIN || "localhost",
-    },
+      UA_CONTAINER_ID: process.env.UA_CONTAINER_ID,
+      GA4_ENABLED: process.env.GA4_ENABLED || "false",
+      GA4_CONTAINER_ID: process.env.GA4_CONTAINER_ID
+    }
   },
   PORT: process.env.PORT || 5030,
   SESSION_SECRET: process.env.SESSION_SECRET,
@@ -26,6 +28,6 @@ module.exports = {
   LOG_LEVEL: process.env.LOG_LEVEL || "request",
   REDIS: {
     SESSION_URL: process.env.REDIS_SESSION_URL,
-    PORT: process.env.REDIS_PORT || 6379,
-  },
+    PORT: process.env.REDIS_PORT || 6379
+  }
 };

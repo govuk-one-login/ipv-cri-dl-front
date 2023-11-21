@@ -6,8 +6,8 @@ describe("custom validation fields test", () => {
     const validator = fields.firstNameMiddleNameLengthValidator.bind({
       values: {
         firstName: "jjjjjjjjjjjjjjjjjjjjjjjjjjjjjj",
-        middleNames: "jjjjjjjjj",
-      },
+        middleNames: "jjjjjjjjj"
+      }
     });
 
     expect(validator(1, 38, "firstName", "middleNames", "DVLA")).to.be.false;
@@ -17,8 +17,8 @@ describe("custom validation fields test", () => {
     const validator = fields.firstNameMiddleNameLengthValidator.bind({
       values: {
         firstName: "jjjjjjjjjjjjjjjjjjjjjjjjjjjjjj",
-        middleNames: "jjjjjjjj",
-      },
+        middleNames: "jjjjjjjj"
+      }
     });
 
     expect(validator(1, 38, "firstName", "middleNames", "DVLA")).to.be.false;
@@ -28,8 +28,8 @@ describe("custom validation fields test", () => {
     const validator = fields.firstNameMiddleNameLengthValidator.bind({
       values: {
         firstName: "jjjjjjjjjjjjjjjjjjjjjjjjjjjjjj",
-        middleNames: "jjjjjjjjj",
-      },
+        middleNames: "jjjjjjjjj"
+      }
     });
 
     expect(validator(1, 38, "firstName", "middleNames", "DVA")).to.be.false;
@@ -39,8 +39,8 @@ describe("custom validation fields test", () => {
     const validator = fields.firstNameMiddleNameLengthValidator.bind({
       values: {
         firstName: "jjjjjjjjjjjjjjjjjjjjjjjjjjjjjj",
-        middleNames: "jjjjjjjj",
-      },
+        middleNames: "jjjjjjjj"
+      }
     });
 
     expect(validator(1, 38, "firstName", "middleNames", "DVA")).to.be.false;
@@ -50,8 +50,8 @@ describe("custom validation fields test", () => {
     const validator = fields.firstNameMiddleNameLengthValidator.bind({
       values: {
         firstName: "jjjjjjjjjjjjjjjjjjjjjjjjjjjjjj",
-        middleNames: "jjjjjjj",
-      },
+        middleNames: "jjjjjjj"
+      }
     });
 
     expect(validator(1, 38, "firstName", "middleNames", "DVA")).to.be.true;
@@ -61,8 +61,8 @@ describe("custom validation fields test", () => {
     const validator = fields.firstNameMiddleNameLengthValidator.bind({
       values: {
         firstName: "jj",
-        middleNames: "",
-      },
+        middleNames: ""
+      }
     });
 
     expect(validator(1, 38, "firstName", "middleNames", "DVA")).to.be.true;
@@ -71,8 +71,8 @@ describe("custom validation fields test", () => {
   it("should be true when middleName is only entered and is 18 characters", () => {
     const validator = fields.middleNamesLengthValidator.bind({
       values: {
-        middleNames: "asdfghjklasdfghjkl",
-      },
+        middleNames: "asdfghjklasdfghjkl"
+      }
     });
 
     expect(validator(1, 18, "middleNames", "DVA")).to.be.true;
@@ -81,8 +81,8 @@ describe("custom validation fields test", () => {
   it("should be true when firstname is only entered and is 18 characters", () => {
     const validator = fields.firstNameLengthValidator.bind({
       values: {
-        firstName: "asdfghjklasdfghjkl",
-      },
+        firstName: "asdfghjklasdfghjkl"
+      }
     });
 
     expect(validator(1, 18, "firstName", "DVA")).to.be.true;
@@ -91,8 +91,8 @@ describe("custom validation fields test", () => {
   it("should be true when surname is 25 characters", () => {
     const validator = fields.surnameLengthValidator.bind({
       values: {
-        surname: "asdfghjklasdfghjklasdfghj",
-      },
+        surname: "asdfghjklasdfghjklasdfghj"
+      }
     });
 
     expect(validator(1, 25, "surname", "DVA")).to.be.true;
@@ -101,8 +101,8 @@ describe("custom validation fields test", () => {
   it("should be false when middleName is only entered and is 19 characters", () => {
     const validator = fields.middleNamesLengthValidator.bind({
       values: {
-        middleNames: "asdfghjklasdfghjkla",
-      },
+        middleNames: "asdfghjklasdfghjkla"
+      }
     });
 
     expect(validator(1, 18, "middleNames", "DVA")).to.be.false;
@@ -111,8 +111,8 @@ describe("custom validation fields test", () => {
   it("should be false when firstname is 19 characters", () => {
     const validator = fields.firstNameLengthValidator.bind({
       values: {
-        firstName: "asdfghjklasdfghjkla",
-      },
+        firstName: "asdfghjklasdfghjkla"
+      }
     });
 
     expect(validator(1, 18, "firstName", "DVA")).to.be.false;
@@ -121,8 +121,8 @@ describe("custom validation fields test", () => {
   it("should be false when surname is 26 characters", () => {
     const validator = fields.surnameLengthValidator.bind({
       values: {
-        surname: "asdfghjklasdfghjklasdfghjk",
-      },
+        surname: "asdfghjklasdfghjklasdfghjk"
+      }
     });
 
     expect(validator(1, 25, "surname", "DVA")).to.be.false;
@@ -136,8 +136,8 @@ describe("custom validation fields test", () => {
         middleNames: "",
         surname: "Harris",
         dob: "1956-09-14",
-        licence: licenceNo,
-      },
+        licence: licenceNo
+      }
     });
 
     expect(
@@ -153,8 +153,8 @@ describe("custom validation fields test", () => {
         middleNames: "",
         surname: "Harris",
         dob: "1958-09-14",
-        licence: licenceNo,
-      },
+        licence: licenceNo
+      }
     });
 
     expect(
@@ -170,8 +170,8 @@ describe("custom validation fields test", () => {
         middleNames: "",
         surname: "Harris",
         dob: "1956-10-14",
-        licence: licenceNo,
-      },
+        licence: licenceNo
+      }
     });
 
     expect(
@@ -187,8 +187,8 @@ describe("custom validation fields test", () => {
         middleNames: "",
         surname: "Harris",
         dob: "1956-09-16",
-        licence: licenceNo,
-      },
+        licence: licenceNo
+      }
     });
 
     expect(
@@ -203,8 +203,8 @@ describe("custom validation fields test", () => {
       .format("YYYY-MM-DD");
     const validator = fields.beforeNow.bind({
       values: {
-        issueDate: issueDate,
-      },
+        issueDate: issueDate
+      }
     });
 
     expect(validator(issueDate, 10, "years")).to.be.false;
@@ -217,8 +217,8 @@ describe("custom validation fields test", () => {
       .format("YYYY-MM-DD");
     const validator = fields.beforeNow.bind({
       values: {
-        issueDate: issueDate,
-      },
+        issueDate: issueDate
+      }
     });
 
     expect(validator(issueDate, 10, "years")).to.be.true;
@@ -228,8 +228,8 @@ describe("custom validation fields test", () => {
     const issueDate = moment().subtract(10, "years").format("YYYY-MM-DD");
     const validator = fields.beforeNow.bind({
       values: {
-        issueDate: issueDate,
-      },
+        issueDate: issueDate
+      }
     });
 
     expect(validator(issueDate, 10, "years")).to.be.true;
@@ -243,8 +243,8 @@ describe("custom validation fields test", () => {
         middleNames: "",
         surname: "DECERQUEIRA",
         dob: "1965-07-08",
-        licence: licenceNo,
-      },
+        licence: licenceNo
+      }
     });
 
     expect(

@@ -153,5 +153,5 @@ module.exports = {
     return (
       _value === "" || (validators.date(_value) && test.isAfter(comparator))
     );
-  },
+  }
 };

@@ -26,7 +26,7 @@ const {
   SESSION_SECRET,
   SESSION_TABLE_NAME,
   SESSION_TTL,
-  LOG_LEVEL,
+  LOG_LEVEL
 } = require("./lib/config");
 
 const { setup } = require("hmpo-app");
@@ -37,28 +37,28 @@ const loggerConfig = {
   consoleJSON: true, // logstash json or pretty print output
   app: false,
   requestMeta: {
-    sessionId: "session.sessionId",
+    sessionId: "session.sessionId"
   },
   meta: {
-    sessionId: "session.sessionId",
-  },
+    sessionId: "session.sessionId"
+  }
 };
 
 AWS.config.update({
-  region: "eu-west-2",
+  region: "eu-west-2"
 });
 const dynamodb = new AWS.DynamoDB();
 
 const dynamoDBSessionStore = new DynamoDBStore({
   client: dynamodb,
-  table: SESSION_TABLE_NAME,
+  table: SESSION_TABLE_NAME
 });
 
 const sessionConfig = {
   cookieName: "service_session",
   secret: SESSION_SECRET,
   cookieOptions: { maxAge: SESSION_TTL },
-  ...(SESSION_TABLE_NAME && { sessionStore: dynamoDBSessionStore }),
+  ...(SESSION_TABLE_NAME && { sessionStore: dynamoDBSessionStore })
 };
 
 const helmetConfig = require("di-ipv-cri-common-express/src/lib/helmet");
@@ -72,13 +72,13 @@ const { app, router } = setup({
   redis: SESSION_TABLE_NAME ? false : commonExpress.lib.redis(),
   urls: {
     public: "/public",
-    publicImages: "/public/images",
+    publicImages: "/public/images"
   },
   publicDirs: ["../dist/public"],
   translation: {
     allowedLangs: ["en", "cy"],
     fallbackLang: ["en"],
-    cookie: { name: "lng" },
+    cookie: { name: "lng" }
   },
   publicImagesDirs: ["../dist/public/images"],
   views: [
@@ -86,18 +86,18 @@ const { app, router } = setup({
       path.dirname(require.resolve("di-ipv-cri-common-express")),
       "components"
     ),
-    "views",
+    "views"
   ],
   middlewareSetupFn: (app) => {
     app.use(setHeaders);
   },
-  dev: true,
+  dev: true
 });
 
 app.get("nunjucks").addGlobal("getContext", function () {
   return {
     keys: Object.keys(this.ctx),
-    ctx: this.ctx.ctx,
+    ctx: this.ctx.ctx
   };
 });
 
@@ -105,15 +105,18 @@ setAPIConfig({
   app,
   baseUrl: API.BASE_URL,
   sessionPath: API.PATHS.SESSION,
-  authorizationPath: API.PATHS.AUTHORIZATION,
+  authorizationPath: API.PATHS.AUTHORIZATION
 });
 
 setOAuthPaths({ app, entryPointPath: APP.PATHS.DRIVING_LICENCE });
 
 setGTM({
   app,
-  id: APP.ANALYTICS.ID,
   analyticsCookieDomain: APP.ANALYTICS.COOKIE_DOMAIN,
+  uaContainerId: APP.ANALYTICS.UA_CONTAINER_ID,
+  isGa4Enabled: APP.ANALYTICS.GA4_ENABLED,
+  ga4ContainerId: APP.ANALYTICS.GA4_CONTAINER_ID,
+  gaTaxonomyLevel2: "driving licence"
 });
 
 router.use(getGTM);
@@ -127,7 +130,7 @@ router.use("/oauth2", commonExpress.routes.oauth2);
 const wizardOptions = {
   name: "cri-driving-licence-front",
   journeyName: "drivingLicence",
-  templatePath: "drivingLicence",
+  templatePath: "drivingLicence"
 };
 
 router.use(wizard(steps, fields, wizardOptions));
