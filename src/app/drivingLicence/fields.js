@@ -1,9 +1,27 @@
 const { firstNameMiddleNameLengthValidator } = require("./fieldsHelper");
+const { surnameLengthValidator } = require("./fieldsHelper");
+const { firstNameLengthValidator } = require("./fieldsHelper");
+const { middleNamesLengthValidator } = require("./fieldsHelper");
 const fields = require("./fieldsHelper");
 
 const firstNameMiddleNameLengthValidatorObj = {
   fn: firstNameMiddleNameLengthValidator,
-  arguments: [38, "firstName", "middleNames"],
+  arguments: [38, "firstName", "middleNames", "issuerDependent"],
+};
+
+const surnameLengthValidatorObj = {
+  fn: surnameLengthValidator,
+  arguments: [43, "surname", "issuerDependent"],
+};
+
+const firstNameLengthValidatorObj = {
+  fn: firstNameLengthValidator,
+  arguments: [38, "firstName", "issuerDependent"],
+};
+
+const middleNamesLengthValidatorObj = {
+  fn: middleNamesLengthValidator,
+  arguments: [38, "middleNames", "issuerDependent"],
 };
 
 const dvlaValidatorObj = {
@@ -19,6 +37,9 @@ const dvlaValidatorObj = {
 
 module.exports = {
   firstNameMiddleNameLengthValidator: fields.firstNameMiddleNameLengthValidator,
+  surnameLengthValidator: fields.surnameLengthValidator,
+  firstNameLengthValidator: fields.firstNameLengthValidator,
+  middleNamesLengthValidator: fields.middleNamesLengthValidator,
   dvlaValidator: fields.dvlaValidator,
   surname: {
     type: "text",
@@ -26,6 +47,10 @@ module.exports = {
       "required",
       { type: "maxlength", arguments: [43] },
       { type: "regexSurname", fn: (value) => value.match(/^[a-zA-Z .'-]*$/) },
+      {
+        type: "surNameLength",
+        ...surnameLengthValidatorObj,
+      },
     ],
     journeyKey: "surname",
   },
@@ -35,6 +60,10 @@ module.exports = {
       "required",
       { type: "maxlength", arguments: [38] },
       { type: "regexFirstName", fn: (value) => value.match(/^[a-zA-Z .'-]*$/) },
+      {
+        type: "firstNameLength",
+        ...firstNameLengthValidatorObj,
+      },
       {
         type: "firstNameMiddleNameLength",
         ...firstNameMiddleNameLengthValidatorObj,
@@ -50,6 +79,10 @@ module.exports = {
       {
         type: "regexMiddleNames",
         fn: (value) => value.match(/^[a-zA-Z .'-]*$/),
+      },
+      {
+        type: "middleNamesLength",
+        ...middleNamesLengthValidatorObj,
       },
       {
         type: "firstNameMiddleNameLength",

@@ -31,6 +31,7 @@ surname:
     default: "Rhowch eich enw olaf fel y mae'n ymddangos ar eich trwydded yrru"
     maxlength: "Rhowch eich enw olaf fel y mae'n ymddangos ar eich trwydded yrru"
     regexSurname: "Rhowch eich enw olaf fel y mae'n ymddangos ar eich trwydded yrru"
+    surNameLength: "Rhowch eich enw olaf fel y mae'n ymddangos ar eich trwydded yrru"
 
 firstName:
   label: Enw cyntaf
@@ -39,7 +40,8 @@ firstName:
     default: "Rhowch eich enw cyntaf fel y mae'n ymddangos ar eich trwydded yrru"
     maxlength: "Rhowch eich enw cyntaf fel y mae'n ymddangos ar eich trwydded yrru"
     regexFirstName: "Rhowch eich enw cyntaf fel y mae'n ymddangos ar eich trwydded yrru"
-    firstNameMiddleNameLength: "Enter your first and middle names as they appear on your driving licence"
+    firstNameLength: "Rhowch eich enw cyntaf fel y mae'n ymddangos ar eich trwydded yrru"
+    firstNameMiddleNameLength: "Rhowch eich enw cyntaf fel y mae'n ymddangos ar eich trwydded yrru"
 
 middleNames:
   label: Enwau canol
@@ -47,6 +49,7 @@ middleNames:
   validation:
     maxlength: "Rhowch unrhyw enwau canol fel y maent yn ymddangos ar eich trwydded yrru"
     regexMiddleNames: "Rhowch unrhyw enwau canol fel y maent yn ymddangos ar eich trwydded yrru"
+    middleNamesLength: "Rhowch unrhyw enwau canol fel y maent yn ymddangos ar eich trwydded yrru"
     firstNameMiddleNameLength: "Rhowch unrhyw enwau canol fel y maent yn ymddangos ar eich trwydded yrru"
 
 dateOfBirth:

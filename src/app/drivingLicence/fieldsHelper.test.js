@@ -2,7 +2,7 @@ const fields = require("./fieldsHelper");
 const moment = require("moment");
 
 describe("custom validation fields test", () => {
-  it("should be false when first and middle name combined is greater than 38 characters", () => {
+  it("should be false when first and middle name combined is greater than 38 characters and issuer is DVLA", () => {
     const validator = fields.firstNameMiddleNameLengthValidator.bind({
       values: {
         firstName: "jjjjjjjjjjjjjjjjjjjjjjjjjjjjjj",
@@ -10,10 +10,10 @@ describe("custom validation fields test", () => {
       },
     });
 
-    expect(validator(1, 38, "firstName", "middleNames")).to.be.false;
+    expect(validator(1, 38, "firstName", "middleNames", "DVLA")).to.be.false;
   });
 
-  it("should be false when first and middle name combined is 38 characters plus extra character", () => {
+  it("should be false when first and middle name combined is 38 characters plus extra character and issuer is DVLA", () => {
     const validator = fields.firstNameMiddleNameLengthValidator.bind({
       values: {
         firstName: "jjjjjjjjjjjjjjjjjjjjjjjjjjjjjj",
@@ -21,7 +21,29 @@ describe("custom validation fields test", () => {
       },
     });
 
-    expect(validator(1, 38, "firstName", "middleNames")).to.be.false;
+    expect(validator(1, 38, "firstName", "middleNames", "DVLA")).to.be.false;
+  });
+
+  it("should be false when first and middle name combined is greater than 38 characters and issuer is DVA", () => {
+    const validator = fields.firstNameMiddleNameLengthValidator.bind({
+      values: {
+        firstName: "jjjjjjjjjjjjjjjjjjjjjjjjjjjjjj",
+        middleNames: "jjjjjjjjj",
+      },
+    });
+
+    expect(validator(1, 38, "firstName", "middleNames", "DVA")).to.be.false;
+  });
+
+  it("should be false when first and middle name combined is 38 characters plus extra character and issuer is DVA", () => {
+    const validator = fields.firstNameMiddleNameLengthValidator.bind({
+      values: {
+        firstName: "jjjjjjjjjjjjjjjjjjjjjjjjjjjjjj",
+        middleNames: "jjjjjjjj",
+      },
+    });
+
+    expect(validator(1, 38, "firstName", "middleNames", "DVA")).to.be.false;
   });
 
   it("should be true when first and middle name is 37 characters", () => {
@@ -32,17 +54,78 @@ describe("custom validation fields test", () => {
       },
     });
 
-    expect(validator(1, 38, "firstName", "middleNames")).to.be.true;
+    expect(validator(1, 38, "firstName", "middleNames", "DVA")).to.be.true;
   });
 
-  it("should be true when firstname is only entered and is 38 characters", () => {
+  it("should be true when middle name is empty", () => {
     const validator = fields.firstNameMiddleNameLengthValidator.bind({
       values: {
-        firstName: "jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj",
+        firstName: "jj",
+        middleNames: "",
       },
     });
 
-    expect(validator(1, 38, "firstName", "middleNames")).to.be.true;
+    expect(validator(1, 38, "firstName", "middleNames", "DVA")).to.be.true;
+  });
+
+  it("should be true when middleName is only entered and is 18 characters", () => {
+    const validator = fields.middleNamesLengthValidator.bind({
+      values: {
+        middleNames: "asdfghjklasdfghjkl",
+      },
+    });
+
+    expect(validator(1, 18, "middleNames", "DVA")).to.be.true;
+  });
+
+  it("should be true when firstname is only entered and is 18 characters", () => {
+    const validator = fields.firstNameLengthValidator.bind({
+      values: {
+        firstName: "asdfghjklasdfghjkl",
+      },
+    });
+
+    expect(validator(1, 18, "firstName", "DVA")).to.be.true;
+  });
+
+  it("should be true when surname is 25 characters", () => {
+    const validator = fields.surnameLengthValidator.bind({
+      values: {
+        surname: "asdfghjklasdfghjklasdfghj",
+      },
+    });
+
+    expect(validator(1, 25, "surname", "DVA")).to.be.true;
+  });
+
+  it("should be false when middleName is only entered and is 19 characters", () => {
+    const validator = fields.middleNamesLengthValidator.bind({
+      values: {
+        middleNames: "asdfghjklasdfghjkla",
+      },
+    });
+
+    expect(validator(1, 18, "middleNames", "DVA")).to.be.false;
+  });
+
+  it("should be false when firstname is 19 characters", () => {
+    const validator = fields.firstNameLengthValidator.bind({
+      values: {
+        firstName: "asdfghjklasdfghjkla",
+      },
+    });
+
+    expect(validator(1, 18, "firstName", "DVA")).to.be.false;
+  });
+
+  it("should be false when surname is 26 characters", () => {
+    const validator = fields.surnameLengthValidator.bind({
+      values: {
+        surname: "asdfghjklasdfghjklasdfghjk",
+      },
+    });
+
+    expect(validator(1, 25, "surname", "DVA")).to.be.false;
   });
 
   it("should be true when licence number matches DOB", () => {
