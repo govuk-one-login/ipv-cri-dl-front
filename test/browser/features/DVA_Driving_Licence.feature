@@ -273,4 +273,98 @@ Feature: DVA Driving licence CRI Error Validations
     Then I go to page not found
     And I assert the link on the page not found page is correct and live
 
+  @mock-api:dl-success @validation-regression @build @staging
+  Scenario Outline:  DLA Driving Licence last name validation test - 25 characters
+    Given User enters DVA data as a <DVADrivingLicenceSubject>
+    And User re-enters last name as <InvalidLastName>
+    When User clicks on continue
+    Examples:
+      | DVADrivingLicenceSubject        | InvalidLastName           |
+      | DrivingLicenceSubjectHappyBilly | abcdefghijklmnopqrstuvwxy |
 
+  @mock-api:dl-success @validation-regression @build @staging
+  Scenario Outline:  DVA Driving Licence last name validation test - 26 characters
+    Given User enters DVA data as a <DVADrivingLicenceSubject>
+    And User re-enters last name as <InvalidLastName>
+    When User clicks on continue
+    Examples:
+      | DVADrivingLicenceSubject        | InvalidLastName            |
+      | DrivingLicenceSubjectHappyBilly | abcdefghijklmnopqrstuvwxyz |
+
+
+  @mock-api:dl-success @validation-regression @build @staging
+  Scenario Outline:  DVLA Driving Licence first name validation test - 18 characters
+    Given User enters DVA data as a <DVADrivingLicenceSubject>
+    And User re-enters first name as <InvalidFirstName>
+    When User clicks on continue
+    Examples:
+      | DVADrivingLicenceSubject        | InvalidFirstName   |
+      | DrivingLicenceSubjectHappyBilly | abcdefghijklmnopqr |
+
+  @mock-api:dl-success @validation-regression @build @staging
+  Scenario Outline:  DVA Driving Licence first name validation test - 19 characters
+    Given User enters DVA data as a <DVADrivingLicenceSubject>
+    And User re-enters first name as <InvalidFirstName>
+    When User clicks on continue
+    Examples:
+      | DVADrivingLicenceSubject        | InvalidFirstName   |
+      | DrivingLicenceSubjectHappyBilly | abcdefghijklmnopqr |
+
+  @mock-api:dl-failed @validation-regression @build @staging
+  Scenario Outline:  DVA Driving Licence middle name validation test - 18 characters
+    Given User enters DVA data as a <DVADrivingLicenceSubject>
+    And User re-enters first name as <InvalidFirstName>
+    And User re-enters middle names as <InvalidMiddleNames>
+    When User clicks on continue
+    Then I see the Firstname error summary as Enter your first name as it appears on your driving licence
+    And I see the Firstname error in the error field as Enter your first name as it appears on your driving licence
+    Examples:
+      | DVADrivingLicenceSubject        | InvalidFirstName | InvalidMiddleNames |
+      | DrivingLicenceSubjectHappyBilly |                  | abcdefghijklmnopqr |
+
+  @mock-api:dl-failed @validation-regression @build @staging
+  Scenario Outline:  DVLA Driving Licence middle name validation test - 19 characters
+    Given User enters DVA data as a <DVADrivingLicenceSubject>
+    And User re-enters first name as <InvalidFirstName>
+    And User re-enters middle names as <InvalidMiddleNames>
+    When User clicks on continue
+    Then I see the Firstname error summary as Enter your first name as it appears on your driving licence
+    And I see the Firstname error in the error field as Enter your first name as it appears on your driving licence
+    Examples:
+      | DVADrivingLicenceSubject        | InvalidFirstName | InvalidMiddleNames |
+      | DrivingLicenceSubjectHappyBilly |                  | abcdefghijklmnopqrs |
+
+  @mock-api:dl-success @validation-regression @build @staging
+  Scenario Outline:  DVLA Driving Licence character limit happy path validation test - first name
+    Given User enters DVA data as a <DVADrivingLicenceSubject>
+    And User re-enters last name as <InvalidLastName>
+    And User re-enters first name as <InvalidFirstName>
+    When User clicks on continue
+    Examples:
+      | DVADrivingLicenceSubject        | InvalidLastName           | InvalidFirstName   |
+      | DrivingLicenceSubjectHappyBilly | abcdefghijklmnopqrstuvwxy | abcdefghijklmnopqr |
+
+  @mock-api:dl-failed @validation-regression @build @staging
+  Scenario Outline:  DVA Driving Licence character limit happy path validation test - given names
+    Given User enters DVA data as a <DVADrivingLicenceSubject>
+    And User re-enters last name as <InvalidLastName>
+    And User re-enters first name as <InvalidFirstName>
+    And User re-enters middle names as <InvalidMiddleNames>
+    When User clicks on continue
+    Then I see the Firstname error summary as Enter your first name as it appears on your driving licence
+    And I see the Firstname error in the error field as Enter your first name as it appears on your driving licence
+    Examples:
+      | DVADrivingLicenceSubject        | InvalidLastName           | InvalidFirstName | InvalidMiddleNames                    |
+      | DrivingLicenceSubjectHappyBilly | abcdefghijklmnopqrstuvwxy |                  | abcdefghijklmnopqr |
+
+  @mock-api:dl-failed @validation-regression @build @staging
+  Scenario Outline:  DVA Driving Licence character limit unhappy path validation test
+    Given User enters DVA data as a <DVADrivingLicenceSubject>
+    And User re-enters last name as <InvalidLastName>
+    And User re-enters middle names as <InvalidMiddleNames>
+    When User clicks on continue
+    Then I see the middlenames error summary as Enter any middle names as they appear on your driving licence
+    And I see the middlenames error in the error field as Enter any middle names as they appear on your driving licence
+    Examples:
+      | DVADrivingLicenceSubject        | InvalidLastName           | InvalidMiddleNames  |
+      | DrivingLicenceSubjectHappyBilly | abcdefghijklmnopqrstuvwxy | abcdefghijklmnopqrs |
