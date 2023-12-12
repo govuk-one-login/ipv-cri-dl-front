@@ -51,7 +51,7 @@ Mappings:
       dynatraceSecretArn: arn:aws:secretsmanager:eu-west-2:216552277552:secret:DynatraceNonProductionVariables
       fargateCPUsize: "256"
       fargateRAMsize: "512"
-      desiredTaskCount: 1
+      desiredTaskCount: 2
       ga4Enabled: "true"
     build:
       logLevel: "request"
@@ -65,14 +65,14 @@ Mappings:
       dynatraceSecretArn: arn:aws:secretsmanager:eu-west-2:216552277552:secret:DynatraceNonProductionVariables
       fargateCPUsize: "256"
       fargateRAMsize: "512"
-      desiredTaskCount: 1
+      desiredTaskCount: 2
       ga4Enabled: "true"
     integration:
       logLevel: "request"
       dynatraceSecretArn: arn:aws:secretsmanager:eu-west-2:216552277552:secret:DynatraceNonProductionVariables
       fargateCPUsize: "512"
       fargateRAMsize: "1024"
-      desiredTaskCount: 1
+      desiredTaskCount: 2
       ga4Enabled: "true"
     production:
       logLevel: "request"
