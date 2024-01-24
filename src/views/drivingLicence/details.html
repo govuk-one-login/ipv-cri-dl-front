@@ -12,66 +12,69 @@
 {% from "hmpo-date/macro.njk" import hmpoDate %}
 {% from "hmpo-checkboxes/macro.njk" import hmpoCheckboxes %}
 
-
 {% block mainContent %}
-{% if values.showRetryMessage and not (ctx("errors") | length) %}
-{# user is retrying #}
-<h1 id="header" data-page="{{hmpoPageKey}}" class="govuk-heading-l">
-    {{ translate("drivingLicence.retryTitle") }}
-</h1>
-{% else %}
-{# user's first attempt #}
-<h1 id="header" data-page="{{hmpoPageKey}}" class="govuk-heading-l">
-    {{ translate("drivingLicence.title") }}
-</h1>
-{% endif %}
-
-{% if values.showRetryMessage and not (ctx("errors") | length) %}
-{# user is retrying, show more information about how to complete the form #}
-{% set retryHtml %}
-<h2>{{ translate("drivingLicence.retryMessageHeading") }}</h2>
-<p>
-    {% if (values.licenceIssuer == "DVA") %}
-    {{ translate("drivingLicence.retryMessageParagraph1DVA") }}
+    {% if values.showRetryMessage and not(ctx("errors") | length) %}
+        {# user is retrying #}
+        <h1 id="header" data-page="{{hmpoPageKey}}" class="govuk-heading-l">
+            {{ translate("drivingLicence.retryTitle") }}
+        </h1>
     {% else %}
-    {{ translate("drivingLicence.retryMessageParagraph1") }}
+        {# user's first attempt #}
+        <h1 id="header" data-page="{{hmpoPageKey}}" class="govuk-heading-l">
+            {{ translate("drivingLicence.title") }}
+        </h1>
     {% endif %}
-</p>
-<p>
-    {{ translate("drivingLicence.retryMessageParagraph2") }}
-</p>
-<ul class="govuk-list govuk-list--bullet">
-    <li>{{ translate("drivingLicence.retryMessageList1") }}</li>
-    <li>{{ translate("drivingLicence.retryMessageList2") }}</li>
-    <li>{{ translate("drivingLicence.retryMessageList3") }}</li>
-</ul>
-{% endset %}
 
-{{ govukNotificationBanner({
+    {% if values.showRetryMessage and not(ctx("errors") | length) %}
+        {# user is retrying, show more information about how to complete the form #}
+        {% set retryHtml %}
+        <h2>{{ translate("drivingLicence.retryMessageHeading") }}</h2>
+        <p>
+            {% if (values.licenceIssuer == "DVA") %}
+                {{ translate("drivingLicence.retryMessageParagraph1DVA") }}
+            {% else %}
+                {{ translate("drivingLicence.retryMessageParagraph1") }}
+            {% endif %}
+        </p>
+        <p>
+            {{ translate("drivingLicence.retryMessageParagraph2") }}
+        </p>
+        <ul class="govuk-list govuk-list--bullet">
+            <li>{{ translate("drivingLicence.retryMessageList1") }}</li>
+            <li>{{ translate("drivingLicence.retryMessageList2") }}</li>
+            <li>{{ translate("drivingLicence.retryMessageList3") }}</li>
+        </ul>
+        {% endset %}
+
+        {{ govukNotificationBanner({
 html: retryHtml,
 titleText: translate("drivingLicence.retryBannerTitle"),
 role: 'alert',
 classes:'driving-licence-message'
 }) }}
 
-{% else %}
-{# user's first attempt #}
+    {% else %}
+        {# user's first attempt #}
 
-{% if (values.licenceIssuer == "DVA") %}
-<p> {{ translate("drivingLicence.checkDetailsContextDVA") }} </p>
-{% else %}
-<p> {{ translate("drivingLicence.checkDetailsContext") }} </p>
-{% endif %}
+        {% if (values.licenceIssuer == "DVA") %}
+            <p>
+                {{ translate("drivingLicence.checkDetailsContextDVA") }}
+            </p>
+        {% else %}
+            <p>
+                {{ translate("drivingLicence.checkDetailsContext") }}
+            </p>
+        {% endif %}
 
-{% endif %}
+    {% endif %}
 
-{{ govukInsetText({
+    {{ govukInsetText({
 html: translate("drivingLicence.drivingLicenceTryAnotherWay")
 }) }}
 
-{% call hmpoForm(ctx) %}
+    {% call hmpoForm(ctx) %}
 
-{{ hmpoText(ctx, {
+    {{ hmpoText(ctx, {
 id: "surname",
 label: {
 classes: "govuk-label"
@@ -79,23 +82,23 @@ classes: "govuk-label"
 classes: "govuk-input"
 }) }}
 
-{%- set firstNameError = hmpoGetError(ctx, {id: 'firstName'}) %}
-{%- set middleNameError = hmpoGetError(ctx, {id: 'middleNames'}) %}
+    {%- set firstNameError = hmpoGetError(ctx, {id: 'firstName'}) %}
+    {%- set middleNameError = hmpoGetError(ctx, {id: 'middleNames'}) %}
 
-{% if firstNameError and middleNameError %}
-<div class="govuk-form-group govuk-form-group--error">
-    {% else %}
-    <div class="govuk-form-group ">
-        {% endif %}
+    {% if firstNameError and middleNameError %}
+        <div class="govuk-form-group govuk-form-group--error">
+        {% else %}
+            <div class="govuk-form-group ">
+            {% endif %}
 
-        {% call govukFieldset({
+            {% call govukFieldset({
         legend: {
         text: translate("drivingLicence.drivingLicenceGivenNames"),
         classes: "govuk-!-margin-0"
         }
         }) %}
-        <div class="govuk-inset-text govuk-!-margin-top-2 govuk-!-padding-top-1">
-            {{ hmpoText(ctx, {
+            <div class="govuk-inset-text govuk-!-margin-top-2 govuk-!-padding-top-1">
+                {{ hmpoText(ctx, {
             id: "firstName",
             label: {
             classes: "govuk-label"
@@ -103,147 +106,146 @@ classes: "govuk-input"
             classes: "govuk-input"
             }) }}
 
-            {{ hmpoText(ctx, {
+                {{ hmpoText(ctx, {
             id: "middleNames",
             label: {
             classes: "govuk-label"
             },
             classes: "govuk-input"
             }) }}
+            </div>
+            {% endcall %}
         </div>
-        {% endcall %}
-    </div>
 
-    {% if (values.licenceIssuer == "DVLA") %}
+        {% if (values.licenceIssuer == "DVLA") %}
 
-    {{ hmpoDate(ctx, {
+            {{ hmpoDate(ctx, {
     id: "dateOfBirth",
     legend: {
     classes: "govuk-label"
     }
     }) }}
 
-    {{ hmpoText(ctx, {
+            {{ hmpoText(ctx, {
     id: "issuerDependent",
     type: "hidden",
     legend: "",
     default: "DVLA"
     }) }}
 
-    {{ hmpoDate(ctx, {
+            {{ hmpoDate(ctx, {
     id: "issueDate",
     legend: {
     classes: "govuk-label"
     }
     }) }}
 
-    {% else %}
+        {% else %}
 
-    {{ hmpoDate(ctx, {
+            {{ hmpoDate(ctx, {
     id: "dvaDateOfBirth",
     legend: {
     classes: "govuk-label"
     }
     }) }}
 
-    {{ hmpoText(ctx, {
+            {{ hmpoText(ctx, {
     id: "issuerDependent",
     type: "hidden",
     legend: "",
     default: "DVA"
     }) }}
 
-    {{ hmpoDate(ctx, {
+            {{ hmpoDate(ctx, {
     id: "dateOfIssue",
     legend: {
     classes: "govuk-label"
     }
     }) }}
 
-    {% endif %}
+        {% endif %}
 
-    {{ hmpoDate(ctx, {
+        {{ hmpoDate(ctx, {
     id: "expiryDate",
     legend: {
     classes: "govuk-label"
     }
     }) }}
 
-    {% if (values.licenceIssuer == "DVLA") %}
-    {{ hmpoText(ctx, {
+        {% if (values.licenceIssuer == "DVLA") %}
+            {{ hmpoText(ctx, {
     id: "drivingLicenceNumber",
     label: {
     classes: "govuk-label"
     }
     }) }}
 
-    {{ hmpoText(ctx, {
+            {{ hmpoText(ctx, {
     id: "issueNumber",
     label: {
     classes: "govuk-label"
     }
     }) }}
 
-    {% else %}
-    {{ hmpoText(ctx, {
+        {% else %}
+            {{ hmpoText(ctx, {
     id: "dvaLicenceNumber",
     label: {
     classes: "govuk-label"
     }
     }) }}
 
-    {% endif %}
+        {% endif %}
 
-    {{ hmpoText(ctx, {
+        {{ hmpoText(ctx, {
     id: "postcode",
     label: {
     classes: "govuk-label"
     }
     }) }}
 
-    {% if (values.licenceIssuer == "DVA") %}
-    <h2>{{ translate("drivingLicence.consentDVA") }}</h2>
+        {% if (values.licenceIssuer == "DVA") %}
+            <h2 >{{ translate("drivingLicence.consentDVA") }}</h2>
 
-    {{ hmpoCheckboxes(ctx, {
+            {{ hmpoCheckboxes(ctx, {
     id: "consentDVACheckbox",
     hint: {
     classes: "govuk-label"
     }
     }) }}
-    {% endif %}
+        {% endif %}
 
-    {% if (values.licenceIssuer == "DVLA") %}
-    <h2>{{ translate("drivingLicence.consentDVLA") }}</h2>
+        {% if (values.licenceIssuer == "DVLA") %}
+            <h2 >{{ translate("drivingLicence.consentDVLA") }}</h2>
 
-    {{ hmpoCheckboxes(ctx, {
+            {{ hmpoCheckboxes(ctx, {
     id: "consentCheckbox",
     hint: {
     classes: "govuk-label"
     }
     }) }}
-    {% endif %}
+        {% endif %}
 
-    {% if values.showRetryMessage and not (ctx("errors") | length) %}
-    {# user is retrying, show warning message they have run out of attempts #}
-    {{ govukWarningText({
+        {% if values.showRetryMessage and not(ctx("errors") | length) %}
+            {# user is retrying, show warning message they have run out of attempts #}
+            {{ govukWarningText({
     text: translate("drivingLicence.retryWarningText"),
     iconFallbackText: translate("drivingLicence.retryWarningTitle")
     }) }}
-    {% endif %}
+        {% endif %}
 
+        {{ hmpoSubmit(ctx, {id: "continue", text: translate("buttons.next")}) }}
 
-    {{ hmpoSubmit(ctx, {id: "continue", text: translate("buttons.next")}) }}
-
-    {% endcall %}
+        {% endcall %}
 
     {% endblock %}
     {% block scripts %}
 
-    {{ super ()}}
+        {{ super ()}}
 
-    <script nonce="{{ cspNonce }}">
+        <script nonce="{{ cspNonce }}">
 
-<!--    Disable enter button from submitting the form but allow if form submit button is focused-->
+            <!--    Disable enter button from submitting the form but allow if form submit button is focused-->
     var form = document.getElementsByTagName('form')[0];
     form.addEventListener("keydown", function (event) {
 
@@ -279,6 +281,23 @@ classes: "govuk-input"
             }
         })
     }
+    
+        window.addEventListener('load', function () {
+            window
+                .DI
+                .analyticsGa4
+                .pageViewTracker
+                .trackOnPageLoad({
+                    statusCode: '200', // Access status code
+                    englishPageTitle: '{{translate("pages.details.title")}}',
+                    taxonomy_level1: 'CRI', // Access taxonomy level 1
+                    taxonomy_level2: 'details', // Access taxonomy level 2
+                    content_id: '002',
+                    logged_in_status: true,
+                    dynamic: false
+                });
+        });
+   
 
     </script>
 
@@ -287,5 +306,5 @@ classes: "govuk-input"
     {% set footerNavItems = translate("govuk.footerNavItems") %}
 
     {% block footer %}
-    {{ govukFooter( footerNavItems ) }}
+        {{ govukFooter( footerNavItems ) }}
     {% endblock %}

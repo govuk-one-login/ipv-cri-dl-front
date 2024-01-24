@@ -7,14 +7,17 @@
 {% from "govuk/components/details/macro.njk" import govukDetails %}
 {% from "hmpo-details/macro.njk" import hmpoDetails %}
 
-{% call hmpoForm(ctx, {attributes: {onsubmit: 'window.disableFormSubmit()'} }) %}
+{% call hmpoForm(ctx, {
+    attributes: {
+        onsubmit: 'window.disableFormSubmit()'
+    }
+}) %}
 
 {{ hmpoRadios(ctx, {
 id: "licenceIssuer"
 }) }}
 
 {% endcall %}
-
 
 {% block submitButton %}
     {{ hmpoSubmit(ctx, {id: 'submitButton'}) }}
@@ -25,7 +28,6 @@ id: "licenceIssuer"
     }) }}
 {% endblock %}
 
-
 {% set footerNavItems = translate("govuk.footerNavItems") %}
 
 {% block footer %}
@@ -33,5 +35,22 @@ id: "licenceIssuer"
 {% endblock %}
 
 {% block scripts %}
-{{ super ()}}
+    <script {% if cspNonce %} nonce="{{ cspNonce }}"{%  endif %}>
+        window.addEventListener('load', function () {
+            window
+                .DI
+                .analyticsGa4
+                .pageViewTracker
+                .trackOnPageLoad({
+                    statusCode: '200', // Access status code
+                    englishPageTitle: '{{translate("licence-issuer.title")}}',
+                    taxonomy_level1: 'CRI', // Access taxonomy level 1
+                    taxonomy_level2: 'licence-issuer', // Access taxonomy level 2
+                    content_id: '001',
+                    logged_in_status: true,
+                    dynamic: false
+                });
+        });
+    </script>
+    {{ super ()}}
 {% endblock %}
