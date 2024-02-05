@@ -3,7 +3,6 @@ on:
   push:
     branches:
       - main
-      - ips-447-fix-workflow-warnings
   workflow_dispatch: # deploy manually
 
 jobs:
@@ -29,6 +28,8 @@ jobs:
       - name: SAM Validate
         run: sam validate --region ${{ env.AWS_REGION }} -t deploy/template.yaml
 
+      # Likely source of node warning
+      # https://github.com/aws-actions/amazon-ecr-login/issues/586
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
