@@ -211,7 +211,7 @@ Feature: DVLA Driving licence CRI Error Validations
 
 #####  DateOfBirthWithSpecialCharacters, DateOfBirthNotReal, NoDateOfBirth #####
   @mock-api:dl-success @validation-regression @build @staging
-  Scenario Outline: DVLA Driving Licence Date of birth that are not real or with special characters or no date of birth error validation
+  Scenario Outline: DVLA Driving Licence Date of birth that are not real or with special characters or no date of birth error validation or year provided is two digits
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters day of birth as <InvalidDayOfBirth>
     And User re-enters month of birth as <InvalidMonthOfBirth>
@@ -224,6 +224,7 @@ Feature: DVLA Driving licence CRI Error Validations
       | DrivingLicenceSubject           | InvalidDayOfBirth | InvalidMonthOfBirth | InvalidYearOfBirth |
       | DrivingLicenceSubjectHappyPeter | @                 | *&                  | 19 7               |
       | DrivingLicenceSubjectHappyPeter | 51                | 71                  | 198                |
+      | DrivingLicenceSubjectHappyPeter | 05                | 08                  | 66                 |
 #      DVLA Driving licence with no date of birth scenario is not displaying the expected error message and has been raised as a bug LIME-694
 #      |DrivingLicenceSubjectHappyPeter|                 |                   |                |
 
@@ -243,7 +244,7 @@ Feature: DVLA Driving licence CRI Error Validations
 
 #####  InvalidIssueDate, NoIssueDate #####
   @mock-api:dl-success @validation-regression @build @staging
-  Scenario Outline: DVLA Driving Licence Issue date that are not real or with special characters or no issue date error validation
+  Scenario Outline: DVLA Driving Licence Issue date that are not real or with special characters or no issue date error validation or year provided is two digits
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters day of issue as <InvalidDayOfIssue>
     And User re-enters month of issue as <InvalidMonthOfIssue>
@@ -257,6 +258,7 @@ Feature: DVLA Driving licence CRI Error Validations
       | DrivingLicenceSubjectHappyPeter | AA                | BB                  | AABC               |
       | DrivingLicenceSubjectHappyPeter | &                 | ^%                  | £$ ^               |
       | DrivingLicenceSubjectHappyPeter |                   |                     |                    |
+      | DrivingLicenceSubjectHappyPeter | 7                 | 8                   | 18                 |
 
   @mock-api:dl-success @validation-regression @build @staging
   Scenario Outline: DVLA Driving Licence Issue date that is previous days gets through successfully
@@ -313,7 +315,7 @@ Feature: DVLA Driving licence CRI Error Validations
 
 #####  InvalidValidToDate, ValidToDateWithSpecialCharacters, NoValidToDate  #####
   @mock-api:dl-success @validation-regression @build @staging
-  Scenario Outline: DVLA Driving Licence Valid to date that are not real or with special characters or no valid to date error validation
+  Scenario Outline: DVLA Driving Licence Valid to date that are not real or with special characters or no valid to date error validation or year provided is two digits
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters valid to day as <InvalidValidToDay>
     And User re-enters valid to month as <InvalidValidToMonth>
@@ -327,6 +329,7 @@ Feature: DVLA Driving licence CRI Error Validations
       | DrivingLicenceSubjectHappyPeter | AA                | BC                  | AABD               |
       | DrivingLicenceSubjectHappyPeter | !@                | £$                  | %^ *               |
       | DrivingLicenceSubjectHappyPeter |                   |                     |                    |
+      | DrivingLicenceSubjectHappyPeter | 5                 | 8                   | 29                 |
 
   @mock-api:dl-success @validation-regression @build @staging
   Scenario Outline: DVLA Driving Licence Valid to date in the past error validation
