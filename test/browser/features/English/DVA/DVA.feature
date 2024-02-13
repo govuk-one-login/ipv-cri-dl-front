@@ -157,7 +157,7 @@ Feature: DVA Driving licence CRI Error Validations
 
 #####  DateOfBirthNotReal, DateOfBirthWithSpecialCharacters, NoDateOfBirth #####
   @mock-api:dva-invalidDateOfBirth @validation-regression @build @staging
-  Scenario Outline: DVA Driving Licence Date of birth that are not real or with special characters or no date of birth error validation
+  Scenario Outline: DVA Driving Licence Date of birth that are not real or with special characters or no date of birth error validation or year provided is two digits
     Given User enters DVA data as a <DVADrivingLicenceSubject>
     And DVA user re-enters day of birth as <InvalidDayOfBirth>
     And DVA user re-enters month of birth as <InvalidMonthOfBirth>
@@ -171,6 +171,7 @@ Feature: DVA Driving licence CRI Error Validations
       |DrivingLicenceSubjectHappyBilly|         51      |     71            |         198      |
       |DrivingLicenceSubjectHappyBilly|         @       |     *&            |         19 7     |
       |DrivingLicenceSubjectHappyBilly|                 |                   |                  |
+      |DrivingLicenceSubjectHappyBilly|         05      |     12            |         29       |
 
   @mock-api:dva-invalidDateOfBirth @validation-regression @build @staging
   Scenario Outline: DVA Driving Licence Date of birth in the future error validation
@@ -188,7 +189,7 @@ Feature: DVA Driving licence CRI Error Validations
 
 #####  IssueDateWithAlphaCharacters, IssueDateWithSpecialCharacters, NoIssueDate #####
   @mock-api:dva-invalidIssueDate @validation-regression @build @staging
-  Scenario Outline: DVA Driving Licence Issue date that are not real or with special characters or no issue date error validation
+  Scenario Outline: DVA Driving Licence Issue date that are not real or with special characters or no issue date error validation or year provided is two digits
     Given User enters DVA data as a <DVADrivingLicenceSubject>
     And DVA user re-enters day of issue as <InvalidDayOfIssue>
     And DVA user re-enters month of issue as <InvalidMonthOfIssue>
@@ -202,6 +203,7 @@ Feature: DVA Driving licence CRI Error Validations
       |DrivingLicenceSubjectHappyBilly|         AA      |     BB            |         AABC     |
       |DrivingLicenceSubjectHappyBilly|         &       |     ^%            |         £$ ^     |
       |DrivingLicenceSubjectHappyBilly|                 |                   |                  |
+      |DrivingLicenceSubjectHappyBilly|         05      |     12            |         19       |
 
   @mock-api:dva-invalidIssueDate @validation-regression @build @staging
   Scenario Outline: DVA Driving Licence Issue date in the future error validation
@@ -219,7 +221,7 @@ Feature: DVA Driving licence CRI Error Validations
 
 #####  InvalidValidToDate, ValidToDateWithSpecialCharacters, NoValidToDate  #####
   @mock-api:dva-invalidExpiryDate @validation-regression @build @staging
-  Scenario Outline: DVA Driving Licence Valid to date that are not real or with special characters or no valid to date error validation
+  Scenario Outline: DVA Driving Licence Valid to date that are not real or with special characters or no valid to date error validation or year provided is two digits
     Given User enters DVA data as a <DVADrivingLicenceSubject>
     And User re-enters valid to day as <InvalidValidToDay>
     And User re-enters valid to month as <InvalidValidToMonth>
@@ -233,6 +235,7 @@ Feature: DVA Driving licence CRI Error Validations
       |DrivingLicenceSubjectHappyBilly|         AA      |     BC            |         AABD     |
       |DrivingLicenceSubjectHappyBilly|         !@      |     £$            |         %^ *     |
       |DrivingLicenceSubjectHappyBilly|                 |                   |                  |
+      |DrivingLicenceSubjectHappyBilly|         05      |     12            |         29       |
 
   @mock-api:dva-invalidExpiryDate @validation-regression @build @staging
   Scenario Outline: DVA Driving Licence Valid to date in the past error validation
