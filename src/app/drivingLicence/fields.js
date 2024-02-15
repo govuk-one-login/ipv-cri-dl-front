@@ -255,11 +255,6 @@ module.exports = {
     validate: ["required"],
     dependent: { field: "issuerDependent", value: "DVLA" }
   },
-  proveAnotherWayRadio: {
-    type: "radios",
-    items: ["proveAnotherWay", "retry"],
-    validate: ["required"]
-  },
   licenceIssuer: {
     type: "radios",
     label: "",
