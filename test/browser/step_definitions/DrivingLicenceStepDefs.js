@@ -814,6 +814,14 @@ Then(
 );
 
 Then(
+  /^I see Contact the One Login team link reads (.*)$/,
+  async function (contactOneLoginTeamLink) {
+    const drivingLicencePage = new DrivingLicencePage(this.page);
+    await drivingLicencePage.assertContactOneLoginTeamLink(contactOneLoginTeamLink);
+  }
+);
+
+Then(
   /^I can see Check your details as (.*)$/,
   async function (checkDetailsTitle) {
     const drivingLicencePage = new DrivingLicencePage(this.page);
