@@ -335,3 +335,17 @@ Feature: DVA Driving licence CRI Error Validations
     Examples:
       |DVADrivingLicenceSubject       |InvalidLicenceNumber|
       |DrivingLicenceSubjectHappyBilly|55667778             |
+
+  @mock-api:DVA-success-supportLinks @language-regression
+  Scenario: Check support links
+    Given I see support link Support in the footer and assert the url is correct and live
+    When I view the beta banner
+    Then the beta banner reads Mae hwn yn wasanaeth newydd – bydd eich adborth (agor mewn tab newydd) yn ein helpu i'w wella.
+    And I assert the link in the banner is correct and live
+    Then I delete the session cookie
+    And User clicks on continue
+    Then I see the heading Mae'n ddrwg gennym, mae problem
+    And I see Contact the One Login team link reads Cysylltu â thîm GOV.UK One Login (agor mewn tab newydd)
+    And I assert the link on the error page is correct and live
+    Then I go to page not found
+    And I assert the link on the page not found page is correct and live
