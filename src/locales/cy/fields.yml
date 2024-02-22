@@ -133,18 +133,6 @@ consentCheckbox:
   validation:
     default: "Mae'n rhaid i chi roi eich caniatâd i barhau"
 
-proveAnotherWayRadio:
-  label: Beth hoffech chi ei wneud?
-  validation:
-    required: Mae'n rhaid i chi ddewis opsiwn i barhau
-  items:
-    proveAnotherWay:
-      label: Profi pwy ydych chi mewn ffordd arall
-      value: continue
-    retry:
-      label: Ceisiwch roi manylion eich pasbort a phrofi pwy ydych chi gyda chyfrif GOV.UK
-      value: retry
-
 licenceIssuer:
   validation:
     required: Mae'n rhaid i chi ddewis opsiwn i barhau
