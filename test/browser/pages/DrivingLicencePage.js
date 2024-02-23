@@ -844,7 +844,9 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
   async assertContactOneLoginTeamLink(contactOneLoginTeamLink) {
     await this.page.waitForLoadState("domcontentloaded");
     expect(await this.isCurrentPage()).to.be.true;
-    expect(await this.contactOneLoginLink.innerText()).to.equal(contactOneLoginTeamLink);
+    expect(await this.contactOneLoginLink.innerText()).to.equal(
+      contactOneLoginTeamLink
+    );
   }
 
   async assertRetryTitle(checkDetailsTitle) {

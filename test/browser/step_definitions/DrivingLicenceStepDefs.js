@@ -817,7 +817,9 @@ Then(
   /^I see Contact the One Login team link reads (.*)$/,
   async function (contactOneLoginTeamLink) {
     const drivingLicencePage = new DrivingLicencePage(this.page);
-    await drivingLicencePage.assertContactOneLoginTeamLink(contactOneLoginTeamLink);
+    await drivingLicencePage.assertContactOneLoginTeamLink(
+      contactOneLoginTeamLink
+    );
   }
 );
 
