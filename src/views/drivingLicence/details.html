@@ -69,14 +69,15 @@ classes:'driving-licence-message'
 html: translate("drivingLicence.drivingLicenceTryAnotherWay")
 }) }}
 
-{% call hmpoForm(ctx) %}
+{% call hmpoForm(ctx, {autocomplete:'on'}) %}
 
 {{ hmpoText(ctx, {
 id: "surname",
 label: {
 classes: "govuk-label"
 },
-classes: "govuk-input"
+classes: "govuk-input",
+autocomplete: "given-name"
 }) }}
 
 {%- set firstNameError = hmpoGetError(ctx, {id: 'firstName'}) %}
@@ -100,7 +101,8 @@ classes: "govuk-input"
             label: {
             classes: "govuk-label"
             },
-            classes: "govuk-input"
+            classes: "govuk-input",
+            autocomplete: "family-name"
             }) }}
 
             {{ hmpoText(ctx, {
@@ -108,7 +110,8 @@ classes: "govuk-input"
             label: {
             classes: "govuk-label"
             },
-            classes: "govuk-input"
+            classes: "govuk-input",
+            autocomplete: "additional-name"
             }) }}
         </div>
         {% endcall %}
@@ -174,14 +177,16 @@ classes: "govuk-input"
     id: "drivingLicenceNumber",
     label: {
     classes: "govuk-label"
-    }
+    },
+    autocomplete: "drivingLicenceNumber"
     }) }}
 
     {{ hmpoText(ctx, {
     id: "issueNumber",
     label: {
     classes: "govuk-label"
-    }
+    },
+    autocomplete: "issueNumber"
     }) }}
 
     {% else %}
@@ -189,7 +194,8 @@ classes: "govuk-input"
     id: "dvaLicenceNumber",
     label: {
     classes: "govuk-label"
-    }
+    },
+    autocomplete: "dvaLicenceNumber"
     }) }}
 
     {% endif %}
@@ -198,7 +204,8 @@ classes: "govuk-input"
     id: "postcode",
     label: {
     classes: "govuk-label"
-    }
+    },
+    autocomplete: "postal-code"
     }) }}
 
     {% if (values.licenceIssuer == "DVA") %}

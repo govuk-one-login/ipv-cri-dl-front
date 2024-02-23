@@ -102,12 +102,14 @@ module.exports = {
         ...dvlaValidatorObj
       }
     ],
+    autocomplete: "bday",
     dependent: { field: "issuerDependent", value: "DVLA" }
   },
   dvaDateOfBirth: {
     type: "date",
     journeyKey: "dvaDateOfBirth",
     validate: ["required", "date", { type: "before", arguments: [] }],
+    autocomplete: "bday",
     dependent: { field: "issuerDependent", value: "DVA" }
   },
   issueDate: {
@@ -126,6 +128,7 @@ module.exports = {
         arguments: [10, "years"]
       }
     ],
+    autocomplete: "issueDate",
     dependent: { field: "issuerDependent", value: "DVLA" }
   },
   dateOfIssue: {
@@ -144,6 +147,7 @@ module.exports = {
         arguments: [10, "years"]
       }
     ],
+    autocomplete: "dateOfIssue",
     dependent: { field: "issuerDependent", value: "DVA" }
   },
   issuerDependent: {
@@ -161,7 +165,8 @@ module.exports = {
         type: "after",
         arguments: []
       }
-    ]
+    ],
+    autocomplete: "expiryDate"
   },
   drivingLicenceNumber: {
     type: "text",
