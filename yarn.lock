@@ -365,10 +365,10 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.53.0.tgz#bea56f2ed2b5baea164348ff4d5a879f6f81f20d"
   integrity sha512-Kn7K8dx/5U6+cT1yEhpX1w4PCSg0M+XyRILPgvwcEBjerFWCwQj5sbr3/VmxqV0JGHCBCzyd6LxypEuehypY1w==
 
-"@govuk-one-login/di-ipv-cri-common-express@6.0.0":
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/@govuk-one-login/di-ipv-cri-common-express/-/di-ipv-cri-common-express-6.0.0.tgz#13173600c7dc41e826c084f6901877f162cfdcf2"
-  integrity sha512-iEJIhUgBiOYtMv940vt/F7lC3CrAg4AV66gYZqepHIC7grrOrIai/uUQ8HNtf1MTE+ezthEDc0810kL9uaXmPA==
+"@govuk-one-login/di-ipv-cri-common-express@6.1.0":
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/@govuk-one-login/di-ipv-cri-common-express/-/di-ipv-cri-common-express-6.1.0.tgz#028a16511eaa57933d95b524d866c413a38cee67"
+  integrity sha512-8KQFwHlVUZZF83l2ibvfL80fFOHv8iXOGFXNKKNWbfd3/oZrp616IedgLHRjRj6zDQHhwaA0KgEkJsW063XXzA==
   dependencies:
     hmpo-logger "7.0.1"
     i18next "23.8.1"
@@ -2706,10 +2706,10 @@ human-signals@^5.0.0:
   resolved "https://registry.yarnpkg.com/human-signals/-/human-signals-5.0.0.tgz#42665a284f9ae0dade3ba41ebc37eb4b852f3a28"
   integrity sha512-AXcZb6vzzrFAUE61HnN4mpLqd/cSIwNQjtNWR0euPm6y0iqx3G4gOXaIDdtdDwZmhwe82LA6+zinmW4UBWVePQ==
 
-husky@8.0.1:
-  version "8.0.1"
-  resolved "https://registry.yarnpkg.com/husky/-/husky-8.0.1.tgz#511cb3e57de3e3190514ae49ed50f6bc3f50b3e9"
-  integrity sha512-xs7/chUH/CKdOCs7Zy0Aev9e/dKOMZf3K1Az1nar3tzlv0jfqnYtu235bstsWTmXOR0EfINrPa97yy4Lz6RiKw==
+husky@9.0.11:
+  version "9.0.11"
+  resolved "https://registry.yarnpkg.com/husky/-/husky-9.0.11.tgz#fc91df4c756050de41b3e478b2158b87c1e79af9"
+  integrity sha512-AB6lFlbwwyIqMdHYhwPe+kjOC3Oc5P3nThEoW/AaO2BX3vJDjWPFxYLxokUZOo6RNX20He3AaT8sESs9NJcmEw==
 
 i18next-fs-backend@2.3.1:
   version "2.3.1"
