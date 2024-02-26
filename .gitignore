@@ -122,4 +122,4 @@ dist
 .DS_Store
 .vscode/
 
-results/*
+reports/*

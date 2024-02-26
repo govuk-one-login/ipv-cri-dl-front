@@ -60,4 +60,4 @@ export PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1
 export PLAYWRIGHT_BROWSERS_PATH=/usr/bin/
 yarn test:browser:ci
 
-cp -r results/* "$REPORT_DIR"
+cp -r reports/* "$REPORT_DIR"

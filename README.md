@@ -17,6 +17,10 @@ yarn install
 - `API_BASE_URL` - URL to the cri-driving-licence-back api.
 - `PORT` - Default port to run webserver on. (Default to `3000`)
 - `SESSION_SECRET` - Secret used when configuring the HMPO session.
+- `GOOGLE_ANALYTICS_4_GTM_CONTAINER_ID` - Container ID for GA4 tracking.
+- `UNIVERSAL_ANALYTICS_GTM_CONTAINER_ID` - Container ID for UA tracking.
+- `GA4_DISABLED` - BOOLEAN
+- `UA_DISABLED` - BOOLEAN
 
 ### Code Owners
 

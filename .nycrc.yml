@@ -10,12 +10,11 @@ exclude:
   - "src/app/drivingLicence/steps.js"
   - "src/app/drivingLicence/fields.js"
   - "src/lib/*"
-  - "src/app.js"
-report-dir: coverage
-statements: 40
-branches: 40
-functions: 40
-lines: 40
+report-dir: reports/coverage
+statements: 60
+branches: 60
+functions: 80
+lines: 60
 watermarks:
   statements:
     - 80
