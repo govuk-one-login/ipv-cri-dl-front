@@ -37,15 +37,16 @@ govuk:
     meta:
       items:
         - href: "https://signin.account.gov.uk/accessibility-statement"
-          text: "Accessibility statement"
+          text: "Datganiad hygyrchedd"
         - href: "https://signin.account.gov.uk/cookies"
-          text: "Cookies"
+          text: "Cwcis"
         - href: "https://signin.account.gov.uk/terms-and-conditions"
-          text: "Terms and conditions"
+          text: "Telerau ac amodau"
         - href: "https://signin.account.gov.uk/privacy-notice"
-          text: "Privacy notice"
+          text: "Hysbysiad preifatrwydd"
         - href: "https://home.account.gov.uk/contact-gov-uk-one-login"
-          text: "Support"
+          text: "Cymorth (agor mewn tab newydd)"
+          attributes: { target: "_blank", rel:"noreferrer noopener" }
 drivingLicence:
   title: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru
   serviceNameRequired: true
