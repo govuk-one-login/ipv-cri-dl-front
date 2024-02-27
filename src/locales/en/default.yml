@@ -45,7 +45,8 @@ govuk:
         - href: "https://signin.account.gov.uk/privacy-notice"
           text: "Privacy notice"
         - href: "https://home.account.gov.uk/contact-gov-uk-one-login"
-          text: "Support"
+          text: "Support (opens in new tab)"
+          attributes: { target: "_blank", rel:"noreferrer noopener" }
 drivingLicence:
   title: Enter your details exactly as they appear on your UK driving licence
   serviceNameRequired: true
@@ -67,9 +68,6 @@ drivingLicence:
   retryMessageList3: days and months are in the right order in your date of birth, issue date and valid to date
   consentDVA: Allow DVA to check your driving licence details
   consentDVLA: Allow DVLA to check your driving licence details
-
-prove-another-way:
-  title: Prove your identity another way
 
 licence-issuer:
   title: Who was your UK driving licence issued by?
