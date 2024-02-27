@@ -994,7 +994,6 @@ Given(
   async function (supportLink) {
     const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
     await dvaDetailsEntryPage.assertFooterLink(supportLink);
-    await this.page.goBack();
   }
 );
 
