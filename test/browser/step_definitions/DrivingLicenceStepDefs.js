@@ -1007,6 +1007,14 @@ Given(
   }
 );
 
+Then(
+  /^the Support link reads (.*)$/,
+  async function (supportFooterLink) {
+    const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
+    await dvaDetailsEntryPage.viewSupportLink(supportFooterLink);
+  }
+);
+
 Given(
   /^I assert the link in the banner is correct and live$/,
   async function () {
