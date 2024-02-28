@@ -45,6 +45,10 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
       'xpath=//*[@id="consentCheckbox"]'
     );
 
+    this.contactOneLoginLink = this.page.locator(
+      'xpath=//*[@id="main-content"]/div/div/p[6]/a'
+    );
+
     // Error summary items
 
     this.invalidLastNameErrorInSummary = this.page.locator(
@@ -834,6 +838,14 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
     expect(await this.isCurrentPage()).to.be.true;
     expect(await this.privacyPolicyDVLALink.innerText()).to.equal(
       consentPrivacyLink
+    );
+  }
+
+  async assertContactOneLoginTeamLink(contactOneLoginTeamLink) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    expect(await this.contactOneLoginLink.innerText()).to.equal(
+      contactOneLoginTeamLink
     );
   }
 
