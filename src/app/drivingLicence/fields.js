@@ -2,6 +2,8 @@ const { firstNameMiddleNameLengthValidator } = require("./fieldsHelper");
 const { surnameLengthValidator } = require("./fieldsHelper");
 const { firstNameLengthValidator } = require("./fieldsHelper");
 const { middleNamesLengthValidator } = require("./fieldsHelper");
+const { postCodeLengthValidator } = require("./fieldsHelper");
+const { licenceLengthValidator } = require("./fieldsHelper");
 const fields = require("./fieldsHelper");
 
 const firstNameMiddleNameLengthValidatorObj = {
@@ -24,6 +26,16 @@ const middleNamesLengthValidatorObj = {
   arguments: [38, "middleNames", "issuerDependent"]
 };
 
+const licenceLengthValidatorObj = {
+  fn: licenceLengthValidator,
+  arguments: [16, "drivingLicenceNumber", "dvaLicenceNumber", "issuerDependent"]
+};
+
+const postCodeLengthValidatorObj = {
+  fn: postCodeLengthValidator,
+  arguments: [8, "postcode"]
+};
+
 const dvlaValidatorObj = {
   fn: fields.dvlaValidator,
   arguments: [
@@ -40,12 +52,13 @@ module.exports = {
   surnameLengthValidator: fields.surnameLengthValidator,
   firstNameLengthValidator: fields.firstNameLengthValidator,
   middleNamesLengthValidator: fields.middleNamesLengthValidator,
+  licenceLengthValidator: fields.licenceLengthValidator,
+  postCodeLengthValidator: fields.postCodeLengthValidator,
   dvlaValidator: fields.dvlaValidator,
   surname: {
     type: "text",
     validate: [
       "required",
-      { type: "maxlength", arguments: [43] },
       { type: "regexSurname", fn: (value) => value.match(/^[a-zA-Z .'-]*$/) },
       {
         type: "surNameLength",
@@ -58,7 +71,6 @@ module.exports = {
     type: "text",
     validate: [
       "required",
-      { type: "maxlength", arguments: [38] },
       { type: "regexFirstName", fn: (value) => value.match(/^[a-zA-Z .'-]*$/) },
       {
         type: "firstNameLength",
@@ -75,7 +87,6 @@ module.exports = {
     type: "text",
     journeyKey: "middleNames",
     validate: [
-      { type: "maxlength", arguments: [38] },
       {
         type: "regexMiddleNames",
         fn: (value) => value.match(/^[a-zA-Z .'-]*$/)
@@ -173,7 +184,10 @@ module.exports = {
     journeyKey: "drivingLicenceNumber",
     validate: [
       "required",
-      { type: "exactlength", arguments: [16] },
+      {
+        type: "licenceLength",
+        ...licenceLengthValidatorObj
+      },
       {
         type: "regexSpecialCharacters",
         fn: (value) => value.match(/^[A-Za-z0-9]*$/)
@@ -199,11 +213,14 @@ module.exports = {
     validate: [
       "required",
       {
+        type: "licenceLength",
+        ...licenceLengthValidatorObj
+      },
+      {
         type: "regexSpecialCharacters",
         fn: (value) => value.match(/^[A-Za-z0-9]*$/)
       },
       { type: "numeric" },
-      { type: "exactlength", arguments: [8] },
       { type: "regexDrivingLicence", fn: (value) => value.match(/^[0-9]{8}$/) }
     ],
     dependent: { field: "issuerDependent", value: "DVA" },
@@ -230,7 +247,6 @@ module.exports = {
     journeyKey: "postcode",
     validate: [
       "required",
-      { type: "maxlength", arguments: [8] },
       { type: "minlength", arguments: [5] },
       {
         type: "regexPostcodeSymbol",
@@ -244,6 +260,10 @@ module.exports = {
           value.match(
             /([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9][A-Za-z]?))))\s?[0-9][A-Za-z]{2})/
           )
+      },
+      {
+        type: "postcodeLength",
+        ...postCodeLengthValidatorObj
       }
     ],
     classes: "govuk-input--width-10"
