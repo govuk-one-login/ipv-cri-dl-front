@@ -263,7 +263,7 @@ Feature: DVA Driving licence CRI Error Validations
       | DVADrivingLicenceSubject        |
       | DrivingLicenceSubjectHappyBilly |
 
-  @mock-api:DVA-success-testt
+  @mock-api:DVA-success
   Scenario: Check support links
     Given the Support link reads Support (opens in new tab)
     And I see support link Support in the footer and assert the url is correct and live
