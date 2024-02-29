@@ -1000,17 +1000,12 @@ Given(
 );
 
 Given(
-  /^I see support link (.*) in the footer and assert the url is correct and live$/,
-  async function (supportLink) {
+  /^The Support link in the footer reads (.*) and assert the url is correct and live$/,
+  async function (supportFooterLink) {
     const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
-    await dvaDetailsEntryPage.assertFooterLink(supportLink);
+    await dvaDetailsEntryPage.assertFooterLink(supportFooterLink);
   }
 );
-
-Then(/^the Support link reads (.*)$/, async function (supportFooterLink) {
-  const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
-  await dvaDetailsEntryPage.viewSupportLink(supportFooterLink);
-});
 
 Given(
   /^I assert the link in the banner is correct and live$/,

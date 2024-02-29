@@ -454,13 +454,10 @@ exports.DVADetailsEntryPage = class PlaywrightDevPage {
     );
   }
 
-  async viewSupportLink(supportFooterLink) {
+  async assertFooterLink(supportFooterLink) {
     await this.page.waitForLoadState("domcontentloaded");
     expect(await this.isCurrentPage()).to.be.true;
     expect(await this.supportLink.innerText()).to.equal(supportFooterLink);
-  }
-
-  async assertFooterLink() {
     await this.supportLink.click();
     await this.page.waitForTimeout(2000); //waitForNavigation and waitForLoadState do not work in this case
     let context = await this.page.context();
