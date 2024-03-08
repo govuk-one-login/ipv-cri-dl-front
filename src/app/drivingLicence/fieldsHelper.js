@@ -93,6 +93,45 @@ module.exports = {
 
     return nameMin && nameMax;
   },
+  licenceLengthValidator(
+    _value,
+    length,
+    dvlaLicenceField,
+    dvaLicenceField,
+    licenceIssuerField
+  ) {
+    const issuer = this.values[licenceIssuerField];
+
+    if (issuer === "DVA") {
+      const licence = this.values[dvaLicenceField];
+      length = 8;
+
+      const licenceLength = validators.string(licence) ? licence.length : 0;
+
+      const licenceExactLength = licenceLength === length;
+
+      return licenceExactLength;
+    }
+    if (issuer === "DVLA") {
+      const licence = this.values[dvlaLicenceField];
+
+      const licenceLength = validators.string(licence) ? licence.length : 0;
+
+      const licenceExactLength = licenceLength === length;
+
+      return licenceExactLength;
+    }
+  },
+  postCodeLengthValidator(_value, length, postCodeField) {
+    const postcode = this.values[postCodeField];
+
+    const postcodeLength = validators.string(postcode) ? postcode.length : 0;
+
+    const postcodeMin = postcodeLength > 0;
+    const postcodeMax = postcodeLength <= length;
+
+    return postcodeMin && postcodeMax;
+  },
   dvlaValidator(
     _value,
     firstNameField,
@@ -107,13 +146,14 @@ module.exports = {
     const dob = this.values[dobField];
     const licence = this.values[licenceField];
 
+    if (!dob || !firstName || !surname || !licence) {
+      return false;
+    }
+
     // eslint-disable-next-line no-unused-vars
     const nameShort =
       surname.length >= 5 ? surname.slice(0, 5) : surname.padEnd(5, "9");
 
-    if (!dob) {
-      return false;
-    }
     const splitDate = dob.split("-");
 
     if (firstName) {

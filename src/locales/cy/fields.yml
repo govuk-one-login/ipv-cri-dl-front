@@ -3,7 +3,7 @@ drivingLicenceNumber:
   hint: "Dyma'r rhif hir yn adran 5 ar eich trwydded er enghraifft HARRI559146MJ931"
   validation:
     default: "Rhowch y rhif yn union fel mae’n ymddangos ar eich trwydded yrru"
-    exactlength: "Dylai rhif eich trwydded fod yn 16 nod o hyd"
+    licenceLength: "Dylai rhif eich trwydded fod yn 16 nod o hyd"
     numeric: "Your licence number should not include any symbols or spaces"
     limit: "Driving licence numbers do not start with 16 – enter the number as it appears on your driving licence"
     dvlaChecker: "Rhowch y rhif yn union fel mae’n ymddangos ar eich trwydded yrru"
@@ -13,7 +13,7 @@ dvaLicenceNumber:
   hint: "Dyma'r rhif hir yn adran 5 ar eich trwydded"
   validation:
     default: "Rhowch y rhif yn union fel mae’n ymddangos ar eich trwydded yrru"
-    exactlength: "Dylai rhif eich trwydded fod yn 8 nod o hyd"
+    licenceLength: "Dylai rhif eich trwydded fod yn 8 nod o hyd"
     numeric: "Ni ddylai rhif eich trwydded gynnwys unrhyw symbolau neu ofodau"
     regexSpecialCharacters: "Ni ddylai rhif eich trwydded gynnwys unrhyw symbolau neu ofodau"
 issueNumber:
@@ -102,12 +102,12 @@ postcode:
   hint: "Rhowch y cod post yn y cyfeiriad yn adran 8 o'ch trwydded"
   validation:
     default: "Rhowch eich cod post"
-    maxlength: "Dylai eich rhowch eich cod post fod rhwng 5 a 7 nod"
     minlength: "Dylai eich rhowch eich cod post fod rhwng 5 a 7 nod"
     regexPostcodeUK: "Rhowch god post yn y DU"
     regexPostcodeAlpha: "Dylai eich rhowch eich cod post ond cynnwys rhifau a llythrennau yn unig"
     regexPostcodeNumeric: "Dylai eich rhowch eich cod post ond cynnwys rhifau a llythrennau"
     regexPostcodeSymbol: "Dylai eich rhowch eich cod post ond cynnwys rhifau a llythrennau yn unig"
+    postcodeLength: "Dylai eich rhowch eich cod post fod rhwng 5 a 7 nod"
 
 consentDVACheckbox:
   label: Rhoi eich caniatâd i DVA i wirio eich manylion trwydded yrru

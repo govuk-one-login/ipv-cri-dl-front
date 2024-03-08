@@ -3,7 +3,7 @@ drivingLicenceNumber:
   hint: "This is the long number in section 5 on your licence for example HARRI559146MJ931"
   validation:
     default: "Enter the number exactly as it appears on your driving licence"
-    exactlength: "Your licence number should be 16 characters long"
+    licenceLength: "Your licence number should be 16 characters long"
     numeric: "Your licence number should not include any symbols or spaces"
     limit: "Driving licence numbers do not start with 16 – Enter the number exactly as it appears on your driving licence"
     dvlaChecker: "Enter the number exactly as it appears on your driving licence"
@@ -13,7 +13,7 @@ dvaLicenceNumber:
   hint: "This is the long number in section 5 on your licence"
   validation:
     default: "Enter the number exactly as it appears on your driving licence"
-    exactlength: "Your licence number should be 8 characters long"
+    licenceLength: "Your licence number should be 8 characters long"
     regexSpecialCharacters: "Your licence number should not include any symbols or spaces"
     numeric: "Enter the number exactly as it appears on your driving licence"
 issueNumber:
@@ -102,12 +102,12 @@ postcode:
   hint: "Enter the postcode in the address in section 8 of your licence"
   validation:
     default: "Enter your postcode"
-    maxlength: "Your postcode should be between 5 and 7 characters"
     minlength: "Your postcode should be between 5 and 7 characters"
     regexPostcodeAlpha: "Your postcode should include numbers and letters"
     regexPostcodeNumeric: "Your postcode should include numbers and letters"
     regexPostcodeSymbol: "Your postcode should only include numbers and letters"
     regexPostcodeUK: "Enter a UK postcode"
+    postcodeLength: "Your postcode should be between 5 and 7 characters"
 
 consentDVACheckbox:
   label: Give DVA your consent to check your driving licence details
