@@ -72,7 +72,7 @@ drivingLicence:
   consentDVLA: Caniatau DVLA i wirio eich manylion trwydded yrru
 
 licence-issuer:
-  h1: Pwy wnaeth gyhoeddi eich trwydded yrru y DU?
+  title: Pwy wnaeth gyhoeddi eich trwydded yrru y DU?
   content: Gallwch ddod o hyd i hwn yn adran 4c o'ch trwydded yrru. Bydd naill ai'n dweud DVLA (Asiantaeth Trwyddedu Gyrru a Cherbydau) neu DVA (Asiantaeth Gyrrwyr a Cherbydau).
   details:
     summary: Pam rydym angen gwybod hyn
