@@ -7,17 +7,18 @@
 {% from "govuk/components/details/macro.njk" import govukDetails %}
 {% from "hmpo-details/macro.njk" import hmpoDetails %}
 
+{% block mainContent %}
+<h1 id="header" data-page="{{hmpoPageKey}}" class="govuk-heading-l">
+    {{ translate("licence-issuer.title") }}
+</h1>
 {% call hmpoForm(ctx, {
     attributes: {
         onsubmit: 'window.disableFormSubmit()'
     }
 }) %}
-
 {{ hmpoRadios(ctx, {
 id: "licenceIssuer"
 }) }}
-
-{% endcall %}
 
 {% block submitButton %}
     {{ hmpoSubmit(ctx, {id: 'submitButton'}) }}
@@ -28,10 +29,8 @@ id: "licenceIssuer"
     }) }}
 {% endblock %}
 
-{% set footerNavItems = translate("govuk.footerNavItems") %}
+{% endcall %}
 
-{% block footer %}
-    {{ govukFooter( footerNavItems ) }}
 {% endblock %}
 
 {% block scripts %}
@@ -53,4 +52,10 @@ id: "licenceIssuer"
         });
     </script>
     {{ super ()}}
+{% endblock %}
+
+{% set footerNavItems = translate("govuk.footerNavItems") %}
+
+{% block footer %}
+{{ govukFooter( footerNavItems ) }}
 {% endblock %}

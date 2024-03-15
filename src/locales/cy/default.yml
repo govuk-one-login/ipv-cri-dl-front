@@ -6,8 +6,14 @@ govuk:
   phaseBanner:
     tag: beta
     content: Mae hwn yn wasanaeth newydd – <a href="https://home.account.gov.uk/contact-gov-uk-one-login" class="govuk-link" rel="noopener" target="_blank">bydd eich adborth (agor mewn tab newydd)</a> yn ein helpu i'w wella.
+  languageToggle:
+    ariaLabel: Dewis iaith
+    englishLanguage: English
+    englishVisuallyHidden: Change to English
+    welshLanguage: Cymraeg
+    welshVisuallyHidden: Newid yr iaith ir Gymraeg
   serviceName: Profi pwy ydych chi
-  backLink: Back
+  backLink: Yn ôl
   errorSummaryTitle: Mae problem
   error: Gwall
   warning: Rhybudd
@@ -68,37 +74,3 @@ drivingLicence:
   retryMessageList3: bod dyddiau a misoedd yn y drefn gywir yn eich dyddiad geni, dyddiad cyhoeddi a dyddiad dilys tan
   consentDVA: Caniatau DVA i wirio eich manylion trwydded yrru
   consentDVLA: Caniatau DVLA i wirio eich manylion trwydded yrru
-
-licence-issuer:
-  title: Pwy wnaeth gyhoeddi eich trwydded yrru y DU?
-  content: Gallwch ddod o hyd i hwn yn adran 4c o'ch trwydded yrru. Bydd naill ai'n dweud DVLA (Asiantaeth Trwyddedu Gyrru a Cherbydau) neu DVA (Asiantaeth Gyrrwyr a Cherbydau).
-  details:
-    summary: Pam rydym angen gwybod hyn
-    text:
-      - Mae angen i ni sicrhau ein bod yn gwirio manylion eich trwydded yrru gyda'r sefydliad cywir. Mae DVLA yn cyhoeddi trwyddedau gyrru yng Nghymru, Lloegr a'r Alban. Mae DVA yn cyhoeddi trwyddedau gyrru yng Ngogledd Iwerddon.
-
-error:
-  title: Mae'n ddrwg gennym, mae problem
-  serviceNameRequired: false
-  content:
-    - Ni allwn brofi pwy ydych chi ar hyn o bryd.
-    - <h2 class="govuk-heading-m"> Beth allwch chi ei wneud </h2>
-    - Ewch yn ôl i'r gwasanaeth roeddech yn ceisio ei ddefnyddio a dechrau eto. Gallwch chwilio am y gwasanaeth gan ddefnyddio'ch peiriant chwilio neu ddod o hyd iddo o hafan GOV.UK.
-    - <a href="https://www.gov.uk/" class="govuk-button" data-module="govuk-button"> Ewch i hafan GOV.UK </a>
-    - <a href="https://home.account.gov.uk/contact-gov-uk-one-login" class="govuk-link" target="_blank"> Cysylltu â thîm GOV.UK One Login (agor mewn tab newydd) </a>
-
-pageNotFound:
-  title: Tudalen heb ei darganfod
-  serviceNameRequired: false
-  content:
-    - Ni allwn ddod o hyd i'r dudalen rydych chi'n chwilio amdani.
-    - <h2>Beth allwch chi ei wneud</h2>
-    - Os ydych wedi teipio'r cyfeiriad gwe, edrychwch i weld ei fod yn gywir.
-    - Os ydych wedi gludo'r cyfeiriad gwe, edrychwch i weld eich bod wedi copïo'r cyfeiriad cyfan.
-    - Gallwch hefyd fynd yn ôl i'r gwasanaeth roeddech yn ceisio ei ddefnyddio a dechrau eto. Gallwch chwilio am y gwasanaeth gan ddefnyddio'ch peiriant chwilio neu dewch o hyd iddo o hafan GOV.UK.
-    - <a href="https://www.gov.uk/" class="govuk-button" data-module="govuk-button">Ewch i hafan GOV.UK</a>
-    - <a href="https://home.account.gov.uk/contact-gov-uk-one-login" class="govuk-link" target="_blank">Cysylltwch â'r tîm GOV.UK One Login (agor mewn tab newydd)</a>
-
-sessionEnded:
-  title: Sesiwn wedi dod i ben
-  serviceNameRequired: false

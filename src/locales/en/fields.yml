@@ -27,6 +27,7 @@ issueNumber:
 
 surname:
   label: Last name
+  hint: ""
   validation:
     default: "Enter your last name as it appears on your driving licence"
     maxlength: "Enter your last name as it appears on your driving licence"
@@ -134,18 +135,26 @@ consentCheckbox:
     default: "You must give your consent to continue"
 
 licenceIssuer:
+  hint: ""
+  content: ""
   validation:
     required: You must choose an option to continue
   items:
     DVLA:
       label: DVLA
       value: DVLA
+      hint: ""
+      reveal: ""
     DVA:
       label: DVA
       value: DVA
+      hint: ""
+      reveal: ""
     or:
       label: or
       value: or
     noLicence:
       label: I do not have a UK driving licence
       value: noLicence
+      hint: ""
+      reveal: ""
