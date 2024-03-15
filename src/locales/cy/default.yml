@@ -6,6 +6,8 @@ govuk:
   phaseBanner:
     tag: beta
     content: Mae hwn yn wasanaeth newydd – <a href="https://home.account.gov.uk/contact-gov-uk-one-login" class="govuk-link" rel="noopener" target="_blank">bydd eich adborth (agor mewn tab newydd)</a> yn ein helpu i'w wella.
+  languageToggle:
+    ariaLabel: Dewis iaith
   serviceName: Profi pwy ydych chi
   backLink: Back
   errorSummaryTitle: Mae problem
@@ -70,7 +72,7 @@ drivingLicence:
   consentDVLA: Caniatau DVLA i wirio eich manylion trwydded yrru
 
 licence-issuer:
-  title: Pwy wnaeth gyhoeddi eich trwydded yrru y DU?
+  h1: Pwy wnaeth gyhoeddi eich trwydded yrru y DU?
   content: Gallwch ddod o hyd i hwn yn adran 4c o'ch trwydded yrru. Bydd naill ai'n dweud DVLA (Asiantaeth Trwyddedu Gyrru a Cherbydau) neu DVA (Asiantaeth Gyrrwyr a Cherbydau).
   details:
     summary: Pam rydym angen gwybod hyn

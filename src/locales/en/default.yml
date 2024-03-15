@@ -6,6 +6,8 @@ govuk:
   phaseBanner:
     tag: beta
     content: This is a new service – your <a href="https://home.account.gov.uk/contact-gov-uk-one-login" class="govuk-link" rel="noopener" target="_blank">feedback (opens in new tab)</a> will help us to improve it.
+  languageToggle:
+    ariaLabel: Choose Language
   serviceName: Prove your identity
   backLink: Back
   errorSummaryTitle: There is a problem
@@ -70,7 +72,7 @@ drivingLicence:
   consentDVLA: Allow DVLA to check your driving licence details
 
 licence-issuer:
-  title: Who was your UK driving licence issued by?
+  h1: Who was your UK driving licence issued by?
   content: You can find this in section 4c of your driving licence. It will either say DVLA (Driving and vehicle Licensing Agency) or DVA (Driver and Vehicle Agency).
   details:
     summary: Why we need to know this

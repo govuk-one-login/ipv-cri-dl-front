@@ -21,6 +21,9 @@ yarn install
 - `UNIVERSAL_ANALYTICS_GTM_CONTAINER_ID` - Container ID for UA tracking.
 - `GA4_DISABLED` - BOOLEAN
 - `UA_DISABLED` - BOOLEAN
+- `LANGUAGE_TOGGLE_ENABLED` - Controls the language toggle feature.
+  - `0`: Disables the feature.
+  - `1`: Enables the feature.
 
 ### Code Owners
 
