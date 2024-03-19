@@ -8,6 +8,10 @@ govuk:
     content: Mae hwn yn wasanaeth newydd – <a href="https://home.account.gov.uk/contact-gov-uk-one-login" class="govuk-link" rel="noopener" target="_blank">bydd eich adborth (agor mewn tab newydd)</a> yn ein helpu i'w wella.
   languageToggle:
     ariaLabel: Dewis iaith
+    englishLanguage: English
+    englishVisuallyHidden: Change to English
+    welshLanguage: Cymraeg
+    welshVisuallyHidden: Newid yr iaith ir Gymraeg
   serviceName: Profi pwy ydych chi
   backLink: Back
   errorSummaryTitle: Mae problem
