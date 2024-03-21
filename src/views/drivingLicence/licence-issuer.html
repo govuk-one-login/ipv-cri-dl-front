@@ -1,38 +1,33 @@
 {% extends "base-form.njk" %}
 {% set hmpoPageKey = "licence-issuer" %}
-{% set hmpoH1Class = "govuk-heading-l" %}
 {% from "hmpo-text/macro.njk" import hmpoText %}
 {% from "hmpo-form/macro.njk" import hmpoForm %}
 {% from "hmpo-radios/macro.njk" import hmpoRadios %}
 {% from "govuk/components/details/macro.njk" import govukDetails %}
 {% from "hmpo-details/macro.njk" import hmpoDetails %}
 
+{% block mainContent %}
+
 {% call hmpoForm(ctx, {
     attributes: {
         onsubmit: 'window.disableFormSubmit()'
     }
 }) %}
-
+  <h1 id="header" data-page="{{hmpoPageKey}}" class="govuk-heading-l" rel="licenceIssuer">{{ translate("licence-issuer.title") }} </h1>
 {{ hmpoRadios(ctx, {
 id: "licenceIssuer"
+}) }}
+ {{ hmpoSubmit(ctx, {id: 'submitButton'}) }}
+
+{{ govukDetails({
+        summaryText: translate("pages.licence-issuer.details.summary"),
+        text: translate("pages.licence-issuer.details.text")
 }) }}
 
 {% endcall %}
 
-{% block submitButton %}
-    {{ hmpoSubmit(ctx, {id: 'submitButton'}) }}
 
-    {{ govukDetails({
-        summaryText: translate("pages.licence-issuer.details.summary"),
-        text: translate("pages.licence-issuer.details.text")
-    }) }}
-{% endblock %}
-
-{% set footerNavItems = translate("govuk.footerNavItems") %}
-
-{% block footer %}
-    {{ govukFooter( footerNavItems ) }}
-{% endblock %}
+{%endblock%}
 
 {% block scripts %}
     <script {% if cspNonce %} nonce="{{ cspNonce }}"{%  endif %}>
@@ -45,7 +40,7 @@ id: "licenceIssuer"
                     statusCode: '200', // Access status code
                     englishPageTitle: '{{translate("licence-issuer.title")}}',
                     taxonomy_level1: 'CRI', // Access taxonomy level 1
-                    taxonomy_level2: 'licence-issuer', // Access taxonomy level 2
+                    taxonomy_level2: 'driving licence', // Access taxonomy level 2
                     content_id: '001',
                     logged_in_status: true,
                     dynamic: false
@@ -53,4 +48,10 @@ id: "licenceIssuer"
         });
     </script>
     {{ super ()}}
+{% endblock %}
+
+{% set footerNavItems = translate("govuk.footerNavItems") %}
+
+{% block footer %}
+    {{ govukFooter( footerNavItems ) }}
 {% endblock %}
