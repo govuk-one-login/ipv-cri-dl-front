@@ -540,3 +540,11 @@ Feature: DVLA Driving licence CRI Error Validations
     Examples:
       | DrivingLicenceSubject             | InvalidLastName                             | InvalidMiddleNames                      |
       | DrivingLicenceSubjectHappyKenneth | abcdefghijklmnopqrstuvwxyzabcdefghijklmnopq | abcdefghijklmnopqrstuvwxyzabcdefghijklm |
+
+  @mock-api:dvla-ConsentSection @validation-regression @build @staging
+  Scenario: DVLA Driving Licence privacy notice link to consent
+    Given I see the consent title section Allow DVLA to check your driving licence details
+    And I see the DVLA Consent first sentence DVLA needs your consent to check your driving licence details before you can continue. They will make sure your licence has not been cancelled or reported as lost or stolen.
+    And I see the DVLA Consent second sentence To find out more about how your driving licence details will be used, you can read:
+    And I see One Login privacy notice link the GOV.UK One Login privacy notice (opens in a new tab)
+    Then I see DVLA privacy notice link the DVLA privacy notice (opens in a new tab)

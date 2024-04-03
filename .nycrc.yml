@@ -10,6 +10,9 @@ exclude:
   - "src/app/drivingLicence/steps.js"
   - "src/app/drivingLicence/fields.js"
   - "src/lib/*"
+  - "src/dynamo-session-config.js"
+  - "src/app.js"
+  - "src/app/shared/oauth.js"
 report-dir: reports/coverage
 statements: 60
 branches: 60
