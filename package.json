@@ -20,7 +20,7 @@
     "lint": "prettier --check --no-editorconfig src test && eslint .",
     "lint-apply": "prettier --write src test && eslint .",
     "prepare": "husky install",
-    "test": "mocha",
+    "test": "SESSION_SECRET=1234 SESSION_TABLE_NAME=table-name mocha",
     "test:coverage": "nyc --reporter=lcov --reporter=text-summary yarn test",
     "test:watch": "mocha --watch",
     "mocks": "yarn run wiremock --port 8030 --root-dir test/mocks",
