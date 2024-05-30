@@ -56,7 +56,7 @@ Mappings:
       uaDisabled: "false"
       languageToggleDisabled: "false"
     build:
-      logLevel: "request"
+      logLevel: "info"
       dynatraceSecretArn: arn:aws:secretsmanager:eu-west-2:216552277552:secret:DynatraceNonProductionVariables
       fargateCPUsize: "1024"
       fargateRAMsize: "2048"
@@ -65,7 +65,7 @@ Mappings:
       uaDisabled: "false"
       languageToggleDisabled: "false"
     staging:
-      logLevel: "request"
+      logLevel: "warn"
       dynatraceSecretArn: arn:aws:secretsmanager:eu-west-2:216552277552:secret:DynatraceNonProductionVariables
       fargateCPUsize: "256"
       fargateRAMsize: "512"
@@ -74,7 +74,7 @@ Mappings:
       uaDisabled: "false"
       languageToggleDisabled: "false"
     integration:
-      logLevel: "request"
+      logLevel: "warn"
       dynatraceSecretArn: arn:aws:secretsmanager:eu-west-2:216552277552:secret:DynatraceNonProductionVariables
       fargateCPUsize: "512"
       fargateRAMsize: "1024"
@@ -83,7 +83,7 @@ Mappings:
       uaDisabled: "false"
       languageToggleDisabled: "true"
     production:
-      logLevel: "request"
+      logLevel: "warn"
       dynatraceSecretArn: arn:aws:secretsmanager:eu-west-2:216552277552:secret:DynatraceProductionVariables
       fargateCPUsize: "1024"
       fargateRAMsize: "2048"

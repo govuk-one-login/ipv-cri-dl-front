@@ -2,10 +2,14 @@ const BaseController = require("hmpo-form-wizard").Controller;
 
 const {
   API: {
+    BASE_URL,
     PATHS: { CHECK }
   }
 } = require("../../../lib/config");
 const logger = require("hmpo-logger").get();
+const {
+  createPersonalDataHeaders
+} = require("@govuk-one-login/frontend-passthrough-headers");
 
 class ValidateController extends BaseController {
   async saveValues(req, res, callback) {
@@ -35,7 +39,8 @@ class ValidateController extends BaseController {
 
     try {
       const headers = {
-        session_id: req.session.tokenId
+        session_id: req.session.tokenId,
+        ...createPersonalDataHeaders(`${BASE_URL}${CHECK}`, req)
       };
 
       if (req.session.featureSet === "direct") {
