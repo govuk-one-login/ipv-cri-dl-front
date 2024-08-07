@@ -36,15 +36,6 @@ Parameters:
     Type: String
     Default: "None"
     # Allowed values: See https://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations.html
-  CodeSigningConfigArn:
-    Type: String
-    Description: Asserts that lambdas are signed when deployed.
-    Default: "none"
-  DeploymentStrategy:
-    Description: "Predefined deployment configuration for ECS application"
-    Type: String
-    Default: "None"
-    # Allowed values: See https://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations.html
 
 Conditions:
   IsNotDevelopment: !Or
@@ -408,22 +399,10 @@ Resources:
       EnableECSManagedTags: false
       HealthCheckGracePeriodSeconds: 60
       LaunchType: FARGATE
-      LoadBalancers:
-        - ContainerName: app
-          ContainerPort: 8080
-          TargetGroupArn: !Ref LoadBalancerListenerTargetGroupECS
-      NetworkConfiguration:
-        AwsvpcConfiguration:
-          AssignPublicIp: DISABLED
-          SecurityGroups:
-            - !GetAtt ECSSecurityGroup.GroupId
-          Subnets:
-            - Fn::ImportValue: !Sub "${VpcStackName}-PrivateSubnetIdA"
-            - Fn::ImportValue: !Sub "${VpcStackName}-PrivateSubnetIdB"
-        # This is an alternative implementation if you want to split across all PrivateSubnets (but don't know how many there are)
-        # Fn::Split:
-        #   [ ",", Fn::ImportValue: !Sub "${VpcStackName}-PrivateSubnets" ]
-      TaskDefinition: !Ref ECSServiceTaskDefinition
+      TaskDefinition: !If
+        - UseCanaryDeployment
+        - !Ref AWS::NoValue
+        - !Ref ECSServiceTaskDefinition
       Tags:
         - Key: Name
           Value: !Sub "${AWS::StackName}-ECS"
