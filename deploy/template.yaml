@@ -31,6 +31,15 @@ Parameters:
     Description: "Set to the string value `true` to deploy alarms in a DEV environment"
     Type: String
     Default: false
+  CodeSigningConfigArn:
+    Type: String
+    Description: Asserts that lambdas are signed when deployed.
+    Default: "none"
+  DeploymentStrategy:
+    Description: "Predefined deployment configuration for ECS application"
+    Type: String
+    Default: "None"
+    # Allowed values: See https://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations.html
 
 Conditions:
   IsNotDevelopment: !Or
@@ -42,14 +51,15 @@ Conditions:
   IsPerformance: !Or
     - !Equals [!Ref Environment, build]
     - !Equals [!Ref Environment, production]
-  UsePermissionsBoundary:
-    Fn::Not:
-      - Fn::Equals:
-          - !Ref PermissionsBoundary
-          - "none"
   DeployAlarms: !Or
     - Condition: IsNotDevelopment
     - !Equals [!Ref DeployAlarmsInDev, true]
+  UsePermissionsBoundary: !Not
+    - !Equals [!Ref PermissionsBoundary, "none"]
+  UseCodeSigning: !Not
+    - !Equals [!Ref CodeSigningConfigArn, "none"]
+  UseCanaryDeployment: !Not
+    - !Equals [!Ref DeploymentStrategy, "None"]
 
 Mappings:
   EnvironmentConfiguration:
@@ -61,38 +71,43 @@ Mappings:
       desiredTaskCount: 2
       ga4Disabled: "false"
       uaDisabled: "false"
+      languageToggleDisabled: "false"
     build:
-      logLevel: "request"
+      logLevel: "info"
       dynatraceSecretArn: arn:aws:secretsmanager:eu-west-2:216552277552:secret:DynatraceNonProductionVariables
       fargateCPUsize: "1024"
       fargateRAMsize: "2048"
       desiredTaskCount: 2
       ga4Disabled: "false"
       uaDisabled: "false"
+      languageToggleDisabled: "false"
     staging:
-      logLevel: "request"
+      logLevel: "warn"
       dynatraceSecretArn: arn:aws:secretsmanager:eu-west-2:216552277552:secret:DynatraceNonProductionVariables
       fargateCPUsize: "256"
       fargateRAMsize: "512"
       desiredTaskCount: 2
       ga4Disabled: "false"
       uaDisabled: "false"
+      languageToggleDisabled: "false"
     integration:
-      logLevel: "request"
+      logLevel: "warn"
       dynatraceSecretArn: arn:aws:secretsmanager:eu-west-2:216552277552:secret:DynatraceNonProductionVariables
       fargateCPUsize: "512"
       fargateRAMsize: "1024"
       desiredTaskCount: 2
-      ga4Disabled: "true"
+      ga4Disabled: "false"
       uaDisabled: "false"
+      languageToggleDisabled: "false"
     production:
-      logLevel: "request"
+      logLevel: "warn"
       dynatraceSecretArn: arn:aws:secretsmanager:eu-west-2:216552277552:secret:DynatraceProductionVariables
       fargateCPUsize: "1024"
       fargateRAMsize: "2048"
       desiredTaskCount: 2
-      ga4Disabled: "true"
+      ga4Disabled: "false"
       uaDisabled: "false"
+      languageToggleDisabled: "false"
 
   # see https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-access-logs.html
   ElasticLoadBalancerAccountIds:
@@ -237,6 +252,23 @@ Resources:
         - Key: deregistration_delay.timeout_seconds
           Value: 60
 
+  SecondLoadBalancerListenerTargetGroupECS:
+    Type: "AWS::ElasticLoadBalancingV2::TargetGroup"
+    Properties:
+      HealthCheckEnabled: TRUE
+      HealthCheckProtocol: HTTP
+      HealthCheckPath: /healthcheck
+      Matcher:
+        HttpCode: 200
+      Port: 80
+      Protocol: HTTP
+      TargetType: ip
+      VpcId:
+        Fn::ImportValue: !Sub "${VpcStackName}-VpcId"
+      TargetGroupAttributes:
+        - Key: deregistration_delay.timeout_seconds
+          Value: 60
+
   LoadBalancerListener:
     Type: "AWS::ElasticLoadBalancingV2::Listener"
     # checkov:skip=CKV_AWS_2:Certificate generation must be resolved before the listener can use HTTPS.
@@ -248,6 +280,13 @@ Resources:
       LoadBalancerArn: !Ref LoadBalancer
       Port: 80
       Protocol: HTTP
+
+  # CloudFront WAF to LB Association
+  CloudFrontWAFv2ACLAssociation:
+    Type: AWS::WAFv2::WebACLAssociation
+    Properties:
+      ResourceArn: !Ref LoadBalancer
+      WebACLArn: !ImportValue cfront-origin-distrib-CloakingOriginWebACLArn
 
   #
   #  ElastiCache (for session caching)
@@ -347,12 +386,19 @@ Resources:
     Type: "AWS::ECS::Service"
     Properties:
       Cluster: !Ref DrivingPermitFrontEcsCluster
-      DeploymentConfiguration:
-        MaximumPercent: 200
-        MinimumHealthyPercent: 50
-        DeploymentCircuitBreaker:
-          Enable: TRUE
-          Rollback: TRUE
+      DeploymentConfiguration: !If
+        - UseCanaryDeployment
+        - !Ref AWS::NoValue
+        - MaximumPercent: 200
+          MinimumHealthyPercent: 50
+          DeploymentCircuitBreaker:
+            Enable: TRUE
+            Rollback: TRUE
+      DeploymentController:
+        Type: !If
+          - UseCanaryDeployment
+          - CODE_DEPLOY
+          - ECS
       DesiredCount: !FindInMap
         - EnvironmentConfiguration
         - !Ref "Environment"
@@ -360,22 +406,29 @@ Resources:
       EnableECSManagedTags: false
       HealthCheckGracePeriodSeconds: 60
       LaunchType: FARGATE
-      LoadBalancers:
-        - ContainerName: app
-          ContainerPort: 8080
-          TargetGroupArn: !Ref LoadBalancerListenerTargetGroupECS
-      NetworkConfiguration:
-        AwsvpcConfiguration:
-          AssignPublicIp: DISABLED
-          SecurityGroups:
-            - !GetAtt ECSSecurityGroup.GroupId
-          Subnets:
-            - Fn::ImportValue: !Sub "${VpcStackName}-PrivateSubnetIdA"
-            - Fn::ImportValue: !Sub "${VpcStackName}-PrivateSubnetIdB"
-        # This is an alternative implementation if you want to split across all PrivateSubnets (but don't know how many there are)
-        # Fn::Split:
-        #   [ ",", Fn::ImportValue: !Sub "${VpcStackName}-PrivateSubnets" ]
-      TaskDefinition: !Ref ECSServiceTaskDefinition
+      LoadBalancers: !If
+        - UseCanaryDeployment
+        - !Ref AWS::NoValue
+        - - ContainerName: app
+            ContainerPort: 8080
+            TargetGroupArn: !Ref LoadBalancerListenerTargetGroupECS
+      NetworkConfiguration: !If
+        - UseCanaryDeployment
+        - !Ref AWS::NoValue
+        - AwsvpcConfiguration:
+            AssignPublicIp: DISABLED
+            SecurityGroups:
+              - !GetAtt ECSSecurityGroup.GroupId
+            Subnets:
+              - Fn::ImportValue: !Sub "${VpcStackName}-PrivateSubnetIdA"
+              - Fn::ImportValue: !Sub "${VpcStackName}-PrivateSubnetIdB"
+          # This is an alternative implementation if you want to split across all PrivateSubnets (but don't know how many there are)
+          # Fn::Split:
+          #   [ ",", Fn::ImportValue: !Sub "${VpcStackName}-PrivateSubnets" ]
+      TaskDefinition: !If
+        - UseCanaryDeployment
+        - !Ref AWS::NoValue
+        - !Ref ECSServiceTaskDefinition
       Tags:
         - Key: Name
           Value: !Sub "${AWS::StackName}-ECS"
@@ -430,6 +483,8 @@ Resources:
               Value: !FindInMap [ EnvironmentConfiguration, !Ref "Environment", ga4Disabled ]
             - Name: UA_DISABLED
               Value: !FindInMap [ EnvironmentConfiguration, !Ref "Environment", uaDisabled ]
+            - Name: LANGUAGE_TOGGLE_DISABLED
+              Value: !FindInMap [ EnvironmentConfiguration, !Ref "Environment", languageToggleDisabled ]
             - Name: ANALYTICS_DOMAIN
               Value:
                 !If [
@@ -585,6 +640,38 @@ Resources:
         - UsePermissionsBoundary
         - !Ref PermissionsBoundary
         - !Ref AWS::NoValue
+
+  ECSCanaryDeploymentStack:
+    Type: AWS::CloudFormation::Stack
+    Condition: UseCanaryDeployment
+    Properties:
+      TemplateURL: https://template-storage-templatebucket-1upzyw6v9cs42.s3.eu-west-2.amazonaws.com/ecs-canary-deployment/template.yaml?versionId=5RRU1nfKQD_d08FKttr8W7pzrAsqQiUM
+      Parameters:
+        CloudWatchAlarms: !Sub
+          - "${MyAlarmOneVar},${MyAlarmTwoVar}"
+          - MyAlarmOneVar: !Ref DL5XXOnELB
+            MyAlarmTwoVar: !Ref FrontTargetGroup5xxPercentErrors
+        CodeSigningConfigArn: !If
+          - UseCodeSigning
+          - !Ref CodeSigningConfigArn
+          - !Ref AWS::NoValue
+        ContainerName: "app"
+        ContainerPort: "8080"
+        DeploymentStrategy: !Ref DeploymentStrategy
+        ECSClusterName: !Ref DrivingPermitFrontEcsCluster
+        ECSServiceName: !GetAtt DrivingPermitFrontEcsService.Name
+        ECSServiceTaskDefinition: !Ref ECSServiceTaskDefinition
+        GreenTargetGroupName: !GetAtt SecondLoadBalancerListenerTargetGroupECS.TargetGroupName
+        LoadBalancerListenerARN: !Ref LoadBalancerListener
+        PermissionsBoundary:
+          Fn::ImportValue: !Sub "${AWS::StackName}-ECSCanaryPermissionsBoundaryArn"
+        SecurityGroups: !GetAtt ECSSecurityGroup.GroupId
+        Subnets: !Join
+          - ","
+          - - Fn::ImportValue: !Sub "${VpcStackName}-PrivateSubnetIdA"
+            - Fn::ImportValue: !Sub "${VpcStackName}-PrivateSubnetIdB"
+        TargetGroupName: !GetAtt LoadBalancerListenerTargetGroupECS.TargetGroupName
+        VpcId: !Sub ${VpcStackName}-VpcId
 
   ApiGwHttpEndpoint:
     Type: "AWS::ApiGatewayV2::Api"
@@ -882,6 +969,45 @@ Resources:
       Threshold: 1
       ComparisonOperator: GreaterThanThreshold
       TreatMissingData: notBreaching
+
+  FrontTargetGroup5xxPercentErrors:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmName: FrontTargetGroup5xxPercentAlarm
+      AlarmDescription: The number of HTTP 5XX server error codes that originate from the target group is greater than 5% of all traffic.
+      EvaluationPeriods: 2
+      DatapointsToAlarm: 2
+      Threshold: 5
+      ComparisonOperator: GreaterThanThreshold
+      TreatMissingData: notBreaching
+      Metrics:
+        - Id: e1
+          Label: ErrorPercent
+          ReturnData: true
+          Expression: (m1/m2)*100
+        - Id: m1
+          ReturnData: false
+          MetricStat:
+            Metric:
+              Namespace: AWS/ApplicationELB
+              MetricName: HTTPCode_Target_5XX_Count
+              Dimensions:
+                - Name: LoadBalancer
+                  Value: !GetAtt LoadBalancer.LoadBalancerFullName
+            Period: 60
+            Stat: Sum
+        - Id: m2
+          ReturnData: false
+          MetricStat:
+            Metric:
+              Namespace: AWS/ApplicationELB
+              MetricName: RequestCount
+              Dimensions:
+                - Name: LoadBalancer
+                  Value: !GetAtt LoadBalancer.LoadBalancerFullName
+            Period: 60
+            Stat: Sum
+
 
   ####################################################################
   #                                                                  #

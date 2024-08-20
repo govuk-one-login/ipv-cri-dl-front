@@ -170,7 +170,7 @@ exports.DVADetailsEntryPage = class PlaywrightDevPage {
 
   isCurrentPage() {
     return (
-      this.page.url() === this.url || this.page.url() === this.url + "?lang=cy"
+      this.page.url() === this.url || this.page.url() === this.url + "?lng=cy"
     );
   }
 

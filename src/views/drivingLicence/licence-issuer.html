@@ -7,31 +7,30 @@
 {% from "govuk/components/details/macro.njk" import govukDetails %}
 {% from "hmpo-details/macro.njk" import hmpoDetails %}
 
+{% block mainContent %}
+<h1 id="header" data-page="{{hmpoPageKey}}" class="govuk-heading-l" rel="licenceIssuer">
+    {{ translate("licence-issuer.title") }}
+</h1>
 {% call hmpoForm(ctx, {
     attributes: {
         onsubmit: 'window.disableFormSubmit()'
     }
 }) %}
-
 {{ hmpoRadios(ctx, {
 id: "licenceIssuer"
 }) }}
 
-{% endcall %}
-
 {% block submitButton %}
     {{ hmpoSubmit(ctx, {id: 'submitButton'}) }}
 
-    {{ govukDetails({
+{{ govukDetails({
         summaryText: translate("pages.licence-issuer.details.summary"),
         text: translate("pages.licence-issuer.details.text")
-    }) }}
+}) }}
 {% endblock %}
 
-{% set footerNavItems = translate("govuk.footerNavItems") %}
+{% endcall %}
 
-{% block footer %}
-    {{ govukFooter( footerNavItems ) }}
 {% endblock %}
 
 {% block scripts %}
@@ -44,8 +43,8 @@ id: "licenceIssuer"
                 .trackOnPageLoad({
                     statusCode: '200', // Access status code
                     englishPageTitle: '{{translate("licence-issuer.title")}}',
-                    taxonomy_level1: 'CRI', // Access taxonomy level 1
-                    taxonomy_level2: 'licence-issuer', // Access taxonomy level 2
+                    taxonomy_level1: 'web cri', // Access taxonomy level 1
+                    taxonomy_level2: 'driving licence', // Access taxonomy level 2
                     content_id: '001',
                     logged_in_status: true,
                     dynamic: false
@@ -53,4 +52,10 @@ id: "licenceIssuer"
         });
     </script>
     {{ super ()}}
+{% endblock %}
+
+{% set footerNavItems = translate("govuk.footerNavItems") %}
+
+{% block footer %}
+{{ govukFooter( footerNavItems ) }}
 {% endblock %}

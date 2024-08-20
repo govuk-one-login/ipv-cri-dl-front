@@ -6,6 +6,12 @@ govuk:
   phaseBanner:
     tag: beta
     content: This is a new service – your <a href="https://home.account.gov.uk/contact-gov-uk-one-login" class="govuk-link" rel="noopener" target="_blank">feedback (opens in new tab)</a> will help us to improve it.
+  languageToggle:
+    ariaLabel: Dewis iaith
+    englishLanguage: English
+    englishVisuallyHidden: Change to English
+    welshLanguage: Cymraeg
+    welshVisuallyHidden: Newid yr iaith ir Gymraeg
   serviceName: Prove your identity
   backLink: Back
   errorSummaryTitle: There is a problem
@@ -68,37 +74,3 @@ drivingLicence:
   retryMessageList3: days and months are in the right order in your date of birth, issue date and valid to date
   consentDVA: Allow DVA to check your driving licence details
   consentDVLA: Allow DVLA to check your driving licence details
-
-licence-issuer:
-  title: Who was your UK driving licence issued by?
-  content: You can find this in section 4c of your driving licence. It will either say DVLA (Driving and vehicle Licensing Agency) or DVA (Driver and Vehicle Agency).
-  details:
-    summary: Why we need to know this
-    text:
-      - We need to make sure we check your driving licence details with the right organisation. DVLA issues driving licences in England, Scotland and Wales. DVA issues driving licences in Northern Ireland.
-
-error:
-  title: Sorry, there is a problem
-  serviceNameRequired: false
-  content:
-    - We cannot prove your identity right now.
-    - <h2 class="govuk-heading-m"> What you can do </h2>
-    - Go back to the service you were trying to use and start again. You can look for the service using your search engine or find it from the GOV.UK homepage.
-    - <a href="https://www.gov.uk/" class="govuk-button" data-module="govuk-button"> Go the GOV.UK homepage </a>
-    - <a href="https://home.account.gov.uk/contact-gov-uk-one-login" class="govuk-link" target="_blank"> Contact the GOV.UK One Login team (opens in a new tab) </a>
-
-pageNotFound:
-  title: Page not found
-  serviceNameRequired: false
-  content:
-    - We cannot find the page you're looking for.
-    - <h2>What you can do</h2>
-    - If you typed the web address, check it’s correct.
-    - If you pasted the web address, check you copied the entire address.
-    - You can also go back to the service you were trying to use and start again. You can look for the service using your search engine or find it from the GOV.UK homepage.
-    - <a href="https://www.gov.uk/" class="govuk-button" data-module="govuk-button">Go to the GOV.UK homepage</a>
-    - <a href="https://home.account.gov.uk/contact-gov-uk-one-login" class="govuk-link" target="_blank">Contact the GOV.UK One Login team (opens in a new tab)</a>
-
-sessionEnded:
-  title: Session expired
-  serviceNameRequired: false

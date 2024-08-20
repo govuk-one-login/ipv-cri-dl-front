@@ -9,7 +9,7 @@ Feature: DVLA Driving licence CRI Error Validations
     And I should be on the DVLA details entry page Enter your details exactly as they appear on your UK driving licence – Prove your identity – GOV.UK
 
   @mock-api:dl-success @validation-regression @build @staging
-  Scenario Outline: DVLA Driving Licence details page unhappy path when licence number date format does not match with User's Date Of Birth
+  Scenario Outline: DVLA - User enters driving licence number date format and does not match with user's date of birth
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters day of birth as <InvalidDayOfBirth>
     And User re-enters month of birth as <InvalidMonthOfBirth>
@@ -25,7 +25,7 @@ Feature: DVLA Driving licence CRI Error Validations
       | DrivingLicenceSubjectHappyPeter | 12                | 08                  | 1985               |
 
   @mock-api:dl-success @validation-regression @build @staging
-  Scenario Outline: DVLA Driving Licence number less than 16 characters error validation
+  Scenario Outline: DVLA - User enters licence number with less than 16 characters
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters drivingLicenceNumber as <InvalidLicenceNumber>
     When User clicks on continue
@@ -37,7 +37,7 @@ Feature: DVLA Driving licence CRI Error Validations
       | DrivingLicenceSubjectHappyPeter | PARKE610112PBF       |
 
   @mock-api:dl-success @validation-regression @build @staging
-  Scenario Outline: DVLA Driving Licence number with special characters and spaces error validation
+  Scenario Outline: DVLA - User enters licence number with special characters and spaces
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters drivingLicenceNumber as <InvalidLicenceNumber>
     When User clicks on continue
@@ -50,7 +50,7 @@ Feature: DVLA Driving licence CRI Error Validations
 
 ####### DrivingLicenceNumberWithNumericChar, DrivingLicenceNumberWithAlphaChar, NoDrivingLicenceNumber #######
   @mock-api:dl-success @validation-regression @build @staging
-  Scenario Outline: DVLA Driving Licence number with numeric characters or alpha characters or no licence number error validation
+  Scenario Outline: DVLA - User enters licence number with numeric/alpha/null characters
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters drivingLicenceNumber as <InvalidLicenceNumber>
     When User clicks on continue
@@ -64,7 +64,7 @@ Feature: DVLA Driving licence CRI Error Validations
       | DrivingLicenceSubjectHappyPeter |                      |
 
   @mock-api:dl-success @validation-regression @build @staging
-  Scenario Outline: DVLA Driving Licence Issue number less than 2 characters error validation
+  Scenario Outline: DVLA - User enters licence issue number with less than 2 characters
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters issue number as <InvalidIssueNumber>
     When User clicks on continue
@@ -76,7 +76,7 @@ Feature: DVLA Driving licence CRI Error Validations
       | DrivingLicenceSubjectHappyPeter | 1                  |
 
   @mock-api:dl-success @validation-regression @build @staging
-  Scenario Outline: DVLA Driving Licence Issue number with special characters error validation
+  Scenario Outline: DVLA - User enters licence issue number with special characters
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters issue number as <InvalidIssueNumber>
     When User clicks on continue
@@ -89,7 +89,7 @@ Feature: DVLA Driving licence CRI Error Validations
 
 ##### IssueNumberWithAlphanumericChar, IssueNumberWithAlphaChar, NoIssueNumber #####
   @mock-api:dl-success @validation-regression @build @staging
-  Scenario Outline: DVLA Driving Licence Issue number with alphanumeric characters or alpha characters No issue number error validation
+  Scenario Outline: DVLA - User enters licence issue number with alpha/numeric/null characters
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters issue number as <InvalidIssueNumber>
     When User clicks on continue
@@ -103,7 +103,7 @@ Feature: DVLA Driving licence CRI Error Validations
       | DrivingLicenceSubjectHappyPeter |                    |
 
   @mock-api:dl-success @validation-regression @build @staging
-  Scenario Outline: DVLA Driving Licence Postcode less than 5 characters error validation
+  Scenario Outline: DVLA - User enters invalid postcode with less than 5 characters
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters postcode as <InvalidPostcode>
     When User clicks on continue
@@ -115,7 +115,7 @@ Feature: DVLA Driving licence CRI Error Validations
       | DrivingLicenceSubjectHappyPeter | E20A            |
 
   @mock-api:dl-success @validation-regression @build @staging
-  Scenario Outline: DVLA Driving Licence - No Postcode in the Postcode field error validation
+  Scenario Outline: DVLA - User enters no postcode and returns enter your postcode error
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters postcode as <InvalidPostcode>
     When User clicks on continue
@@ -127,7 +127,7 @@ Feature: DVLA Driving licence CRI Error Validations
       | DrivingLicenceSubjectHappyPeter |                 |
 
   @mock-api:dl-success @validation-regression @build @staging
-  Scenario Outline: DVLA Driving Licence International Postcode error validation
+  Scenario Outline: DVLA - User enters international postcode and returns enter a UK postcode error
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters postcode as <InvalidPostcode>
     When User clicks on continue
@@ -140,7 +140,7 @@ Feature: DVLA Driving licence CRI Error Validations
 
 ##### PostcodeWithSpecialChar #####
   @mock-api:dl-success @validation-regression @build @staging
-  Scenario Outline: DVLA Driving Licence Postcode with special characters error validation
+  Scenario Outline: DVLA - User enters invalid postcode with special characters
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters postcode as <InvalidPostcode>
     When User clicks on continue
@@ -153,7 +153,7 @@ Feature: DVLA Driving licence CRI Error Validations
 
 ###### PostcodeWithNumericChar, PostcodeWithAlphaChar #####
   @mock-api:dl-success @validation-regression @build @staging
-  Scenario Outline: DVLA Driving Licence Postcode with numeric characters or alpha characters error validation
+  Scenario Outline: DVLA - User enters invalid postcode with special characters
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters postcode as <InvalidPostcode>
     When User clicks on continue
@@ -167,7 +167,7 @@ Feature: DVLA Driving licence CRI Error Validations
 
 ######  InvalidLastNameWithNumbers, InvalidLastNameWithSpecialCharacters, NoLastName #####
   @mock-api:dl-success @validation-regression @build @staging
-  Scenario Outline: DVLA Driving Licence Last name with numbers or special characters or no last name error validation
+  Scenario Outline: DVLA - User enters last name with alpha/numeric/special/null characters
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters last name as <InvalidLastName>
     When User clicks on continue
@@ -182,7 +182,7 @@ Feature: DVLA Driving licence CRI Error Validations
 
 ######  InvalidFirstNameWithNumbers, InvalidFirstNameWithSpecialCharacters, NoFirstName #####
   @mock-api:dl-success @validation-regression @build @staging
-  Scenario Outline: DVLA Driving Licence First name with numbers or special characters or no first name error validation
+  Scenario Outline: DVLA - User enters first name with alpha/numeric/special/null characters
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters first name as <InvalidFirstName>
     When User clicks on continue
@@ -197,7 +197,7 @@ Feature: DVLA Driving licence CRI Error Validations
 
     ######  InvalidMiddleNamesWithNumbers, InvalidMiddleNamesWithSpecialCharacters #####
   @mock-api:dl-success @validation-regression @build @staging
-  Scenario Outline: DVLA Driving Licence Middle names with numbers or special characters error validation
+  Scenario Outline: DVLA - User enters middle name with alpha/numeric/special characters
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters middle names as <InvalidMiddleNames>
     When User clicks on continue
@@ -211,7 +211,7 @@ Feature: DVLA Driving licence CRI Error Validations
 
 #####  DateOfBirthWithSpecialCharacters, DateOfBirthNotReal, NoDateOfBirth #####
   @mock-api:dl-success @validation-regression @build @staging
-  Scenario Outline: DVLA Driving Licence Date of birth that are not real or with special characters or no date of birth error validation or year provided is two digits
+  Scenario Outline: DVLA - User enters dob that are not real or with special characters or no issue date error validation or year provided is two digits
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters day of birth as <InvalidDayOfBirth>
     And User re-enters month of birth as <InvalidMonthOfBirth>
@@ -229,7 +229,7 @@ Feature: DVLA Driving licence CRI Error Validations
 #      |DrivingLicenceSubjectHappyPeter|                 |                   |                |
 
   @mock-api:dl-success @validation-regression @build @staging
-  Scenario Outline: DVLA Driving Licence Date of birth in the future error validation
+  Scenario Outline: DVLA - User enters future date of birth
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters day of birth as <InvalidDayOfBirth>
     And User re-enters month of birth as <InvalidMonthOfBirth>
@@ -244,7 +244,7 @@ Feature: DVLA Driving licence CRI Error Validations
 
 #####  InvalidIssueDate, NoIssueDate #####
   @mock-api:dl-success @validation-regression @build @staging
-  Scenario Outline: DVLA Driving Licence Issue date that are not real or with special characters or no issue date error validation or year provided is two digits
+  Scenario Outline: DVLA - User enters issue date that are not real or with special characters or no issue date error validation or year provided is two digits
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters day of issue as <InvalidDayOfIssue>
     And User re-enters month of issue as <InvalidMonthOfIssue>
@@ -260,8 +260,9 @@ Feature: DVLA Driving licence CRI Error Validations
       | DrivingLicenceSubjectHappyPeter |                   |                     |                    |
       | DrivingLicenceSubjectHappyPeter | 7                 | 8                   | 18                 |
 
-  @mock-api:dl-success @validation-regression @build @staging
-  Scenario Outline: DVLA Driving Licence Issue date that is previous days gets through successfully
+  @mock-api:dl-success @validation-regression @build @staging @cat
+  #Scenario Outline: DVLA Driving Licence Issue date that is previous days gets through successfully
+  Scenario Outline: DVLA - User enters issue date a few days before current day
     Given User enters DVLA data as a DrivingLicenceSubjectHappyPeter
     Then User enters date of issue as current date
     And User enters day of issue as current day minus <daysToSubtract>
@@ -273,7 +274,7 @@ Feature: DVLA Driving licence CRI Error Validations
       | 3              |
 
   @mock-api:dl-success @validation-regression @build @staging
-  Scenario: DVLA Driving Licence Issue date that is greater than 10 years old date error validation
+  Scenario: DVLA - User enters issue date older than 10 years
     Given User enters DVLA data as a DrivingLicenceSubjectHappyPeter
     Then User enters date of issue as current date
     And User enters day of issue as current day minus 1
@@ -284,7 +285,7 @@ Feature: DVLA Driving licence CRI Error Validations
     And I check the page Title Error: Enter your details exactly as they appear on your UK driving licence – Prove your identity – GOV.UK
 
   @mock-api:dl-success @validation-regression @build @staging
-  Scenario: DVLA Driving Licence Issue date that is exactly 10 years old date error validation
+  Scenario: DVLA - User enters issue date exactly 10 years old
     Given User enters DVLA data as a DrivingLicenceSubjectHappyPeter
     Then User enters date of issue as current date
     And User enters year of issue as current year minus 10
@@ -292,7 +293,7 @@ Feature: DVLA Driving licence CRI Error Validations
     Then Proper error message is displayed as We could not find your details
 
   @mock-api:dl-success @validation-regression @build @staging
-  Scenario: DVLA Driving Licence Issue date that is 1 day under 10 years old date error validation
+  Scenario: DVLA - User enters issue date that is 1 day under 10 years old
     Given User enters DVLA data as a DrivingLicenceSubjectHappyPeter
     Then User enters date of issue as current date
     And User enters year of issue as current year minus 10 plus 1 day
@@ -300,7 +301,7 @@ Feature: DVLA Driving licence CRI Error Validations
     Then Proper error message is displayed as We could not find your details
 
   @mock-api:dl-success @validation-regression @build @staging
-  Scenario Outline: DVLA Driving Licence Issue date in the future error validation
+  Scenario Outline: DVLA - User enters issue date in the future
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters day of issue as <InvalidDayOfIssue>
     And User re-enters month of issue as <InvalidMonthOfIssue>
@@ -315,7 +316,7 @@ Feature: DVLA Driving licence CRI Error Validations
 
 #####  InvalidValidToDate, ValidToDateWithSpecialCharacters, NoValidToDate  #####
   @mock-api:dl-success @validation-regression @build @staging
-  Scenario Outline: DVLA Driving Licence Valid to date that are not real or with special characters or no valid to date error validation or year provided is two digits
+  Scenario Outline: DVLA - User enters valid to dates that are invalid or contain special characters or year provided is two digits or are not real
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters valid to day as <InvalidValidToDay>
     And User re-enters valid to month as <InvalidValidToMonth>
@@ -332,7 +333,7 @@ Feature: DVLA Driving licence CRI Error Validations
       | DrivingLicenceSubjectHappyPeter | 5                 | 8                   | 29                 |
 
   @mock-api:dl-success @validation-regression @build @staging
-  Scenario Outline: DVLA Driving Licence Valid to date in the past error validation
+  Scenario Outline: DVLA - User enters valid to date in the past
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters valid to day as <InvalidValidToDay>
     And User re-enters valid to month as <InvalidValidToMonth>
@@ -346,7 +347,7 @@ Feature: DVLA Driving licence CRI Error Validations
       | DrivingLicenceSubjectHappyPeter | 10                | 01                  | 2010               |
 
   @mock-api:dl-success @validation-regression @build @staging
-  Scenario Outline:  DVLA Driving Licence error validation when DVLA consent checkbox is unselected
+  Scenario Outline: DVLA - User attempts journey without selecting consent checkbox
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And DVLA consent checkbox is unselected
     When User clicks on continue
@@ -358,7 +359,7 @@ Feature: DVLA Driving licence CRI Error Validations
       | DrivingLicenceSubjectHappyPeter |
 
   @mock-api:dl-failed @validation-regression @build @staging
-  Scenario Outline: DVLA Driving Licence number validation test - Correct licence number structure - error validation
+  Scenario Outline: DVLA - User enters invalid driving licence
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters drivingLicenceNumber as <InvalidLicenceNumber>
     When User clicks on continue
@@ -368,7 +369,7 @@ Feature: DVLA Driving licence CRI Error Validations
       | DrivingLicenceSubjectHappyKenneth | DECER657085K99LN     |
 
   @mock-api:dl-failed @validation-regression @build @staging
-  Scenario Outline:  DVLA Driving Licence number validation test - (VALID, female licenceNumber DOB Jan)
+  Scenario Outline: DVLA - Driving Licence number validation test - (VALID, female licenceNumber DOB Jan)
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters drivingLicenceNumber as <InvalidLicenceNumber>
     And User re-enters day of birth as <InvalidDayOfBirth>
@@ -381,7 +382,7 @@ Feature: DVLA Driving licence CRI Error Validations
       | DrivingLicenceSubjectHappyKenneth | DECER651085K99LN     | 08                | 01                  | 1965               |
 
   @mock-api:dl-failed @validation-regression @build @staging
-  Scenario Outline:  DVLA Driving Licence number validation test - (VALID, female licenceNumber DOB Dec)
+  Scenario Outline: DVLA - Driving Licence number validation test - (VALID, female licenceNumber DOB Dec)
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters drivingLicenceNumber as <InvalidLicenceNumber>
     And User re-enters day of birth as <InvalidDayOfBirth>
@@ -394,7 +395,7 @@ Feature: DVLA Driving licence CRI Error Validations
       | DrivingLicenceSubjectHappyKenneth | DECER662085K99LN     | 08                | 12                  | 1965               |
 
   @mock-api:dl-failed @validation-regression @build @staging
-  Scenario Outline:  DVLA Driving Licence number validation test - (VALID, licenceNumber DOB Dec)
+  Scenario Outline: DVLA - Driving Licence number validation test - (VALID, licenceNumber DOB Dec)
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters drivingLicenceNumber as <InvalidLicenceNumber>
     And User re-enters day of birth as <InvalidDayOfBirth>
@@ -407,7 +408,7 @@ Feature: DVLA Driving licence CRI Error Validations
       | DrivingLicenceSubjectHappyKenneth | DECER612085KE9LN     | 08                | 12                  | 1965               |
 
   @mock-api:dl-failed @validation-regression @build @staging
-  Scenario Outline:  DVLA Driving Licence number validation test - (VALID, 1 forename)
+  Scenario Outline: DVLA - Driving Licence number validation test - (VALID, 1 forename)
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters drivingLicenceNumber as <InvalidLicenceNumber>
     And User re-enters last name as <InvalidLastName>
@@ -419,7 +420,7 @@ Feature: DVLA Driving licence CRI Error Validations
       | DrivingLicenceSubjectHappyKenneth | AB999607085J9AAA     | JOHN            | SMITH            |
 
   @mock-api:dl-failed @validation-regression @build @staging
-  Scenario Outline:  DVLA Driving Licence number validation test - (VALID, surname < 5)
+  Scenario Outline: DVLA - Driving Licence number validation test - (VALID, surname < 5)
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters drivingLicenceNumber as <InvalidLicenceNumber>
     And User re-enters last name as <InvalidLastName>
@@ -431,7 +432,7 @@ Feature: DVLA Driving licence CRI Error Validations
       | DrivingLicenceSubjectHappyKenneth | AB999607085J9AAA     | JOHN            | AB               |
 
   @mock-api:dl-failed @validation-regression @build @staging
-  Scenario Outline:  DVLA Driving Licence number validation test - (VALID, 2 forenames)
+  Scenario Outline: DVLA - Driving Licence number validation test - (VALID, 2 forenames)
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters drivingLicenceNumber as <InvalidLicenceNumber>
     And User re-enters last name as <InvalidLastName>
@@ -444,7 +445,7 @@ Feature: DVLA Driving licence CRI Error Validations
       | DrivingLicenceSubjectHappyKenneth | AB999607085JAAAA     | JOHN            | SMITH            | A                  |
 
   @mock-api:dl-success @validation-regression @build @staging
-  Scenario Outline:  DVLA Driving Licence last name validation test - 43 characters
+  Scenario Outline: DVLA - User enters last name 43 characters long
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters last name as <InvalidLastName>
     When User clicks on continue
@@ -453,7 +454,7 @@ Feature: DVLA Driving licence CRI Error Validations
       | DrivingLicenceSubjectHappyKenneth | abcdefghijklmnopqrstuvwxyzabcdefghijklmnopq |
 
   @mock-api:dl-success @validation-regression @build @staging
-  Scenario Outline:  DVLA Driving Licence last name validation test - 44 characters
+  Scenario Outline: DVLA - User enters last name 44 characters long
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters last name as <InvalidLastName>
     When User clicks on continue
@@ -463,7 +464,7 @@ Feature: DVLA Driving licence CRI Error Validations
 
 
   @mock-api:dl-success @validation-regression @build @staging
-  Scenario Outline:  DVLA Driving Licence first name validation test - 38 characters
+  Scenario Outline: DVLA - User enters first name 38 characters long
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters first name as <InvalidFirstName>
     When User clicks on continue
@@ -472,7 +473,7 @@ Feature: DVLA Driving licence CRI Error Validations
       | DrivingLicenceSubjectHappyKenneth | abcdefghijklmnopqrstuvwxyzabcdefghijkl |
 
   @mock-api:dl-success @validation-regression @build @staging
-  Scenario Outline:  DVLA Driving Licence first name validation test - 39 characters
+  Scenario Outline: DVLA - User enters first name 39 characters long
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters first name as <InvalidFirstName>
     When User clicks on continue
@@ -481,7 +482,7 @@ Feature: DVLA Driving licence CRI Error Validations
       | DrivingLicenceSubjectHappyKenneth | abcdefghijklmnopqrstuvwxyzabcdefghijklm |
 
   @mock-api:dl-failed @validation-regression @build @staging
-  Scenario Outline:  DVLA Driving Licence middle name validation test - 38 characters
+  Scenario Outline: DVLA - User enters middle name 38 characters long
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters first name as <InvalidFirstName>
     And User re-enters middle names as <InvalidMiddleNames>
@@ -493,7 +494,7 @@ Feature: DVLA Driving licence CRI Error Validations
       | DrivingLicenceSubjectHappyKenneth |                  | abcdefghijklmnopqrstuvwxyzabcdefghijkl |
 
   @mock-api:dl-failed @validation-regression @build @staging
-  Scenario Outline:  DVLA Driving Licence middle name validation test - 39 characters
+  Scenario Outline: DVLA - User enters middle name 39 characters long
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters first name as <InvalidFirstName>
     And User re-enters middle names as <InvalidMiddleNames>
@@ -505,7 +506,7 @@ Feature: DVLA Driving licence CRI Error Validations
       | DrivingLicenceSubjectHappyKenneth |                  | abcdefghijklmnopqrstuvwxyzabcdefghijklm |
 
   @mock-api:dl-success @validation-regression @build @staging
-  Scenario Outline:  DVLA Driving Licence character limit happy path validation test - first name
+  Scenario Outline: DVLA - User enters first and last names so that it reaches max length but doesn't go over the limit
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters last name as <InvalidLastName>
     And User re-enters first name as <InvalidFirstName>
@@ -515,7 +516,7 @@ Feature: DVLA Driving licence CRI Error Validations
       | DrivingLicenceSubjectHappyKenneth | abcdefghijklmnopqrstuvwxyzabcdefghijklmnopq | abcdefghijklmnopqrstuvwxyzabcdefghijkl |
 
   @mock-api:dl-failed @validation-regression @build @staging
-  Scenario Outline:  DVLA Driving Licence character limit happy path validation test - given names
+  Scenario Outline: DVLA - User enters last and middle names so that it reaches max length but doesn't go over the limit
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters last name as <InvalidLastName>
     And User re-enters first name as <InvalidFirstName>
@@ -528,7 +529,7 @@ Feature: DVLA Driving licence CRI Error Validations
       | DrivingLicenceSubjectHappyKenneth | abcdefghijklmnopqrstuvwxyzabcdefghijklmnopq |                  | abcdefghijklmnopqrstuvwxyzabcdefghijk |
 
   @mock-api:dl-failed @validation-regression @build @staging
-  Scenario Outline:  DVLA Driving Licence character limit unhappy path validation test
+  Scenario Outline: DVLA - User enters names longer than allowed character limit
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters last name as <InvalidLastName>
     And User re-enters middle names as <InvalidMiddleNames>
@@ -540,3 +541,11 @@ Feature: DVLA Driving licence CRI Error Validations
     Examples:
       | DrivingLicenceSubject             | InvalidLastName                             | InvalidMiddleNames                      |
       | DrivingLicenceSubjectHappyKenneth | abcdefghijklmnopqrstuvwxyzabcdefghijklmnopq | abcdefghijklmnopqrstuvwxyzabcdefghijklm |
+
+  @mock-api:dvla-ConsentSection @validation-regression @build @staging
+  Scenario: DVLA Driving Licence privacy notice link to consent
+    Given I see the consent title section Allow DVLA to check your driving licence details
+    And I see the DVLA Consent first sentence DVLA needs your consent to check your driving licence details before you can continue. They will make sure your licence has not been cancelled or reported as lost or stolen.
+    And I see the DVLA Consent second sentence To find out more about how your driving licence details will be used, you can read:
+    And I see One Login privacy notice link the GOV.UK One Login privacy notice (opens in a new tab)
+    Then I see DVLA privacy notice link the DVLA privacy notice (opens in a new tab)

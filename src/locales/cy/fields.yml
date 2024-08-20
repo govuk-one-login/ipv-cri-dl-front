@@ -27,6 +27,7 @@ issueNumber:
 
 surname:
   label: Enw olaf
+  hint: ""
   validation:
     default: "Rhowch eich enw olaf fel y mae'n ymddangos ar eich trwydded yrru"
     maxlength: "Rhowch eich enw olaf fel y mae'n ymddangos ar eich trwydded yrru"
@@ -134,18 +135,26 @@ consentCheckbox:
     default: "Mae'n rhaid i chi roi eich caniatâd i barhau"
 
 licenceIssuer:
+  hint: ""
+  content: ""
   validation:
     required: Mae'n rhaid i chi ddewis opsiwn i barhau
   items:
     DVLA:
       label: DVLA
       value: DVLA
+      hint: ""
+      reveal: ""
     DVA:
       label: DVA
       value: DVA
+      hint: ""
+      reveal: ""
     or:
       label: neu
       value: or
     noLicence:
       label: Nid oes gennyf drwydded yrru y DU
       value: noLicence
+      hint: ""
+      reveal: ""

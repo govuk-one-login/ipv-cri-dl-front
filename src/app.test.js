@@ -15,6 +15,8 @@ describe("app", () => {
   beforeEach(() => {
     setup = sinon.stub();
     setGTM = sinon.stub();
+    setLanguageToggle = sinon.stub();
+    setI18n = sinon.stub();
     app = sinon.stub();
     AWS = {
       DynamoDB: sinon.stub(),
@@ -48,7 +50,7 @@ describe("app", () => {
         table: SESSION_TABLE_NAME
       });
 
-      const helmetConfig = commonExpress.lib.helmet;
+      const helmetConfig = require("@govuk-one-login/di-ipv-cri-common-express/src/lib/helmet");
 
       const sessionConfig = {
         cookieName: "service_session",
@@ -82,6 +84,7 @@ describe("app", () => {
             ),
             "components"
           ),
+          path.resolve("node_modules/@govuk-one-login/"),
           "views"
         ],
         middlewareSetupFn: (app) => {

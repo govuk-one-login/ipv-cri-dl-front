@@ -164,7 +164,8 @@ module.exports = {
   issuerDependent: {
     type: "hidden",
     label: "",
-    legend: ""
+    legend: "",
+    hint: ""
   },
   expiryDate: {
     type: "date",
