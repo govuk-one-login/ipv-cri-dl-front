@@ -1073,7 +1073,7 @@ Resources:
     Properties:
       AlarmName: !Sub "${AWS::StackName}-ECSFatalErrorAlarm"
       AlarmDescription: !Sub "Trigger an alarm when Fatal Error occurs"
-      ActionsEnabled: false
+      ActionsEnabled: true
       OKActions:
         - !ImportValue platform-alarm-warning-alert-topic
       AlarmActions:
@@ -1108,7 +1108,7 @@ Resources:
     Properties:
       AlarmName: !Sub "${AWS::StackName}-APIGWFatalErrorAlarm"
       AlarmDescription: !Sub "Trigger an alarm when Fatal Error occurs"
-      ActionsEnabled: false
+      ActionsEnabled: true
       OKActions:
         - !ImportValue platform-alarm-warning-alert-topic
       AlarmActions:
@@ -1131,7 +1131,7 @@ Resources:
     Properties:
       AlarmName: !Sub "${AWS::StackName}-FE5XXErrorAlarm"
       AlarmDescription: Trigger the alarm if errorThreshold exceeds 10% with a minimum of 150 invocations and a minimum of 5 errors in 5 out of the last 5 minutes
-      ActionsEnabled: false
+      ActionsEnabled: true
       OKActions:
         - !ImportValue platform-alarm-warning-alert-topic
       AlarmActions:
@@ -1181,7 +1181,7 @@ Resources:
     Properties:
       AlarmName: !Sub "${AWS::StackName}-FE4XXErrorAlarm"
       AlarmDescription: Trigger the alarm if errorThreshold exceeds 5% with a minimum of 150 invocations and a minimum of 2 errors in 2 out of the last 5 minutes
-      ActionsEnabled: false
+      ActionsEnabled: true
       OKActions:
         - !ImportValue platform-alarm-warning-alert-topic
       AlarmActions:
@@ -1231,7 +1231,7 @@ Resources:
     Properties:
       AlarmName: !Sub "${AWS::StackName}-FELatencyAlarmP95"
       AlarmDescription: Trigger the alarm if less than 95% of requests has a latency of less than 1 second with a minimum of 25 invocations in 2 out of the last 5 minutes
-      ActionsEnabled: false
+      ActionsEnabled: true
       OKActions:
         - !ImportValue platform-alarm-warning-alert-topic
       AlarmActions:
@@ -1277,7 +1277,7 @@ Resources:
     Properties:
       AlarmName: !Sub "${AWS::StackName}-FELatencyAlarmP99"
       AlarmDescription: Trigger the alarm if less than 99% of requests has a latency of less than 2.5 second with a minimum of 150 invocations in 2 out of the last 5 minutes
-      ActionsEnabled: false
+      ActionsEnabled: true
       OKActions:
         - !ImportValue platform-alarm-warning-alert-topic
       AlarmActions:
