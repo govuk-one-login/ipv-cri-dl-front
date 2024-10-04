@@ -40,6 +40,10 @@ Parameters:
     Type: String
     Default: "None"
     # Allowed values: See https://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations.html
+  LogGroupRetentionInDays:
+    Description: "Retention for all log groups"
+    Type: Number
+    Default: "30"
 
 Conditions:
   IsNotDevelopment: !Or
@@ -445,7 +449,7 @@ Resources:
     Type: AWS::Logs::LogGroup
     Properties:
       LogGroupName: !Sub /aws/ecs/${AWS::StackName}-DrivingPermitFront-ECS
-      RetentionInDays: 14
+      RetentionInDays: !Ref LogGroupRetentionInDays
 
   ECSAccessLogsGroupSubscriptionFilter:
     Type: AWS::Logs::SubscriptionFilter
@@ -727,6 +731,7 @@ Resources:
     Type: AWS::Logs::LogGroup
     Properties:
       LogGroupName: !Sub /aws/apigateway/${AWS::StackName}-DrivingPermitFront-API-GW-AccessLogs
+      RetentionInDays: !Ref LogGroupRetentionInDays
 
   APIGWAccessLogsGroupSubscriptionFilter:
     Type: AWS::Logs::SubscriptionFilter
