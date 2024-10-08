@@ -19,6 +19,16 @@ Feature: DVLA Driving licence CRI Error Validations
     Given I view the beta banner
     And the beta banner reads Mae hwn yn wasanaeth newydd – bydd eich adborth (agor mewn tab newydd) yn ein helpu i'w wella.
 
+  @mock-api:dvla-WelshBetaBanner @language-regression
+  Scenario: Footer Links and Text
+    Given I see the accessibility statement link Datganiad hygyrchedd
+    And I see the cookies link Cwcis
+    And I see the terms and conditions link Telerau ac amodau
+    And I see the privacy notice link Hysbysiad preifatrwydd
+    And I see the support link Cymorth (agor mewn tab newydd)
+    And I see the OLG link Trwydded Llywodraeth Agored v3.0
+    And I see the crown copyright link © Hawlfraint y goron
+
   @mock-api:dvla-NameField @language-regression
   Scenario: DVLA Name fields
     Given I can see the lastname as Enw olaf
