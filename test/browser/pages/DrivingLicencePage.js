@@ -147,6 +147,34 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
 
     this.betaBanner = this.page.locator("xpath=/html/body/div[2]/div/p/strong");
 
+    this.footerAccessibilityStatementText = this.page.locator(
+      "xpath=//html/body/footer/div/div/div[1]/ul/li[1]/a"
+    );
+
+    this.footerCookieText = this.page.locator(
+      "xpath=//html/body/footer/div/div/div[1]/ul/li[2]/a"
+    );
+
+    this.footerTermsAndConditionsText = this.page.locator(
+      "xpath=//html/body/footer/div/div/div[1]/ul/li[3]/a"
+    );
+
+    this.footerPrivacyNoticeText = this.page.locator(
+      "xpath=//html/body/footer/div/div/div[1]/ul/li[4]/a"
+    );
+
+    this.footerSupportText = this.page.locator(
+      "xpath=//html/body/footer/div/div/div[1]/ul/li[5]/a"
+    );
+
+    this.footerOpenGovernmentLicenceText = this.page.locator(
+      "xpath=//html/body/footer/div/div/div[1]/span/a"
+    );
+
+    this.footerCrownCopyrightText = this.page.locator(
+      "xpath=//html/body/footer/div/div/div[2]/a"
+    );
+
     this.lastNameLabel = this.page.locator('xpath=//*[@id="surname-label"]');
 
     this.givenNameLegend = this.page.locator(
@@ -620,6 +648,66 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
     expect(await this.isCurrentPage()).to.be.true;
     await expect(await this.betaBannerReads.textContent()).to.contains(
       assertBetaBannerText
+    );
+  }
+
+  async assertFooterAccessibilityStatementText(
+    assertFooterAccessibilityStatementText
+  ) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    await expect(
+      await this.footerAccessibilityStatementText.textContent()
+    ).to.contains(assertFooterAccessibilityStatementText);
+  }
+
+  async assertFooterCookieText(assertFooterCookieText) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    await expect(await this.footerCookieText.textContent()).to.contains(
+      assertFooterCookieText
+    );
+  }
+
+  async assertFooterTermsAndConditonsText(assertFooterTermsAndConditonsText) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    await expect(
+      await this.footerTermsAndConditionsText.textContent()
+    ).to.contains(assertFooterTermsAndConditonsText);
+  }
+
+  async assertFooterPrivacyNoticeText(assertFooterPrivacyNoticeText) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    await expect(await this.footerPrivacyNoticeText.textContent()).to.contains(
+      assertFooterPrivacyNoticeText
+    );
+  }
+
+  async assertFooterSupportText(assertFooterSupportText) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    await expect(await this.footerSupportText.textContent()).to.contains(
+      assertFooterSupportText
+    );
+  }
+
+  async assertFooterOpenGovernmentLicenceText(
+    assertFooterOpenGovernmentLicenceText
+  ) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    await expect(
+      await this.footerOpenGovernmentLicenceText.textContent()
+    ).to.contains(assertFooterOpenGovernmentLicenceText);
+  }
+
+  async assertFooterCrownCopyrightText(assertFooterCrownCopyrightText) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    await expect(await this.footerCrownCopyrightText.textContent()).to.contains(
+      assertFooterCrownCopyrightText
     );
   }
 
