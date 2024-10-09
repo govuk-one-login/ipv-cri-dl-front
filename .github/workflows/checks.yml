@@ -27,6 +27,9 @@ jobs:
       with:
         extra_args: "detect-secrets --all-files"
 
+    - name: SAM Validate
+      run: sam validate --region eu-west-2 -t deploy/template.yaml --lint
+
   run-tests:
     runs-on: ubuntu-latest
     steps:
