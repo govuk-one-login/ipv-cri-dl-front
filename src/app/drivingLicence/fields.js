@@ -292,5 +292,22 @@ module.exports = {
       { value: "noLicence" }
     ],
     validate: ["required"]
+  },
+  confirmDetails: {
+      type: "radios",
+      label: "",
+      legend: "",
+      hint: "",
+      items: [
+        { value: "Yes" },
+        { value: "No" }
+      ],
+      validate: ["required"]
+    },
+  checkYourDetails: {
+    type: "text",
+    label: "",
+    legend: "",
+    hint: ""
   }
 };

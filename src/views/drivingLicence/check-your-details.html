@@ -1,0 +1,44 @@
+{% extends "base-form.njk" %}
+{% set hmpoPageKey = "check-your-details" %}
+{% set hmpoH1Class = "govuk-heading-l" %}
+{% from "hmpo-form/macro.njk" import hmpoForm %}
+{% from "hmpo-submit/macro.njk" import hmpoSubmit %}
+{% from "hmpo-radios/macro.njk" import hmpoRadios %}
+{% from "hmpo-inset-text/macro.njk" import hmpoInsetText %}
+{% from "hmpo-warning-text/macro.njk" import hmpoWarningText %}
+
+{% block mainContent %}
+<h1 id="header" data-page="{{hmpoPageKey}}" class="govuk-heading-l">
+    {{ translate("pages.check-your-details.title") }}
+</h1>
+
+{{ hmpoWarningText({
+text: translate("pages.check-your-details.warningText")
+}) }}
+
+
+
+
+
+{{ hmpoInsetText(ctx, {
+id: "checkYourDetails"
+})
+}}
+
+<h2>{{ translate("pages.check-your-details.correctCheck") }}</h2>
+
+{{ hmpoRadios(ctx, {
+id: "confirmDetails"
+}) }}
+
+
+{{ hmpoSubmit(ctx, {id: "", text: translate("pages.check-your-details.confirmButton")}) }}
+
+{% endblock %}
+
+{# generate the specific footer items required for the PYI flows #}
+{% set footerNavItems = translate("govuk.footerNavItems") %}
+
+{% block footer %}
+{{ govukFooter( footerNavItems ) }}
+{% endblock %}

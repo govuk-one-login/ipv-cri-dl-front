@@ -47,7 +47,7 @@ const create = (setup) => {
   const loggerConfig = {
     consoleLevel: LOG_LEVEL,
     console: true,
-    consoleJSON: true,
+    consoleJSON: false,
     app: false,
     requestMeta: {
       sessionId: "session.sessionId"

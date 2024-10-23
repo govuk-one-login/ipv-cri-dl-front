@@ -2,6 +2,7 @@ const details = require("./controllers/details");
 const root = require("./controllers/root");
 const validate = require("./controllers/validate");
 const licenceIssuer = require("./controllers/licence-issuer");
+const checkYourDetails = require("./controllers/check-your-details");
 
 module.exports = {
   "/": {
@@ -9,8 +10,13 @@ module.exports = {
     entryPoint: true,
     skip: true,
     controller: root,
-    next: "licence-issuer"
+    next: "/check-your-details"
   },
+  "/check-your-details": {
+    controller: checkYourDetails,
+    fields: ["confirmDetails"],
+    next: "/oauth2/callback"
+    },
   "/licence-issuer": {
     controller: licenceIssuer,
     fields: ["licenceIssuer"],

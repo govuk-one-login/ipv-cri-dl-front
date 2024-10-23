@@ -134,6 +134,9 @@ consentCheckbox:
   validation:
     default: "You must give your consent to continue"
 
+confirmDetailsCheckbox:
+  label:
+
 licenceIssuer:
   hint: ""
   content: ""
@@ -158,3 +161,24 @@ licenceIssuer:
       value: noLicence
       hint: ""
       reveal: ""
+
+  confirmDetails:
+    hint: ""
+    content: ""
+    validation:
+      required: You must choose an option to continue
+    items:
+      Yes:
+        label: Yes
+        value: Yes
+        hint: ""
+        reveal: ""
+      No:
+        label: No
+        value: No
+        hint: ""
+        reveal: ""
+
+
+
+
