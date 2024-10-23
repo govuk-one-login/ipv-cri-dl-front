@@ -11,6 +11,20 @@ licence-issuer:
 details:
   title: Enter your details exactly as they appear on your UK driving licence
 
+check-your-details:
+  title: Check your UK photocard driving licence details
+  warningText: Make sure your answers are correct before you continue.
+  correctCheck: Are your UK photocard driving licence details correct?
+  confirmButton: Confirm and continue
+  lastName: Last name
+  givenNames: Given names
+  dateOfBirth: Date of birth
+  issueDate: Issue date
+  validTo: Valid to
+  licenceNumber: Licence number
+  issueNumber: Issue number
+  postcode: Postcode
+
 error:
   title: Sorry, there is a problem
   serviceNameRequired: false
