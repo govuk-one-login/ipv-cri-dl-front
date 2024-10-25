@@ -764,7 +764,7 @@ Resources:
     Condition: IsPerformance
     Type: AWS::ApplicationAutoScaling::ScalableTarget
     Properties:
-      MinCapacity: 4
+      MinCapacity: 6
       MaxCapacity: 60
       ResourceId: !Join
         - "/"
