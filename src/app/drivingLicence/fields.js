@@ -294,20 +294,37 @@ module.exports = {
     validate: ["required"]
   },
   confirmDetails: {
-      type: "radios",
-      label: "",
-      legend: "",
-      hint: "",
-      items: [
-        { value: "Yes" },
-        { value: "No" }
-      ],
-      validate: ["required"]
-    },
-  checkYourDetails: {
-    type: "text",
+    type: "radios",
     label: "",
     legend: "",
-    hint: ""
-  }
+    items: [
+      { value: "detailsConfirmed" },
+      { value: "detailsNotConfirmed" },
+    ],
+    validate: ["required"]
+  },
+  cydLastName: {
+    type: "text"
+  },
+  cydGivenNames: {
+    type: "text"
+  },
+  cydDateOfBirth: {
+    type: "text"
+  },
+  cydIssueDate: {
+    type: "text"
+  },
+  cydValidTo: {
+    type: "text"
+  },
+  cydLicenceNumber: {
+    type: "text"
+  },
+  cydIssueNumber: {
+    type: "text"
+  },
+  cydPostcode: {
+    type: "text"
+  },
 };

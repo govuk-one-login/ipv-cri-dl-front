@@ -162,23 +162,28 @@ licenceIssuer:
       hint: ""
       reveal: ""
 
-  confirmDetails:
-    hint: ""
-    content: ""
-    validation:
-      required: You must choose an option to continue
-    items:
-      Yes:
-        label: Yes
-        value: Yes
-        hint: ""
-        reveal: ""
-      No:
-        label: No
-        value: No
-        hint: ""
-        reveal: ""
+confirmDetails:
+  hint: ""
+  validation:
+    required: You must choose an option to continue
+  items:
+    detailsConfirmed:
+      label: Yes
+      reveal: ""
+    detailsNotConfirmed:
+      label: No
+      reveal: "You can try to scan your driving licence again or prove your identity another way"
 
+checkYourDetails:
+  type: "text"
+  value: "testing"
+  label: "testinggggg"
+  legend: ""
+  hint: ""
 
-
-
+event:
+  type: "text"
+  value: "testing"
+  label: "testinggggg"
+  legend: ""
+  hint: ""

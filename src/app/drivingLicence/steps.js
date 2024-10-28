@@ -14,9 +14,26 @@ module.exports = {
   },
   "/check-your-details": {
     controller: checkYourDetails,
-    fields: ["confirmDetails"],
-    next: "/oauth2/callback"
-    },
+    fields: [
+      "confirmDetails",
+      "cydLastName",
+      "cydGivenNames",
+      "cydDateOfBirth",
+      "cydIssueDate",
+      "cydValidTo",
+      "cydLicenceNumber",
+      "cydIssueNumber",
+      "cydPostcode"
+    ],
+    next: [
+          {
+            field: "detailsNotConfirmed",
+            value: true,
+            next: "/prove-another-way"
+          },
+    "/oauth2/callback"
+    ]
+  },
   "/licence-issuer": {
     controller: licenceIssuer,
     fields: ["licenceIssuer"],

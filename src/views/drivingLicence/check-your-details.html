@@ -4,41 +4,228 @@
 {% from "hmpo-form/macro.njk" import hmpoForm %}
 {% from "hmpo-submit/macro.njk" import hmpoSubmit %}
 {% from "hmpo-radios/macro.njk" import hmpoRadios %}
-{% from "hmpo-inset-text/macro.njk" import hmpoInsetText %}
 {% from "hmpo-warning-text/macro.njk" import hmpoWarningText %}
+{% from "govuk/components/summary-list/macro.njk" import govukSummaryList %}
+
+
+{% set checkYourDetailsLabel = fields.checkYourDetails.label %}
 
 {% block mainContent %}
-<h1 id="header" data-page="{{hmpoPageKey}}" class="govuk-heading-l">
-    {{ translate("pages.check-your-details.title") }}
-</h1>
 
-{{ hmpoWarningText({
-text: translate("pages.check-your-details.warningText")
-}) }}
+    <h1 id="header" data-page="{{hmpoPageKey}}" class="govuk-heading-l">
+        {{ translate("pages.check-your-details.title") }}
+    </h1>
 
+    {{ hmpoWarningText({
+        text: translate("pages.check-your-details.warningText")
+    }) }}
 
+    {% call hmpoForm(ctx, {
+        attributes: {
+            onsubmit: 'window.disableFormSubmit()'
+        }
+    }) %}
 
+        {% if (values.licenceIssuer == "DVLA") %}
 
+            {{ govukSummaryList({
+                rows: [
+                    {
+                        key: {
+                            text: translate("pages.check-your-details.lastName"),
+                            classes: "govuk-!-font-weight-bold"
+                        },
+                        value: {
+                            id: cydLastName,
+                            text: "Morgan"
+                        }
+                    },
+                    {
+                        key: {
+                            text: translate("pages.check-your-details.givenNames"),
+                            classes: "govuk-!-font-weight-bold"
+                        },
+                        value: {
+                            id: cydGivenNames,
+                            text: "Sarah May"
+                        }
+                    },
+                    {
+                        key: {
+                            text: translate("pages.check-your-details.dateOfBirth"),
+                            classes: "govuk-!-font-weight-bold $govuk-text-colour"
+                        },
+                        value: {
+                            id: cydDateOfBirth,
+                            text: "cat"
+                        }
+                    },
+                    {
+                        key: {
+                            text: translate("pages.check-your-details.issueDate"),
+                            classes: "govuk-!-font-weight-bold"
+                        },
+                        value: {
+                            id: cydIssueDate,
+                            text: "10 01 2019"
+                        }
+                    },
+                    {
+                        key: {
+                            text: translate("pages.check-your-details.validTo"),
+                            classes: "govuk-!-font-weight-bold"
+                        },
+                        value: {
+                            id: cydValidTo,
+                            text: "18 01 2029"
+                        }
+                    },
+                    {
+                        key: {
+                            text: translate("pages.check-your-details.licenceNumber"),
+                            classes: "govuk-!-font-weight-bold"
+                        },
+                        value: {
+                            id: cydLicenceNumber,
+                            text: "MORGA753116SM9IJ"
+                        }
+                    },
+                    {
+                        key: {
+                            text: translate("pages.check-your-details.issueNumber"),
+                            classes: "govuk-!-font-weight-bold"
+                        },
+                        value: {
+                            id: cydIssueNumber,
+                            text: "35"
+                        }
+                    },
+                    {
+                        key: {
+                            text: translate("pages.check-your-details.postcode"),
+                            classes: "govuk-!-font-weight-bold"
+                        },
+                        value: {
+                            id: cydPostcode,
+                            text: translate("fields.checkYourDetails.label")
+                        }
+                    }
+                ]
+            }) }}
 
-{{ hmpoInsetText(ctx, {
-id: "checkYourDetails"
-})
-}}
+        {% else %}
 
-<h2>{{ translate("pages.check-your-details.correctCheck") }}</h2>
+            {{ govukSummaryList({
+                rows: [
+                    {
+                        key: {
+                            text: translate("pages.check-your-details.lastName"),
+                            classes: "govuk-!-font-weight-bold"
+                        },
+                        value: {
+                            id: cydLastName,
+                            text: "Morgan"
+                        }
+                    },
+                    {
+                        key: {
+                            text: translate("pages.check-your-details.givenNames"),
+                            classes: "govuk-!-font-weight-bold"
+                        },
+                        value: {
+                            id: cydGivenNames,
+                            text: "Sarah May"
+                        }
+                    },
+                    {
+                        key: {
+                            text: translate("pages.check-your-details.dateOfBirth"),
+                            classes: "govuk-!-font-weight-bold $govuk-text-colour"
+                        },
+                        value: {
+                            id: cydDateOfBirth,
+                            text: "cat"
+                        }
+                    },
+                    {
+                        key: {
+                            text: translate("pages.check-your-details.issueDate"),
+                            classes: "govuk-!-font-weight-bold"
+                        },
+                        value: {
+                            id: cydIssueDate,
+                            text: "10 01 2019"
+                        }
+                    },
+                    {
+                        key: {
+                            text: translate("pages.check-your-details.validTo"),
+                            classes: "govuk-!-font-weight-bold"
+                        },
+                        value: {
+                            id: cydValidTo,
+                            text: "18 01 2029"
+                        }
+                    },
+                    {
+                        key: {
+                            text: translate("pages.check-your-details.licenceNumber"),
+                            classes: "govuk-!-font-weight-bold"
+                        },
+                        value: {
+                            id: cydLicenceNumber,
+                            text: "MORGA753116SM9IJ"
+                        }
+                    },
+                    {
+                        key: {
+                            text: translate("pages.check-your-details.postcode"),
+                            classes: "govuk-!-font-weight-bold"
+                        },
+                        value: {
+                            id: cydPostcode,
+                            text: BA7 3LP)
+                        }
+                    }
+                ]
+            }) }}
 
-{{ hmpoRadios(ctx, {
-id: "confirmDetails"
-}) }}
+        {% endif %}
 
+        <h2>{{ translate("pages.check-your-details.correctCheck") }}</h2>
 
-{{ hmpoSubmit(ctx, {id: "", text: translate("pages.check-your-details.confirmButton")}) }}
+        {{ hmpoRadios(ctx, {
+            id: "confirmDetails"
+        }) }}
+
+        {{ hmpoSubmit(ctx, {id: "", text: translate("pages.check-your-details.confirmButton")}) }}
+
+    {% endcall %}
 
 {% endblock %}
 
-{# generate the specific footer items required for the PYI flows #}
-{% set footerNavItems = translate("govuk.footerNavItems") %}
+{% block scripts %}
+    <script {% if cspNonce %} nonce="{{ cspNonce }}"{%  endif %}>
+        window.addEventListener('load', function () {
+            window
+                .DI
+                .analyticsGa4
+                .pageViewTracker
+                .trackOnPageLoad({
+                    statusCode: '200', // Access status code
+                    englishPageTitle: '{{translate("check-your-details.title")}}',
+                    taxonomy_level1: 'web cri', // Access taxonomy level 1
+                    taxonomy_level2: 'driving licence', // Access taxonomy level 2
+                    content_id: '001',
+                    logged_in_status: true,
+                    dynamic: false
+                });
+        });
+    </script>
+    {{ super ()}}
+{% endblock %}
 
+{% set footerNavItems = translate("govuk.footerNavItems") %}
 {% block footer %}
-{{ govukFooter( footerNavItems ) }}
+    {{ govukFooter( footerNavItems ) }}
 {% endblock %}
