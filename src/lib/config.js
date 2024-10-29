@@ -6,7 +6,8 @@ module.exports = {
     PATHS: {
       SESSION: "session",
       CHECK: "check-driving-licence",
-      AUTHORIZATION: "authorization"
+      AUTHORIZATION: "authorization",
+      PERSON_INFO: "person-info"
     }
   },
   APP: {
@@ -21,7 +22,8 @@ module.exports = {
       GA4_DISABLED: process.env.GA4_DISABLED || false,
       UA_DISABLED: process.env.UA_DISABLED || true
     },
-    LANGUAGE_TOGGLE_DISABLED: process.env.LANGUAGE_TOGGLE_DISABLED || "true"
+    LANGUAGE_TOGGLE_DISABLED: process.env.LANGUAGE_TOGGLE_DISABLED || "true",
+    AUTH_SOURCE_ENABLED: process.env.AUTH_SOURCE_ENABLED || "true"
   },
   PORT: process.env.PORT || 5030,
   SESSION_SECRET: process.env.SESSION_SECRET,
