@@ -75,6 +75,7 @@ Mappings:
       ga4Disabled: "false"
       uaDisabled: "false"
       languageToggleDisabled: "false"
+      authSourceEnabled: "true"
     build:
       logLevel: "info"
       dynatraceSecretArn: arn:aws:secretsmanager:eu-west-2:216552277552:secret:DynatraceNonProductionVariables
@@ -83,6 +84,7 @@ Mappings:
       ga4Disabled: "false"
       uaDisabled: "false"
       languageToggleDisabled: "false"
+      authSourceEnabled: "true"
     staging:
       logLevel: "warn"
       dynatraceSecretArn: arn:aws:secretsmanager:eu-west-2:216552277552:secret:DynatraceNonProductionVariables
@@ -92,6 +94,7 @@ Mappings:
       ga4Disabled: "false"
       uaDisabled: "false"
       languageToggleDisabled: "false"
+      authSourceEnabled: "false"
     integration:
       logLevel: "warn"
       dynatraceSecretArn: arn:aws:secretsmanager:eu-west-2:216552277552:secret:DynatraceNonProductionVariables
@@ -100,6 +103,7 @@ Mappings:
       ga4Disabled: "false"
       uaDisabled: "false"
       languageToggleDisabled: "false"
+      authSourceEnabled: "false"
     production:
       logLevel: "warn"
       dynatraceSecretArn: arn:aws:secretsmanager:eu-west-2:216552277552:secret:DynatraceProductionVariables
@@ -108,6 +112,7 @@ Mappings:
       ga4Disabled: "false"
       uaDisabled: "false"
       languageToggleDisabled: "false"
+      authSourceEnabled: "false"
 
   # see https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-access-logs.html
   ElasticLoadBalancerAccountIds:
@@ -203,7 +208,7 @@ Resources:
                     !FindInMap [
                       ElasticLoadBalancerAccountIds,
                       !Ref AWS::Region,
-                      AccountId,
+                      AccountId
                     ]
             Action:
               - s3:PutObject
@@ -482,20 +487,47 @@ Resources:
             - Name: GOOGLE_ANALYTICS_4_GTM_CONTAINER_ID
               Value: !If [IsProduction, "GTM-K4PBJH3", "GTM-KD86CMZ"]
             - Name: GA4_DISABLED
-              Value: !FindInMap [ EnvironmentConfiguration, !Ref "Environment", ga4Disabled ]
+              Value:
+                !FindInMap [
+                  EnvironmentConfiguration,
+                  !Ref "Environment",
+                  ga4Disabled
+                ]
             - Name: UA_DISABLED
-              Value: !FindInMap [ EnvironmentConfiguration, !Ref "Environment", uaDisabled ]
+              Value:
+                !FindInMap [
+                  EnvironmentConfiguration,
+                  !Ref "Environment",
+                  uaDisabled
+                ]
             - Name: LANGUAGE_TOGGLE_DISABLED
-              Value: !FindInMap [ EnvironmentConfiguration, !Ref "Environment", languageToggleDisabled ]
+              Value:
+                !FindInMap [
+                  EnvironmentConfiguration,
+                  !Ref "Environment",
+                  languageToggleDisabled
+                ]
             - Name: ANALYTICS_DOMAIN
               Value:
                 !If [
                   IsProduction,
                   "account.gov.uk",
-                  !Sub "${Environment}.account.gov.uk",
+                  !Sub "${Environment}.account.gov.uk"
                 ]
             - Name: LOG_LEVEL
-              Value: !FindInMap [ EnvironmentConfiguration, !Ref "Environment", logLevel ]
+              Value:
+                !FindInMap [
+                  EnvironmentConfiguration,
+                  !Ref "Environment",
+                  logLevel
+                ]
+            - Name: AUTH_SOURCE_ENABLED
+              Value:
+                !FindInMap [
+                  EnvironmentConfiguration,
+                  !Ref "Environment",
+                  authSourceEnabled
+                ]
           Secrets:
             - Name: DT_TENANT
               ValueFrom: !Join
@@ -503,7 +535,7 @@ Resources:
                 - - !FindInMap [
                       EnvironmentConfiguration,
                       !Ref Environment,
-                      dynatraceSecretArn,
+                      dynatraceSecretArn
                     ]
                   - ":DT_TENANT::"
             - Name: DT_TENANTTOKEN
@@ -512,7 +544,7 @@ Resources:
                 - - !FindInMap [
                       EnvironmentConfiguration,
                       !Ref Environment,
-                      dynatraceSecretArn,
+                      dynatraceSecretArn
                     ]
                   - ":DT_TENANTTOKEN::"
             - Name: DT_CONNECTION_POINT
@@ -521,7 +553,7 @@ Resources:
                 - - !FindInMap [
                       EnvironmentConfiguration,
                       !Ref Environment,
-                      dynatraceSecretArn,
+                      dynatraceSecretArn
                     ]
                   - ":DT_CONNECTION_POINT::"
           PortMappings:
@@ -533,9 +565,19 @@ Resources:
               awslogs-group: !Ref ECSAccessLogsGroup
               awslogs-region: !Sub ${AWS::Region}
               awslogs-stream-prefix: !Sub driving-permit-front-${Environment}
-      Cpu: !FindInMap [ EnvironmentConfiguration, !Ref "Environment", fargateCPUsize ]
+      Cpu:
+        !FindInMap [
+          EnvironmentConfiguration,
+          !Ref "Environment",
+          fargateCPUsize
+        ]
       ExecutionRoleArn: !GetAtt ECSTaskExecutionRole.Arn
-      Memory: !FindInMap [ EnvironmentConfiguration, !Ref "Environment", fargateRAMsize ]
+      Memory:
+        !FindInMap [
+          EnvironmentConfiguration,
+          !Ref "Environment",
+          fargateRAMsize
+        ]
       NetworkMode: awsvpc
       RequiresCompatibilities:
         - FARGATE
@@ -845,8 +887,7 @@ Resources:
             # with <5% utilisation
           - MetricIntervalLowerBound: -15 # 5%
             MetricIntervalUpperBound: 0 # 20%
-            ScalingAdjustment:
-              -50 # Scale down 50% of containers if the metric is breached
+            ScalingAdjustment: -50 # Scale down 50% of containers if the metric is breached
             # with <20% utilisation
 
   EcsStepScaleOutAlarm:
@@ -1012,7 +1053,6 @@ Resources:
             Period: 60
             Stat: Sum
 
-
   ####################################################################
   #                                                                  #
   # Alarm setup                                                      #
@@ -1065,8 +1105,7 @@ Resources:
       LogGroupName: !Ref ECSAccessLogsGroup
       FilterPattern: '{ $.level = "FATAL" || $.message = "Unhandled Exception:*" }'
       MetricTransformations:
-        -
-          MetricValue: "1"
+        - MetricValue: "1"
           MetricNamespace: !Sub "${AWS::StackName}/LogMessages"
           MetricName: "ECSFatalerror-message"
 
@@ -1082,11 +1121,11 @@ Resources:
         - !ImportValue platform-alarm-warning-alert-topic
       AlarmActions:
         - !ImportValue platform-alarm-warning-alert-topic
-      InsufficientDataActions: [ ]
+      InsufficientDataActions: []
       MetricName: ECSFatalerror-message
       Namespace: !Sub "${AWS::StackName}/LogMessages"
       Statistic: Sum
-      Dimensions: [ ]
+      Dimensions: []
       Period: 60
       EvaluationPeriods: 1
       DatapointsToAlarm: 1
@@ -1100,8 +1139,7 @@ Resources:
       LogGroupName: !Ref APIGWAccessLogsGroup
       FilterPattern: '{ $.level = "FATAL" || $.message = "Unhandled Exception:*" }'
       MetricTransformations:
-        -
-          MetricValue: "1"
+        - MetricValue: "1"
           MetricNamespace: !Sub "${AWS::StackName}/LogMessages"
           MetricName: "APIGWFatalerror-message"
 
@@ -1117,11 +1155,11 @@ Resources:
         - !ImportValue platform-alarm-warning-alert-topic
       AlarmActions:
         - !ImportValue platform-alarm-warning-alert-topic
-      InsufficientDataActions: [ ]
+      InsufficientDataActions: []
       MetricName: APIGWFatalerror-message
       Namespace: !Sub "${AWS::StackName}/LogMessages"
       Statistic: Sum
-      Dimensions: [ ]
+      Dimensions: []
       Period: 60
       EvaluationPeriods: 1
       DatapointsToAlarm: 1
@@ -1189,7 +1227,7 @@ Resources:
         - !ImportValue platform-alarm-warning-alert-topic
       AlarmActions:
         - !ImportValue platform-alarm-warning-alert-topic
-      InsufficientDataActions: [ ]
+      InsufficientDataActions: []
       EvaluationPeriods: 5
       DatapointsToAlarm: 2
       Threshold: 5
@@ -1238,7 +1276,7 @@ Resources:
         - !ImportValue platform-alarm-warning-alert-topic
       AlarmActions:
         - !ImportValue platform-alarm-warning-alert-topic
-      InsufficientDataActions: [ ]
+      InsufficientDataActions: []
       EvaluationPeriods: 5
       DatapointsToAlarm: 2
       Threshold: 1000
@@ -1283,7 +1321,7 @@ Resources:
         - !ImportValue platform-alarm-warning-alert-topic
       AlarmActions:
         - !ImportValue platform-alarm-warning-alert-topic
-      InsufficientDataActions: [ ]
+      InsufficientDataActions: []
       EvaluationPeriods: 5
       DatapointsToAlarm: 2
       Threshold: 2500

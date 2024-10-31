@@ -60,6 +60,9 @@ class ValidateController extends BaseController {
       if (checkDrivingLicenceResponse.data?.retry === true) {
         logger.info("validate: driving licence retry", { req, res });
         req.sessionModel.set("showRetryMessage", true);
+        if (req.sessionModel.get("isAuthSourceRoute") === false) {
+          req.sessionModel.set("showRetryMessage", false);
+        }
         return callback();
       }
 
