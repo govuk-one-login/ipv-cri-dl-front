@@ -292,5 +292,12 @@ module.exports = {
       { value: "noLicence" }
     ],
     validate: ["required"]
+  },
+  confirmDetails: {
+    type: "radios",
+    label: "",
+    legend: "",
+    items: [{ value: "detailsConfirmed" }, { value: "detailsNotConfirmed" }],
+    validate: ["required"]
   }
 };

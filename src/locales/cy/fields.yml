@@ -158,3 +158,17 @@ licenceIssuer:
       value: noLicence
       hint: ""
       reveal: ""
+
+confirmDetails:
+  hint: ""
+  validation:
+    required: Select yes if your driving licence details are correct
+  items:
+    detailsConfirmed:
+      label: Yes
+      hint: ""
+      reveal: ""
+    detailsNotConfirmed:
+      label: No
+      hint: You can try to scan your driving licence again or prove your identity another way
+      reveal: ""
