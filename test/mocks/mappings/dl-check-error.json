@@ -31,6 +31,24 @@
       }
     },
     {
+      "scenarioName": "dl-check-error",
+      "request": {
+        "method": "GET",
+        "urlPath": "/person-info",
+        "headers": {
+          "x-scenario-id": {
+            "equalTo": "drivingLicence-check-error"
+          },
+          "session_id": {
+            "equalTo": "ABADCAFE"
+          }
+        }
+      },
+      "response": {
+        "status": 204
+      }
+    },
+    {
       "scenarioName": "drivingLicence-check-error",
       "request": {
         "method": "POST",

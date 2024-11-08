@@ -33,6 +33,24 @@
     {
       "scenarioName": "dl-failed",
       "request": {
+        "method": "GET",
+        "urlPath": "/person-info",
+        "headers": {
+          "x-scenario-id": {
+            "equalTo": "dl-failed"
+          },
+          "session_id": {
+            "equalTo": "ABCDEF"
+          }
+        }
+      },
+      "response": {
+        "status": 204
+      }
+    },
+    {
+      "scenarioName": "dl-failed",
+      "request": {
         "method": "POST",
         "urlPath": "/check-driving-licence",
         "headers": {

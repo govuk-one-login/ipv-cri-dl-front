@@ -4,6 +4,7 @@ require("playwright");
 
 const users = {
   "Authenticatable Anita": {},
+  "DL Auth Source Kenneth": {},
   "Erroring Ethem": {},
   "Not Authenticatable Neil": {},
   "Validating Valerie": {}
