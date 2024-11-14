@@ -25,6 +25,12 @@ check-your-details:
   issueNumber: Issue number
   postcode: Postcode
 
+consent:
+  title: We need to check your driving licence details
+  titleDVA: We need to check your driving licence details with the DVA
+  checkDVLA: We need to check the details you provided on your driving licence with the DVLA.
+  checkDVA: We need to check the details you provided on your driving licence with the DVA.
+
 error:
   title: Mae'n ddrwg gennym, mae problem
   serviceNameRequired: false

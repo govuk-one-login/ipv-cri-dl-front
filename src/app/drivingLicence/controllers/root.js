@@ -50,6 +50,11 @@ class RootController extends BaseController {
         );
 
         req.sessionModel.set(
+          "issuerDependent",
+          req.sessionModel.get("licenceIssuer")
+        );
+
+        req.sessionModel.set(
           "postcode",
           personInfoApiResponse.data.address[0].postalCode
         );

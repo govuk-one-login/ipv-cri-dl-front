@@ -94,7 +94,7 @@ Mappings:
       ga4Disabled: "false"
       uaDisabled: "false"
       languageToggleDisabled: "false"
-      authSourceEnabled: "false"
+      authSourceEnabled: "true"
     integration:
       logLevel: "warn"
       dynatraceSecretArn: arn:aws:secretsmanager:eu-west-2:216552277552:secret:DynatraceNonProductionVariables

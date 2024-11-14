@@ -3,16 +3,17 @@ check-coverage: true
 include:
   - "src/**/*.js"
 exclude:
-  - "**/*.test.js"
-  - "**/*router.js"
   - "src/assets/*"
+  - "**/*.test.js"
+  - "src/dynamo-session-config.js"
+  - "**/*router.js"
+  - "src/app.js"
+  - "src/lib/*"
+  - "src/app/shared/oauth.js"
   - "src/app/drivingLicence/router.js"
   - "src/app/drivingLicence/steps.js"
   - "src/app/drivingLicence/fields.js"
-  - "src/lib/*"
-  - "src/dynamo-session-config.js"
-  - "src/app.js"
-  - "src/app/shared/oauth.js"
+
 report-dir: reports/coverage
 statements: 60
 branches: 60

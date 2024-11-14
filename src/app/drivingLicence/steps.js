@@ -3,6 +3,7 @@ const root = require("./controllers/root");
 const validate = require("./controllers/validate");
 const licenceIssuer = require("./controllers/licence-issuer");
 const checkYourDetails = require("./controllers/check-your-details");
+const consent = require("./controllers/consent");
 
 module.exports = {
   "/": {
@@ -28,8 +29,13 @@ module.exports = {
         value: true,
         next: "/prove-another-way"
       },
-      "validate"
+      "consent"
     ]
+  },
+  "/consent": {
+    controller: consent,
+    fields: ["issuerDependent", "consentDVACheckbox", "consentCheckbox"],
+    next: "validate"
   },
   "/licence-issuer": {
     controller: licenceIssuer,
