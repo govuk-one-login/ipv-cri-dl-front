@@ -26,10 +26,10 @@ check-your-details:
   postcode: Cod post
 
 consent:
-  title: We need to check your driving licence details
-  titleDVA: We need to check your driving licence details with the DVA
-  checkDVLA: We need to check the details you provided on your driving licence with the DVLA.
-  checkDVA: We need to check the details you provided on your driving licence with the DVA.
+  title: Rydym angen gwirio manylion eich trwydded yrru
+  titleDVA: Rydym angen gwirio manylion eich trwydded yrru gyda'r DVA
+  checkDVLA: Rydym angen gwirio'r manylion a ddarparwyd gennych ar eich trwydded yrru gyda'r DVLA.
+  checkDVA: Rydym angen gwirio'r manylion a ddarparwyd gennych ar eich trwydded yrru gyda'r DVA.
 
 error:
   title: Mae'n ddrwg gennym, mae problem
