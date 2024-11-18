@@ -162,13 +162,13 @@ licenceIssuer:
 confirmDetails:
   hint: ""
   validation:
-    required: Select yes if your driving licence details are correct
+    required: Dewiswch ydy os yw manylion eich trwydded yrru yn gywir
   items:
     detailsConfirmed:
-      label: Yes
+      label: Ydy
       hint: ""
       reveal: ""
     detailsNotConfirmed:
-      label: No
-      hint: You can try to scan your driving licence again or prove your identity another way
+      label: Na
+      hint: Gallwch geisio sganio'ch trwydded yrru eto neu brofi eich hunaniaeth mewn ffordd arall
       reveal: ""

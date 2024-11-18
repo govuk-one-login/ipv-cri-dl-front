@@ -12,18 +12,18 @@ details:
   title: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru
 
 check-your-details:
-  title: Check your UK photocard driving licence details
-  warningText: Make sure your answers are correct before you continue.
-  correctCheck: Are your UK photocard driving licence details correct?
-  confirmButton: Confirm and continue
-  lastName: Last name
-  givenNames: Given names
-  dateOfBirth: Date of birth
-  issueDate: Issue date
-  validTo: Valid to
-  licenceNumber: Licence number
-  issueNumber: Issue number
-  postcode: Postcode
+  title: Gwirio manylion eich trwydded yrru cerdyn-llun yn y DU
+  warningText: Gwnewch yn siŵr bod eich atebion yn gywir cyn i chi barhau.
+  correctCheck: A yw manylion eich trwydded yrru cerdyn-llun yn y DU yn gywir?
+  confirmButton: Cadarnhau a pharhau
+  lastName: Enw olaf
+  givenNames: Enwau a roddwyd
+  dateOfBirth: Dyddiad geni
+  issueDate: Dyddiad cyhoeddi
+  validTo: Yn ddilys tan
+  licenceNumber: Rhif trwydded
+  issueNumber: Rhif cyhoeddi
+  postcode: Cod post
 
 consent:
   title: We need to check your driving licence details
