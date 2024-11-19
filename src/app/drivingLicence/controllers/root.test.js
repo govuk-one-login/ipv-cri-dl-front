@@ -1,33 +1,5 @@
 const RootController = require("./root");
 const { Controller: BaseController } = require("hmpo-form-wizard");
-let personInfoApiResponse = {
-  data: {
-    name: [
-      {
-        nameParts: [
-          { type: "GivenName", value: "KENNETH" },
-          { type: "FamilyName", value: "DECERQUEIRA" }
-        ]
-      }
-    ],
-    birthDate: [{ value: "1965-07-08" }],
-    address: [
-      {
-        postalCode: "BA2 5AA"
-      }
-    ],
-    drivingPermit: [
-      {
-        personalNumber: "DOE99751010AL9OD",
-        expiryDate: "2022-02-02",
-        issueNumber: "13",
-        issuedBy: "DVLA",
-        issueDate: "2012-02-02",
-        fullAddress: "8 HADLEY ROAD BATH BA2 5AA"
-      }
-    ]
-  }
-};
 
 describe("root controller", () => {
   const root = new RootController({ route: "/test" });
@@ -399,4 +371,425 @@ describe("root controller", () => {
     expect(req.sessionModel.get("surname")).to.equal(undefined);
     expect(req.sessionModel.get("dateOfBirth")).to.equal(undefined);
   });
+
+  it("should return false if personInfo response is missing name object", async () => {
+    personInfoApiResponse = {
+      data: {
+        birthDate: [{ value: "1965-07-08" }],
+        address: [
+          {
+            postalCode: "BA2 5AA"
+          }
+        ],
+        drivingPermit: [
+          {
+            personalNumber: "DOE99751010AL9OD",
+            expiryDate: "2022-02-02",
+            issueNumber: "13",
+            issuedBy: "DVLA",
+            issueDate: "2012-02-02",
+            fullAddress: "8 HADLEY ROAD BATH BA2 5AA"
+          }
+        ]
+      }
+    };
+
+    expect(
+      root.checkForValidSharedClaimsData(req, personInfoApiResponse)
+    ).to.equal(false);
+  });
+
+  it("should return false if personInfo response is missing nameParts objects", async () => {
+    personInfoApiResponse = {
+      name: [
+        {
+          nameParts: []
+        }
+      ],
+      data: {
+        birthDate: [{ value: "1965-07-08" }],
+        address: [
+          {
+            postalCode: "BA2 5AA"
+          }
+        ],
+        drivingPermit: [
+          {
+            personalNumber: "DOE99751010AL9OD",
+            expiryDate: "2022-02-02",
+            issueNumber: "13",
+            issuedBy: "DVLA",
+            issueDate: "2012-02-02",
+            fullAddress: "8 HADLEY ROAD BATH BA2 5AA"
+          }
+        ]
+      }
+    };
+
+    expect(
+      root.checkForValidSharedClaimsData(req, personInfoApiResponse)
+    ).to.equal(false);
+  });
+
+  it("should return false if personInfo response is missing birthDate object", async () => {
+    personInfoApiResponse = {
+      data: {
+        name: [
+          {
+            nameParts: [
+              { type: "GivenName", value: "KENNETH" },
+              { type: "FamilyName", value: "DECERQUEIRA" }
+            ]
+          }
+        ],
+        address: [
+          {
+            postalCode: "BA2 5AA"
+          }
+        ],
+        drivingPermit: [
+          {
+            personalNumber: "DOE99751010AL9OD",
+            expiryDate: "2022-02-02",
+            issueNumber: "13",
+            issuedBy: "DVLA",
+            issueDate: "2012-02-02",
+            fullAddress: "8 HADLEY ROAD BATH BA2 5AA"
+          }
+        ]
+      }
+    };
+
+    expect(
+      root.checkForValidSharedClaimsData(req, personInfoApiResponse)
+    ).to.equal(false);
+  });
+
+  it("should return false if personInfo response has empty string for birthDate value", async () => {
+    personInfoApiResponse = {
+      data: {
+        name: [
+          {
+            nameParts: [
+              { type: "GivenName", value: "KENNETH" },
+              { type: "FamilyName", value: "DECERQUEIRA" }
+            ]
+          }
+        ],
+        birthDate: [{ value: "" }],
+        address: [
+          {
+            postalCode: "BA2 5AA"
+          }
+        ],
+        drivingPermit: [
+          {
+            personalNumber: "DOE99751010AL9OD",
+            expiryDate: "2022-02-02",
+            issueNumber: "13",
+            issuedBy: "DVLA",
+            issueDate: "2012-02-02",
+            fullAddress: "8 HADLEY ROAD BATH BA2 5AA"
+          }
+        ]
+      }
+    };
+
+    expect(
+      root.checkForValidSharedClaimsData(req, personInfoApiResponse)
+    ).to.equal(false);
+  });
+
+  it("should return false if personInfo response is missing address object", async () => {
+    personInfoApiResponse = {
+      data: {
+        name: [
+          {
+            nameParts: [
+              { type: "GivenName", value: "KENNETH" },
+              { type: "FamilyName", value: "DECERQUEIRA" }
+            ]
+          }
+        ],
+        birthDate: [{ value: "1965-07-08" }],
+        drivingPermit: [
+          {
+            personalNumber: "DOE99751010AL9OD",
+            expiryDate: "2022-02-02",
+            issueNumber: "13",
+            issuedBy: "DVLA",
+            issueDate: "2012-02-02",
+            fullAddress: "8 HADLEY ROAD BATH BA2 5AA"
+          }
+        ]
+      }
+    };
+
+    expect(
+      root.checkForValidSharedClaimsData(req, personInfoApiResponse)
+    ).to.equal(false);
+  });
+  it("should return false if personInfo response is has empty string for postalCode value", async () => {
+    personInfoApiResponse = {
+      data: {
+        name: [
+          {
+            nameParts: [
+              { type: "GivenName", value: "KENNETH" },
+              { type: "FamilyName", value: "DECERQUEIRA" }
+            ]
+          }
+        ],
+        birthDate: [{ value: "1965-07-08" }],
+        address: [
+          {
+            postalCode: ""
+          }
+        ],
+        drivingPermit: [
+          {
+            personalNumber: "DOE99751010AL9OD",
+            expiryDate: "2022-02-02",
+            issueNumber: "13",
+            issuedBy: "DVLA",
+            issueDate: "2012-02-02",
+            fullAddress: "8 HADLEY ROAD BATH BA2 5AA"
+          }
+        ]
+      }
+    };
+
+    expect(
+      root.checkForValidSharedClaimsData(req, personInfoApiResponse)
+    ).to.equal(false);
+  });
+
+  it("should return false if personInfo response is missing drivingPermit object", async () => {
+    personInfoApiResponse = {
+      data: {
+        name: [
+          {
+            nameParts: [
+              { type: "GivenName", value: "KENNETH" },
+              { type: "FamilyName", value: "DECERQUEIRA" }
+            ]
+          }
+        ],
+        birthDate: [{ value: "1965-07-08" }],
+        address: [
+          {
+            postalCode: "BA2 5AA"
+          }
+        ]
+      }
+    };
+
+    expect(
+      root.checkForValidSharedClaimsData(req, personInfoApiResponse)
+    ).to.equal(false);
+  });
+
+  it("should return false if personInfo response has empty string for personalNumber value", async () => {
+    personInfoApiResponse = {
+      data: {
+        name: [
+          {
+            nameParts: [
+              { type: "GivenName", value: "KENNETH" },
+              { type: "FamilyName", value: "DECERQUEIRA" }
+            ]
+          }
+        ],
+        birthDate: [{ value: "1965-07-08" }],
+        address: [
+          {
+            postalCode: "BA2 5AA"
+          }
+        ],
+        drivingPermit: [
+          {
+            personalNumber: "",
+            expiryDate: "2022-02-02",
+            issueNumber: "13",
+            issuedBy: "DVLA",
+            issueDate: "2012-02-02",
+            fullAddress: "8 HADLEY ROAD BATH BA2 5AA"
+          }
+        ]
+      }
+    };
+
+    expect(
+      root.checkForValidSharedClaimsData(req, personInfoApiResponse)
+    ).to.equal(false);
+  });
+
+  it("should return false if personInfo response has empty string for expiryDate value", async () => {
+    personInfoApiResponse = {
+      data: {
+        name: [
+          {
+            nameParts: [
+              { type: "GivenName", value: "KENNETH" },
+              { type: "FamilyName", value: "DECERQUEIRA" }
+            ]
+          }
+        ],
+        birthDate: [{ value: "1965-07-08" }],
+        address: [
+          {
+            postalCode: "BA2 5AA"
+          }
+        ],
+        drivingPermit: [
+          {
+            personalNumber: "DOE99751010AL9OD",
+            expiryDate: "",
+            issueNumber: "13",
+            issuedBy: "DVLA",
+            issueDate: "2012-02-02",
+            fullAddress: "8 HADLEY ROAD BATH BA2 5AA"
+          }
+        ]
+      }
+    };
+
+    expect(
+      root.checkForValidSharedClaimsData(req, personInfoApiResponse)
+    ).to.equal(false);
+  });
+
+  it("should return false if personInfo response has empty string for issueNumber value", async () => {
+    personInfoApiResponse = {
+      data: {
+        name: [
+          {
+            nameParts: [
+              { type: "GivenName", value: "KENNETH" },
+              { type: "FamilyName", value: "DECERQUEIRA" }
+            ]
+          }
+        ],
+        birthDate: [{ value: "1965-07-08" }],
+        address: [
+          {
+            postalCode: "BA2 5AA"
+          }
+        ],
+        drivingPermit: [
+          {
+            personalNumber: "DOE99751010AL9OD",
+            expiryDate: "2022-02-02",
+            issueNumber: "",
+            issuedBy: "DVLA",
+            issueDate: "2012-02-02",
+            fullAddress: "8 HADLEY ROAD BATH BA2 5AA"
+          }
+        ]
+      }
+    };
+
+    expect(
+      root.checkForValidSharedClaimsData(req, personInfoApiResponse)
+    ).to.equal(false);
+  });
+
+  it("should return false if personInfo response has empty string for issuedBy value", async () => {
+    personInfoApiResponse = {
+      data: {
+        name: [
+          {
+            nameParts: [
+              { type: "GivenName", value: "KENNETH" },
+              { type: "FamilyName", value: "DECERQUEIRA" }
+            ]
+          }
+        ],
+        birthDate: [{ value: "1965-07-08" }],
+        address: [
+          {
+            postalCode: "BA2 5AA"
+          }
+        ],
+        drivingPermit: [
+          {
+            personalNumber: "DOE99751010AL9OD",
+            expiryDate: "2022-02-02",
+            issueNumber: "13",
+            issuedBy: "",
+            issueDate: "2012-02-02",
+            fullAddress: "8 HADLEY ROAD BATH BA2 5AA"
+          }
+        ]
+      }
+    };
+
+    expect(
+      root.checkForValidSharedClaimsData(req, personInfoApiResponse)
+    ).to.equal(false);
+  });
+
+  it("should return false if personInfo response has empty string for issuedDate value", async () => {
+    personInfoApiResponse = {
+      data: {
+        name: [
+          {
+            nameParts: [
+              { type: "GivenName", value: "KENNETH" },
+              { type: "FamilyName", value: "DECERQUEIRA" }
+            ]
+          }
+        ],
+        birthDate: [{ value: "1965-07-08" }],
+        address: [
+          {
+            postalCode: "BA2 5AA"
+          }
+        ],
+        drivingPermit: [
+          {
+            personalNumber: "DOE99751010AL9OD",
+            expiryDate: "2022-02-02",
+            issueNumber: "13",
+            issuedBy: "DVLA",
+            issueDate: "",
+            fullAddress: "8 HADLEY ROAD BATH BA2 5AA"
+          }
+        ]
+      }
+    };
+
+    expect(
+      root.checkForValidSharedClaimsData(req, personInfoApiResponse)
+    ).to.equal(false);
+  });
+
+  let personInfoApiResponse = {
+    data: {
+      name: [
+        {
+          nameParts: [
+            { type: "GivenName", value: "KENNETH" },
+            { type: "FamilyName", value: "DECERQUEIRA" }
+          ]
+        }
+      ],
+      birthDate: [{ value: "1965-07-08" }],
+      address: [
+        {
+          postalCode: "BA2 5AA"
+        }
+      ],
+      drivingPermit: [
+        {
+          personalNumber: "DOE99751010AL9OD",
+          expiryDate: "2022-02-02",
+          issueNumber: "13",
+          issuedBy: "DVLA",
+          issueDate: "2012-02-02",
+          fullAddress: "8 HADLEY ROAD BATH BA2 5AA"
+        }
+      ]
+    }
+  };
 });
