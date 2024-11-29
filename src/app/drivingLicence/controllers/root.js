@@ -3,7 +3,6 @@ const logger = require("hmpo-logger").get();
 
 const {
   API: {
-    BASE_URL,
     PATHS: { PERSON_INFO }
   }
 } = require("../../../lib/config");
@@ -19,10 +18,9 @@ class RootController extends BaseController {
 
     if (process.env.AUTH_SOURCE_ENABLED === "true") {
       //axios.post to new personInfo endpoint, put licence details into req.session.shared_claims shared claims
-      const personInfoApiResponse = await req.axios.get(
-        `${BASE_URL}/${PERSON_INFO}`,
-        { headers: headers }
-      );
+      const personInfoApiResponse = await req.axios.get(`${PERSON_INFO}`, {
+        headers: headers
+      });
 
       req.sessionModel.set(
         "isAuthSourceRoute",

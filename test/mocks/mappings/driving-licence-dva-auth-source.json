@@ -1,23 +1,23 @@
 {
   "mappings": [
     {
-      "scenarioName": "dl-success",
+      "scenarioName": "dl-dva-auth-success",
       "request": {
         "method": "GET",
-        "url": "/__reset/dl-success"
+        "url": "/__reset/dl-dva-auth-success"
       },
       "response": {
         "status": 200
       }
     },
     {
-      "scenarioName": "dl-success",
+      "scenarioName": "dl-dva-auth-success",
       "request": {
         "method": "POST",
         "urlPath": "/session",
         "headers": {
           "x-scenario-id": {
-            "equalTo": "dl-success"
+            "equalTo": "dl-dva-auth-success"
           }
         }
       },
@@ -30,14 +30,15 @@
         }
       }
     },
+
     {
-      "scenarioName": "dl-success",
+      "scenarioName": "dl-dva-auth-success",
       "request": {
         "method": "GET",
         "urlPath": "/person-info",
         "headers": {
           "x-scenario-id": {
-            "equalTo": "dl-success"
+            "equalTo": "dl-dva-auth-success"
           },
           "session_id": {
             "equalTo": "ABADCAFE"
@@ -45,17 +46,39 @@
         }
       },
       "response": {
-        "status": 204
+        "status": 200,
+        "jsonBody": {
+          "name": [
+            {
+              "nameParts": [
+                { "type": "GivenName", "value": "KENNETH" },
+                { "type": "FamilyName", "value": "DECERQUEIRA" }
+              ]
+            }
+          ],
+          "birthDate": [{ "value": "1965-07-08" }],
+          "address": [{ "postalCode": "BA2 5AA" }],
+          "drivingPermit": [
+            {
+              "personalNumber": "12345678",
+              "expiryDate": "2042-10-01",
+              "issuedBy": "DVA",
+              "issueDate": "2018-04-19",
+              "fullAddress": "8 HADLEY ROAD BATH BA2 5AA"
+            }
+          ]
+        }
       }
     },
+
     {
-      "scenarioName": "dl-success",
+      "scenarioName": "dl-dva-auth-success",
       "request": {
         "method": "POST",
         "urlPath": "/check-driving-licence",
         "headers": {
           "x-scenario-id": {
-            "equalTo": "dl-success"
+            "equalTo": "dl-dva-auth-success"
           },
           "session_id": {
             "equalTo": "ABADCAFE"
@@ -67,13 +90,13 @@
       }
     },
     {
-      "scenarioName": "dl-success",
+      "scenarioName": "dl-dva-auth-success",
       "request": {
         "method": "GET",
         "urlPath": "/authorization",
         "headers": {
           "x-scenario-id": {
-            "equalTo": "dl-success"
+            "equalTo": "dl-dva-auth-success"
           },
           "session-id": {
             "equalTo": "ABADCAFE"
