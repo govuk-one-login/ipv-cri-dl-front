@@ -8,9 +8,9 @@ BeforeAll(async function () {
     ? await chromium.launch()
     : await chromium.launch({
         // Not headless so we can watch test runs
-        headless: false,
+        headless: true,
         // Slow so we can see things happening
-        slowMo: 500
+        slowMo: 0
       });
 });
 
@@ -22,25 +22,25 @@ AfterAll(async function () {
 Before(async function ({ pickle } = {}) {
   const tags = pickle.tags || [];
   const tag = tags.find((tag) => tag.name.startsWith("@mock-api:"));
-
   if (!tag) {
     return;
   }
-
   const header = tag?.name.substring(10);
   if (!header) {
     return;
   }
-
   this.SCENARIO_ID_HEADER = header;
-
   const url = `http://localhost:8030/__reset/${header}`;
-
   try {
     await axios.get(url);
   } catch (e) {
     console.log(`Error fetching ${url}`); // eslint-disable-line no-console
     console.log(`${e.message}`); // eslint-disable-line no-console
+  }
+
+  // Set environment variable for specific tags
+  if (["dl-dva-auth-success", "dl-dvla-auth-success"].includes(header)) {
+    process.env.AUTH_SOURCE_ENABLED = "true";
   }
 });
 

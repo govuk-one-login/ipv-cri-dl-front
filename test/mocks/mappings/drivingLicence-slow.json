@@ -33,6 +33,24 @@
     {
       "scenarioName": "driving-licence-success-slow",
       "request": {
+        "method": "GET",
+        "urlPath": "/person-info",
+        "headers": {
+          "x-scenario-id": {
+            "equalTo": "driving-licence-success-slow"
+          },
+          "session_id": {
+            "equalTo": "ABADCAFE"
+          }
+        }
+      },
+      "response": {
+        "status": 204
+      }
+    },
+    {
+      "scenarioName": "driving-licence-success-slow",
+      "request": {
         "method": "POST",
         "urlPath": "/check-driving-licence",
         "headers": {

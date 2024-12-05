@@ -29,7 +29,7 @@ jobs:
           aws-region: eu-west-2
 
       - name: SAM Validate
-        run: sam validate --region ${{ env.AWS_REGION }} -t deploy/template.yaml
+        run: sam validate --region ${{ env.AWS_REGION }} -t deploy/template.yaml --lint
 
       # Likely source of node warning
       # https://github.com/aws-actions/amazon-ecr-login/issues/586
@@ -45,9 +45,10 @@ jobs:
           password: ${{ secrets.DYNATRACE_PAAS_TOKEN }}
 
       - name: "Push signed image to ECR, updated SAM template with image then upload it to the S3 Artifact Bucket"
-        uses: govuk-one-login/devplatform-upload-action-ecr@1.2.0
+        uses: govuk-one-login/devplatform-upload-action-ecr@v1.3.0
         with:
           artifact-bucket-name: ${{ secrets.DEV_ARTIFACT_BUCKET }}
+          container-sign-kms-key-arn: ${{ secrets.DEV_CONTAINER_SIGN_KMS_KEY }}
           template-file: deploy/template.yaml
           dockerfile: dev.Dockerfile
           role-to-assume-arn: ${{ secrets.AWS_DL_DEV_ROLE_ARN }}

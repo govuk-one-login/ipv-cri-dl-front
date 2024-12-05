@@ -2,6 +2,8 @@ const details = require("./controllers/details");
 const root = require("./controllers/root");
 const validate = require("./controllers/validate");
 const licenceIssuer = require("./controllers/licence-issuer");
+const checkYourDetails = require("./controllers/check-your-details");
+const consent = require("./controllers/consent");
 
 module.exports = {
   "/": {
@@ -9,7 +11,31 @@ module.exports = {
     entryPoint: true,
     skip: true,
     controller: root,
-    next: "licence-issuer"
+    next: [
+      {
+        field: "isAuthSourceRoute",
+        value: true,
+        next: "/check-your-details"
+      },
+      "/licence-issuer"
+    ]
+  },
+  "/check-your-details": {
+    controller: checkYourDetails,
+    fields: ["confirmDetails"],
+    next: [
+      {
+        field: "detailsNotConfirmed",
+        value: true,
+        next: "/prove-another-way"
+      },
+      "consent"
+    ]
+  },
+  "/consent": {
+    controller: consent,
+    fields: ["issuerDependent", "consentDVACheckbox", "consentCheckbox"],
+    next: "validate"
   },
   "/licence-issuer": {
     controller: licenceIssuer,
@@ -53,6 +79,11 @@ module.exports = {
     controller: validate,
     skip: true,
     next: [
+      {
+        field: "isAuthSourceRoute",
+        value: true,
+        next: "/oauth2/callback"
+      },
       {
         field: "showRetryMessage",
         value: true,

@@ -601,6 +601,66 @@ Then(/^the beta banner reads (.*)$/, async function (betaBannerText) {
   await drivingLicencePage.assertBetaBannerText(betaBannerText);
 });
 
+Then(
+  /^I see the accessibility statement link (.*)$/,
+  async function (footerAccessibilityStatementText) {
+    const drivingLicencePage = new DrivingLicencePage(this.page);
+    await drivingLicencePage.assertFooterAccessibilityStatementText(
+      footerAccessibilityStatementText
+    );
+  }
+);
+
+Then(/^I see the cookies link (.*)$/, async function (footerCookieText) {
+  const drivingLicencePage = new DrivingLicencePage(this.page);
+  await drivingLicencePage.assertFooterCookieText(footerCookieText);
+});
+
+Then(
+  /^I see the terms and conditions link (.*)$/,
+  async function (footerTermsAndConditionsText) {
+    const drivingLicencePage = new DrivingLicencePage(this.page);
+    await drivingLicencePage.assertFooterTermsAndConditonsText(
+      footerTermsAndConditionsText
+    );
+  }
+);
+
+Then(
+  /^I see the privacy notice link (.*)$/,
+  async function (footerPrivacyNoticeText) {
+    const drivingLicencePage = new DrivingLicencePage(this.page);
+    await drivingLicencePage.assertFooterPrivacyNoticeText(
+      footerPrivacyNoticeText
+    );
+  }
+);
+
+Then(/^I see the support link (.*)$/, async function (footerSupportText) {
+  const drivingLicencePage = new DrivingLicencePage(this.page);
+  await drivingLicencePage.assertFooterSupportText(footerSupportText);
+});
+
+Then(
+  /^I see the OLG link (.*)$/,
+  async function (footerOpenGovernmentLicenceText) {
+    const drivingLicencePage = new DrivingLicencePage(this.page);
+    await drivingLicencePage.assertFooterOpenGovernmentLicenceText(
+      footerOpenGovernmentLicenceText
+    );
+  }
+);
+
+Then(
+  /^I see the crown copyright link (.*)$/,
+  async function (footerCrownCopyrightText) {
+    const drivingLicencePage = new DrivingLicencePage(this.page);
+    await drivingLicencePage.assertFooterCrownCopyrightText(
+      footerCrownCopyrightText
+    );
+  }
+);
+
 Then(/^I can see the lastname as (.*)$/, async function (dvlaLastName) {
   const drivingLicencePage = new DrivingLicencePage(this.page);
   await drivingLicencePage.assertLastName(dvlaLastName);

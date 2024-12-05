@@ -11,6 +11,26 @@ licence-issuer:
 details:
   title: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru
 
+check-your-details:
+  title: Gwirio manylion eich trwydded yrru cerdyn-llun yn y DU
+  warningText: Gwnewch yn siŵr bod eich atebion yn gywir cyn i chi barhau.
+  correctCheck: A yw manylion eich trwydded yrru cerdyn-llun yn y DU yn gywir?
+  confirmButton: Cadarnhau a pharhau
+  lastName: Enw olaf
+  givenNames: Enwau a roddwyd
+  dateOfBirth: Dyddiad geni
+  issueDate: Dyddiad cyhoeddi
+  validTo: Yn ddilys tan
+  licenceNumber: Rhif trwydded
+  issueNumber: Rhif cyhoeddi
+  postcode: Cod post
+
+consent:
+  title: Rydym angen gwirio manylion eich trwydded yrru
+  titleDVA: Rydym angen gwirio manylion eich trwydded yrru gyda'r DVA
+  checkDVLA: Rydym angen gwirio'r manylion a ddarparwyd gennych ar eich trwydded yrru gyda'r DVLA.
+  checkDVA: Rydym angen gwirio'r manylion a ddarparwyd gennych ar eich trwydded yrru gyda'r DVA.
+
 error:
   title: Mae'n ddrwg gennym, mae problem
   serviceNameRequired: false
