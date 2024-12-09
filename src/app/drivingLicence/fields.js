@@ -165,7 +165,8 @@ module.exports = {
     type: "hidden",
     label: "",
     legend: "",
-    hint: ""
+    hint: "",
+    prefix: ""
   },
   expiryDate: {
     type: "date",

@@ -1,6 +1,7 @@
 drivingLicenceNumber:
   label: Rhif trwydded
   hint: "Dyma'r rhif hir yn adran 5 ar eich trwydded er enghraifft HARRI559146MJ931"
+  prefix: ""
   validation:
     default: "Rhowch y rhif yn union fel mae’n ymddangos ar eich trwydded yrru"
     licenceLength: "Dylai rhif eich trwydded fod yn 16 nod o hyd"
@@ -11,6 +12,7 @@ drivingLicenceNumber:
 dvaLicenceNumber:
   label: Rhif trwydded
   hint: "Dyma'r rhif hir yn adran 5 ar eich trwydded"
+  prefix: ""
   validation:
     default: "Rhowch y rhif yn union fel mae’n ymddangos ar eich trwydded yrru"
     licenceLength: "Dylai rhif eich trwydded fod yn 8 nod o hyd"
@@ -19,6 +21,7 @@ dvaLicenceNumber:
 issueNumber:
   label: Rhif cyhoeddi
   hint: "Dyma'r rhif 2 ddigid ar ôl y gofod yn adran 5 o'ch trwydded"
+  prefix: ""
   validation:
     default: "Rhowch y rhif cyhoeddi fel y mae'n ymddangos ar eich trwydded yrru"
     exactlength: "Dylai eich rhif cyhoeddi fod yn 2 rif o hyd"
@@ -28,6 +31,7 @@ issueNumber:
 surname:
   label: Enw olaf
   hint: ""
+  prefix: ""
   validation:
     default: "Rhowch eich enw olaf fel y mae'n ymddangos ar eich trwydded yrru"
     maxlength: "Rhowch eich enw olaf fel y mae'n ymddangos ar eich trwydded yrru"
@@ -37,6 +41,7 @@ surname:
 firstName:
   label: Enw cyntaf
   hint: "Mae hwn yn adran 2 o'ch trwydded. Nid oes angen i chi gynnwys eich teitl."
+  prefix: ""
   validation:
     default: "Rhowch eich enw cyntaf fel y mae'n ymddangos ar eich trwydded yrru"
     maxlength: "Rhowch eich enw cyntaf fel y mae'n ymddangos ar eich trwydded yrru"
@@ -47,6 +52,7 @@ firstName:
 middleNames:
   label: Enwau canol
   hint: "Gadewch hyn yn wag os nad oes gennych unrhyw enwau canol"
+  prefix: ""
   validation:
     maxlength: "Rhowch unrhyw enwau canol fel y maent yn ymddangos ar eich trwydded yrru"
     regexMiddleNames: "Rhowch unrhyw enwau canol fel y maent yn ymddangos ar eich trwydded yrru"
@@ -101,6 +107,7 @@ expiryDate:
 postcode:
   label: Cod post
   hint: "Rhowch y cod post yn y cyfeiriad yn adran 8 o'ch trwydded"
+  prefix: ""
   validation:
     default: "Rhowch eich cod post"
     minlength: "Dylai eich rhowch eich cod post fod rhwng 5 a 7 nod"

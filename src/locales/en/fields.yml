@@ -1,6 +1,7 @@
 drivingLicenceNumber:
   label: Licence number
   hint: "This is the long number in section 5 on your licence for example HARRI559146MJ931"
+  prefix: ""
   validation:
     default: "Enter the number exactly as it appears on your driving licence"
     licenceLength: "Your licence number should be 16 characters long"
@@ -11,6 +12,7 @@ drivingLicenceNumber:
 dvaLicenceNumber:
   label: Licence number
   hint: "This is the long number in section 5 on your licence"
+  prefix: ""
   validation:
     default: "Enter the number exactly as it appears on your driving licence"
     licenceLength: "Your licence number should be 8 characters long"
@@ -19,6 +21,7 @@ dvaLicenceNumber:
 issueNumber:
   label: Issue number
   hint: "This is the 2 digit number after the space in section 5 of your licence"
+  prefix: ""
   validation:
     default: "Enter the issue number as it appears on your driving licence"
     exactlength: "Your issue number should be 2 numbers long"
@@ -28,6 +31,7 @@ issueNumber:
 surname:
   label: Last name
   hint: ""
+  prefix: ""
   validation:
     default: "Enter your last name as it appears on your driving licence"
     maxlength: "Enter your last name as it appears on your driving licence"
@@ -37,6 +41,7 @@ surname:
 firstName:
   label: First name
   hint: "This is in section 2 of your licence. You do not need to include your title."
+  prefix: ""
   validation:
     default: "Enter your first name as it appears on your driving licence"
     maxlength: "Enter your first name as it appears on your driving licence"
@@ -47,6 +52,7 @@ firstName:
 middleNames:
   label: Middle names
   hint: "Leave this blank if you do not have any middle names"
+  prefix: ""
   validation:
     maxlength: "Enter any middle names as they appear on your driving licence"
     regexMiddleNames: "Enter any middle names as they appear on your driving licence"
@@ -101,6 +107,7 @@ expiryDate:
 postcode:
   label: Postcode
   hint: "Enter the postcode in the address in section 8 of your licence"
+  prefix: ""
   validation:
     default: "Enter your postcode"
     minlength: "Your postcode should be between 5 and 7 characters"
