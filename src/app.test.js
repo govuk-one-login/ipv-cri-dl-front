@@ -106,8 +106,8 @@ describe("app", () => {
         ga4ContainerId: APP.GTM.GA4_ID,
         uaContainerId: APP.GTM.UA_ID,
         analyticsCookieDomain: APP.GTM.ANALYTICS_COOKIE_DOMAIN,
-        ga4Disabled: APP.GTM.GA4_DISABLED,
-        uaDisabled: APP.GTM.UA_DISABLED
+        ga4Disabled: APP.GTM.GA4_ENABLED,
+        uaDisabled: APP.GTM.UA_ENSABLED
       };
 
       setGTM(options);

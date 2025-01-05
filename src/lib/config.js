@@ -1,6 +1,7 @@
 require("dotenv").config();
 
 module.exports = {
+  PACKAGE_NAME: "di-ipv-cri-uk-driving-licence-front",
   API: {
     BASE_URL: process.env.API_BASE_URL || "http://localhost:5007/",
     PATHS: {
@@ -19,8 +20,8 @@ module.exports = {
       GA4_ID: process.env.GOOGLE_ANALYTICS_4_GTM_CONTAINER_ID || "GTM-XXXXXXX",
       UA_ID: process.env.UNIVERSAL_ANALYTICS_GTM_CONTAINER_ID || "UA-XXXXXXX",
       ANALYTICS_COOKIE_DOMAIN: process.env.ANALYTICS_DOMAIN || "localhost",
-      GA4_DISABLED: process.env.GA4_DISABLED || false,
-      UA_DISABLED: process.env.UA_DISABLED || true
+      GA4_ENABLED: process.env.GA4_ENABLED || true,
+      UA_ENABLED: process.env.UA_ENABLED || false
     },
     LANGUAGE_TOGGLE_DISABLED: process.env.LANGUAGE_TOGGLE_DISABLED || "true",
     AUTH_SOURCE_ENABLED: process.env.AUTH_SOURCE_ENABLED || "true"

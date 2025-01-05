@@ -30,8 +30,8 @@ const init = (app, router) => {
     ga4ContainerId: APP.GTM.GA4_ID,
     uaContainerId: APP.GTM.UA_ID,
     analyticsCookieDomain: APP.GTM.ANALYTICS_COOKIE_DOMAIN,
-    ga4Disabled: APP.GTM.GA4_DISABLED,
-    uaDisabled: APP.GTM.UA_DISABLED
+    ga4Enabled: APP.GTM.GA4_ENABLED,
+    uaEnabled: APP.GTM.UA_ENABLED
   });
   setLanguageToggle({ app, showLanguageToggle: showLanguageToggle });
   setI18n({

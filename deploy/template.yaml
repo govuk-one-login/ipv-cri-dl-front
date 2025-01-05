@@ -486,14 +486,14 @@ Resources:
               Value: !If [IsProduction, "GTM-TT5HDKV", "GTM-TK92W68"]
             - Name: GOOGLE_ANALYTICS_4_GTM_CONTAINER_ID
               Value: !If [IsProduction, "GTM-K4PBJH3", "GTM-KD86CMZ"]
-            - Name: GA4_DISABLED
+            - Name: GA4_ENABLED
               Value:
                 !FindInMap [
                   EnvironmentConfiguration,
                   !Ref "Environment",
                   ga4Disabled
                 ]
-            - Name: UA_DISABLED
+            - Name: UA_ENABLED
               Value:
                 !FindInMap [
                   EnvironmentConfiguration,
