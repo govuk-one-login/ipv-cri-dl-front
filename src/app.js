@@ -7,6 +7,7 @@ const RoutingService = require("./router");
 const AppSetup = require("./app-setup");
 
 const { app, router } = AppSetup.create(setup);
+
 app.get("nunjucks").addGlobal("getContext", function () {
   return {
     keys: Object.keys(this.ctx),
