@@ -73,15 +73,15 @@ exports.CheckYourDetailsPage = class PlaywrightDevPage {
     );
 
     this.issueNumberLabel = this.page.locator(
-      'xpath=//*[@id="main-content"]/div/div/form/dl[2]/div/dt'
+      'xpath=//*[@id="main-content"]/div/div/form/dl[1]/div[7]/dt'
     );
 
     this.dvaPostcodeLabel = this.page.locator(
-      'xpath=//*[@id="main-content"]/div/div/form/dl[2]/div/dt'
+      'xpath=//*[@id="main-content"]/div/div/form/dl[1]/div[7]/dt'
     );
 
     this.dvlaPostcodeLabel = this.page.locator(
-      '//*[@id="main-content"]/div/div/form/dl[3]/div/dt'
+      'xpath=//*[@id="main-content"]/div/div/form/dl[1]/div[8]/dt'
     );
 
     this.warningTextLabel = this.page.locator(
