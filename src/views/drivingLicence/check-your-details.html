@@ -51,7 +51,7 @@
                         classes: "govuk-!-font-weight-bold $govuk-text-colour"
                     },
                     value: {
-                        text: values.dateOfBirth
+                        text: values.dateOfBirth | date ('DD-MM-YYYY')
                     }
                 },
                 {
@@ -60,7 +60,7 @@
                         classes: "govuk-!-font-weight-bold"
                     },
                     value: {
-                        text: values.issueDate
+                        text: values.issueDate | date ('DD-MM-YYYY')
                     }
                 },
                 {
@@ -69,7 +69,7 @@
                         classes: "govuk-!-font-weight-bold"
                     },
                     value: {
-                        text: values.expiryDate
+                        text: values.expiryDate | date ('DD-MM-YYYY')
                     }
                 },
                 {
