@@ -23,10 +23,10 @@
         }
     }) %}
 
+        {% if values.licenceIssuer == "DVLA" %}
 
-        {{ govukSummaryList({
-            classes: "govuk-!-margin-bottom-0",
-            rows: [
+            {{ govukSummaryList({
+                rows: [
                 {
                     key: {
                         text: translate("pages.check-your-details.lastName"),
@@ -80,31 +80,16 @@
                     value: {
                         text: values.drivingLicenceNumber
                     }
-                }
-            ]
-        }) }}
-
-        {% if values.licenceIssuer == "DVLA" %}
-
-            {{ govukSummaryList({
-                classes: "govuk-!-margin-bottom-0",
-                rows: [
-                    {
-                        key: {
-                            text: translate("pages.check-your-details.issueNumber"),
-                            classes: "govuk-!-font-weight-bold"
-                        },
-                        value: {
-                            text: values.issueNumber
-                        }
+                },
+                {
+                    key: {
+                        text: translate("pages.check-your-details.issueNumber"),
+                        classes: "govuk-!-font-weight-bold"
+                    },
+                    value: {
+                        text: values.issueNumber
                     }
-                ]
-            }) }}
-
-        {% endif %}
-
-        {{ govukSummaryList({
-            rows: [
+                },
                 {
                     key: {
                         text: translate("pages.check-your-details.postcode"),
@@ -116,6 +101,78 @@
                 }
             ]
         }) }}
+        {% endif %}
+
+        {% if values.licenceIssuer == "DVA" %}
+
+            {{ govukSummaryList({
+                rows: [
+                {
+                    key: {
+                        text: translate("pages.check-your-details.lastName"),
+                        classes: "govuk-!-font-weight-bold"
+                    },
+                    value: {
+                        text: values.surname
+                    }
+                },
+                {
+                    key: {
+                        text: translate("pages.check-your-details.givenNames"),
+                        classes: "govuk-!-font-weight-bold"
+                    },
+                    value: {
+                        text: values.firstName + " " + values.middleNames
+                    }
+                },
+                {
+                    key: {
+                        text: translate("pages.check-your-details.dateOfBirth"),
+                        classes: "govuk-!-font-weight-bold $govuk-text-colour"
+                    },
+                    value: {
+                        text: values.dateOfBirth
+                    }
+                },
+                {
+                    key: {
+                        text: translate("pages.check-your-details.issueDate"),
+                        classes: "govuk-!-font-weight-bold"
+                    },
+                    value: {
+                        text: values.issueDate
+                    }
+                },
+                {
+                    key: {
+                        text: translate("pages.check-your-details.validTo"),
+                        classes: "govuk-!-font-weight-bold"
+                    },
+                    value: {
+                        text: values.expiryDate
+                    }
+                },
+                {
+                    key: {
+                        text: translate("pages.check-your-details.licenceNumber"),
+                        classes: "govuk-!-font-weight-bold"
+                    },
+                    value: {
+                        text: values.drivingLicenceNumber
+                    }
+                },
+                {
+                    key: {
+                        text: translate("pages.check-your-details.postcode"),
+                        classes: "govuk-!-font-weight-bold"
+                    },
+                    value: {
+                        text: values.postcode
+                    }
+                }
+            ]
+        }) }}
+        {% endif %}
 
         <h2>{{ translate("pages.check-your-details.correctCheck") }}</h2>
 
