@@ -93,7 +93,7 @@ exports.CheckYourDetailsPage = class PlaywrightDevPage {
     );
 
     this.hintTextLabel = this.page.locator(
-      'xpath=//*[@id="main-content"]/div/div/form/p'
+      'xpath=//*[@id="confirmDetails-detailsNotConfirmed-item-hint"]'
     );
   }
 
