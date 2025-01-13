@@ -12,6 +12,12 @@ $govuk-assets-path: "/public/";
   background-color: $govuk-error-colour;
 }
 
+// ensures Govuk-summary-list__key elements are in bold primary text
+
+.govuk-summary-list .govuk-summary-list__key {
+  color: $govuk-text-colour;
+}
+
 //// Task list pattern
 //
 //.app-task-list {
