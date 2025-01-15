@@ -48,7 +48,7 @@ describe("app-setup", () => {
       );
       sinon.assert.calledWith(app.set, "APP.GTM.UA_CONTAINER_ID", "UA-XXXXXXX");
       sinon.assert.calledWith(app.set, "APP.GTM.UA_ENABLED", false);
-      sinon.assert.calledWith(app.set, "APP.GTM.GA4_ENABLED", false);
+      sinon.assert.calledWith(app.set, "APP.GTM.GA4_ENABLED", true);
     });
 
     it("should set API config variables", () => {

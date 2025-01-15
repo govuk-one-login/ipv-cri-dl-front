@@ -21,7 +21,14 @@ module.exports = {
       UA_ID: process.env.UNIVERSAL_ANALYTICS_GTM_CONTAINER_ID || "UA-XXXXXXX",
       ANALYTICS_COOKIE_DOMAIN: process.env.ANALYTICS_DOMAIN || "localhost",
       GA4_ENABLED: process.env.GA4_ENABLED || true,
-      UA_ENABLED: process.env.UA_ENABLED || false
+      UA_ENABLED: process.env.UA_ENABLED || false,
+      ANALYTICS_DATA_SENSITIVE: process.env.ANALYTICS_DATA_SENSITIVE || true,
+      GA4_PAGE_VIEW_ENABLED: process.env.GA4_PAGE_VIEW_ENABLED || true,
+      GA4_FORM_RESPONSE_ENABLED: process.env.GA4_FORM_RESPONSE_ENABLED || true,
+      GA4_FORM_ERROR_ENABLED: process.env.GA4_FORM_ERROR_ENABLED || true,
+      GA4_FORM_CHANGE_ENABLED: process.env.GA4_FORM_CHANGE_ENABLED || true,
+      GA4_NAVIGATION_ENABLED: process.env.GA4_NAVIGATION_ENABLED || true,
+      GA4_SELECT_CONTENT_ENABLED: process.env.GA4_SELECT_CONTENT_ENABLED || true
     },
     LANGUAGE_TOGGLE_DISABLED: process.env.LANGUAGE_TOGGLE_DISABLED || "true",
     AUTH_SOURCE_ENABLED: process.env.AUTH_SOURCE_ENABLED || "true"
