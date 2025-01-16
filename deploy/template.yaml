@@ -72,8 +72,8 @@ Mappings:
       dynatraceSecretArn: arn:aws:secretsmanager:eu-west-2:216552277552:secret:DynatraceNonProductionVariables
       fargateCPUsize: "256"
       fargateRAMsize: "512"
-      ga4Disabled: "false"
-      uaDisabled: "false"
+      ga4Enabled: "true"
+      uaEnabled: "true"
       languageToggleDisabled: "false"
       authSourceEnabled: "true"
     build:
@@ -81,8 +81,8 @@ Mappings:
       dynatraceSecretArn: arn:aws:secretsmanager:eu-west-2:216552277552:secret:DynatraceNonProductionVariables
       fargateCPUsize: "1024"
       fargateRAMsize: "2048"
-      ga4Disabled: "false"
-      uaDisabled: "false"
+      ga4Enabled: "true"
+      uaEnabled: "true"
       languageToggleDisabled: "false"
       authSourceEnabled: "true"
     staging:
@@ -91,8 +91,8 @@ Mappings:
       fargateCPUsize: "256"
       fargateRAMsize: "512"
       desiredTaskCount: 2
-      ga4Disabled: "false"
-      uaDisabled: "false"
+      ga4Enabled: "true"
+      uaEnabled: "true"
       languageToggleDisabled: "false"
       authSourceEnabled: "true"
     integration:
@@ -100,8 +100,8 @@ Mappings:
       dynatraceSecretArn: arn:aws:secretsmanager:eu-west-2:216552277552:secret:DynatraceNonProductionVariables
       fargateCPUsize: "512"
       fargateRAMsize: "1024"
-      ga4Disabled: "false"
-      uaDisabled: "false"
+      ga4Enabled: "true"
+      uaEnabled: "true"
       languageToggleDisabled: "false"
       authSourceEnabled: "false"
     production:
@@ -109,8 +109,8 @@ Mappings:
       dynatraceSecretArn: arn:aws:secretsmanager:eu-west-2:216552277552:secret:DynatraceProductionVariables
       fargateCPUsize: "1024"
       fargateRAMsize: "2048"
-      ga4Disabled: "false"
-      uaDisabled: "false"
+      ga4Enabled: "true"
+      uaEnabled: "true"
       languageToggleDisabled: "false"
       authSourceEnabled: "false"
 
@@ -486,19 +486,19 @@ Resources:
               Value: !If [IsProduction, "GTM-TT5HDKV", "GTM-TK92W68"]
             - Name: GOOGLE_ANALYTICS_4_GTM_CONTAINER_ID
               Value: !If [IsProduction, "GTM-K4PBJH3", "GTM-KD86CMZ"]
-            - Name: GA4_DISABLED
+            - Name: GA4_ENABLED
               Value:
                 !FindInMap [
                   EnvironmentConfiguration,
                   !Ref "Environment",
-                  ga4Disabled
+                  ga4Enabled
                 ]
-            - Name: UA_DISABLED
+            - Name: UA_ENABLED
               Value:
                 !FindInMap [
                   EnvironmentConfiguration,
                   !Ref "Environment",
-                  uaDisabled
+                  uaEnabled
                 ]
             - Name: LANGUAGE_TOGGLE_DISABLED
               Value:

@@ -6,7 +6,8 @@ const {
     PATHS: { CHECK }
   }
 } = require("../../../lib/config");
-const logger = require("hmpo-logger").get();
+const { PACKAGE_NAME } = require("../../../lib/config");
+const logger = require("hmpo-logger").get(PACKAGE_NAME);
 const {
   createPersonalDataHeaders
 } = require("@govuk-one-login/frontend-passthrough-headers");
