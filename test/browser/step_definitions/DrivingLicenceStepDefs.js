@@ -1,8 +1,8 @@
 const { Given, When, Then } = require("@cucumber/cucumber");
-
 const { DVADetailsEntryPage } = require("../pages/DVADetailsEntryPage");
 const { DrivingLicencePage } = require("../pages/DrivingLicencePage");
 const { expect } = require("chai");
+const { injectAxe } = require("axe-playwright");
 
 Then(/^I can see CTA {string}$/, async function () {});
 
@@ -11,6 +11,14 @@ Then(
   async function (dvlaDetailsEntryPageTitle) {
     const drivingLicencePage = new DrivingLicencePage(this.page);
     await drivingLicencePage.assertDVLAPageTitle(dvlaDetailsEntryPageTitle);
+    await injectAxe(this.page);
+    // Run Axe for WCAG 2.2 AA rules
+    const wcagResults = await this.page.evaluate(() => {
+      return axe.run({
+        runOnly: ["wcag2aa"]
+      });
+    });
+    expect(wcagResults.violations, "WCAG 2.2 AAA violations found").to.be.empty;
   }
 );
 
@@ -415,6 +423,14 @@ Then(
   async function (dvaDetailsEntryPageTitle) {
     const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
     await dvaDetailsEntryPage.assertDVAPageTitle(dvaDetailsEntryPageTitle);
+    await injectAxe(this.page);
+    // Run Axe for WCAG 2.2 AA rules
+    const wcagResults = await this.page.evaluate(() => {
+      return axe.run({
+        runOnly: ["wcag2aa"]
+      });
+    });
+    expect(wcagResults.violations, "WCAG 2.2 AAA violations found").to.be.empty;
   }
 );
 
