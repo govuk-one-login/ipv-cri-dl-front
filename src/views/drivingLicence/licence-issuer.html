@@ -20,13 +20,14 @@
 id: "licenceIssuer"
 }) }}
 
-{% block submitButton %}
-    {{ hmpoSubmit(ctx, {id: 'submitButton'}) }}
-
 {{ govukDetails({
         summaryText: translate("pages.licence-issuer.details.summary"),
         text: translate("pages.licence-issuer.details.text")
 }) }}
+
+{% block submitButton %}
+    {{ hmpoSubmit(ctx, {id: 'submitButton'}) }}
+    
 {% endblock %}
 
 {% endcall %}

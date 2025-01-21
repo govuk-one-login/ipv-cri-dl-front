@@ -142,7 +142,7 @@ consentCheckbox:
     default: "You must give your consent to continue"
 
 licenceIssuer:
-  hint: ""
+  hint: "You can find this in section 4c of your driving licence. It will either say DVLA (Driving and vehicle Licensing Agency) or DVA (Driver and Vehicle Agency)."
   content: ""
   validation:
     required: You must choose an option to continue
@@ -150,18 +150,18 @@ licenceIssuer:
     DVLA:
       label: DVLA
       value: DVLA
-      hint: ""
+      hint: "Driving licences issued in England, Scotland and Wales."
       reveal: ""
     DVA:
       label: DVA
       value: DVA
-      hint: ""
+      hint: "Driving licenses issued in Northern Ireland."
       reveal: ""
     or:
       label: or
       value: or
     noLicence:
-      label: I do not have a UK driving licence
+      label: I do not have a UK photocard driving licence
       value: noLicence
       hint: ""
       reveal: ""
