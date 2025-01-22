@@ -106,7 +106,7 @@ Mappings:
       ga4Enabled: "true"
       uaEnabled: "true"
       languageToggleDisabled: "false"
-      authSourceEnabled: "true"
+      authSourceEnabled: "false"
       minECSCount: 2
       maxECSCount: 4
     production:
@@ -117,7 +117,7 @@ Mappings:
       ga4Enabled: "true"
       uaEnabled: "true"
       languageToggleDisabled: "false"
-      authSourceEnabled: "true"
+      authSourceEnabled: "false"
       minECSCount: 6
       maxECSCount: 60
 
