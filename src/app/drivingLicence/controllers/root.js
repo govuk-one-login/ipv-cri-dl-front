@@ -205,6 +205,9 @@ class RootController extends BaseController {
       }
     }
 
+    logger.info(
+      "Root Controller: Valid Shared Claims and Context Value, isAuthSourceRoute set to true"
+    );
     return true;
   }
 
