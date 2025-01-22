@@ -82,7 +82,7 @@ class RootController extends BaseController {
       undefined === personInfoApiResponse?.data?.drivingPermit ||
       "" === personInfoApiResponse?.data?.drivingPermit
     ) {
-      logger.info(
+      logger.warn(
         "Root controller: drivingPermit data missing from API response"
       );
       return false;
@@ -92,7 +92,7 @@ class RootController extends BaseController {
         undefined === drivingPermit?.personalNumber ||
         "" === drivingPermit?.personalNumber
       ) {
-        logger.info(
+        logger.warn(
           "Root controller: drivingPermit personalNumber data missing from API response"
         );
         return false;
@@ -102,7 +102,7 @@ class RootController extends BaseController {
         undefined === drivingPermit?.expiryDate ||
         "" === drivingPermit?.expiryDate
       ) {
-        logger.info(
+        logger.warn(
           "Root controller: drivingPermit expiryDate data missing from API response"
         );
         return false;
@@ -112,7 +112,7 @@ class RootController extends BaseController {
         undefined === drivingPermit?.issueDate ||
         "" === drivingPermit?.issueDate
       ) {
-        logger.info(
+        logger.warn(
           "Root controller: drivingPermit issueDate data missing from API response"
         );
         return false;
@@ -122,7 +122,7 @@ class RootController extends BaseController {
         undefined === drivingPermit?.issuedBy ||
         "" === drivingPermit?.issuedBy
       ) {
-        logger.info(
+        logger.warn(
           "Root controller: drivingPermit issuedBy data missing from API response"
         );
         return false;
@@ -133,7 +133,7 @@ class RootController extends BaseController {
           undefined === drivingPermit?.issueNumber ||
           "" === drivingPermit?.issueNumber
         ) {
-          logger.info(
+          logger.warn(
             "Root controller: drivingPermit issueNumber data missing from API response"
           );
           return false;
@@ -145,12 +145,12 @@ class RootController extends BaseController {
       undefined === personInfoApiResponse?.data?.address ||
       "" === personInfoApiResponse?.data?.address
     ) {
-      logger.info("Root controller: address data missing from API response");
+      logger.warn("Root controller: address data missing from API response");
       return false;
     } else {
       const address = personInfoApiResponse?.data?.address[0];
       if (undefined === address?.postalCode || "" === address?.postalCode) {
-        logger.info(
+        logger.warn(
           "Root controller: address postalCode data missing from API response"
         );
         return false;
@@ -161,12 +161,12 @@ class RootController extends BaseController {
       undefined === personInfoApiResponse?.data?.birthDate ||
       "" === personInfoApiResponse?.data?.birthDate
     ) {
-      logger.info("Root controller: birthDate data missing from API response");
+      logger.warn("Root controller: birthDate data missing from API response");
       return false;
     } else {
       const birthDate = personInfoApiResponse?.data?.birthDate[0];
       if (undefined === birthDate.value || "" === birthDate.value) {
-        logger.info(
+        logger.warn(
           "Root controller: birthDate value data missing from API response"
         );
         return false;
@@ -177,26 +177,26 @@ class RootController extends BaseController {
       undefined === personInfoApiResponse?.data?.name ||
       "" === personInfoApiResponse?.data?.name
     ) {
-      logger.info("Root controller: name data missing from API response");
+      logger.warn("Root controller: name data missing from API response");
       return false;
     } else {
       const name = personInfoApiResponse?.data?.name[0];
       if (undefined === name?.nameParts || "" === name?.nameParts) {
-        logger.info(
+        logger.warn(
           "Root controller: nameParts data missing from API response"
         );
         return false;
       } else {
         const namePart = name?.nameParts[0];
         if (undefined === namePart || "" === namePart) {
-          logger.info(
+          logger.warn(
             "Root controller: namePart data missing from API response"
           );
           return false;
         }
         for (let i = 0; i < namePart.length; i++) {
           if (undefined === namePart[i] || "" === namePart[i]) {
-            logger.info(
+            logger.warn(
               "Root controller: namePart value missing from API response"
             );
             return false;
@@ -205,7 +205,7 @@ class RootController extends BaseController {
       }
     }
 
-    logger.info(
+    logger.warn(
       "Root Controller: Valid Shared Claims and Context Value, isAuthSourceRoute set to true"
     );
     return true;
