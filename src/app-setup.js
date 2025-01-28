@@ -1,4 +1,4 @@
-const { API, APP, PORT, LOG_LEVEL } = require("./lib/config");
+const { API, APP, LOG_LEVEL } = require("./lib/config");
 
 const commonExpress = require("@govuk-one-login/di-ipv-cri-common-express");
 
@@ -64,7 +64,7 @@ const create = (setup) => {
 
   const { app, router } = setup({
     config: { APP_ROOT: __dirname },
-    port: PORT,
+    port: false,
     logs: loggerConfig,
     session: sessionConfig,
     helmet: helmetConfig,
