@@ -92,7 +92,8 @@
     "http-cache-semantics": "4.1.1",
     "json5": "2.2.2",
     "jsonwebtoken": "9.0.0",
-    "nunjucks": "3.2.4"
+    "nunjucks": "3.2.4",
+    "overload-protection": "1.2.3"
   },
   "resolutions": {
     "strip-ansi": "^6.0.1",
