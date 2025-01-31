@@ -1500,7 +1500,7 @@ Resources:
         - MetricValue: $.maxConcurrentConnections
           MetricName: MaxConcurrentConnections
           MetricNamespace: !Sub ${AWS::StackName}/LogMessages
-          Unit: Count       
+          Unit: Count
 
 # Outputs
 
