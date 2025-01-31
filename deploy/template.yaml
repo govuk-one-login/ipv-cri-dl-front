@@ -1245,12 +1245,14 @@ Resources:
     Type: AWS::CloudWatch::Alarm
     Properties:
       AlarmName: !Sub "${AWS::StackName}-FE5XXErrorCriticalAlarm"
-      AlarmDescription: !Sub "There has been a significant proportion of 5XX errors on the frontend api-gateway. ${SupportManualURL}"
+      AlarmDescription: >
+        Trigger the 5xx cricical alarm if errorThreshold exceeds 80% with 10 or more invocations
+        and a minimum of 2 errors in 5 out of the last 5 minutes
       ActionsEnabled: true
       OKActions:
-        - !ImportValue platform-alarm-topic-critical-alert
+        - !ImportValue platform-alarm-critical-alert-topic
       AlarmActions:
-        - !ImportValue platform-alarm-topic-critical-alert
+        - !ImportValue platform-alarm-critical-alert-topic
       EvaluationPeriods: 5
       DatapointsToAlarm: 2
       Threshold: 80
