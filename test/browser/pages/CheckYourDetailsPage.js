@@ -68,6 +68,18 @@ exports.CheckYourDetailsPage = class PlaywrightDevPage {
       'xpath=//*[@id="main-content"]/div/div/form/dl[1]/div[5]/dt'
     );
 
+    this.dobValue = this.page.locator(
+      'xpath=//*[@id="main-content"]/div/div/form/dl[1]/div[3]/dd'
+    );
+
+    this.issueDateValue = this.page.locator(
+      'xpath=//*[@id="main-content"]/div/div/form/dl[1]/div[4]/dd'
+    );
+
+    this.validToValue = this.page.locator(
+      'xpath=//*[@id="main-content"]/div/div/form/dl[1]/div[5]/dd'
+    );
+
     this.licenceNumberNameLabel = this.page.locator(
       'xpath=//*[@id="main-content"]/div/div/form/dl[1]/div[6]/dt'
     );
@@ -293,6 +305,30 @@ exports.CheckYourDetailsPage = class PlaywrightDevPage {
     expect(await this.isCurrentPage()).to.be.true;
     await expect(await this.hintTextLabel.textContent()).to.contains(
       checkYourDetailsHintTextText
+    );
+  }
+
+  async assertFormattedDobValue(checkYourDetailsDobFormattedValue) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    await expect(await this.dobValue.textContent()).to.contains(
+      checkYourDetailsDobFormattedValue
+    );
+  }
+
+  async assertFormattedIssueDateValue(checkYourDetailsIssueDateFormattedValue) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    await expect(await this.issueDateValue.textContent()).to.contains(
+      checkYourDetailsIssueDateFormattedValue
+    );
+  }
+
+  async assertFormattedValidToValue(checkYourDetailsValidToFormattedValue) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    await expect(await this.validToValue.textContent()).to.contains(
+      checkYourDetailsValidToFormattedValue
     );
   }
 };

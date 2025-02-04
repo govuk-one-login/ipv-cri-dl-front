@@ -169,6 +169,36 @@ Then(
 );
 
 Then(
+  /^I can see the check details formatted dob value as (.*)$/,
+  async function (checkYourDetailsDobFormatttedValue) {
+    const checkYourDetailsPage = new CheckYourDetailsPage(this.page);
+    await checkYourDetailsPage.assertFormattedDobValue(
+      checkYourDetailsDobFormatttedValue
+    );
+  }
+);
+
+Then(
+  /^I can see the check details formatted issueDate value as (.*)$/,
+  async function (checkYourDetailsIssueDateFormatttedValue) {
+    const checkYourDetailsPage = new CheckYourDetailsPage(this.page);
+    await checkYourDetailsPage.assertFormattedIssueDateValue(
+      checkYourDetailsIssueDateFormatttedValue
+    );
+  }
+);
+
+Then(
+  /^I can see the check details formatted validTo value as (.*)$/,
+  async function (checkYourDetailsValidToFormatttedValue) {
+    const checkYourDetailsPage = new CheckYourDetailsPage(this.page);
+    await checkYourDetailsPage.assertFormattedValidToValue(
+      checkYourDetailsValidToFormatttedValue
+    );
+  }
+);
+
+Then(
   /^I can see the check details licenceNumber as (.*)$/,
   async function (checkYourDetailsLicenceNumber) {
     const checkYourDetailsPage = new CheckYourDetailsPage(this.page);
