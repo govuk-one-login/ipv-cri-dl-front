@@ -22,7 +22,7 @@ module.exports = class PlaywrightDevPage {
 
   async clickOnDVLARadioButton() {
     expect(await this.page.title()).to.equal(
-      "Who was your UK driving licence issued by? – Prove your identity – GOV.UK"
+      "Was your UK photocard driving licence issued by DVLA or DVA? – Prove your identity – GOV.UK"
     );
     await this.radioBtnDVLA.click();
     await this.CTButton.click();
@@ -34,7 +34,7 @@ module.exports = class PlaywrightDevPage {
 
   async clickOnDVARadioButton() {
     expect(await this.page.title()).to.equal(
-      "Who was your UK driving licence issued by? – Prove your identity – GOV.UK"
+      "Was your UK photocard driving licence issued by DVLA or DVA? – Prove your identity – GOV.UK"
     );
     await this.radioBtnDVA.click();
     await this.CTButton.click();
