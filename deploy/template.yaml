@@ -1504,6 +1504,7 @@ Resources:
           MetricName: MaxConcurrentConnections
           MetricNamespace: !Sub ${AWS::StackName}/LogMessages
           Unit: Count
+          
 
 # Outputs
 

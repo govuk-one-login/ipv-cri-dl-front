@@ -1,0 +1,62 @@
+name: Overload Test
+on:
+    push:
+
+jobs:
+    performance-test:
+        runs-on: ubuntu-latest
+        permissions:
+            contents: write
+            packages: write
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Use Node.js 20.x
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 20
+                  cache: "yarn"
+
+            - name: Install dependencies
+              run: yarn install
+
+            - name: Install Clinic Doctor and Autcannon
+              run: yarn add global clinic autocannon
+
+            - name: Starting Node App, Run Overload test and Generate clinic doctor report 
+              run: yarn run test:overload
+            
+            - name: Save Clinic Doctor Test report
+              uses: actions/upload-artifact@v4
+              with:
+                name: clinic-doctor-report.html
+                path: ./reports/clinic/clinic-doctor-report.html
+
+            - name: Get test results history
+              uses: actions/checkout@v4
+              if: always()
+              continue-on-error: true
+              with:
+                  ref: LIME-Overload-gh-pages
+                  path: LIME-Overload-gh-pages
+
+            - name: Clinic HTML Report action
+              uses: PavanMudigonda/html-reporter-github-pages@v1.1
+              id: test-report
+              if: always()
+              with:
+                test_results: reports/clinic/clinic-doctor-report.html
+                gh_pages: LIME-Overload-gh-pages
+                results_history: results/results-history
+
+            - name: Publish Github Pages
+              if: always() && ${{ github.actor != 'dependabot[bot]' }}
+              uses: peaceiris/actions-gh-pages@v4.0.0
+              with:
+                github_token: ${{ secrets.GITHUB_TOKEN }}
+                publish_branch: LIME-Overload-gh-pages
+                publish_dir: results/results-history
+                keep_files: true
+                    
