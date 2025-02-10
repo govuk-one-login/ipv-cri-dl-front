@@ -145,7 +145,7 @@ licenceIssuer:
   hint: Mae hwn i'w weld yn adran 4c o'ch trwydded yrru. Bydd naill ai’n dweud DVLA (Asiantaeth Trwyddedu Gyrru a Cherbydau) neu DVA (Asiantaeth Gyrwyr a Cherbydau).
   content: ""
   validation:
-    required: Mae'n rhaid i chi ddewis opsiwn i barhau
+    required: Rhaid i chi ddewis opsiwn i barhau
   items:
     DVLA:
       label: DVLA
