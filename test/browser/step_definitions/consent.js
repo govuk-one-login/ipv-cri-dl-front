@@ -1,14 +1,21 @@
 const { Given, When, Then } = require("@cucumber/cucumber");
-
 const { expect } = require("chai");
-
 const { ConsentPage } = require("../pages/consent");
+const { injectAxe } = require("axe-playwright");
 
 Then(
   /^I should be on the DVA consent page (.*)$/,
   async function (consentPageTitle) {
     const consentPage = new ConsentPage(this.page);
     await consentPage.assertConsentDVAPageTitle(consentPageTitle);
+    await injectAxe(this.page);
+    // Run Axe for WCAG 2.2 AA rules
+    const wcagResults = await this.page.evaluate(() => {
+      return axe.run({
+        runOnly: ["wcag2aa"]
+      });
+    });
+    expect(wcagResults.violations, "WCAG 2.2 AAA violations found").to.be.empty;
   }
 );
 
@@ -17,6 +24,14 @@ Then(
   async function (consentPageTitle) {
     const consentPage = new ConsentPage(this.page);
     await consentPage.assertConsentDVLAPageTitle(consentPageTitle);
+    await injectAxe(this.page);
+    // Run Axe for WCAG 2.2 AA rules
+    const wcagResults = await this.page.evaluate(() => {
+      return axe.run({
+        runOnly: ["wcag2aa"]
+      });
+    });
+    expect(wcagResults.violations, "WCAG 2.2 AAA violations found").to.be.empty;
   }
 );
 

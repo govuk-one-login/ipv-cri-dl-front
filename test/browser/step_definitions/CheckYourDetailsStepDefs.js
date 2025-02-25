@@ -1,7 +1,7 @@
 const { Given, When, Then } = require("@cucumber/cucumber");
-
 const { CheckYourDetailsPage } = require("../pages/CheckYourDetailsPage");
 const { expect } = require("chai");
+const { injectAxe } = require("axe-playwright");
 
 When(/^they have started the DL Auth Source journey$/, async function () {});
 
@@ -12,6 +12,14 @@ Then(
     await checkYourDetailsPage.assertCheckYourDetailsPageTitle(
       checkYourDetailsPageTitle
     );
+    await injectAxe(this.page);
+    // Run Axe for WCAG 2.2 AA rules
+    const wcagResults = await this.page.evaluate(() => {
+      return axe.run({
+        runOnly: ["wcag2aa"]
+      });
+    });
+    expect(wcagResults.violations, "WCAG 2.2 AAA violations found").to.be.empty;
   }
 );
 
