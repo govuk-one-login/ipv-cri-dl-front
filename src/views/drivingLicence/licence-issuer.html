@@ -8,16 +8,21 @@
 {% from "hmpo-details/macro.njk" import hmpoDetails %}
 
 {% block mainContent %}
-<h1 id="header" data-page="{{hmpoPageKey}}" class="govuk-heading-l" rel="licenceIssuer">
-    {{ translate("licence-issuer.title") }}
-</h1>
+{% set title = translate("licence-issuer.title") %}
 {% call hmpoForm(ctx, {
     attributes: {
         onsubmit: 'window.disableFormSubmit()'
     }
 }) %}
 {{ hmpoRadios(ctx, {
-id: "licenceIssuer"
+   id: "licenceIssuer",
+   fieldset: {
+        legend: {
+            text: title,
+            isPageHeading: true,
+            classes: "govuk-fieldset__legend--l"
+        }
+    }
 }) }}
 
 {{ govukDetails({

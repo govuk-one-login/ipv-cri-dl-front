@@ -18,7 +18,7 @@ Feature: Driving licence CRI - Common Tests
         And The DVLA Hint text reads Driving licences issued in England, Scotland and Wales.
         And I see the radio button for DVA
         Then The DVA Radio button label reads DVA
-        And The DVA Hint text reads Driving licenses issued in Northern Ireland.
+        And The DVA Hint text reads Driving licences issued in Northern Ireland.
         And I see the radio button for I do not have a UK photocard driving licence
         Then The third Radio button label reads I do not have a UK photocard driving licence
 
