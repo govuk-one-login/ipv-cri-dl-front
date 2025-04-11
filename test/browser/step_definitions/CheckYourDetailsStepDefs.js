@@ -12,6 +12,12 @@ Then(
     await checkYourDetailsPage.assertCheckYourDetailsPageTitle(
       checkYourDetailsPageTitle
     );
+  }
+);
+
+Then(
+  /^I run the Axe Accessibility check against the Driving Licence check your details page$/,
+  async function () {
     await injectAxe(this.page);
     // Run Axe for WCAG 2.2 AA rules
     const wcagResults = await this.page.evaluate(() => {
@@ -19,7 +25,7 @@ Then(
         runOnly: ["wcag2aa"]
       });
     });
-    expect(wcagResults.violations, "WCAG 2.2 AAA violations found").to.be.empty;
+    expect(wcagResults.violations).to.be.empty;
   }
 );
 

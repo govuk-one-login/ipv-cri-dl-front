@@ -123,3 +123,8 @@ Feature: Driving licence CRI - Common Tests
         Examples:
             | DeviceIntelligenceCookieName |
             | di-device-intelligence       |
+
+    @mock-api:driving-licence-Accessibility @validation-regression
+    Scenario: Driving Licence - Axe Accessibility Scan - DL Landing Page
+        Given I should be on the Landing Page with Page Title Was your UK photocard driving licence issued by DVLA or DVA?
+        And I run the Axe Accessibility check against the DL Landing page

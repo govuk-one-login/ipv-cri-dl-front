@@ -556,3 +556,7 @@ Feature: DVLA Driving licence CRI Error Validations
     Examples:
       | DeviceIntelligenceCookieName |
       | di-device-intelligence       |
+
+  @mock-api:dvla-accessibility @validation-regression @build @staging
+  Scenario Outline: DVLA - Axe Accessibility Scan - DVLA Details Page
+    Given I run the Axe Accessibility check against the DVLA Details page

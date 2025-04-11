@@ -8,14 +8,6 @@ Then(
   async function (consentPageTitle) {
     const consentPage = new ConsentPage(this.page);
     await consentPage.assertConsentDVAPageTitle(consentPageTitle);
-    await injectAxe(this.page);
-    // Run Axe for WCAG 2.2 AA rules
-    const wcagResults = await this.page.evaluate(() => {
-      return axe.run({
-        runOnly: ["wcag2aa"]
-      });
-    });
-    expect(wcagResults.violations, "WCAG 2.2 AAA violations found").to.be.empty;
   }
 );
 
@@ -24,6 +16,12 @@ Then(
   async function (consentPageTitle) {
     const consentPage = new ConsentPage(this.page);
     await consentPage.assertConsentDVLAPageTitle(consentPageTitle);
+  }
+);
+
+Then(
+  /^I run the Axe Accessibility check against the Driving Licence Consent page$/,
+  async function () {
     await injectAxe(this.page);
     // Run Axe for WCAG 2.2 AA rules
     const wcagResults = await this.page.evaluate(() => {
@@ -31,7 +29,7 @@ Then(
         runOnly: ["wcag2aa"]
       });
     });
-    expect(wcagResults.violations, "WCAG 2.2 AAA violations found").to.be.empty;
+    expect(wcagResults.violations).to.be.empty;
   }
 );
 
