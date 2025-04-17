@@ -69,10 +69,6 @@ Mappings:
       dynatraceSecretArn: arn:aws:secretsmanager:eu-west-2:216552277552:secret:DynatraceNonProductionVariables
       fargateCPUsize: "256"
       fargateRAMsize: "512"
-      ga4Enabled: "true"
-      uaEnabled: "true"
-      languageToggleDisabled: "false"
-      authSourceEnabled: "true"
       minECSCount: 1
       maxECSCount: 4
     build:
@@ -80,10 +76,6 @@ Mappings:
       dynatraceSecretArn: arn:aws:secretsmanager:eu-west-2:216552277552:secret:DynatraceNonProductionVariables
       fargateCPUsize: "2048"
       fargateRAMsize: "4096"
-      ga4Enabled: "true"
-      uaEnabled: "true"
-      languageToggleDisabled: "false"
-      authSourceEnabled: "true"
       minECSCount: 6
       maxECSCount: 60
     staging:
@@ -92,10 +84,6 @@ Mappings:
       fargateCPUsize: "256"
       fargateRAMsize: "512"
       desiredTaskCount: 2
-      ga4Enabled: "true"
-      uaEnabled: "true"
-      languageToggleDisabled: "false"
-      authSourceEnabled: "true"
       minECSCount: 2
       maxECSCount: 4
     integration:
@@ -103,10 +91,6 @@ Mappings:
       dynatraceSecretArn: arn:aws:secretsmanager:eu-west-2:216552277552:secret:DynatraceNonProductionVariables
       fargateCPUsize: "512"
       fargateRAMsize: "1024"
-      ga4Enabled: "true"
-      uaEnabled: "true"
-      languageToggleDisabled: "false"
-      authSourceEnabled: "true"
       minECSCount: 2
       maxECSCount: 4
     production:
@@ -114,12 +98,40 @@ Mappings:
       dynatraceSecretArn: arn:aws:secretsmanager:eu-west-2:216552277552:secret:DynatraceProductionVariables
       fargateCPUsize: "2048"
       fargateRAMsize: "4096"
-      ga4Enabled: "true"
-      uaEnabled: "true"
-      languageToggleDisabled: "false"
-      authSourceEnabled: "true"
       minECSCount: 6
       maxECSCount: 60
+
+  FeatureFlagMapping:
+    dev:
+      ga4Enabled: "true"
+      uaEnabled: "false"
+      languageToggleDisabled: "false"
+      authSourceEnabled: "true"
+      deviceIntelligenceEnabled: "true"
+    build:
+      ga4Enabled: "true"
+      uaEnabled: "false"
+      languageToggleDisabled: "false"
+      authSourceEnabled: "true"
+      deviceIntelligenceEnabled: "true"
+    staging:
+      ga4Enabled: "true"
+      uaEnabled: "false"
+      languageToggleDisabled: "false"
+      authSourceEnabled: "true"
+      deviceIntelligenceEnabled: "true"
+    integration:
+      ga4Enabled: "true"
+      uaEnabled: "false"
+      languageToggleDisabled: "false"
+      authSourceEnable: "true"
+      deviceIntelligenceEnabled: "false"
+    production:
+      ga4Enabled: "true"
+      uaEnabled: "false"
+      languageToggleDisabled: "false"
+      authSourceEnabled: "true"
+      deviceIntelligenceEnabled: "false"
 
   # see https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-access-logs.html
   ElasticLoadBalancerAccountIds:
@@ -499,25 +511,25 @@ Resources:
             - Name: GA4_ENABLED
               Value:
                 !FindInMap [
-                  EnvironmentConfiguration,
+                  FeatureFlagMapping,
                   !Ref "Environment",
                   ga4Enabled
                 ]
             - Name: UA_ENABLED
               Value:
                 !FindInMap [
-                  EnvironmentConfiguration,
+                  FeatureFlagMapping,
                   !Ref "Environment",
                   uaEnabled
                 ]
             - Name: LANGUAGE_TOGGLE_DISABLED
               Value:
                 !FindInMap [
-                  EnvironmentConfiguration,
+                  FeatureFlagMapping,
                   !Ref "Environment",
                   languageToggleDisabled
                 ]
-            - Name: ANALYTICS_DOMAIN
+            - Name: FRONTEND_DOMAIN
               Value:
                 !If [
                   IsProduction,
@@ -534,9 +546,16 @@ Resources:
             - Name: AUTH_SOURCE_ENABLED
               Value:
                 !FindInMap [
-                  EnvironmentConfiguration,
+                  FeatureFlagMapping,
                   !Ref "Environment",
                   authSourceEnabled
+                ]
+            - Name: DEVICE_INTELLIGENCE_ENABLED
+              Value:
+                !FindInMap [
+                  FeatureFlagMapping,
+                  !Ref "Environment",
+                  deviceIntelligenceEnabled
                 ]
           Secrets:
             - Name: DT_TENANT
