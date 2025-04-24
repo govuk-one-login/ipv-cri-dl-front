@@ -922,6 +922,17 @@ Then(
   }
 );
 
+Then(
+  /^On the entry details page I see the Device Intelligence Cookie (.*)$/,
+  async function (deviceIntelligenceCookieName) {
+    const drivingLicencePage = new DrivingLicencePage(this.page);
+
+    await drivingLicencePage.checkDeviceIntelligenceCookie(
+      deviceIntelligenceCookieName
+    );
+  }
+);
+
 //########### Text Content Comparisions - DVA ##############
 
 Then(

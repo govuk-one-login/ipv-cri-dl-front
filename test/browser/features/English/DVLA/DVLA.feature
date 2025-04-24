@@ -549,3 +549,10 @@ Feature: DVLA Driving licence CRI Error Validations
     And I see the DVLA Consent second sentence To find out more about how your driving licence details will be used, you can read:
     And I see One Login privacy notice link the GOV.UK One Login privacy notice (opens in a new tab)
     Then I see DVLA privacy notice link the DVLA privacy notice (opens in a new tab)
+
+  @mock-api:dl-success @validation-regression @build @staging
+  Scenario: Driving Licence - Cookies - Device Intelligence
+    Given On the entry details page I see the Device Intelligence Cookie <DeviceIntelligenceCookieName>
+    Examples:
+      | DeviceIntelligenceCookieName |
+      | di-device-intelligence       |

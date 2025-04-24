@@ -17,8 +17,8 @@ Feature: DVA Driving licence CRI Error Validations
     And I can see the DVA licence number error in the field as Your licence number should be 8 characters long
     And I check the page Title Error: Enter your details exactly as they appear on your UK driving licence – GOV.UK One Login
     Examples:
-      |DVADrivingLicenceSubject       |InvalidLicenceNumber|
-      |DrivingLicenceSubjectHappyBilly|5566778             |
+      | DVADrivingLicenceSubject        | InvalidLicenceNumber |
+      | DrivingLicenceSubjectHappyBilly | 5566778              |
 
   @mock-api:dva-invalidDrivingLicenceNumber @validation-regression @build @staging
   Scenario Outline: DVA - User enters licence number with special characters and spaces
@@ -29,10 +29,10 @@ Feature: DVA Driving licence CRI Error Validations
     And I can see the DVA licence number error in the field as Your licence number should not include any symbols or spaces
     And I check the page Title Error: Enter your details exactly as they appear on your UK driving licence – GOV.UK One Login
     Examples:
-      |DVADrivingLicenceSubject       |InvalidLicenceNumber|
-      |DrivingLicenceSubjectHappyBilly|55667^&*            |
+      | DVADrivingLicenceSubject        | InvalidLicenceNumber |
+      | DrivingLicenceSubjectHappyBilly | 55667^&*             |
 
-###### DrivingLicenceNumberWithAlphaNumericChar, DrivingLicenceNumberWithAlphaChar, NoDrivingLicenceNumber #####
+  ###### DrivingLicenceNumberWithAlphaNumericChar, DrivingLicenceNumberWithAlphaChar, NoDrivingLicenceNumber #####
   @mock-api:dva-invalidDrivingLicenceNumber @validation-regression @build @staging
   Scenario Outline: DVA - User enters licence number with numeric/alpha/null characters
     Given User enters DVA data as a <DVADrivingLicenceSubject>
@@ -42,10 +42,10 @@ Feature: DVA Driving licence CRI Error Validations
     And I can see the DVA licence number error in the field as Enter the number exactly as it appears on your driving licence
     And I check the page Title Error: Enter your details exactly as they appear on your UK driving licence – GOV.UK One Login
     Examples:
-      |DVADrivingLicenceSubject       |InvalidLicenceNumber|
-      |DrivingLicenceSubjectHappyBilly|55667ABC            |
-      |DrivingLicenceSubjectHappyBilly|XYZabdAB            |
-      |DrivingLicenceSubjectHappyBilly|                    |
+      | DVADrivingLicenceSubject        | InvalidLicenceNumber |
+      | DrivingLicenceSubjectHappyBilly | 55667ABC             |
+      | DrivingLicenceSubjectHappyBilly | XYZabdAB             |
+      | DrivingLicenceSubjectHappyBilly |                      |
 
   @mock-api:dva-invalidPostcode @validation-regression @build @staging
   Scenario Outline: DVA - User enters postcode number with less than 5 characters
@@ -56,8 +56,8 @@ Feature: DVA Driving licence CRI Error Validations
     And I see the postcode error in field as Your postcode should be between 5 and 7 characters
     And I check the page Title Error: Enter your details exactly as they appear on your UK driving licence – GOV.UK One Login
     Examples:
-      |DVADrivingLicenceSubject       |InvalidPostcode   |
-      |DrivingLicenceSubjectHappyBilly|E20A              |
+      | DVADrivingLicenceSubject        | InvalidPostcode |
+      | DrivingLicenceSubjectHappyBilly | E20A            |
 
   @mock-api:dva-invalidPostcode @validation-regression @build @staging
   Scenario Outline: DVA - User enters no postcode in the postcode field
@@ -68,8 +68,8 @@ Feature: DVA Driving licence CRI Error Validations
     And I see the postcode error in field as Enter your postcode
     And I check the page Title Error: Enter your details exactly as they appear on your UK driving licence – GOV.UK One Login
     Examples:
-      |DVADrivingLicenceSubject       |InvalidPostcode   |
-      |DrivingLicenceSubjectHappyBilly|                  |
+      | DVADrivingLicenceSubject        | InvalidPostcode |
+      | DrivingLicenceSubjectHappyBilly |                 |
 
   @mock-api:dva-invalidPostcode @validation-regression @build @staging
   Scenario Outline: DVA - User enters international postcode and returns enter a UK postcode error
@@ -80,10 +80,10 @@ Feature: DVA Driving licence CRI Error Validations
     And I see the postcode error in field as Enter a UK postcode
     And I check the page Title Error: Enter your details exactly as they appear on your UK driving licence – GOV.UK One Login
     Examples:
-      |DVADrivingLicenceSubject       |InvalidPostcode   |
-      |DrivingLicenceSubjectHappyBilly|CA 95128          |
+      | DVADrivingLicenceSubject        | InvalidPostcode |
+      | DrivingLicenceSubjectHappyBilly | CA 95128        |
 
-##### PostcodeWithSpecialChar #####
+  ##### PostcodeWithSpecialChar #####
   @mock-api:dva-invalidPostcode @validation-regression @build @staging
   Scenario Outline: DVA - User enters invalid postcode with special characters
     Given User enters DVA data as a <DVADrivingLicenceSubject>
@@ -93,10 +93,10 @@ Feature: DVA Driving licence CRI Error Validations
     And I see the postcode error in field as Your postcode should only include numbers and letters
     And I check the page Title Error: Enter your details exactly as they appear on your UK driving licence – GOV.UK One Login
     Examples:
-      |DVADrivingLicenceSubject       |InvalidPostcode   |
-      |DrivingLicenceSubjectHappyBilly|NW* ^%G           |
+      | DVADrivingLicenceSubject        | InvalidPostcode |
+      | DrivingLicenceSubjectHappyBilly | NW* ^%G         |
 
-####### PostcodeWithNumericChar, PostcodeWithAlphaChar #####
+  ####### PostcodeWithNumericChar, PostcodeWithAlphaChar #####
   @mock-api:dva-invalidPostcode @validation-regression @build @staging
   Scenario Outline: DVA - User enters postcode with alpha/numeric characters
     Given User enters DVA data as a <DVADrivingLicenceSubject>
@@ -106,11 +106,11 @@ Feature: DVA Driving licence CRI Error Validations
     And I see the postcode error in field as Your postcode should include numbers and letters
     And I check the page Title Error: Enter your details exactly as they appear on your UK driving licence – GOV.UK One Login
     Examples:
-      |DVADrivingLicenceSubject       |InvalidPostcode   |
-      |DrivingLicenceSubjectHappyBilly|123 456           |
-      |DrivingLicenceSubjectHappyBilly|ABC XYZ           |
+      | DVADrivingLicenceSubject        | InvalidPostcode |
+      | DrivingLicenceSubjectHappyBilly | 123 456         |
+      | DrivingLicenceSubjectHappyBilly | ABC XYZ         |
 
-######  InvalidLastNameWithNumbers, InvalidLastNameWithSpecialCharacters, NoLastName #####
+  ######  InvalidLastNameWithNumbers, InvalidLastNameWithSpecialCharacters, NoLastName #####
   @mock-api:dva-invalidLastName @validation-regression @build @staging
   Scenario Outline: DVA - User enters last name with alpha/numeric/special/null characters
     Given User enters DVA data as a <DVADrivingLicenceSubject>
@@ -120,12 +120,12 @@ Feature: DVA Driving licence CRI Error Validations
     And I see the Lastname error in the error field as Enter your last name as it appears on your driving licence
     And I check the page Title Error: Enter your details exactly as they appear on your UK driving licence – GOV.UK One Login
     Examples:
-      |DVADrivingLicenceSubject       |InvalidLastName |
-      |DrivingLicenceSubjectHappyBilly|KYLE123         |
-      |DrivingLicenceSubjectHappyBilly|KYLE^&(         |
-      |DrivingLicenceSubjectHappyBilly|                |
+      | DVADrivingLicenceSubject        | InvalidLastName |
+      | DrivingLicenceSubjectHappyBilly | KYLE123         |
+      | DrivingLicenceSubjectHappyBilly | KYLE^&(         |
+      | DrivingLicenceSubjectHappyBilly |                 |
 
-######  InvalidFirstNameWithNumbers, InvalidFirstNameWithSpecialCharacters, NoFirstName, firstName exceeds maxlength #####
+  ######  InvalidFirstNameWithNumbers, InvalidFirstNameWithSpecialCharacters, NoFirstName, firstName exceeds maxlength #####
   @mock-api:dva-invalidFirstName @validation-regression @build @staging
   Scenario Outline: DVA - User enters first name with alpha/numeric/special/null characters
     Given User enters DVA data as a <DVADrivingLicenceSubject>
@@ -141,7 +141,7 @@ Feature: DVA Driving licence CRI Error Validations
       | DrivingLicenceSubjectHappyBilly | SELINA%$@                                  |
       | DrivingLicenceSubjectHappyBilly |                                            |
 
-#######  InvalidMiddleNamesWithNumbers, InvalidMiddleNamesWithSpecialCharacters #####
+  #######  InvalidMiddleNamesWithNumbers, InvalidMiddleNamesWithSpecialCharacters #####
   @mock-api:dva-invalidMiddleNames @validation-regression @build @staging
   Scenario Outline: DVA - User enters middle nams with alpha/numeric/special/null characters
     Given User enters DVA data as a <DVADrivingLicenceSubject>
@@ -151,11 +151,11 @@ Feature: DVA Driving licence CRI Error Validations
     And I see the middlenames error in the error field as Enter any middle names as they appear on your driving licence
     And I check the page Title Error: Enter your details exactly as they appear on your UK driving licence – GOV.UK One Login
     Examples:
-      |DVADrivingLicenceSubject          |InvalidMiddleNames|
-      |DrivingLicenceSubjectHappyBilly|SELINA987       |
-      |DrivingLicenceSubjectHappyBilly|SELINA%$@       |
+      | DVADrivingLicenceSubject        | InvalidMiddleNames |
+      | DrivingLicenceSubjectHappyBilly | SELINA987          |
+      | DrivingLicenceSubjectHappyBilly | SELINA%$@          |
 
-#####  DateOfBirthNotReal, DateOfBirthWithSpecialCharacters, NoDateOfBirth #####
+  #####  DateOfBirthNotReal, DateOfBirthWithSpecialCharacters, NoDateOfBirth #####
   @mock-api:dva-invalidDateOfBirth @validation-regression @build @staging
   Scenario Outline: DVA - User enters dob that are not real or with special characters or no issue date error validation or year provided is two digits
     Given User enters DVA data as a <DVADrivingLicenceSubject>
@@ -167,11 +167,11 @@ Feature: DVA Driving licence CRI Error Validations
     And DVA user can see the date of birth error in the field as Enter your date of birth as it appears on your driving licence
     And I check the page Title Error: Enter your details exactly as they appear on your UK driving licence – GOV.UK One Login
     Examples:
-      |DVADrivingLicenceSubject       |InvalidDayOfBirth|InvalidMonthOfBirth|InvalidYearOfBirth|
-      |DrivingLicenceSubjectHappyBilly|         51      |     71            |         198      |
-      |DrivingLicenceSubjectHappyBilly|         @       |     *&            |         19 7     |
-      |DrivingLicenceSubjectHappyBilly|                 |                   |                  |
-      |DrivingLicenceSubjectHappyBilly|         05      |     12            |         29       |
+      | DVADrivingLicenceSubject        | InvalidDayOfBirth | InvalidMonthOfBirth | InvalidYearOfBirth |
+      | DrivingLicenceSubjectHappyBilly | 51                | 71                  | 198                |
+      | DrivingLicenceSubjectHappyBilly | @                 | *&                  | 19 7               |
+      | DrivingLicenceSubjectHappyBilly |                   |                     |                    |
+      | DrivingLicenceSubjectHappyBilly | 05                | 12                  | 29                 |
 
   @mock-api:dva-invalidDateOfBirth @validation-regression @build @staging
   Scenario Outline: DVA - User enters future date of birth
@@ -184,10 +184,10 @@ Feature: DVA Driving licence CRI Error Validations
     And DVA user can see the date of birth error in the field as Your date of birth must be in the past
     And I check the page Title Error: Enter your details exactly as they appear on your UK driving licence – GOV.UK One Login
     Examples:
-      |DVADrivingLicenceSubject       |InvalidDayOfBirth|InvalidMonthOfBirth|InvalidYearOfBirth|
-      |DrivingLicenceSubjectHappyBilly|         10      |     10            |         2042     |
+      | DVADrivingLicenceSubject        | InvalidDayOfBirth | InvalidMonthOfBirth | InvalidYearOfBirth |
+      | DrivingLicenceSubjectHappyBilly | 10                | 10                  | 2042               |
 
-#####  IssueDateWithAlphaCharacters, IssueDateWithSpecialCharacters, NoIssueDate #####
+  #####  IssueDateWithAlphaCharacters, IssueDateWithSpecialCharacters, NoIssueDate #####
   @mock-api:dva-invalidIssueDate @validation-regression @build @staging
   Scenario Outline: DVA - User enters issue date that are not real or with special characters or no issue date error validation or year provided is two digits
     Given User enters DVA data as a <DVADrivingLicenceSubject>
@@ -199,11 +199,11 @@ Feature: DVA Driving licence CRI Error Validations
     And I see DVA invalid issue date field error as Enter the date as it appears on your driving licence
     And I check the page Title Error: Enter your details exactly as they appear on your UK driving licence – GOV.UK One Login
     Examples:
-      |DVADrivingLicenceSubject          |InvalidDayOfIssue|InvalidMonthOfIssue|InvalidYearOfIssue|
-      |DrivingLicenceSubjectHappyBilly|         AA      |     BB            |         AABC     |
-      |DrivingLicenceSubjectHappyBilly|         &       |     ^%            |         £$ ^     |
-      |DrivingLicenceSubjectHappyBilly|                 |                   |                  |
-      |DrivingLicenceSubjectHappyBilly|         05      |     12            |         19       |
+      | DVADrivingLicenceSubject        | InvalidDayOfIssue | InvalidMonthOfIssue | InvalidYearOfIssue |
+      | DrivingLicenceSubjectHappyBilly | AA                | BB                  | AABC               |
+      | DrivingLicenceSubjectHappyBilly | &                 | ^%                  | £$ ^               |
+      | DrivingLicenceSubjectHappyBilly |                   |                     |                    |
+      | DrivingLicenceSubjectHappyBilly | 05                | 12                  | 19                 |
 
   @mock-api:dva-invalidIssueDate @validation-regression @build @staging
   Scenario Outline: DVA - User enters issue date in the future
@@ -216,10 +216,10 @@ Feature: DVA Driving licence CRI Error Validations
     And I see DVA issue date error in summary as The issue date must be in the past
     And I check the page Title Error: Enter your details exactly as they appear on your UK driving licence – GOV.UK One Login
     Examples:
-      |DVADrivingLicenceSubject          |InvalidDayOfIssue|InvalidMonthOfIssue|InvalidYearOfIssue|
-      |DrivingLicenceSubjectHappyBilly|         01      |     10            |         2043     |
+      | DVADrivingLicenceSubject        | InvalidDayOfIssue | InvalidMonthOfIssue | InvalidYearOfIssue |
+      | DrivingLicenceSubjectHappyBilly | 01                | 10                  | 2043               |
 
-#####  InvalidValidToDate, ValidToDateWithSpecialCharacters, NoValidToDate  #####
+  #####  InvalidValidToDate, ValidToDateWithSpecialCharacters, NoValidToDate  #####
   @mock-api:dva-invalidExpiryDate @validation-regression @build @staging
   Scenario Outline: DVA - User enters valid to dates that are invalid or contain special characters or year provided is two digits or are not real
     Given User enters DVA data as a <DVADrivingLicenceSubject>
@@ -231,11 +231,11 @@ Feature: DVA Driving licence CRI Error Validations
     And I can see the Valid to date field error as Enter the date as it appears on your driving licence
     And I check the page Title Error: Enter your details exactly as they appear on your UK driving licence – GOV.UK One Login
     Examples:
-      |DVADrivingLicenceSubject          |InvalidValidToDay|InvalidValidToMonth|InvalidValidToYear|
-      |DrivingLicenceSubjectHappyBilly|         AA      |     BC            |         AABD     |
-      |DrivingLicenceSubjectHappyBilly|         !@      |     £$            |         %^ *     |
-      |DrivingLicenceSubjectHappyBilly|                 |                   |                  |
-      |DrivingLicenceSubjectHappyBilly|         05      |     12            |         29       |
+      | DVADrivingLicenceSubject        | InvalidValidToDay | InvalidValidToMonth | InvalidValidToYear |
+      | DrivingLicenceSubjectHappyBilly | AA                | BC                  | AABD               |
+      | DrivingLicenceSubjectHappyBilly | !@                | £$                  | %^ *               |
+      | DrivingLicenceSubjectHappyBilly |                   |                     |                    |
+      | DrivingLicenceSubjectHappyBilly | 05                | 12                  | 29                 |
 
   @mock-api:dva-invalidExpiryDate @validation-regression @build @staging
   Scenario Outline: DVA - User enters valid to date in the past
@@ -248,8 +248,8 @@ Feature: DVA Driving licence CRI Error Validations
     And I can see the Valid to date field error as You cannot use an expired driving licence
     And I check the page Title Error: Enter your details exactly as they appear on your UK driving licence – GOV.UK One Login
     Examples:
-      |DVADrivingLicenceSubject       |InvalidValidToDay|InvalidValidToMonth|InvalidValidToYear|
-      |DrivingLicenceSubjectHappyBilly|         10      |     01            |         2010     |
+      | DVADrivingLicenceSubject        | InvalidValidToDay | InvalidValidToMonth | InvalidValidToYear |
+      | DrivingLicenceSubjectHappyBilly | 10                | 01                  | 2010               |
 
   @mock-api:dva-ConsentError @validation-regression @build @staging
   Scenario Outline: DVA - User attempts journey without selecting consent checkbox
@@ -335,7 +335,7 @@ Feature: DVA Driving licence CRI Error Validations
     Then I see the Firstname error summary as Enter your first name as it appears on your driving licence
     And I see the Firstname error in the error field as Enter your first name as it appears on your driving licence
     Examples:
-      | DVADrivingLicenceSubject        | InvalidFirstName | InvalidMiddleNames |
+      | DVADrivingLicenceSubject        | InvalidFirstName | InvalidMiddleNames  |
       | DrivingLicenceSubjectHappyBilly |                  | abcdefghijklmnopqrs |
 
   @mock-api:dl-success @validation-regression @build @staging
@@ -358,7 +358,7 @@ Feature: DVA Driving licence CRI Error Validations
     Then I see the Firstname error summary as Enter your first name as it appears on your driving licence
     And I see the Firstname error in the error field as Enter your first name as it appears on your driving licence
     Examples:
-      | DVADrivingLicenceSubject        | InvalidLastName           | InvalidFirstName | InvalidMiddleNames                    |
+      | DVADrivingLicenceSubject        | InvalidLastName           | InvalidFirstName | InvalidMiddleNames |
       | DrivingLicenceSubjectHappyBilly | abcdefghijklmnopqrstuvwxy |                  | abcdefghijklmnopqr |
 
   @mock-api:dl-failed @validation-regression @build @staging
@@ -380,3 +380,10 @@ Feature: DVA Driving licence CRI Error Validations
     And I see the DVA Consent second sentence To find out more about how your driving licence details will be used, you can read:
     And I see DVA One Login privacy notice link the GOV.UK One Login privacy notice (opens in a new tab)
     Then I see DVA privacy notice link the DVA privacy notice (opens in a new tab)
+
+  @mock-api:driving-licence-PageCookies @validation-regression
+  Scenario: Driving Licence - Cookies - Device Intelligence
+    Given On the entry details page I see the Device Intelligence Cookie <DeviceIntelligenceCookieName>
+    Examples:
+      | DeviceIntelligenceCookieName |
+      | di-device-intelligence       |
