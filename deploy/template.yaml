@@ -124,7 +124,7 @@ Mappings:
       ga4Enabled: "true"
       uaEnabled: "false"
       languageToggleDisabled: "false"
-      authSourceEnable: "true"
+      authSourceEnabled: "true"
       deviceIntelligenceEnabled: "false"
     production:
       ga4Enabled: "true"
