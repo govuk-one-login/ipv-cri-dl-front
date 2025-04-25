@@ -116,3 +116,10 @@ Feature: Driving licence CRI - Common Tests
         Given I see the OGL footer link with the text All content is available under the Open Government Licence v3.0, except where otherwise stated.
         When User clicks the OGL Link
         And I check the OGL page Title Open Government Licence for public sector information
+
+    @mock-api:driving-licence-PageCookies @validation-regression
+    Scenario: Driving Licence - Cookies - Device Intelligence
+        Given I see the Device Intelligence Cookie <DeviceIntelligenceCookieName>
+        Examples:
+            | DeviceIntelligenceCookieName |
+            | di-device-intelligence       |

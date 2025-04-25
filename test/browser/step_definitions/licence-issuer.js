@@ -65,6 +65,17 @@ Then(
   }
 );
 
+Then(
+  /^I see the Device Intelligence Cookie (.*)$/,
+  async function (deviceIntelligenceCookieName) {
+    const licenceIssuerPage = new LicenceIssuerPage(this.page);
+
+    await licenceIssuerPage.checkDeviceIntelligenceCookie(
+      deviceIntelligenceCookieName
+    );
+  }
+);
+
 Given(/^The beta banner is displayed$/, async function () {
   const licenceIssuerPage = new LicenceIssuerPage(this.page);
   await licenceIssuerPage.betaBannerDisplayed();
