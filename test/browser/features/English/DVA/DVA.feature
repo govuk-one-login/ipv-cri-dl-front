@@ -387,3 +387,14 @@ Feature: DVA Driving licence CRI Error Validations
     Examples:
       | DeviceIntelligenceCookieName |
       | di-device-intelligence       |
+
+  @mock-api:dva-accessibility @validation-regression @build @staging
+  Scenario Outline: DVA - Axe Accessibility Scan - DVA Details Page
+    Given I run the Axe Accessibility check against the DVA Details page
+
+  @mock-api:DVA-success @build @staging
+  Scenario: DVA - Check support link validation
+    Given I delete the session cookie
+    And User clicks on continue
+    Then they should see an error page
+    Then I run the Axe Accessibility check against the DL Error page

@@ -11,6 +11,12 @@ Then(
   async function (dvlaDetailsEntryPageTitle) {
     const drivingLicencePage = new DrivingLicencePage(this.page);
     await drivingLicencePage.assertDVLAPageTitle(dvlaDetailsEntryPageTitle);
+  }
+);
+
+Then(
+  /^I run the Axe Accessibility check against the DVLA Details page$/,
+  async function () {
     await injectAxe(this.page);
     // Run Axe for WCAG 2.2 AA rules
     const wcagResults = await this.page.evaluate(() => {
@@ -18,7 +24,7 @@ Then(
         runOnly: ["wcag2aa"]
       });
     });
-    expect(wcagResults.violations, "WCAG 2.2 AAA violations found").to.be.empty;
+    expect(wcagResults.violations).to.be.empty;
   }
 );
 
@@ -423,14 +429,20 @@ Then(
   async function (dvaDetailsEntryPageTitle) {
     const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
     await dvaDetailsEntryPage.assertDVAPageTitle(dvaDetailsEntryPageTitle);
+  }
+);
+
+Then(
+  /^I run the Axe Accessibility check against the DVA Details page$/,
+  async function () {
     await injectAxe(this.page);
     // Run Axe for WCAG 2.2 AA rules
     const wcagResults = await this.page.evaluate(() => {
       return axe.run({
-        runOnly: ["wcag2aa"]
+        runOnly: ["wcag22aa"]
       });
     });
-    expect(wcagResults.violations, "WCAG 2.2 AAA violations found").to.be.empty;
+    expect(wcagResults.violations).to.be.empty;
   }
 );
 
