@@ -33,7 +33,8 @@ module.exports = {
     LANGUAGE_TOGGLE_DISABLED: process.env.LANGUAGE_TOGGLE_DISABLED || true,
     DEVICE_INTELLIGENCE_ENABLED:
       process.env.DEVICE_INTELLIGENCE_ENABLED || false,
-    DEVICE_INTELLIGENCE_DOMAIN: process.env.FRONTEND_DOMAIN || "localhost",
+    DEVICE_INTELLIGENCE_DOMAIN:
+      process.env.DEVICE_INTELLIGENCE_DOMAIN || "localhost",
     AUTH_SOURCE_ENABLED: process.env.AUTH_SOURCE_ENABLED || "true"
   },
   PORT: process.env.PORT || 5030,
