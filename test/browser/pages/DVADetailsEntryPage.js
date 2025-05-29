@@ -180,12 +180,6 @@ exports.DVADetailsEntryPage = class PlaywrightDevPage {
     expect(await this.page.title()).to.equal(dvaDetailsEntryPageTitle);
   }
 
-  async assertDVAErrorPageTitle(dvaErrorPageTitle) {
-    await this.page.waitForLoadState("domcontentloaded");
-    expect(await this.isCurrentPage()).to.be.true;
-    expect(await this.page.title()).to.equal(dvaErrorPageTitle);
-  }
-
   async userEntersDVAData(issuer, drivingLicenceSubjectScenario) {
     var dvaDrivingLicenceSubject = TestDataCreator.getDVATestUserFromMap(
       issuer,
@@ -511,15 +505,6 @@ exports.DVADetailsEntryPage = class PlaywrightDevPage {
       "Page not found - GOV.UK One Login"
     );
     await pages[1].close();
-  }
-
-  async deleteSessionCookie() {
-    const cookieName = "service_session";
-    const cookies = (await this.page.context().cookies()).filter(
-      (cookie) => cookie.name !== cookieName
-    );
-    await this.page.context().clearCookies();
-    await this.page.context().addCookies(cookies);
   }
 
   async goToPage(pageName) {

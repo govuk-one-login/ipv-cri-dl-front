@@ -12,37 +12,4 @@ module.exports = class PlaywrightDevPage {
 
     await this.page.goto(this.startingUrl);
   }
-
-  async isRedirectPage() {
-    const url = this.page.url();
-
-    const isCorrectPage =
-      url.startsWith("http://example.net") &&
-      url.endsWith("client_id=standalone&state=sT%40t3&code=FACEFEED");
-
-    return isCorrectPage;
-  }
-
-  isRelyingPartyServer() {
-    return new URL(this.page.url()).origin === "http://example.net";
-  }
-
-  hasSuccessQueryParams() {
-    const { searchParams } = new URL(this.page.url());
-
-    return (
-      searchParams.get("client_id") === "standalone" &&
-      searchParams.get("state") === "sT@t3" &&
-      searchParams.get("code") === "FACEFEED"
-    );
-  }
-
-  hasErrorQueryParams() {
-    const { searchParams } = new URL(this.page.url());
-
-    return (
-      searchParams.get("error") === "server_error" &&
-      searchParams.get("error_description") === "general error"
-    );
-  }
 };

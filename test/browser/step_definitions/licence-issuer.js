@@ -3,8 +3,6 @@ const { expect } = require("chai");
 const { LicenceIssuerPage } = require("../pages");
 const { injectAxe } = require("axe-playwright");
 
-When(/^they (?:have )?start(?:ed)? the DL journey$/, async function () {});
-
 Given(/they (?:can )?see? the licence-issuer page$/, async function () {
   const licenceIssuerPage = new LicenceIssuerPage(this.page);
   expect(licenceIssuerPage.isCurrentPage()).to.be.true;
@@ -445,5 +443,73 @@ Then(
     await licenceIssuerPage.assertHintErrorSummary(
       noRadioButtonSelectHintSummaryError
     );
+  }
+);
+
+Then(/^I delete the session cookie$/, async function () {
+  const licenceIssuerPage = new LicenceIssuerPage(this.page);
+  await licenceIssuerPage.deleteSessionCookie();
+});
+
+Then(
+  /^User clicks continue on the licence issuer page$/,
+  { timeout: 2 * 5000 },
+  async function () {
+    const licenceIssuerPage = new LicenceIssuerPage(this.page);
+    await licenceIssuerPage.continue();
+  }
+);
+
+Then(
+  /^I see the Contact the One Login team link which reads (.*)$/,
+  async function (contactOneLoginTeamLink) {
+    const licenceIssuerPage = new LicenceIssuerPage(this.page);
+    await licenceIssuerPage.assertContactOneLoginTeamLink(
+      contactOneLoginTeamLink
+    );
+  }
+);
+
+Given(/^I go to the page not found URL$/, async function () {
+  const licenceIssuerPage = new LicenceIssuerPage(this.page);
+  await licenceIssuerPage.goToPage("not-found");
+});
+
+Given(
+  /^I assert the link on the error page is correct and live$/,
+  async function () {
+    const licenceIssuerPage = new LicenceIssuerPage(this.page);
+    await licenceIssuerPage.assertErrorLinkIsCorrectAndLive();
+  }
+);
+
+Given(
+  /^I assert the link on the page not found page is correct and live$/,
+  async function () {
+    const licenceIssuerPage = new LicenceIssuerPage(this.page);
+    await licenceIssuerPage.assertNotFoundLinkIsCorrectAndLive();
+  }
+);
+
+Then(/^I refresh the page$/, async function () {
+  const licenceIssuerPage = new LicenceIssuerPage(this.page);
+  await licenceIssuerPage.refreshPage();
+});
+
+Then(
+  /^I see the error page heading (.*)$/,
+  { timeout: 2 * 5000 },
+  async function (pageHeadingErrorPage) {
+    const licenceIssuerPage = new LicenceIssuerPage(this.page);
+    await licenceIssuerPage.assertErrorPageHeading(pageHeadingErrorPage);
+  }
+);
+
+Then(
+  /^I see the page not found heading (.*)$/,
+  { timeout: 2 * 5000 },
+  async function (pageHeadingNotFoundPage) {
+    const licenceIssuerPage = new LicenceIssuerPage(this.page);
+    await licenceIssuerPage.assertPageNotFoundHeading(pageHeadingNotFoundPage);
   }
 );

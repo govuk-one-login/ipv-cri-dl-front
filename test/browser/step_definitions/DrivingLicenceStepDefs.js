@@ -460,10 +460,8 @@ Given(
 
 Then(/^I check the page Title (.*)$/, async function (dvaErrorPageTitle) {
   const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
-  await dvaDetailsEntryPage.assertDVAErrorPageTitle(dvaErrorPageTitle);
+  await dvaDetailsEntryPage.assertDVAPageTitle(dvaErrorPageTitle);
 });
-
-// Re-enter DVA test data step-defs
 
 Then(
   /^DVA User re-enters drivingLicenceNumber as (.*)$/,
@@ -971,11 +969,6 @@ Then(
   }
 );
 
-Then(/^I check the page title (.*)$/, async function (dvaPageTitle) {
-  const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
-  await dvaDetailsEntryPage.assertDVAPageTitle(dvaPageTitle);
-});
-
 Then(
   /^I can see the DVA DoB fields titled (.*)$/,
   async function (dobFieldTitle) {
@@ -1086,56 +1079,3 @@ Then(
     await dvaDetailsEntryPage.assertDVAConsentOneLoginLink(consentOneLoginLink);
   }
 );
-
-Given(
-  /^they click Footer (.*) and assert I have been redirected correctly$/,
-  async function (linkName) {
-    const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
-
-    expect(dvaDetailsEntryPage.isCurrentPage()).to.be.true;
-
-    await dvaDetailsEntryPage.assertFooterLink(linkName);
-  }
-);
-
-Given(
-  /^The Support link in the footer reads (.*) and assert the url is correct and live$/,
-  async function (supportFooterLink) {
-    const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
-    await dvaDetailsEntryPage.assertFooterLink(supportFooterLink);
-  }
-);
-
-Given(
-  /^I assert the link in the banner is correct and live$/,
-  async function () {
-    const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
-    await dvaDetailsEntryPage.assertBannerLink();
-  }
-);
-
-Given(
-  /^I assert the link on the error page is correct and live$/,
-  async function () {
-    const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
-    await dvaDetailsEntryPage.assertErrorLink();
-  }
-);
-
-Given(
-  /^I assert the link on the page not found page is correct and live$/,
-  async function () {
-    const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
-    await dvaDetailsEntryPage.assertNotFoundLink();
-  }
-);
-
-Given(/^I delete the session cookie$/, async function () {
-  const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
-  await dvaDetailsEntryPage.deleteSessionCookie();
-});
-
-Given(/^I go to page not found$/, async function () {
-  const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
-  await dvaDetailsEntryPage.goToPage("not-found");
-});
