@@ -2,28 +2,25 @@
 Feature: DVA Driving licence - Auth Source
 
   Background:
-    Given Authenticatable Anita is using the system
+    Given Authenticatable Anita has started the Auth Source Driving Licence Journey
     And they have provided their details
-    When they have started the DL Auth Source journey
-
-  @mock-api:dl-dva-auth-success @validation-regression @build @staging
-  Scenario: DVA Auth Source - User navigates through the Auth Source Journey - Check Your Details Page
     And I should be on the Driving Licence check your details page Check your UK photocard driving licence details – GOV.UK One Login
+
+  @mock-api:dl-dva-auth-success @validation-regression
+  Scenario: DVA Auth Source - User navigates through the Auth Source Journey - Check Your Details Page
     When I click on the Yes radio button
     Then I click on the Confirm and Continue button
     And I should be on the DVA consent page We need to check your driving licence details – GOV.UK One Login
     And I click on the DVA consent checkbox
     When I click on the Continue button
 
-  @mock-api:dl-dva-auth-success @validation-regression @build @staging
+  @mock-api:dl-dva-auth-success @validation-regression
   Scenario: DVA Auth Source - User selects No on the Check Your Details Page
-    And I should be on the Driving Licence check your details page Check your UK photocard driving licence details – GOV.UK One Login
     When I click on the No radio button
     Then I click on the Confirm and Continue button
 
-  @mock-api:dl-dva-auth-success @validation-regression @build @staging
+  @mock-api:dl-dva-auth-success @validation-regression
   Scenario: DVA Auth Source - User fails to provide consent on the Consent Page
-    And I should be on the Driving Licence check your details page Check your UK photocard driving licence details – GOV.UK One Login
     When I click on the Yes radio button
     Then I click on the Confirm and Continue button
     And I should be on the DVA consent page We need to check your driving licence details – GOV.UK One Login
@@ -36,14 +33,12 @@ Feature: DVA Driving licence - Auth Source
     And I can see the check details formatted issueDate value as 19 04 2018
     And I can see the check details formatted validTo value as 01 10 2042
 
-  @mock-api:dl-dva-auth-success @validation-regression @accessibility @build @staging
+  @mock-api:dl-dva-auth-success @validation-regression @accessibility
   Scenario: DVA Auth Source - Axe Accessibility Scan - Driving Licence - Check Your Details Page
-    And I should be on the Driving Licence check your details page Check your UK photocard driving licence details – GOV.UK One Login
     Then I run the Axe Accessibility check against the Driving Licence check your details page
 
-  @mock-api:dl-dva-auth-success @validation-regression @build @staging
+  @mock-api:dl-dva-auth-success @validation-regression @accessibility
   Scenario: DVA Auth Source - Axe Accessibility Scan - Driving Licence - Consent Page
-    And I should be on the Driving Licence check your details page Check your UK photocard driving licence details – GOV.UK One Login
     When I click on the Yes radio button
     Then I click on the Confirm and Continue button
     And I should be on the DVA consent page We need to check your driving licence details – GOV.UK One Login

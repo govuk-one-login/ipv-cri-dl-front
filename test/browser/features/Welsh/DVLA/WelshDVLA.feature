@@ -2,15 +2,14 @@
 Feature: DVLA Driving licence CRI Error Validations - Welsh Translation
 
   Background:
-    Given Authenticatable Anita is using the system
+    Given Authenticatable Anita has started the Driving Licence Journey
     And they have provided their details
-    And they have started the DL journey
     And I click on DVLA radio button and Continue
     And I add a cookie to change the language to Welsh
 
   @mock-api:dvla-PageHeading @language-regression
   Scenario:User Selects DVLA and landed in DVLA page and Page title and sub-text
-    Given I check the page title Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – GOV.UK One Login
+    Given I check the page Title Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – GOV.UK One Login
     Then I see the heading Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru
     And I see sentence Os nad oes gennych drwydded yrru y DU neu os na allwch gofio'ch manylion, gallwch brofi pwy ydych chi mewn ffordd arall yn lle.
 
@@ -101,8 +100,8 @@ Feature: DVLA Driving licence CRI Error Validations - Welsh Translation
     And  I see the date of birth error in the field as Gwiriwch eich bod wedi rhoi eich dyddiad geni yn gywir
     And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – GOV.UK One Login
     Examples:
-      |DrivingLicenceSubject          |InvalidDayOfBirth|InvalidMonthOfBirth|InvalidYearOfBirth|
-      |DrivingLicenceSubjectHappyPeter|         12      |     08            |       1985       |
+      | DrivingLicenceSubject           | InvalidDayOfBirth | InvalidMonthOfBirth | InvalidYearOfBirth |
+      | DrivingLicenceSubjectHappyPeter | 12                | 08                  | 1985               |
 
   #####  InvalidLastNameWithNumbers, InvalidLastNameWithSpecialCharacters, NoLastName #####
   @mock-api:dvla-invalidLastName @language-regression
@@ -114,10 +113,10 @@ Feature: DVLA Driving licence CRI Error Validations - Welsh Translation
     And I see the Lastname error in the error field as Rhowch eich enw olaf fel y mae'n ymddangos ar eich trwydded yrru
     And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – GOV.UK One Login
     Examples:
-      |DrivingLicenceSubject          |InvalidLastName |
-      |DrivingLicenceSubjectHappyPeter|KYLE123         |
-      |DrivingLicenceSubjectHappyPeter|KYLE^&(         |
-      |DrivingLicenceSubjectHappyPeter|                |
+      | DrivingLicenceSubject           | InvalidLastName |
+      | DrivingLicenceSubjectHappyPeter | KYLE123         |
+      | DrivingLicenceSubjectHappyPeter | KYLE^&(         |
+      | DrivingLicenceSubjectHappyPeter |                 |
 
   #####  InvalidFirstNameWithNumbers, InvalidFirstNameWithSpecialCharacters, NoFirstName #####
   @mock-api:dvla-invalidFirstName @language-regression
@@ -129,12 +128,12 @@ Feature: DVLA Driving licence CRI Error Validations - Welsh Translation
     And I see the Firstname error in the error field as Rhowch eich enw cyntaf fel y mae'n ymddangos ar eich trwydded yrru
     And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – GOV.UK One Login
     Examples:
-      |DrivingLicenceSubject          |InvalidFirstName|
-      |DrivingLicenceSubjectHappyPeter|SELINA987       |
-      |DrivingLicenceSubjectHappyPeter|SELINA%$@       |
-      |DrivingLicenceSubjectHappyPeter|                |
+      | DrivingLicenceSubject           | InvalidFirstName |
+      | DrivingLicenceSubjectHappyPeter | SELINA987        |
+      | DrivingLicenceSubjectHappyPeter | SELINA%$@        |
+      | DrivingLicenceSubjectHappyPeter |                  |
 
-    #####  InvalidMiddleNamesWithNumbers, InvalidMiddleNamesWithSpecialCharacters #####
+  #####  InvalidMiddleNamesWithNumbers, InvalidMiddleNamesWithSpecialCharacters #####
   @mock-api:dvla-invalidMiddleNames @language-regression
   Scenario Outline: DVLA Driving Licence Middle names with numbers or special characters error validation
     Given User enters DVLA data as a <DrivingLicenceSubject>
@@ -144,11 +143,11 @@ Feature: DVLA Driving licence CRI Error Validations - Welsh Translation
     And I see the middlenames error in the error field as Rhowch unrhyw enwau canol fel y maent yn ymddangos ar eich trwydded yrru
     And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – GOV.UK One Login
     Examples:
-      |DrivingLicenceSubject          |InvalidMiddleNames|
-      |DrivingLicenceSubjectHappyPeter|SELINA987         |
-      |DrivingLicenceSubjectHappyPeter|SELINA%$@         |
+      | DrivingLicenceSubject           | InvalidMiddleNames |
+      | DrivingLicenceSubjectHappyPeter | SELINA987          |
+      | DrivingLicenceSubjectHappyPeter | SELINA%$@          |
 
-#####  DateOfBirthWithSpecialCharacters, DateOfBirthNotReal, NoDateOfBirth #####
+  #####  DateOfBirthWithSpecialCharacters, DateOfBirthNotReal, NoDateOfBirth #####
   @mock-api:dvla-invalidDateOfBirth @language-regression
   Scenario Outline: DVLA Driving Licence Date of birth that are not real or with special characters or no date of birth error validation
     Given User enters DVLA data as a <DrivingLicenceSubject>
@@ -160,11 +159,11 @@ Feature: DVLA Driving licence CRI Error Validations - Welsh Translation
     And I see the date of birth error in the field as Rhowch eich dyddiad geni fel y mae'n ymddangos ar eich trwydded yrru
     And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – GOV.UK One Login
     Examples:
-      |DrivingLicenceSubject          |InvalidDayOfBirth|InvalidMonthOfBirth|InvalidYearOfBirth|
-      |DrivingLicenceSubjectHappyPeter|         @       |     *&            |       19 7     |
-      |DrivingLicenceSubjectHappyPeter|         51      |     71            |       198      |
-      #DVLA Driving licence with no date of birth scenario is not displaying the expected error message and has been raised as a bug LIME-694
-      #|DrivingLicenceSubjectHappyPeter|                 |                   |                |
+      | DrivingLicenceSubject           | InvalidDayOfBirth | InvalidMonthOfBirth | InvalidYearOfBirth |
+      | DrivingLicenceSubjectHappyPeter | @                 | *&                  | 19 7               |
+      | DrivingLicenceSubjectHappyPeter | 51                | 71                  | 198                |
+  #DVLA Driving licence with no date of birth scenario is not displaying the expected error message and has been raised as a bug LIME-694
+  #|DrivingLicenceSubjectHappyPeter|                 |                   |                |
 
   @mock-api:dvla-invalidDateOfBirth @language-regression
   Scenario Outline: DVLA Driving Licence Date of birth in the future error validation
@@ -177,8 +176,8 @@ Feature: DVLA Driving licence CRI Error Validations - Welsh Translation
     And I see the date of birth error in the field as Rhaid i'ch dyddiad geni fod yn y gorffennol
     And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – GOV.UK One Login
     Examples:
-      |DrivingLicenceSubject          |InvalidDayOfBirth|InvalidMonthOfBirth|InvalidYearOfBirth|
-      |DrivingLicenceSubjectHappyPeter|         10      |     10            |         2042     |
+      | DrivingLicenceSubject           | InvalidDayOfBirth | InvalidMonthOfBirth | InvalidYearOfBirth |
+      | DrivingLicenceSubjectHappyPeter | 10                | 10                  | 2042               |
 
   #####  InvalidIssueDate, NoIssueDate #####
   @mock-api:dvla-invalidIssueDate @language-regression
@@ -193,10 +192,10 @@ Feature: DVLA Driving licence CRI Error Validations - Welsh Translation
     And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – GOV.UK One Login
 
     Examples:
-      |DrivingLicenceSubject          |InvalidDayOfIssue|InvalidMonthOfIssue|InvalidYearOfIssue|
-      |DrivingLicenceSubjectHappyPeter|         AA      |     BB            |         AABC     |
-      |DrivingLicenceSubjectHappyPeter|         &       |     ^%            |         £$ ^     |
-      |DrivingLicenceSubjectHappyPeter|                 |                   |                  |
+      | DrivingLicenceSubject           | InvalidDayOfIssue | InvalidMonthOfIssue | InvalidYearOfIssue |
+      | DrivingLicenceSubjectHappyPeter | AA                | BB                  | AABC               |
+      | DrivingLicenceSubjectHappyPeter | &                 | ^%                  | £$ ^               |
+      | DrivingLicenceSubjectHappyPeter |                   |                     |                    |
 
   @mock-api:dvla-invalidIssueDate @language-regression
   Scenario Outline: DVLA Driving Licence Issue date in the future error validation
@@ -209,8 +208,8 @@ Feature: DVLA Driving licence CRI Error Validations - Welsh Translation
     And I see invalid issue date field error as Rhaid i ddyddiad cyhoeddi fod yn y gorffennol
     And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – GOV.UK One Login
     Examples:
-      |DrivingLicenceSubject          |InvalidDayOfIssue|InvalidMonthOfIssue|InvalidYearOfIssue|
-      |DrivingLicenceSubjectHappyPeter|         01      |     10            |         2043     |
+      | DrivingLicenceSubject           | InvalidDayOfIssue | InvalidMonthOfIssue | InvalidYearOfIssue |
+      | DrivingLicenceSubjectHappyPeter | 01                | 10                  | 2043               |
 
   ####  InvalidValidToDate, ValidToDateWithSpecialCharacters, NoValidToDate  #####
   @mock-api:dvla-invalidExpiryDate @language-regression
@@ -224,10 +223,10 @@ Feature: DVLA Driving licence CRI Error Validations - Welsh Translation
     And I can see the Valid to date field error as Rhowch y dyddiad fel y mae'n ymddangos ar eich trwydded yrru
     And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – GOV.UK One Login
     Examples:
-      |DrivingLicenceSubject          |InvalidValidToDay|InvalidValidToMonth|InvalidValidToYear|
-      |DrivingLicenceSubjectHappyPeter|         AA      |     BC            |         AABD     |
-      |DrivingLicenceSubjectHappyPeter|         !@      |     £$            |         %^ *     |
-      |DrivingLicenceSubjectHappyPeter|                 |                   |                  |
+      | DrivingLicenceSubject           | InvalidValidToDay | InvalidValidToMonth | InvalidValidToYear |
+      | DrivingLicenceSubjectHappyPeter | AA                | BC                  | AABD               |
+      | DrivingLicenceSubjectHappyPeter | !@                | £$                  | %^ *               |
+      | DrivingLicenceSubjectHappyPeter |                   |                     |                    |
 
   @mock-api:dvla-invalidExpiryDate @language-regression
   Scenario Outline: DVLA Driving Licence Valid to date in the past error validation
@@ -240,8 +239,8 @@ Feature: DVLA Driving licence CRI Error Validations - Welsh Translation
     And I can see the Valid to date field error as Ni allwch ddefnyddio trwydded yrru sydd wedi dod i ben
     And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – GOV.UK One Login
     Examples:
-      |DrivingLicenceSubject          |InvalidValidToDay|InvalidValidToMonth|InvalidValidToYear|
-      |DrivingLicenceSubjectHappyPeter|         10      |     01            |         2010     |
+      | DrivingLicenceSubject           | InvalidValidToDay | InvalidValidToMonth | InvalidValidToYear |
+      | DrivingLicenceSubjectHappyPeter | 10                | 01                  | 2010               |
 
   @mock-api:dvla-invalidDrivingLicenceNumber @language-regression
   Scenario Outline: DVLA Driving Licence number less than 16 characters error validation
@@ -252,8 +251,8 @@ Feature: DVLA Driving licence CRI Error Validations - Welsh Translation
     And I can see the licence number error in the field as Dylai rhif eich trwydded fod yn 16 nod o hyd
     And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – GOV.UK One Login
     Examples:
-      |DrivingLicenceSubject          |InvalidLicenceNumber|
-      |DrivingLicenceSubjectHappyPeter|PARKE610112PBF      |
+      | DrivingLicenceSubject           | InvalidLicenceNumber |
+      | DrivingLicenceSubjectHappyPeter | PARKE610112PBF       |
 
   @mock-api:dvla-invalidDrivingLicenceNumber @language-regression
   Scenario Outline: DVLA Driving Licence number with special characters and spaces error validation
@@ -264,10 +263,10 @@ Feature: DVLA Driving licence CRI Error Validations - Welsh Translation
     And I can see the licence number error in the field as Ni ddylai rhif eich trwydded gynnwys unrhyw symbolau neu ofodau
     And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – GOV.UK One Login
     Examples:
-      |DrivingLicenceSubject          |InvalidLicenceNumber|
-      |DrivingLicenceSubjectHappyPeter|12345678901112@@    |
+      | DrivingLicenceSubject           | InvalidLicenceNumber |
+      | DrivingLicenceSubjectHappyPeter | 12345678901112@@     |
 
-####### DrivingLicenceNumberWithNumericChar, DrivingLicenceNumberWithAlphaChar, NoDrivingLicenceNumber #######
+  ####### DrivingLicenceNumberWithNumericChar, DrivingLicenceNumberWithAlphaChar, NoDrivingLicenceNumber #######
   @mock-api:dvla-invalidDrivingLicenceNumber @language-regression
   Scenario Outline: DVLA Driving Licence number with numeric characters or alpha characters or no licence number error validation
     Given User enters DVLA data as a <DrivingLicenceSubject>
@@ -277,10 +276,10 @@ Feature: DVLA Driving licence CRI Error Validations - Welsh Translation
     And I can see the licence number error in the field as Rhowch y rhif yn union fel mae’n ymddangos ar eich trwydded yrru
     And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – GOV.UK One Login
     Examples:
-      |DrivingLicenceSubject          |InvalidLicenceNumber|
-      |DrivingLicenceSubjectHappyPeter|1234567890111213    |
-      |DrivingLicenceSubjectHappyPeter|abcdefghijklomnp    |
-      |DrivingLicenceSubjectHappyPeter|                    |
+      | DrivingLicenceSubject           | InvalidLicenceNumber |
+      | DrivingLicenceSubjectHappyPeter | 1234567890111213     |
+      | DrivingLicenceSubjectHappyPeter | abcdefghijklomnp     |
+      | DrivingLicenceSubjectHappyPeter |                      |
 
   @mock-api:dvla-invalidIssueNumber @language-regression
   Scenario Outline: DVLA Driving Licence Issue number less than 2 characters error validation
@@ -291,8 +290,8 @@ Feature: DVLA Driving licence CRI Error Validations - Welsh Translation
     And I see the issue number error in field as Dylai eich rhif cyhoeddi fod yn 2 rif o hyd
     And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – GOV.UK One Login
     Examples:
-      |DrivingLicenceSubject          |InvalidIssueNumber|
-      |DrivingLicenceSubjectHappyPeter|1                 |
+      | DrivingLicenceSubject           | InvalidIssueNumber |
+      | DrivingLicenceSubjectHappyPeter | 1                  |
 
   @mock-api:dvla-invalidIssueNumber @language-regression
   Scenario Outline: DVLA Driving Licence Issue number with special characters error validation
@@ -303,10 +302,10 @@ Feature: DVLA Driving licence CRI Error Validations - Welsh Translation
     And I see the issue number error in field as Ni ddylai eich rhif cyhoeddi gynnwys unrhyw symbolau neu ofodau
     And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – GOV.UK One Login
     Examples:
-      |DrivingLicenceSubject          |InvalidIssueNumber|
-      |DrivingLicenceSubjectHappyPeter|A@                |
+      | DrivingLicenceSubject           | InvalidIssueNumber |
+      | DrivingLicenceSubjectHappyPeter | A@                 |
 
-##### IssueNumberWithAlphanumericChar, IssueNumberWithAlphaChar, NoIssueNumber #####
+  ##### IssueNumberWithAlphanumericChar, IssueNumberWithAlphaChar, NoIssueNumber #####
   @mock-api:dvla-invalidIssueNumber @language-regression
   Scenario Outline: DVLA Driving Licence Issue number with alphanumeric characters or alpha characters No issue number error validation
     Given User enters DVLA data as a <DrivingLicenceSubject>
@@ -316,10 +315,10 @@ Feature: DVLA Driving licence CRI Error Validations - Welsh Translation
     And I see the issue number error in field as Rhowch y rhif cyhoeddi fel y mae'n ymddangos ar eich trwydded yrru
     And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – GOV.UK One Login
     Examples:
-      |DrivingLicenceSubject          |InvalidIssueNumber|
-#     |DrivingLicenceSubjectHappyPeter|A1                |bug raised -LIME-751
-#     |DrivingLicenceSubjectHappyPeter|AB                |bug rasied - LIME-751
-      |DrivingLicenceSubjectHappyPeter|                  |
+      | DrivingLicenceSubject           | InvalidIssueNumber |
+      | DrivingLicenceSubjectHappyPeter |                    |
+  #     |DrivingLicenceSubjectHappyPeter|A1                |bug raised - LIME-751
+  #     |DrivingLicenceSubjectHappyPeter|AB                |bug rasied - LIME-751
 
   @mock-api:dvla-invalidPostcode @language-regression
   Scenario Outline: DVLA Driving Licence Postcode less than 5 characters error validation
@@ -330,8 +329,8 @@ Feature: DVLA Driving licence CRI Error Validations - Welsh Translation
     And I see the postcode error in field as Dylai eich rhowch eich cod post fod rhwng 5 a 7 nod
     And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – GOV.UK One Login
     Examples:
-      |DrivingLicenceSubject          |InvalidPostcode   |
-      |DrivingLicenceSubjectHappyPeter|E20A              |
+      | DrivingLicenceSubject           | InvalidPostcode |
+      | DrivingLicenceSubjectHappyPeter | E20A            |
 
   @mock-api:dvla-invalidPostcode @language-regression
   Scenario Outline: DVLA Driving Licence - No Postcode in the Postcode field error validation
@@ -342,8 +341,8 @@ Feature: DVLA Driving licence CRI Error Validations - Welsh Translation
     And I see the postcode error in field as Rhowch eich cod post
     And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – GOV.UK One Login
     Examples:
-      |DrivingLicenceSubject          |InvalidPostcode   |
-      |DrivingLicenceSubjectHappyPeter|                  |
+      | DrivingLicenceSubject           | InvalidPostcode |
+      | DrivingLicenceSubjectHappyPeter |                 |
 
   @mock-api:dvla-invalidPostcode @language-regression
   Scenario Outline: DVLA Driving Licence International Postcode error validation
@@ -354,10 +353,10 @@ Feature: DVLA Driving licence CRI Error Validations - Welsh Translation
     And I see the postcode error in field as Rhowch god post yn y DU
     And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – GOV.UK One Login
     Examples:
-      |DrivingLicenceSubject          |InvalidPostcode   |
-      |DrivingLicenceSubjectHappyPeter|CA 95128          |
+      | DrivingLicenceSubject           | InvalidPostcode |
+      | DrivingLicenceSubjectHappyPeter | CA 95128        |
 
-##### PostcodeWithSpecialChar #####
+  ##### PostcodeWithSpecialChar #####
   @mock-api:dvla-invalidPostcode @language-regression
   Scenario Outline: DVLA Driving Licence Postcode with special characters error validation
     Given User enters DVLA data as a <DrivingLicenceSubject>
@@ -367,10 +366,10 @@ Feature: DVLA Driving licence CRI Error Validations - Welsh Translation
     And I see the postcode error in field as Dylai eich rhowch eich cod post ond cynnwys rhifau a llythrennau yn unig
     And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – GOV.UK One Login
     Examples:
-      |DrivingLicenceSubject          |InvalidPostcode   |
-      |DrivingLicenceSubjectHappyPeter|NW* ^%G           |
+      | DrivingLicenceSubject           | InvalidPostcode |
+      | DrivingLicenceSubjectHappyPeter | NW* ^%G         |
 
-###### PostcodeWithNumericChar, PostcodeWithAlphaChar #####  (need clarification)
+  ###### PostcodeWithNumericChar, PostcodeWithAlphaChar #####  (need clarification)
   @mock-api:dvla-invalidPostcode @language-regression
   Scenario Outline: DVLA Driving Licence Postcode with numeric characters or alpha characters error validation
     Given User enters DVLA data as a <DrivingLicenceSubject>
@@ -380,11 +379,11 @@ Feature: DVLA Driving licence CRI Error Validations - Welsh Translation
     And I see the postcode error in field as Dylai eich rhowch eich cod post ond cynnwys rhifau a llythrennau
     And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – GOV.UK One Login
     Examples:
-      |DrivingLicenceSubject          |InvalidPostcode   |
-      #|DrivingLicenceSubjectHappyPeter|123 456           | Bug raised -LIME-750
-      |DrivingLicenceSubjectHappyPeter|ABC XYZ           |
+      | DrivingLicenceSubject           | InvalidPostcode |
+      | DrivingLicenceSubjectHappyPeter | ABC XYZ         |
+  #|DrivingLicenceSubjectHappyPeter|123 456           | Bug raised -LIME-750
 
-    ##### Consent Checkbox Unselected error Validation ##### (passed)
+  ##### Consent Checkbox Unselected error Validation ##### (passed)
   @mock-api:dvla-Consent-checkbox-error @language-regression
   Scenario Outline: DVLA Driving Licence error validation when DVLA consent checkbox is unselected
     Given User enters DVLA data as a <DrivingLicenceSubject>
@@ -394,10 +393,10 @@ Feature: DVLA Driving licence CRI Error Validations - Welsh Translation
     Then I can see the DVLA consent error summary as Mae'n rhaid i chi roi eich caniatâd i barhau
     And I check the page Title Gwall: Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – GOV.UK One Login
     Examples:
-      |DrivingLicenceSubject             |
-      |DrivingLicenceSubjectHappyPeter   |
+      | DrivingLicenceSubject           |
+      | DrivingLicenceSubjectHappyPeter |
 
-    ##### Retry message #####
+  ##### Retry message #####
   @mock-api:dl-failed @language-regression
   Scenario Outline:Retry message
     Given User enters DVLA data as a <DrivingLicenceSubject>
@@ -411,5 +410,5 @@ Feature: DVLA Driving licence CRI Error Validations - Welsh Translation
     Then I see error word as Gwall
     And I see Check your details as Roedd yna broblem wrth i ni wirio eich manylion gyda'r DVLA.
     Examples:
-      |DrivingLicenceSubject             |InvalidLicenceNumber |InvalidLastName|InvalidFirstName|InvalidMiddleNames|
-      |DrivingLicenceSubjectHappyKenneth |AB999607085JAAAA     |       JOHN    |     SMITH      |           A      |
+      | DrivingLicenceSubject             | InvalidLicenceNumber | InvalidLastName | InvalidFirstName | InvalidMiddleNames |
+      | DrivingLicenceSubjectHappyKenneth | AB999607085JAAAA     | JOHN            | SMITH            | A                  |

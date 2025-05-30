@@ -2,9 +2,8 @@
 Feature: DVLA Driving licence - Auth Source - Welsh Translation
 
     Background:
-        Given Authenticatable Anita is using the system
+        Given Authenticatable Anita has started the Auth Source Driving Licence Journey
         And they have provided their details
-        When they have started the DL Auth Source journey
         And I add a cookie to change the language to Welsh
 
     @mock-api:dl-dvla-auth-success @language-regression
@@ -50,7 +49,6 @@ Feature: DVLA Driving licence - Auth Source - Welsh Translation
         Given I can see the DVA check details warning text as Gwnewch yn siŵr bod eich atebion yn gywir cyn i chi barhau.
         And I can see the check details driving licence details correct as A yw manylion eich trwydded yrru cerdyn-llun yn y DU yn gywir?
         And I can see the check details hint text as Gallwch geisio sganio'ch trwydded yrru eto neu brofi eich hunaniaeth mewn ffordd arall
-
 
      @mock-api:dl-dva-auth-success @language-regression
     Scenario: DVLA Auth Source - Welsh Translation Tests - Consent Page Text

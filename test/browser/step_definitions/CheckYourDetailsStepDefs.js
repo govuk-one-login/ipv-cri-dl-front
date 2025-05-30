@@ -3,8 +3,6 @@ const { CheckYourDetailsPage } = require("../pages/CheckYourDetailsPage");
 const { expect } = require("chai");
 const { injectAxe } = require("axe-playwright");
 
-When(/^they have started the DL Auth Source journey$/, async function () {});
-
 Then(
   /^I should be on the Driving Licence check your details page (.*)$/,
   async function (checkYourDetailsPageTitle) {

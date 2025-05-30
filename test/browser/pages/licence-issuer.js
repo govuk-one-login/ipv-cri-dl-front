@@ -136,10 +136,22 @@ module.exports = class PlaywrightDevPage {
     this.dlLandingPageErrorHintSummary = this.page.locator(
       'xpath=//*[@id="licenceIssuer-error"]'
     );
+    this.contactOneLoginLink = this.page.locator(
+      'xpath=//*[@id="main-content"]/div/div/p[6]/a'
+    );
+    this.errorLink = this.page.locator(
+      'xpath=//*[@id="main-content"]/div/div/p[6]/a'
+    );
+    this.notFoundLink = this.page.locator(
+      'xpath=//*[@id="main-content"]/div/div/p[8]/a'
+    );
+    this.header = this.page.locator('xpath=//*[@id="header"]');
   }
 
   isCurrentPage() {
-    return this.page.url() === this.url;
+    return (
+      this.page.url() === this.url || this.page.url() === this.url + "?lng=cy"
+    );
   }
 
   async clickOnDVLARadioButton() {
@@ -496,5 +508,71 @@ module.exports = class PlaywrightDevPage {
     }
 
     return true;
+  }
+
+  async deleteSessionCookie() {
+    const cookieName = "service_session";
+    const cookies = (await this.page.context().cookies()).filter(
+      (cookie) => cookie.name !== cookieName
+    );
+    await this.page.context().clearCookies();
+    await this.page.context().addCookies(cookies);
+  }
+
+  async assertContactOneLoginTeamLink(contactOneLoginTeamLink) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    expect(await this.contactOneLoginLink.innerText()).to.equal(
+      contactOneLoginTeamLink
+    );
+  }
+
+  async assertErrorLinkIsCorrectAndLive() {
+    const newPagePromise = this.page.waitForEvent("popup");
+
+    await this.errorLink.click();
+    await this.assertNewPageIsCorrectAndLive(newPagePromise);
+  }
+
+  async assertNotFoundLinkIsCorrectAndLive() {
+    const newPagePromise = this.page.waitForEvent("popup");
+
+    await this.notFoundLink.click();
+    await this.assertNewPageIsCorrectAndLive(newPagePromise);
+  }
+
+  async assertNewPageIsCorrectAndLive(newPagePromise) {
+    const newPage = await newPagePromise;
+    await this.page.waitForLoadState("networkidle", { timeout: 10000 });
+    const expectedURL = "https://home.account.gov.uk/contact-gov-uk-one-login";
+    const unexpectedTitle = "Page not found - GOV.UK One Login";
+
+    const actualTitle = await newPage.title();
+    expect(actualTitle).to.not.equal(unexpectedTitle);
+
+    const actualURL = await newPage.url();
+    expect(actualURL).to.equal(expectedURL);
+
+    await newPage.close();
+  }
+
+  async goToPage(pageName) {
+    await this.page.goto(this.page.url() + pageName);
+  }
+
+  async refreshPage() {
+    await this.page.reload();
+  }
+
+  async assertErrorPageHeading(pageHeadingErrorPage) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    expect(await this.header.innerText()).to.equal(pageHeadingErrorPage);
+  }
+
+  async assertPageNotFoundHeading(pageHeadingNotFoundPage) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    expect(await this.header.innerText()).to.equal(pageHeadingNotFoundPage);
   }
 };

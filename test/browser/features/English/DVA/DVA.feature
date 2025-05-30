@@ -2,13 +2,12 @@
 Feature: DVA Driving licence CRI Error Validations
 
   Background:
-    Given Authenticatable Anita is using the system
+    Given Authenticatable Anita has started the Driving Licence Journey
     And they have provided their details
-    And they have started the DL journey
     And I click on DVA radio button and Continue
     And I should be on the DVA details entry page Enter your details exactly as they appear on your UK driving licence – GOV.UK One Login
 
-  @mock-api:dva-invalidDrivingLicenceNumber @validation-regression @build @staging
+  @mock-api:dva-invalidDrivingLicenceNumber @validation-regression
   Scenario Outline: DVA - User enters licence number with less than 8 characters
     Given User enters DVA data as a <DVADrivingLicenceSubject>
     And DVA User re-enters drivingLicenceNumber as <InvalidLicenceNumber>
@@ -20,7 +19,7 @@ Feature: DVA Driving licence CRI Error Validations
       | DVADrivingLicenceSubject        | InvalidLicenceNumber |
       | DrivingLicenceSubjectHappyBilly | 5566778              |
 
-  @mock-api:dva-invalidDrivingLicenceNumber @validation-regression @build @staging
+  @mock-api:dva-invalidDrivingLicenceNumber @validation-regression
   Scenario Outline: DVA - User enters licence number with special characters and spaces
     Given User enters DVA data as a <DVADrivingLicenceSubject>
     And DVA User re-enters drivingLicenceNumber as <InvalidLicenceNumber>
@@ -33,7 +32,7 @@ Feature: DVA Driving licence CRI Error Validations
       | DrivingLicenceSubjectHappyBilly | 55667^&*             |
 
   ###### DrivingLicenceNumberWithAlphaNumericChar, DrivingLicenceNumberWithAlphaChar, NoDrivingLicenceNumber #####
-  @mock-api:dva-invalidDrivingLicenceNumber @validation-regression @build @staging
+  @mock-api:dva-invalidDrivingLicenceNumber @validation-regression
   Scenario Outline: DVA - User enters licence number with numeric/alpha/null characters
     Given User enters DVA data as a <DVADrivingLicenceSubject>
     And DVA User re-enters drivingLicenceNumber as <InvalidLicenceNumber>
@@ -47,7 +46,7 @@ Feature: DVA Driving licence CRI Error Validations
       | DrivingLicenceSubjectHappyBilly | XYZabdAB             |
       | DrivingLicenceSubjectHappyBilly |                      |
 
-  @mock-api:dva-invalidPostcode @validation-regression @build @staging
+  @mock-api:dva-invalidPostcode @validation-regression
   Scenario Outline: DVA - User enters postcode number with less than 5 characters
     Given User enters DVA data as a <DVADrivingLicenceSubject>
     And User re-enters postcode as <InvalidPostcode>
@@ -59,7 +58,7 @@ Feature: DVA Driving licence CRI Error Validations
       | DVADrivingLicenceSubject        | InvalidPostcode |
       | DrivingLicenceSubjectHappyBilly | E20A            |
 
-  @mock-api:dva-invalidPostcode @validation-regression @build @staging
+  @mock-api:dva-invalidPostcode @validation-regression
   Scenario Outline: DVA - User enters no postcode in the postcode field
     Given User enters DVA data as a <DVADrivingLicenceSubject>
     And User re-enters postcode as <InvalidPostcode>
@@ -71,7 +70,7 @@ Feature: DVA Driving licence CRI Error Validations
       | DVADrivingLicenceSubject        | InvalidPostcode |
       | DrivingLicenceSubjectHappyBilly |                 |
 
-  @mock-api:dva-invalidPostcode @validation-regression @build @staging
+  @mock-api:dva-invalidPostcode @validation-regression
   Scenario Outline: DVA - User enters international postcode and returns enter a UK postcode error
     Given User enters DVA data as a <DVADrivingLicenceSubject>
     And User re-enters postcode as <InvalidPostcode>
@@ -84,7 +83,7 @@ Feature: DVA Driving licence CRI Error Validations
       | DrivingLicenceSubjectHappyBilly | CA 95128        |
 
   ##### PostcodeWithSpecialChar #####
-  @mock-api:dva-invalidPostcode @validation-regression @build @staging
+  @mock-api:dva-invalidPostcode @validation-regression
   Scenario Outline: DVA - User enters invalid postcode with special characters
     Given User enters DVA data as a <DVADrivingLicenceSubject>
     And User re-enters postcode as <InvalidPostcode>
@@ -97,7 +96,7 @@ Feature: DVA Driving licence CRI Error Validations
       | DrivingLicenceSubjectHappyBilly | NW* ^%G         |
 
   ####### PostcodeWithNumericChar, PostcodeWithAlphaChar #####
-  @mock-api:dva-invalidPostcode @validation-regression @build @staging
+  @mock-api:dva-invalidPostcode @validation-regression
   Scenario Outline: DVA - User enters postcode with alpha/numeric characters
     Given User enters DVA data as a <DVADrivingLicenceSubject>
     And User re-enters postcode as <InvalidPostcode>
@@ -111,7 +110,7 @@ Feature: DVA Driving licence CRI Error Validations
       | DrivingLicenceSubjectHappyBilly | ABC XYZ         |
 
   ######  InvalidLastNameWithNumbers, InvalidLastNameWithSpecialCharacters, NoLastName #####
-  @mock-api:dva-invalidLastName @validation-regression @build @staging
+  @mock-api:dva-invalidLastName @validation-regression
   Scenario Outline: DVA - User enters last name with alpha/numeric/special/null characters
     Given User enters DVA data as a <DVADrivingLicenceSubject>
     And User re-enters last name as <InvalidLastName>
@@ -126,7 +125,7 @@ Feature: DVA Driving licence CRI Error Validations
       | DrivingLicenceSubjectHappyBilly |                 |
 
   ######  InvalidFirstNameWithNumbers, InvalidFirstNameWithSpecialCharacters, NoFirstName, firstName exceeds maxlength #####
-  @mock-api:dva-invalidFirstName @validation-regression @build @staging
+  @mock-api:dva-invalidFirstName @validation-regression
   Scenario Outline: DVA - User enters first name with alpha/numeric/special/null characters
     Given User enters DVA data as a <DVADrivingLicenceSubject>
     And User re-enters first name as <InvalidFirstName>
@@ -142,7 +141,7 @@ Feature: DVA Driving licence CRI Error Validations
       | DrivingLicenceSubjectHappyBilly |                                            |
 
   #######  InvalidMiddleNamesWithNumbers, InvalidMiddleNamesWithSpecialCharacters #####
-  @mock-api:dva-invalidMiddleNames @validation-regression @build @staging
+  @mock-api:dva-invalidMiddleNames @validation-regression
   Scenario Outline: DVA - User enters middle nams with alpha/numeric/special/null characters
     Given User enters DVA data as a <DVADrivingLicenceSubject>
     And User re-enters middle names as <InvalidMiddleNames>
@@ -156,7 +155,7 @@ Feature: DVA Driving licence CRI Error Validations
       | DrivingLicenceSubjectHappyBilly | SELINA%$@          |
 
   #####  DateOfBirthNotReal, DateOfBirthWithSpecialCharacters, NoDateOfBirth #####
-  @mock-api:dva-invalidDateOfBirth @validation-regression @build @staging
+  @mock-api:dva-invalidDateOfBirth @validation-regression
   Scenario Outline: DVA - User enters dob that are not real or with special characters or no issue date error validation or year provided is two digits
     Given User enters DVA data as a <DVADrivingLicenceSubject>
     And DVA user re-enters day of birth as <InvalidDayOfBirth>
@@ -173,7 +172,7 @@ Feature: DVA Driving licence CRI Error Validations
       | DrivingLicenceSubjectHappyBilly |                   |                     |                    |
       | DrivingLicenceSubjectHappyBilly | 05                | 12                  | 29                 |
 
-  @mock-api:dva-invalidDateOfBirth @validation-regression @build @staging
+  @mock-api:dva-invalidDateOfBirth @validation-regression
   Scenario Outline: DVA - User enters future date of birth
     Given User enters DVA data as a <DVADrivingLicenceSubject>
     And DVA user re-enters day of birth as <InvalidDayOfBirth>
@@ -188,7 +187,7 @@ Feature: DVA Driving licence CRI Error Validations
       | DrivingLicenceSubjectHappyBilly | 10                | 10                  | 2042               |
 
   #####  IssueDateWithAlphaCharacters, IssueDateWithSpecialCharacters, NoIssueDate #####
-  @mock-api:dva-invalidIssueDate @validation-regression @build @staging
+  @mock-api:dva-invalidIssueDate @validation-regression
   Scenario Outline: DVA - User enters issue date that are not real or with special characters or no issue date error validation or year provided is two digits
     Given User enters DVA data as a <DVADrivingLicenceSubject>
     And DVA user re-enters day of issue as <InvalidDayOfIssue>
@@ -205,7 +204,7 @@ Feature: DVA Driving licence CRI Error Validations
       | DrivingLicenceSubjectHappyBilly |                   |                     |                    |
       | DrivingLicenceSubjectHappyBilly | 05                | 12                  | 19                 |
 
-  @mock-api:dva-invalidIssueDate @validation-regression @build @staging
+  @mock-api:dva-invalidIssueDate @validation-regression
   Scenario Outline: DVA - User enters issue date in the future
     Given User enters DVA data as a <DVADrivingLicenceSubject>
     And DVA user re-enters day of issue as <InvalidDayOfIssue>
@@ -220,7 +219,7 @@ Feature: DVA Driving licence CRI Error Validations
       | DrivingLicenceSubjectHappyBilly | 01                | 10                  | 2043               |
 
   #####  InvalidValidToDate, ValidToDateWithSpecialCharacters, NoValidToDate  #####
-  @mock-api:dva-invalidExpiryDate @validation-regression @build @staging
+  @mock-api:dva-invalidExpiryDate @validation-regression
   Scenario Outline: DVA - User enters valid to dates that are invalid or contain special characters or year provided is two digits or are not real
     Given User enters DVA data as a <DVADrivingLicenceSubject>
     And User re-enters valid to day as <InvalidValidToDay>
@@ -237,7 +236,7 @@ Feature: DVA Driving licence CRI Error Validations
       | DrivingLicenceSubjectHappyBilly |                   |                     |                    |
       | DrivingLicenceSubjectHappyBilly | 05                | 12                  | 29                 |
 
-  @mock-api:dva-invalidExpiryDate @validation-regression @build @staging
+  @mock-api:dva-invalidExpiryDate @validation-regression
   Scenario Outline: DVA - User enters valid to date in the past
     Given User enters DVA data as a <DVADrivingLicenceSubject>
     And User re-enters valid to day as <InvalidValidToDay>
@@ -251,7 +250,7 @@ Feature: DVA Driving licence CRI Error Validations
       | DVADrivingLicenceSubject        | InvalidValidToDay | InvalidValidToMonth | InvalidValidToYear |
       | DrivingLicenceSubjectHappyBilly | 10                | 01                  | 2010               |
 
-  @mock-api:dva-ConsentError @validation-regression @build @staging
+  @mock-api:dva-ConsentError @validation-regression
   Scenario Outline: DVA - User attempts journey without selecting consent checkbox
     Given User enters DVA data as a <DVADrivingLicenceSubject>
     And DVA consent checkbox is unselected
@@ -263,21 +262,7 @@ Feature: DVA Driving licence CRI Error Validations
       | DVADrivingLicenceSubject        |
       | DrivingLicenceSubjectHappyBilly |
 
-  @mock-api:DVA-success
-  Scenario: DVA - Check support link validation
-    Given The Support link in the footer reads Support (opens in new tab) and assert the url is correct and live
-    When I view the beta banner
-    Then the beta banner reads This is a new service – your feedback (opens in new tab) will help us to improve it.
-    And I assert the link in the banner is correct and live
-    Then I delete the session cookie
-    And User clicks on continue
-    Then they should see an error page
-    And I see Contact the One Login team link reads Contact the GOV.UK One Login team (opens in a new tab)
-    And I assert the link on the error page is correct and live
-    Then I go to page not found
-    And I assert the link on the page not found page is correct and live
-
-  @mock-api:dl-success @validation-regression @build @staging
+  @mock-api:dl-success @validation-regression
   Scenario Outline: DVA - User enters last name 25 characters long
     Given User enters DVA data as a <DVADrivingLicenceSubject>
     And User re-enters last name as <InvalidLastName>
@@ -286,7 +271,7 @@ Feature: DVA Driving licence CRI Error Validations
       | DVADrivingLicenceSubject        | InvalidLastName           |
       | DrivingLicenceSubjectHappyBilly | abcdefghijklmnopqrstuvwxy |
 
-  @mock-api:dl-success @validation-regression @build @staging
+  @mock-api:dl-success @validation-regression
   Scenario Outline: DVA - User enters last name 26 characters long
     Given User enters DVA data as a <DVADrivingLicenceSubject>
     And User re-enters last name as <InvalidLastName>
@@ -296,7 +281,7 @@ Feature: DVA Driving licence CRI Error Validations
       | DrivingLicenceSubjectHappyBilly | abcdefghijklmnopqrstuvwxyz |
 
 
-  @mock-api:dl-success @validation-regression @build @staging
+  @mock-api:dl-success @validation-regression
   Scenario Outline: DVA - User enters first name 18 characters long
     Given User enters DVA data as a <DVADrivingLicenceSubject>
     And User re-enters first name as <InvalidFirstName>
@@ -305,7 +290,7 @@ Feature: DVA Driving licence CRI Error Validations
       | DVADrivingLicenceSubject        | InvalidFirstName   |
       | DrivingLicenceSubjectHappyBilly | abcdefghijklmnopqr |
 
-  @mock-api:dl-success @validation-regression @build @staging
+  @mock-api:dl-success @validation-regression
   Scenario Outline: DVA - User enters first name 19 characters long
     Given User enters DVA data as a <DVADrivingLicenceSubject>
     And User re-enters first name as <InvalidFirstName>
@@ -314,7 +299,7 @@ Feature: DVA Driving licence CRI Error Validations
       | DVADrivingLicenceSubject        | InvalidFirstName   |
       | DrivingLicenceSubjectHappyBilly | abcdefghijklmnopqr |
 
-  @mock-api:dl-failed @validation-regression @build @staging
+  @mock-api:dl-failed @validation-regression
   Scenario Outline: DVA - User enters middle names 18 characters long
     Given User enters DVA data as a <DVADrivingLicenceSubject>
     And User re-enters first name as <InvalidFirstName>
@@ -326,7 +311,7 @@ Feature: DVA Driving licence CRI Error Validations
       | DVADrivingLicenceSubject        | InvalidFirstName | InvalidMiddleNames |
       | DrivingLicenceSubjectHappyBilly |                  | abcdefghijklmnopqr |
 
-  @mock-api:dl-failed @validation-regression @build @staging
+  @mock-api:dl-failed @validation-regression
   Scenario Outline: DVA - User enters middle names 19 characters long
     Given User enters DVA data as a <DVADrivingLicenceSubject>
     And User re-enters first name as <InvalidFirstName>
@@ -338,7 +323,7 @@ Feature: DVA Driving licence CRI Error Validations
       | DVADrivingLicenceSubject        | InvalidFirstName | InvalidMiddleNames  |
       | DrivingLicenceSubjectHappyBilly |                  | abcdefghijklmnopqrs |
 
-  @mock-api:dl-success @validation-regression @build @staging
+  @mock-api:dl-success @validation-regression
   Scenario Outline: DVA - User enters first and last names so that it reaches max length but doesn't go over the limit
     Given User enters DVA data as a <DVADrivingLicenceSubject>
     And User re-enters last name as <InvalidLastName>
@@ -348,7 +333,7 @@ Feature: DVA Driving licence CRI Error Validations
       | DVADrivingLicenceSubject        | InvalidLastName           | InvalidFirstName   |
       | DrivingLicenceSubjectHappyBilly | abcdefghijklmnopqrstuvwxy | abcdefghijklmnopqr |
 
-  @mock-api:dl-failed @validation-regression @build @staging
+  @mock-api:dl-failed @validation-regression
   Scenario Outline: DVA - User enters last and middle names so that it reaches max length but doesn't go over the limit
     Given User enters DVA data as a <DVADrivingLicenceSubject>
     And User re-enters last name as <InvalidLastName>
@@ -361,7 +346,7 @@ Feature: DVA Driving licence CRI Error Validations
       | DVADrivingLicenceSubject        | InvalidLastName           | InvalidFirstName | InvalidMiddleNames |
       | DrivingLicenceSubjectHappyBilly | abcdefghijklmnopqrstuvwxy |                  | abcdefghijklmnopqr |
 
-  @mock-api:dl-failed @validation-regression @build @staging
+  @mock-api:dl-failed @validation-regression
   Scenario Outline: DVA - User enters names longer than allowed character limit
     Given User enters DVA data as a <DVADrivingLicenceSubject>
     And User re-enters last name as <InvalidLastName>
@@ -373,27 +358,27 @@ Feature: DVA Driving licence CRI Error Validations
       | DVADrivingLicenceSubject        | InvalidLastName           | InvalidMiddleNames  |
       | DrivingLicenceSubjectHappyBilly | abcdefghijklmnopqrstuvwxy | abcdefghijklmnopqrs |
 
-  @mock-api:dva-ConsentSection @validation-regression @build @staging
-  Scenario: DVA Driving Licence privacy notice link to consent
+  @mock-api:dva-ConsentSection @validation-regression
+  Scenario: DVA - Privacy notice link to consent
     Given I see the consent title section Allow DVA to check your driving licence details
     And I see the DVA Consent first sentence DVA needs your consent to check your driving licence details before you can continue. They will make sure your licence has not been cancelled or reported as lost or stolen.
     And I see the DVA Consent second sentence To find out more about how your driving licence details will be used, you can read:
     And I see DVA One Login privacy notice link the GOV.UK One Login privacy notice (opens in a new tab)
     Then I see DVA privacy notice link the DVA privacy notice (opens in a new tab)
 
-  @mock-api:driving-licence-PageCookies @validation-regression
-  Scenario: Driving Licence - Cookies - Device Intelligence
+  @mock-api:driving-licence-PageCookies @cookies
+  Scenario: DVA - Cookies - Device Intelligence
     Given On the entry details page I see the Device Intelligence Cookie <DeviceIntelligenceCookieName>
     Examples:
       | DeviceIntelligenceCookieName |
       | di-device-intelligence       |
 
-  @mock-api:dva-accessibility @validation-regression @build @staging
-  Scenario Outline: DVA - Axe Accessibility Scan - DVA Details Page
+  @mock-api:dva-accessibility @accessibility
+  Scenario: DVA - Axe Accessibility Scan - DVA Details Page
     Given I run the Axe Accessibility check against the DVA Details page
 
-  @mock-api:DVA-success @build @staging
-  Scenario: DVA - Check support link validation
+  @mock-api:DVA-success @accessibility
+  Scenario: DVA - Axe Accessibility Scan - DVA Error Page
     Given I delete the session cookie
     And User clicks on continue
     Then they should see an error page

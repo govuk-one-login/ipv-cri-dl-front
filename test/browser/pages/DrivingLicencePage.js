@@ -129,10 +129,6 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
       'xpath=//*[@id="expiryDate-error"]'
     );
 
-    //    this.Continue = this.page.locator("button", {
-    //      hasText: " Continue ",
-    //    });
-
     this.invalidConsentErrorFieldError = this.page.locator(
       'xpath=//*[@id="consentCheckbox-error"]'
     );

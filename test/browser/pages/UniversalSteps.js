@@ -6,6 +6,14 @@ exports.UniversalSteps = class PlaywrightDevPage {
     this.url = url;
   }
 
+  async changeLanguageTo(language) {
+    let languageIsoCode = "en";
+    if (language === "Welsh") {
+      languageIsoCode = "cy";
+    }
+    await this.page.goto(this.page.url() + "?lng=" + languageIsoCode);
+  }
+
   async waitForTextToAppear(text) {
     const header = await this.driver.getTitle();
     await this.driver.manage().setTimeouts({ implicit: 10000 });
@@ -25,13 +33,5 @@ exports.UniversalSteps = class PlaywrightDevPage {
   async assertURLContains(expected) {
     const url = await this.driver.getCurrentUrl();
     assertTrue(url.contains(expected));
-  }
-
-  async changeLanguageTo(language) {
-    var languageIsoCode = "eng";
-    if (language === "Welsh") {
-      languageIsoCode = "cy";
-    }
-    await this.page.goto(this.page.url() + "?lng=" + languageIsoCode);
   }
 };
