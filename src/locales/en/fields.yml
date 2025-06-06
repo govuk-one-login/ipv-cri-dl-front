@@ -123,7 +123,7 @@ consentDVACheckbox:
     <p>DVA needs your consent to check your driving licence details before you can continue. They will make sure your licence has not been cancelled or reported as lost or stolen.</p>
     <p>To find out more about how your driving licence details will be used, you can read:</p>
     <ul class="govuk-list govuk-list--bullet">
-    <li class="govuk-body govuk-!-margin-left-2"><a href="https://signin.account.gov.uk/privacy-notice" class="govuk-link" rel="noopener" target="_blank" class="govuk-body govuk-!-margin-left-4">the GOV.UK One Login privacy notice (opens in a new tab)</a></li>
+    <li class="govuk-body govuk-!-margin-left-2"><a href="https://www.gov.uk/government/publications/govuk-one-login-privacy-notice" class="govuk-link" rel="noopener" target="_blank" class="govuk-body govuk-!-margin-left-4">the GOV.UK One Login privacy notice (opens in a new tab)</a></li>
     <li class="govuk-body govuk-!-margin-left-2"><a href="https://www.infrastructure-ni.gov.uk/publications/gdpr-privacy-notices-dfi-business-areas" class="govuk-link" rel="noopener" target="_blank">the DVA privacy notice (opens in a new tab)</a></li>
     </ul>
   validation:
@@ -135,7 +135,7 @@ consentCheckbox:
     <P>DVLA needs your consent to check your driving licence details before you can continue. They will make sure your licence has not been cancelled or reported as lost or stolen.</P>
     <p>To find out more about how your driving licence details will be used, you can read:</p>
     <ul class="govuk-list govuk-list--bullet">
-    <li class="govuk-body govuk-!-margin-left-2"><a href="https://signin.account.gov.uk/privacy-notice" class="govuk-link" rel="noopener" target="_blank" class="govuk-body govuk-!-margin-left-4">the GOV.UK One Login privacy notice (opens in a new tab)</a></li>
+    <li class="govuk-body govuk-!-margin-left-2"><a href="https://www.gov.uk/government/publications/govuk-one-login-privacy-notice" class="govuk-link" rel="noopener" target="_blank" class="govuk-body govuk-!-margin-left-4">the GOV.UK One Login privacy notice (opens in a new tab)</a></li>
     <li class="govuk-body govuk-!-margin-left-2"><a href="https://www.gov.uk/government/publications/dvla-privacy-policy" class="govuk-link" rel="noopener" target="_blank">the DVLA privacy notice (opens in a new tab)</a></li>
     </ul>
   validation:
