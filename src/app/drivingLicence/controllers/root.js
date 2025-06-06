@@ -1,5 +1,5 @@
 const { Controller: BaseController } = require("hmpo-form-wizard");
-const { PACKAGE_NAME } = require("../../../lib/config");
+const { PACKAGE_NAME, APP } = require("../../../lib/config");
 const logger = require("hmpo-logger").get(PACKAGE_NAME);
 
 const {
@@ -17,7 +17,7 @@ class RootController extends BaseController {
       session_id: req.session?.tokenId
     };
 
-    if (process.env.AUTH_SOURCE_ENABLED === "true") {
+    if (APP.AUTH_SOURCE_ENABLED === "true") {
       //axios.post to new personInfo endpoint, put licence details into req.session.shared_claims shared claims
       const personInfoApiResponse = await req.axios.get(`${PERSON_INFO}`, {
         headers: headers
