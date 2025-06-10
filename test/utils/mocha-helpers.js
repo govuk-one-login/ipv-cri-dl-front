@@ -1,11 +1,11 @@
-const chai = require("chai");
-const sinon = require("sinon");
-const sinonChai = require("sinon-chai");
-const chaiAsPromised = require("chai-as-promised");
-const reqres = require("reqres");
-const JourneyModel = require("hmpo-form-wizard/lib/journey-model");
-const WizardModel = require("hmpo-form-wizard/lib/wizard-model.js");
-const axios = require("axios");
+import chai from "chai";
+import sinon from "sinon";
+import sinonChai from "sinon-chai";
+import chaiAsPromised from "chai-as-promised";
+import reqres from "reqres";
+import JourneyModel from "hmpo-form-wizard/lib/journey-model.js";
+import WizardModel from "hmpo-form-wizard/lib/wizard-model.js";
+import axios from "axios";
 
 chai.should();
 chai.use(sinonChai);
