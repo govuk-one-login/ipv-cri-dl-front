@@ -9,6 +9,11 @@ updates:
     labels:
       - dependabot
     open-pull-requests-limit: 20
+    groups:
+      playwright:
+        patterns:
+          - "playwright"
+          - "@playwright/test"
     ignore:
       - dependency-name: "node"
         versions: ["20.x"]
