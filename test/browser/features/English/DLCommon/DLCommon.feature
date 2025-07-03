@@ -64,13 +64,13 @@ Feature: Driving licence CRI - Common Tests
     @mock-api:driving-licence-BetaBanner @validation-regression
     Scenario: Driving Licence - GOV.UK Beta Banner
         Given The beta banner is displayed
-        And The beta banner reads This is a new service – your feedback (opens in new tab) will help us to improve it.
+        And The beta banner reads This is a new service. Help us improve it and give your feedback (opens in a new tab).
         When User clicks on the Feedback Link
         And I check the Feedback page Title Contact GOV.UK One Login
 
     @mock-api:driving-licence-PageHeading @validation-regression
     Scenario: Driving Licence - Header - GOV.UK Link
-        Given I see the GOV.UK footer link with the text GOV.UK
+        Given I see the GOV.UK header link with the text GOV.UK
         When User clicks the GOV.UK Link
         And I check the GOV.UK page Title GOV.UK
 
@@ -112,7 +112,7 @@ Feature: Driving licence CRI - Common Tests
 
     @mock-api:driving-licence-PageFooter @validation-regression
     Scenario: Driving Licence - Footer - Open Government Licence v3.0
-        Given I see the OGL footer link with the text All content is available under the Open Government Licence v3.0, except where otherwise stated.
+        Given I see the OGL footer link with the text All content is available under the Open Government Licence v3.0, except where otherwise stated
         When User clicks the OGL Link
         And I check the OGL page Title Open Government Licence for public sector information
 
@@ -136,7 +136,7 @@ Feature: Driving licence CRI - Common Tests
         Then they should see an error page
         And I see the Contact the One Login team link which reads Contact the GOV.UK One Login team (opens in a new tab)
         Then I assert the link on the error page is correct and live
-        
+
     @mock-api:driving-licence-PageNotFoundSupportLinks
     Scenario: Driving Licence - Page Not Found - Contact GOV.UK One Login Link
         Given I should be on the Landing Page with Page Title Was your UK photocard driving licence issued by DVLA or DVA?

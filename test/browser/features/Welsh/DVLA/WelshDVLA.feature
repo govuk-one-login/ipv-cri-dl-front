@@ -15,8 +15,8 @@ Feature: DVLA Driving licence CRI Error Validations - Welsh Translation
 
   @mock-api:dvla-WelshBetaBanner @language-regression
   Scenario: Beta Banner
-    Given I view the beta banner
-    And the beta banner reads Mae hwn yn wasanaeth newydd – bydd eich adborth (agor mewn tab newydd) yn ein helpu i'w wella.
+    Given I view the BETA banner
+    And the beta banner reads Mae hwn yn wasanaeth newydd. Helpwch ni i'w wella a rhoi eich adborth (agor mewn tab newydd).
 
   @mock-api:dvla-WelshBetaBanner @language-regression
   Scenario: Footer Links and Text

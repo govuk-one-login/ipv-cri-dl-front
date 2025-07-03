@@ -116,9 +116,7 @@ module.exports = class PlaywrightDevPage {
     this.openGovernmentLicencePageTitle = this.page.locator(
       'xpath=//*[@id="open-licence-logo"]'
     );
-    this.govUkLink = this.page.locator(
-      "xpath=/html/body/header/div/div/a/span/span"
-    );
+    this.govUkLink = this.page.locator("xpath=/html/body/header/div/div");
     this.govUkPageTitle = this.page.locator(
       'xpath=//*[@id="content"]/header/div/div[1]/h1/span[1]'
     );
@@ -438,7 +436,7 @@ module.exports = class PlaywrightDevPage {
 
   async assertGovUkLinkText(govUkLinkText) {
     await this.page.waitForLoadState("domcontentloaded");
-    expect(await this.govUkLink.innerText()).to.equal(govUkLinkText);
+    expect(await this.govUkLink.textContent()).to.contain(govUkLinkText);
   }
 
   async clickGovUkLink() {

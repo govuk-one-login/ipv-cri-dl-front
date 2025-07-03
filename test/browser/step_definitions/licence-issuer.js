@@ -369,7 +369,7 @@ Then(
 );
 
 Then(
-  /^I see the GOV.UK footer link with the text (.*)$/,
+  /^I see the GOV.UK header link with the text (.*)$/,
   async function (govUkLinkText) {
     const licenceIssuerPage = new LicenceIssuerPage(this.page);
     await licenceIssuerPage.assertGovUkLinkText(govUkLinkText);

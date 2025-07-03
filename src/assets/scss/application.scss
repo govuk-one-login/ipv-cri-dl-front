@@ -18,6 +18,8 @@ $govuk-assets-path: "/public/";
   color: $govuk-text-colour;
 }
 
+@import "../../../node_modules/@govuk-one-login/frontend-ui/build/all";
+
 //// Task list pattern
 //
 //.app-task-list {
