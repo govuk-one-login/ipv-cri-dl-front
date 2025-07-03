@@ -20,8 +20,8 @@ Feature: DVLA Driving licence - Auth Source - Welsh Translation
 
     @mock-api:dl-dvla-auth-success @language-regression
     Scenario: DVLA Auth Source - Welsh Translation Tests - Beta Banner
-        Given I view the beta banner on the check your answers page
-        And the beta banner on the check your answers page reads Mae hwn yn wasanaeth newydd – bydd eich adborth (agor mewn tab newydd) yn ein helpu i'w wella.
+        Given I view the BETA banner on the check your answers page
+        And the beta banner on the check your answers page reads Mae hwn yn wasanaeth newydd. Helpwch ni i'w wella a rhoi eich adborth (agor mewn tab newydd).
 
     @mock-api:dl-dvla-auth-success @language-regression
     Scenario: DVLA Auth Source - Welsh Translation Tests - Footer Links and Text
