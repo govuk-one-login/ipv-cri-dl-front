@@ -43,4 +43,3 @@ Feature: DVA Driving licence - Auth Source
     Then I click on the Confirm and Continue button
     And I should be on the DVA consent page We need to check your driving licence details – GOV.UK One Login
     And I run the Axe Accessibility check against the Driving Licence Consent page
-    

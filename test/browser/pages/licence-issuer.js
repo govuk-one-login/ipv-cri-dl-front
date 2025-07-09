@@ -20,9 +20,6 @@ module.exports = class PlaywrightDevPage {
     this.betaBannerFeedbackLink = this.page.locator(
       "xpath=/html/body/div[2]/div/p/span/a"
     );
-    this.feedbackPageTitle = this.page.locator(
-      'xpath=//*[@id="main-content"]/div/div/h1'
-    );
     this.cookieBanner = this.page.locator(
       'xpath=//*[@id="cookies-banner-main"]'
     );
@@ -116,9 +113,7 @@ module.exports = class PlaywrightDevPage {
     this.openGovernmentLicencePageTitle = this.page.locator(
       'xpath=//*[@id="open-licence-logo"]'
     );
-    this.govUkLink = this.page.locator(
-      "xpath=/html/body/header/div/div/a/span/span"
-    );
+    this.govUkLink = this.page.locator("xpath=/html/body/header/div/div");
     this.govUkPageTitle = this.page.locator(
       'xpath=//*[@id="content"]/header/div/div[1]/h1/span[1]'
     );
@@ -295,6 +290,21 @@ module.exports = class PlaywrightDevPage {
     expect(await this.betaBannerText.innerText()).to.equal(betaBannerText);
   }
 
+  async assertFeedbackPageIsCorrectAndLive(expectedURL) {
+    const newPagePromise = this.page.waitForEvent("popup");
+
+    await this.betaBannerFeedbackLink.click();
+
+    const newPage = await newPagePromise;
+    await newPage.waitForLoadState("domcontentloaded");
+
+    const actualURL = await newPage.url();
+
+    expect(actualURL).to.contain(expectedURL); // Use to.equal for exact URL match
+
+    await newPage.close();
+  }
+
   async clickHideThisMessageCookieButton() {
     await this.page.waitForLoadState("domcontentloaded");
     await this.page.evaluate(() => {
@@ -308,11 +318,6 @@ module.exports = class PlaywrightDevPage {
   async assertCookiesPolicyPageTitle(cookiesPageTitle) {
     await this.page.waitForLoadState("domcontentloaded");
     await this.cookiesPageTitle.isVisible(cookiesPageTitle);
-  }
-
-  async assertFeedbackPageTitle(feedbackPageTitle) {
-    await this.page.waitForLoadState("domcontentloaded");
-    await this.feedbackPageTitle.isVisible(feedbackPageTitle);
   }
 
   async assertAccessibilityStatementPageTitle(accessibilityStatementPageTitle) {
@@ -332,11 +337,6 @@ module.exports = class PlaywrightDevPage {
   async clickAccessibilityStatementLink() {
     await this.page.waitForLoadState("domcontentloaded");
     await this.accessibilityStatementLink.click();
-  }
-
-  async clickBetaBannerFeedbackLink() {
-    await this.page.waitForLoadState("domcontentloaded");
-    await this.betaBannerFeedbackLink.click();
   }
 
   async assertCookiesLinkText(cookiesLinkText) {
@@ -438,7 +438,7 @@ module.exports = class PlaywrightDevPage {
 
   async assertGovUkLinkText(govUkLinkText) {
     await this.page.waitForLoadState("domcontentloaded");
-    expect(await this.govUkLink.innerText()).to.equal(govUkLinkText);
+    expect(await this.govUkLink.textContent()).to.contain(govUkLinkText);
   }
 
   async clickGovUkLink() {

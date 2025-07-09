@@ -7,12 +7,14 @@ const setAxiosDefaults = commonExpress.lib.axios;
 const steps = require("./app/drivingLicence/steps");
 const fields = require("./app/drivingLicence/fields");
 const featureSets = require("./app/drivingLicence/featureSets");
+const frontendUi = require("@govuk-one-login/frontend-ui");
 
 const wizard = require("hmpo-form-wizard");
 
 const init = (router) => {
   router.use(getGTM);
   router.use(getLanguageToggle);
+  router.use(frontendUi.frontendUiMiddlewareIdentityBypass);
   router.use(getDeviceIntelligence);
   router.use(setScenarioHeaders);
   router.use(setAxiosDefaults);

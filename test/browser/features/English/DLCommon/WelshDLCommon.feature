@@ -52,9 +52,7 @@ Feature: Driving licence CRI - Common Tests - Welsh Translation
     @mock-api:driving-licence-BetaBanner @language-regression
     Scenario: Driving Licence - GOV.UK Beta Banner
         Given The beta banner is displayed
-        And The beta banner reads Mae hwn yn wasanaeth newydd – bydd eich adborth (agor mewn tab newydd) yn ein helpu i'w wella.
-        When User clicks on the Feedback Link
-        And I check the Feedback page Title Contact GOV.UK One Login
+        And The beta banner reads Mae hwn yn wasanaeth newydd. Helpwch ni i'w wella a rhoi eich adborth (agor mewn tab newydd).
 
     @mock-api:driving-licence-PageFooter @language-regression
     Scenario: Driving Licence - Footer - Accessibility statement
@@ -94,7 +92,7 @@ Feature: Driving licence CRI - Common Tests - Welsh Translation
 
     @mock-api:driving-licence-PageFooter @language-regression
     Scenario: Driving Licence - Footer - Open Government Licence v3.0
-        Given I see the OGL footer link with the text Mae’r holl gynnwys ar gael o dan Trwydded Llywodraeth Agored v3.0, oni nodir yn wahanol
+        Given I see the OGL footer link with the text Mae'r holl gynnwys ar gael o dan Trwydded Llywodraeth Agored v3.0, oni nodir yn wahanol
         When User clicks the OGL Link
         And I check the OGL page Title Open Government Licence for public sector information
 
