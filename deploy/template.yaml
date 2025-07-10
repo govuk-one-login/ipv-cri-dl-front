@@ -569,7 +569,7 @@ Resources:
                   !Ref "Environment",
                   deviceIntelligenceEnabled
                 ]
-            - Name: MAY2025REBRANDENABLED
+            - Name: MAY_2025_REBRAND_ENABLED
               Value:
                 !FindInMap [
                   FeatureFlagMapping,
