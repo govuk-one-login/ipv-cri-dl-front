@@ -198,16 +198,11 @@ Then(/^The beta banner reads (.*)$/, async function (betaBannerText) {
   await licenceIssuerPage.assertBetaBannerText(betaBannerText);
 });
 
-Then(/^User clicks on the Feedback Link$/, async function () {
-  const licenceIssuerPage = new LicenceIssuerPage(this.page);
-  await licenceIssuerPage.clickBetaBannerFeedbackLink();
-});
-
-Then(
-  /^I check the Feedback page Title (.*)$/,
-  async function (feedbackPageTitle) {
+Given(
+  /^I assert the feedback URL (.*) is correct and live$/,
+  async function (expectedURL) {
     const licenceIssuerPage = new LicenceIssuerPage(this.page);
-    await licenceIssuerPage.assertFeedbackPageTitle(feedbackPageTitle);
+    await licenceIssuerPage.assertFeedbackPageIsCorrectAndLive(expectedURL);
   }
 );
 
@@ -369,7 +364,7 @@ Then(
 );
 
 Then(
-  /^I see the GOV.UK footer link with the text (.*)$/,
+  /^I see the GOV.UK header link with the text (.*)$/,
   async function (govUkLinkText) {
     const licenceIssuerPage = new LicenceIssuerPage(this.page);
     await licenceIssuerPage.assertGovUkLinkText(govUkLinkText);
