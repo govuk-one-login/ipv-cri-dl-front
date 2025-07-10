@@ -134,7 +134,7 @@ Mappings:
       languageToggleDisabled: "false"
       authSourceEnabled: "true"
       deviceIntelligenceEnabled: "true"
-      may2025RebrandEnabled: "false"
+      may2025RebrandEnabled: "true"
     production:
       ga4Enabled: "true"
       uaEnabled: "false"
