@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "node src/app.js",
-    "start:ci": "AUTH_SOURCE_ENABLED=true DEVICE_INTELLIGENCE_ENABLED=true NODE_ENV=development API_BASE_URL=http://127.0.0.1:8030/ yarn start",
+    "start:ci": "MAY_2025_REBRAND_ENABLED=true AUTH_SOURCE_ENABLED=true DEVICE_INTELLIGENCE_ENABLED=true NODE_ENV=development API_BASE_URL=http://127.0.0.1:8030/ yarn start",
     "dev": "LOG_LEVEL=debug nodemon src/app.js",
     "build": "yarn build-sass && yarn build-js && yarn copy-assets",
     "build-sass": "rm -rf dist/public/stylesheets/application.css && sass --no-source-map src/assets/scss/application.scss dist/public/stylesheets/application.css --style compressed",
