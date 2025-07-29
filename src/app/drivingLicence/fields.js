@@ -222,7 +222,6 @@ module.exports = {
         type: "regexSpecialCharacters",
         fn: (value) => value.match(/^[A-Za-z0-9]*$/)
       },
-      { type: "numeric" },
       { type: "regexDrivingLicence", fn: (value) => value.match(/^[0-9]{8}$/) }
     ],
     dependent: { field: "issuerDependent", value: "DVA" },
