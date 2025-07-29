@@ -16,7 +16,7 @@ dvaLicenceNumber:
   validation:
     default: "Rhowch y rhif yn union fel mae’n ymddangos ar eich trwydded yrru"
     licenceLength: "Dylai rhif eich trwydded fod yn 8 nod o hyd"
-    numeric: "Ni ddylai rhif eich trwydded gynnwys unrhyw symbolau neu ofodau"
+    numeric: "Rhowch y rhif yn union fel mae’n ymddangos ar eich trwydded yrru"
     regexSpecialCharacters: "Ni ddylai rhif eich trwydded gynnwys unrhyw symbolau neu ofodau"
 issueNumber:
   label: Rhif cyhoeddi
