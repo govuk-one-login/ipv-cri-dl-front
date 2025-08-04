@@ -117,8 +117,8 @@ Feature: DVA Driving licence CRI Error Validations - Welsh Translation
     Examples:
       | DVADrivingLicenceSubject        | InvalidLicenceNumber |
       | DrivingLicenceSubjectHappyBilly |                      |
-  #      |DrivingLicenceSubjectHappyBilly|55667ABC            | - bug raised under LIME-666
-  #      |DrivingLicenceSubjectHappyBilly|XYZabdAB            | - bug raised under LIME-666
+      | DrivingLicenceSubjectHappyBilly | 55667ABC             |
+      | DrivingLicenceSubjectHappyBilly | XYZabdAB             |
 
   @mock-api:dva-invalidPostcode @language-regression
   Scenario Outline: DVA Driving Licence Postcode less than 5 characters error validation
