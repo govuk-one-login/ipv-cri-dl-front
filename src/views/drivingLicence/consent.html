@@ -5,6 +5,13 @@
 {% from "hmpo-checkboxes/macro.njk" import hmpoCheckboxes %}
 {% from "hmpo-text/macro.njk" import hmpoText %}
 
+{% set isPageDataSensitive = false %}
+{% set pageTitleKey = "pages.consent.title" %}
+{% set contentID = "8532cce3-4cda-4ebf-a638-4c5a397645dd" %}
+{% set taxLevel2 = 'driving licence' %}
+{% set isPageDynamic = false %}
+{% set loggedInStatus = true %}
+
 {% block mainContent %}
 
   {% call hmpoForm(ctx, {
@@ -103,22 +110,6 @@
         }
       })
     }
-
-    window.addEventListener('load', function () {
-      window
-        .DI
-        .analyticsGa4
-        .pageViewTracker
-        .trackOnPageLoad({
-          statusCode: '200', // Access status code
-          englishPageTitle: '{{translate("pages.consent.title")}}',
-          taxonomy_level1: 'web cri', // Access taxonomy level 1
-          taxonomy_level2: 'driving licence', // Access taxonomy level 2
-          content_id: '001',
-          logged_in_status: true,
-          dynamic: false
-        });
-    });
 </script>
 
 {% endblock %}

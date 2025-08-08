@@ -7,6 +7,13 @@
 {% from "govuk/components/details/macro.njk" import govukDetails %}
 {% from "hmpo-details/macro.njk" import hmpoDetails %}
 
+{% set isPageDataSensitive = false %}
+{% set pageTitleKey = "pages.licence-issuer.title" %}
+{% set contentID = "3984e021-96f1-43cd-b3c8-077390224204" %}
+{% set taxLevel2 = 'driving licence' %}
+{% set isPageDynamic = false %}
+{% set loggedInStatus = true %}
+
 {% block mainContent %}
 {% set title = translate("licence-issuer.title") %}
 {% call hmpoForm(ctx, {
@@ -37,27 +44,6 @@
 
 {% endcall %}
 
-{% endblock %}
-
-{% block scripts %}
-    <script {% if cspNonce %} nonce="{{ cspNonce }}"{%  endif %}>
-        window.addEventListener('load', function () {
-            window
-                .DI
-                .analyticsGa4
-                .pageViewTracker
-                .trackOnPageLoad({
-                    statusCode: '200', // Access status code
-                    englishPageTitle: '{{translate("licence-issuer.title")}}',
-                    taxonomy_level1: 'web cri', // Access taxonomy level 1
-                    taxonomy_level2: 'driving licence', // Access taxonomy level 2
-                    content_id: '001',
-                    logged_in_status: true,
-                    dynamic: false
-                });
-        });
-    </script>
-    {{ super ()}}
 {% endblock %}
 
 {% set footerNavItems = translate("govuk.footerNavItems") %}
