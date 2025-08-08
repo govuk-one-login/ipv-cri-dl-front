@@ -12,6 +12,13 @@
 {% from "hmpo-date/macro.njk" import hmpoDate %}
 {% from "hmpo-checkboxes/macro.njk" import hmpoCheckboxes %}
 
+{% set isPageDataSensitive = false %}
+{% set pageTitleKey = "pages.details.title" %}
+{% set contentID = "83eb5c2e-5013-4fe4-a18f-a4ab73553bdf" %}
+{% set taxLevel2 = 'driving licence' %}
+{% set isPageDynamic = false %}
+{% set loggedInStatus = true %}
+
 {% block mainContent %}
     {% if values.showRetryMessage and not(ctx("errors") | length) %}
         {# user is retrying #}
@@ -288,24 +295,6 @@ autocomplete: "family-name"
             }
         })
     }
-
-        window.addEventListener('load', function () {
-            window
-                .DI
-                .analyticsGa4
-                .pageViewTracker
-                .trackOnPageLoad({
-                    statusCode: '200', // Access status code
-                    englishPageTitle: '{{translate("pages.details.title")}}',
-                    taxonomy_level1: 'web cri', // Access taxonomy level 1
-                    taxonomy_level2: 'driving licence', // Access taxonomy level 2
-                    content_id: '002',
-                    logged_in_status: true,
-                    dynamic: false
-                });
-        });
-
-
     </script>
 
     {% endblock %}
