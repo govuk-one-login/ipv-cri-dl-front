@@ -40,14 +40,6 @@ Given(/^The cookie banner is displayed$/, async function () {
 });
 
 Then(
-  /^I check the Cookies page Title (.*)$/,
-  async function (cookiesPageTitle) {
-    const licenceIssuerPage = new LicenceIssuerPage(this.page);
-    await licenceIssuerPage.assertCookiesPolicyPageTitle(cookiesPageTitle);
-  }
-);
-
-Then(
   /^I see the Device Intelligence Cookie (.*)$/,
   async function (deviceIntelligenceCookieName) {
     const licenceIssuerPage = new LicenceIssuerPage(this.page);
@@ -77,6 +69,14 @@ When(/^User clicks on the View Cookies Link$/, async function () {
   const licenceIssuerPage = new LicenceIssuerPage(this.page);
   await licenceIssuerPage.clickViewCookiesLink();
 });
+
+Then(
+  /^I check the Cookies page Title (.*)$/,
+  async function (cookiesPageTitle) {
+    const licenceIssuerPage = new LicenceIssuerPage(this.page);
+    await licenceIssuerPage.assertCookiesPolicyPageTitle(cookiesPageTitle);
+  }
+);
 
 When(/^I see the radio button for DVLA$/, async function () {
   const licenceIssuerPage = new LicenceIssuerPage(this.page);
@@ -137,6 +137,72 @@ Then(
   async function (thirdRadioButton) {
     const licenceIssuerPage = new LicenceIssuerPage(this.page);
     await licenceIssuerPage.noDrivingLicenceRadioButtonLabel(thirdRadioButton);
+  }
+);
+
+Then(
+  /^I see the licence issuer accessibility statement link (.*)$/,
+  async function (footerAccessibilityStatementText) {
+    const licenceIssuerPage = new LicenceIssuerPage(this.page);
+    await licenceIssuerPage.assertFooterAccessibilityStatementText(
+      footerAccessibilityStatementText
+    );
+  }
+);
+
+Then(
+  /^I see the licence issuer cookies link (.*)$/,
+  async function (footerCookieText) {
+    const licenceIssuerPage = new LicenceIssuerPage(this.page);
+    await licenceIssuerPage.assertFooterCookieText(footerCookieText);
+  }
+);
+
+Then(
+  /^I see the licence issuer terms and conditions link (.*)$/,
+  async function (footerTermsAndConditionsText) {
+    const licenceIssuerPage = new LicenceIssuerPage(this.page);
+    await licenceIssuerPage.assertFooterTermsAndConditonsText(
+      footerTermsAndConditionsText
+    );
+  }
+);
+
+Then(
+  /^I see the licence issuer privacy notice link (.*)$/,
+  async function (footerPrivacyNoticeText) {
+    const licenceIssuerPage = new LicenceIssuerPage(this.page);
+    await licenceIssuerPage.assertFooterPrivacyNoticeText(
+      footerPrivacyNoticeText
+    );
+  }
+);
+
+Then(
+  /^I see the licence issuer support link (.*)$/,
+  async function (footerSupportText) {
+    const licenceIssuerPage = new LicenceIssuerPage(this.page);
+    await licenceIssuerPage.assertFooterSupportText(footerSupportText);
+  }
+);
+
+Then(
+  /^I see the licence issuer OLG link (.*)$/,
+  async function (footerOpenGovernmentLicenceText) {
+    const licenceIssuerPage = new LicenceIssuerPage(this.page);
+    await licenceIssuerPage.assertFooterOpenGovernmentLicenceText(
+      footerOpenGovernmentLicenceText
+    );
+  }
+);
+
+Then(
+  /^I see the licence issuer crown copyright link (.*)$/,
+  async function (footerCrownCopyrightText) {
+    const licenceIssuerPage = new LicenceIssuerPage(this.page);
+    await licenceIssuerPage.assertFooterCrownCopyrightText(
+      footerCrownCopyrightText
+    );
   }
 );
 
@@ -206,160 +272,12 @@ Given(
   }
 );
 
-Then(
-  /^I see the Accessibility statement footer link with the text (.*)$/,
-  async function (accessibilityStatementLinkText) {
-    const licenceIssuerPage = new LicenceIssuerPage(this.page);
-    await licenceIssuerPage.assertAccessibilityStatementLinkText(
-      accessibilityStatementLinkText
-    );
-  }
-);
-
-Then(/^User clicks the Accessibiliy statement Link$/, async function () {
-  const licenceIssuerPage = new LicenceIssuerPage(this.page);
-  await licenceIssuerPage.clickAccessibilityStatementLink();
-});
-
-Then(
-  /^I check the Accessibiliy statement page Title (.*)$/,
-  async function (accessibilityStatementPageTitle) {
-    const licenceIssuerPage = new LicenceIssuerPage(this.page);
-    await licenceIssuerPage.assertAccessibilityStatementPageTitle(
-      accessibilityStatementPageTitle
-    );
-  }
-);
-
-Then(
-  /^I see the Cookies footer link with the text (.*)$/,
-  async function (cookiesLinkText) {
-    const licenceIssuerPage = new LicenceIssuerPage(this.page);
-    await licenceIssuerPage.assertCookiesLinkText(cookiesLinkText);
-  }
-);
-
-Then(/^User clicks the Cookies Link$/, async function () {
-  const licenceIssuerPage = new LicenceIssuerPage(this.page);
-  await licenceIssuerPage.clickCookiesLink();
-});
-
-Then(
-  /^I see the Terms and conditions footer link with the text (.*)$/,
-  async function (termsAndConditionsLinkText) {
-    const licenceIssuerPage = new LicenceIssuerPage(this.page);
-    await licenceIssuerPage.assertTermsAndConditionsLinkText(
-      termsAndConditionsLinkText
-    );
-  }
-);
-
-Then(/^User clicks the Terms and conditions Link$/, async function () {
-  const licenceIssuerPage = new LicenceIssuerPage(this.page);
-  await licenceIssuerPage.clickTermsAndConditionsLink();
-});
-
-Then(
-  /^I check the Terms and conditions page Title (.*)$/,
-  async function (termsAndConditionsPageTitle) {
-    const licenceIssuerPage = new LicenceIssuerPage(this.page);
-    await licenceIssuerPage.assertTermsAndConditionsPageTitle(
-      termsAndConditionsPageTitle
-    );
-  }
-);
-
-Then(
-  /^I see the Privacy notice footer link with the text (.*)$/,
-  async function (privacyNoticeLinkText) {
-    const licenceIssuerPage = new LicenceIssuerPage(this.page);
-    await licenceIssuerPage.assertPrivacyNoticeLinkText(privacyNoticeLinkText);
-  }
-);
-
-Then(/^User clicks the Privacy notice Link$/, async function () {
-  const licenceIssuerPage = new LicenceIssuerPage(this.page);
-  await licenceIssuerPage.clickPrivacyNoticeLink();
-});
-
-Then(
-  /^I check the Privacy notice page Title (.*)$/,
-  async function (privacyNoticePageTitle) {
-    const licenceIssuerPage = new LicenceIssuerPage(this.page);
-    await licenceIssuerPage.assertPrivacyNoticePageTitle(
-      privacyNoticePageTitle
-    );
-  }
-);
-
-Then(
-  /^I see the Support footer link with the text (.*)$/,
-  async function (supportLinkText) {
-    const licenceIssuerPage = new LicenceIssuerPage(this.page);
-    await licenceIssuerPage.assertSupportLinkText(supportLinkText);
-  }
-);
-
-Then(/^User clicks the Support Link$/, async function () {
-  const licenceIssuerPage = new LicenceIssuerPage(this.page);
-  await licenceIssuerPage.clickSupportLink();
-});
-
-Then(
-  /^I check the Support page Title (.*)$/,
-  async function (supportPageTitle) {
-    const licenceIssuerPage = new LicenceIssuerPage(this.page);
-    await licenceIssuerPage.assertSupportPageTitle(supportPageTitle);
-  }
-);
-
-Then(
-  /^I see the Crown Copyright footer link with the text (.*)$/,
-  async function (crownCopyrightLinkText) {
-    const licenceIssuerPage = new LicenceIssuerPage(this.page);
-    await licenceIssuerPage.assertCrownCopyrightLinkText(
-      crownCopyrightLinkText
-    );
-  }
-);
-
-Then(/^User clicks the Crown Copyright Link$/, async function () {
-  const licenceIssuerPage = new LicenceIssuerPage(this.page);
-  await licenceIssuerPage.clickCrownCopyrightLink();
-});
-
-Then(
-  /^I check the Crown Copyright page Title (.*)$/,
-  async function (crownCopyrightPageTitle) {
-    const licenceIssuerPage = new LicenceIssuerPage(this.page);
-    await licenceIssuerPage.assertCrownCopyrightPageTitle(
-      crownCopyrightPageTitle
-    );
-  }
-);
-
-Then(
-  /^I see the OGL footer link with the text (.*)$/,
-  async function (openGovernmentLicenceLinkText) {
-    const licenceIssuerPage = new LicenceIssuerPage(this.page);
-    await licenceIssuerPage.assertOpenGovernmentLicenceLinkText(
-      openGovernmentLicenceLinkText
-    );
-  }
-);
-
-Then(/^User clicks the OGL Link$/, async function () {
-  const licenceIssuerPage = new LicenceIssuerPage(this.page);
-  await licenceIssuerPage.clickOpenGovernmentLicenceLink();
-});
-
-Then(
-  /^I check the OGL page Title (.*)$/,
-  async function (openGovernmentLicencePageTitle) {
-    const licenceIssuerPage = new LicenceIssuerPage(this.page);
-    await licenceIssuerPage.assertOpenGovernmentLicencePageTitle(
-      openGovernmentLicencePageTitle
-    );
+Given(
+  /^they click Footer (.*) and assert I have been redirected correctly$/,
+  async function (linkName) {
+    const checkPage = new LicenceIssuerPage(this.page);
+    expect(checkPage.isCurrentPage()).to.be.true;
+    await checkPage.assertFooterLink(linkName);
   }
 );
 
@@ -388,6 +306,11 @@ Then(
     await licenceIssuerPage.assertDlLandingPageTitle(dlLandingPageTitle);
   }
 );
+
+Then(/^I see the (.*) Link Text$/, async function (skipToMainContent) {
+  const licenceIssuerPage = new LicenceIssuerPage(this.page);
+  await licenceIssuerPage.assertSkipToMainContent(skipToMainContent);
+});
 
 Then(
   /^I run the Axe Accessibility check against the DL Landing page$/,
