@@ -9,3 +9,8 @@ Then(
     await universalSteps.changeLanguageTo(language);
   }
 );
+
+Then(/^User clicks the back button$/, async function () {
+  const universalSteps = new UniversalSteps(this.page);
+  await universalSteps.clickBackButton();
+});

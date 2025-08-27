@@ -358,6 +358,12 @@ Feature: DVA Driving licence CRI Error Validations
       | DVADrivingLicenceSubject        | InvalidLastName           | InvalidMiddleNames  |
       | DrivingLicenceSubjectHappyBilly | abcdefghijklmnopqrstuvwxy | abcdefghijklmnopqrs |
 
+  @mock-api:dva-BackButton @validation-regression
+  Scenario: DVA - User clicks the back button
+    Given I see the back button on the DVA details page with text Back
+    And User clicks the back button
+    Then I should be on the Landing Page with Page Title Was your UK photocard driving licence issued by DVLA or DVA?
+
   @mock-api:dva-ConsentSection @validation-regression
   Scenario: DVA - Privacy notice link to consent
     Given I see the consent title section Allow DVA to check your driving licence details
