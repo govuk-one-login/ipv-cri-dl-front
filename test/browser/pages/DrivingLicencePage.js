@@ -49,6 +49,8 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
       'xpath=//*[@id="main-content"]/div/div/p[6]/a'
     );
 
+    this.backButton = this.page.locator('xpath=//*[@id="back"]/a');
+
     // Error summary items
 
     this.invalidLastNameErrorInSummary = this.page.locator(
@@ -983,5 +985,11 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
     }
 
     return true;
+  }
+
+  async assertBackButtonText(backButtonText) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    expect(await this.backButton.innerText()).to.equal(backButtonText);
   }
 };

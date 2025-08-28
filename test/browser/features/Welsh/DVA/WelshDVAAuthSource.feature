@@ -56,3 +56,12 @@ Feature: DVA Driving licence - Auth Source - Welsh Translation
         And I should be on the DVA consent page Rydym angen gwirio manylion eich trwydded yrru – GOV.UK One Login
         And I can see the consent page title as Rydym angen gwirio manylion eich trwydded yrru gyda'r DVA
         And I can see the consent page text as Caniatau DVA i wirio eich manylion trwydded yrru
+
+    @mock-api:dl-dva-auth-success @language-regression
+    Scenario: DVA Auth Source - Welsh Translation Tests - User clicks the back button
+        When I click on the Yes radio button
+        Then I click on the Confirm and Continue button
+        And I should be on the DVA consent page Rydym angen gwirio manylion eich trwydded yrru – GOV.UK One Login
+        Then I see the back button on the DVA check your details page with text Yn ôl
+        And User clicks the back button
+        Then I should be on the Driving Licence check your details page Gwirio manylion eich trwydded yrru cerdyn-llun yn y DU – GOV.UK One Login

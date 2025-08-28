@@ -269,3 +269,19 @@ Then(
     await checkYourDetailsPage.assertHintText(checkYourDetailsHintTextText);
   }
 );
+
+Given(
+  /^I see the back button on the DVA check your details page with text (.*)$/,
+  async function (backButtonText) {
+    const checkYourDetailsPage = new CheckYourDetailsPage(this.page);
+    await checkYourDetailsPage.assertBackButtonText(backButtonText);
+  }
+);
+
+Given(
+  /^I see the back button on the DVLA check your details page with text (.*)$/,
+  async function (backButtonText) {
+    const checkYourDetailsPage = new CheckYourDetailsPage(this.page);
+    await checkYourDetailsPage.assertBackButtonText(backButtonText);
+  }
+);

@@ -548,6 +548,12 @@ Feature: DVLA Driving licence CRI Error Validations
     And I see One Login privacy notice link the GOV.UK One Login privacy notice (opens in a new tab)
     Then I see DVLA privacy notice link the DVLA privacy notice (opens in a new tab)
 
+  @mock-api:dvla-BackButton @validation-regression
+  Scenario: DVLA - User clicks the back button
+    Given I see the back button on the DVLA details page with text Back
+    And User clicks the back button
+    Then I should be on the Landing Page with Page Title Was your UK photocard driving licence issued by DVLA or DVA?
+
   @mock-api:dl-success @cookies
   Scenario: Driving Licence - Cookies - Device Intelligence
     Given On the entry details page I see the Device Intelligence Cookie <DeviceIntelligenceCookieName>

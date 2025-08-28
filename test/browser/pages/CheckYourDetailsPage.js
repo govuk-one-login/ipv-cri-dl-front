@@ -14,6 +14,8 @@ exports.CheckYourDetailsPage = class PlaywrightDevPage {
       'xpath=//*[@id="main-content"]/div/div/form/button'
     );
 
+    this.backButton = this.page.locator('xpath=//*[@id="back"]/a');
+
     this.betaBanner = this.page.locator("xpath=/html/body/div[2]/div/p/strong");
 
     this.betaBannerReads = this.page.locator(
@@ -330,5 +332,10 @@ exports.CheckYourDetailsPage = class PlaywrightDevPage {
     await expect(await this.validToValue.textContent()).to.contains(
       checkYourDetailsValidToFormattedValue
     );
+  }
+
+  async assertBackButtonText(backButtonText) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.backButton.innerText()).to.equal(backButtonText);
   }
 };
