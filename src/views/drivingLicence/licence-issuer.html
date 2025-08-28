@@ -9,11 +9,7 @@
 
 {% block mainContent %}
 {% set title = translate("licence-issuer.title") %}
-{% call hmpoForm(ctx, {
-    attributes: {
-        onsubmit: 'window.disableFormSubmit()'
-    }
-}) %}
+{% call hmpoForm(ctx) %}
 {{ hmpoRadios(ctx, {
    id: "licenceIssuer",
    fieldset: {
@@ -31,7 +27,7 @@
 }) }}
 
 {% block submitButton %}
-    {{ hmpoSubmit(ctx, {id: 'submitButton'}) }}
+    {{ hmpoSubmit(ctx, {id: 'continue'}) }}
 
 {% endblock %}
 
@@ -40,24 +36,26 @@
 {% endblock %}
 
 {% block scripts %}
-    <script {% if cspNonce %} nonce="{{ cspNonce }}"{%  endif %}>
-        window.addEventListener('load', function () {
-            window
-                .DI
-                .analyticsGa4
-                .pageViewTracker
-                .trackOnPageLoad({
-                    statusCode: '200', // Access status code
-                    englishPageTitle: '{{translate("licence-issuer.title")}}',
-                    taxonomy_level1: 'web cri', // Access taxonomy level 1
-                    taxonomy_level2: 'driving licence', // Access taxonomy level 2
-                    content_id: '001',
-                    logged_in_status: true,
-                    dynamic: false
-                });
+  {% include "partials/prevent-enter.html" %}
+  {% include "partials/submit-spinner.html" %}
+  <script {% if cspNonce %} nonce="{{ cspNonce }}" {% endif %}>
+    window.addEventListener("load", function() {
+      window
+        .DI
+        .analyticsGa4
+        .pageViewTracker
+        .trackOnPageLoad({
+          statusCode: "200", // Access status code
+          englishPageTitle: "{{translate(\"licence-issuer.title\")}}",
+          taxonomy_level1: "web cri", // Access taxonomy level 1
+          taxonomy_level2: "driving licence", // Access taxonomy level 2
+          content_id: "001",
+          logged_in_status: true,
+          dynamic: false
         });
-    </script>
-    {{ super ()}}
+    });
+  </script>
+  {{ super ()}}
 {% endblock %}
 
 {% set footerNavItems = translate("govuk.footerNavItems") %}

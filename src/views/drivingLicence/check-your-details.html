@@ -17,11 +17,7 @@
         text: translate("pages.check-your-details.warningText")
     }) }}
 
-    {% call hmpoForm(ctx, {
-        attributes: {
-            onsubmit: 'window.disableFormSubmit()'
-        }
-    }) %}
+    {% call hmpoForm(ctx) %}
 
         {% if values.licenceIssuer == "DVLA" %}
 
@@ -182,13 +178,15 @@
             id: "confirmDetails"
         }) }}
 
-        {{ hmpoSubmit(ctx, {id: "", text: translate("pages.check-your-details.confirmButton")}) }}
+        {{ hmpoSubmit(ctx, {id: "continue", text: translate("pages.check-your-details.confirmButton")}) }}
 
     {% endcall %}
 
 {% endblock %}
 
 {% block scripts %}
+    {% include "partials/prevent-enter.html" %}
+    {% include "partials/submit-spinner.html" %}
     <script {% if cspNonce %} nonce="{{ cspNonce }}"{%  endif %}>
         window.addEventListener('load', function () {
             window
