@@ -7,11 +7,7 @@
 
 {% block mainContent %}
 
-  {% call hmpoForm(ctx, {
-    attributes: {
-      onsubmit: 'window.disableFormSubmit()'
-    }
-  }) %}
+  {% call hmpoForm(ctx) %}
 
     {% if (values.licenceIssuer == "DVA") %}
 
@@ -77,7 +73,7 @@
 {% block scripts %}
 
 {{ super ()}}
-
+{% include "partials/prevent-enter.html" %}
 <script nonce="{{ cspNonce }}">
     var formSubmitted = false;
 

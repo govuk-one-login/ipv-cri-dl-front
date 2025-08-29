@@ -1,0 +1,12 @@
+<script {% if cspNonce %} nonce="{{ cspNonce }}"{%  endif %}>
+  var form = document.getElementsByTagName('form')[0];
+  form.addEventListener("keydown", function (event) {
+
+    var submitButton = document.getElementById('continue')
+    var submitButtonIsNotFocused = document.activeElement !== submitButton;
+
+    if ((event.code === 'Enter') && submitButtonIsNotFocused){
+      event.preventDefault();
+    }
+  });
+</script>

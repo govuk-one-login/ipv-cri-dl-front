@@ -249,21 +249,8 @@ autocomplete: "family-name"
     {% block scripts %}
 
         {{ super ()}}
-
+          {% include "partials/prevent-enter.html" %}
         <script nonce="{{ cspNonce }}">
-
-            <!--    Disable enter button from submitting the form but allow if form submit button is focused-->
-    var form = document.getElementsByTagName('form')[0];
-    form.addEventListener("keydown", function (event) {
-
-        var submitButton = document.getElementById('continue')
-        var submitButtonIsNotFocused = document.activeElement !== submitButton;
-
-        if ((event.code === 'Enter') && submitButtonIsNotFocused){
-            event.preventDefault();
-        }
-    });
-
     var formSubmitted = false;
 
     submitSpinner()
