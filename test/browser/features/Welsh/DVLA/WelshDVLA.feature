@@ -8,18 +8,18 @@ Feature: DVLA Driving licence CRI Error Validations - Welsh Translation
     And I add a cookie to change the language to Welsh
 
   @mock-api:dvla-PageHeading @language-regression
-  Scenario:User Selects DVLA and landed in DVLA page and Page title and sub-text
+  Scenario: DVLA - Welsh Translation Tests - User Selects DVLA and landed in DVLA page and Page title and sub-text
     Given I check the page Title Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru – GOV.UK One Login
     Then I see the heading Rhowch eich manylion yn union fel maent yn ymddangos ar eich trwydded yrru
     And I see sentence Os nad oes gennych drwydded yrru y DU neu os na allwch gofio'ch manylion, gallwch brofi pwy ydych chi mewn ffordd arall yn lle.
 
   @mock-api:dvla-WelshBetaBanner @language-regression
-  Scenario: Beta Banner
+  Scenario: DVLA - Welsh Translation Tests - Beta Banner
     Given I view the BETA banner
     And the beta banner reads Mae hwn yn wasanaeth newydd. Helpwch ni i'w wella a rhoi eich adborth (agor mewn tab newydd).
 
   @mock-api:dvla-WelshBetaBanner @language-regression
-  Scenario: Footer Links and Text
+  Scenario: DVLA - Welsh Translation Tests - Footer Links and Text
     Given I see the accessibility statement link Datganiad hygyrchedd
     And I see the cookies link Cwcis
     And I see the terms and conditions link Telerau ac amodau
@@ -29,7 +29,7 @@ Feature: DVLA Driving licence CRI Error Validations - Welsh Translation
     And I see the crown copyright link © Hawlfraint y goron
 
   @mock-api:dvla-NameField @language-regression
-  Scenario: DVLA Name fields
+  Scenario: DVLA - Welsh Translation Tests - DVLA Name fields
     Given I can see the lastname as Enw olaf
     And I can see the givenName as Enwau a roddwyd
     And I can see the firstName as Enw cyntaf
@@ -38,7 +38,7 @@ Feature: DVLA Driving licence CRI Error Validations - Welsh Translation
     And I can see the middle name sentence Gadewch hyn yn wag os nad oes gennych unrhyw enwau canol
 
   @mock-api:dvla-DobField @language-regression
-  Scenario: DVLA DoB Fields
+  Scenario: DVLA - Welsh Translation Tests - DVLA DoB Fields
     Given I can see the DoB fields titled Dyddiad geni
     When I can see example as Er enghraifft, 5 9 1973
     Then I can see date as Diwrnod
@@ -47,7 +47,7 @@ Feature: DVLA Driving licence CRI Error Validations - Welsh Translation
 
   @mock-api:dvla-IssueDateField @language-regression
   @Language-regression
-  Scenario: DVLA Issue date fields
+  Scenario: DVLA - Welsh Translation Tests - DVLA Issue date fields
     Given I can see the Issue date field titled Dyddiad cyhoeddi
     Then I can see Issue date sentence as Dyma'r dyddiad yn adran 4a o'ch trwydded, er enghraifft 27 5 2019
     And I can see issue day as Diwrnod
@@ -55,7 +55,7 @@ Feature: DVLA Driving licence CRI Error Validations - Welsh Translation
     And I can see issue year as Blwyddyn
 
   @mock-api:dvla-ValidToDateField @language-regression
-  Scenario: DVLA Valid to date field
+  Scenario: DVLA - Welsh Translation Tests - DVLA Valid to date field
     Given I can see the Valid to date field titled Yn ddilys tan
     And I can see Valid to date sentence as Dyma'r dyddiad yn adran 4b o'ch trwydded, er enghraifft 27 5 2019
     Then I can see Valid To day as Diwrnod
@@ -63,22 +63,22 @@ Feature: DVLA Driving licence CRI Error Validations - Welsh Translation
     Then I can see Valid To year as Blwyddyn
 
   @mock-api:dvla-LicenceField @language-regression
-  Scenario: DVLA Licence number
+  Scenario: DVLA - Welsh Translation Tests - DVLA Licence number
     Given I can see the licence number field titled Rhif trwydded
     Then I see the Licence number sentence Dyma'r rhif hir yn adran 5 ar eich trwydded er enghraifft HARRI559146MJ931
 
   @mock-api:dvla-IssueNumberField @language-regression
-  Scenario: DVLA Issue number
+  Scenario: DVLA - Welsh Translation Tests - DVLA Issue number
     Given I can see the issue number field titled Rhif cyhoeddi
     And I can see issue sentence as Dyma'r rhif 2 ddigid ar ôl y gofod yn adran 5 o'ch trwydded
 
   @mock-api:dvla-PostcodeField @language-regression
-  Scenario: DVLA Postcode
+  Scenario: DVLA - Welsh Translation Tests - DVLA Postcode
     Given I can see the postcode field titled Cod post
     Then I can see postcode sentence as Rhowch y cod post yn y cyfeiriad yn adran 8 o'ch trwydded
 
   @mock-api:dvla-consentSection @language-regression
-  Scenario: DVLA Driving Licence privacy notice link to consent
+  Scenario: DVLA - Welsh Translation Tests - DVLA Driving Licence privacy notice link to consent
     Given I see the consent title section Caniatau DVLA i wirio eich manylion trwydded yrru
     And I see the DVLA Consent first sentence Mae DVLA angen eich caniatâd i wirio eich manylion trwydded yrru cyn y gallwch barhau. Byddant yn sicrhau nad yw eich trwydded wedi cael ei chanslo na'i hadrodd fel un sydd ar goll neu wedi'i dwyn.
     And I see the DVLA Consent second sentence I ddarganfod mwy am sut bydd eich manylion trwydded yrru yn cael eu defnyddio, gallwch ddarllen:
@@ -88,7 +88,7 @@ Feature: DVLA Driving licence CRI Error Validations - Welsh Translation
   #### Summary Error validation ######
 
   @mock-api:dvla-unhappyPath @language-regression
-  Scenario Outline: DVLA Driving Licence details page unhappy path when licence number date format does not match with User's Date Of Birth
+  Scenario Outline: DVLA - Welsh Translation Tests - DVLA Driving Licence details page unhappy path when licence number date format does not match with User's Date Of Birth
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters day of birth as <InvalidDayOfBirth>
     And User re-enters month of birth as <InvalidMonthOfBirth>
@@ -105,7 +105,7 @@ Feature: DVLA Driving licence CRI Error Validations - Welsh Translation
 
   #####  InvalidLastNameWithNumbers, InvalidLastNameWithSpecialCharacters, NoLastName #####
   @mock-api:dvla-invalidLastName @language-regression
-  Scenario Outline: DVLA Driving Licence Last name with numbers or special characters or no last name error validation
+  Scenario Outline: DVLA - Welsh Translation Tests - DVLA Driving Licence Last name with numbers or special characters or no last name error validation
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters last name as <InvalidLastName>
     When User clicks on continue
@@ -120,7 +120,7 @@ Feature: DVLA Driving licence CRI Error Validations - Welsh Translation
 
   #####  InvalidFirstNameWithNumbers, InvalidFirstNameWithSpecialCharacters, NoFirstName #####
   @mock-api:dvla-invalidFirstName @language-regression
-  Scenario Outline: DVLA Driving Licence First name with numbers or special characters or no first name error validation
+  Scenario Outline: DVLA - Welsh Translation Tests - DVLA Driving Licence First name with numbers or special characters or no first name error validation
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters first name as <InvalidFirstName>
     When User clicks on continue
@@ -135,7 +135,7 @@ Feature: DVLA Driving licence CRI Error Validations - Welsh Translation
 
   #####  InvalidMiddleNamesWithNumbers, InvalidMiddleNamesWithSpecialCharacters #####
   @mock-api:dvla-invalidMiddleNames @language-regression
-  Scenario Outline: DVLA Driving Licence Middle names with numbers or special characters error validation
+  Scenario Outline: DVLA - Welsh Translation Tests - DVLA Driving Licence Middle names with numbers or special characters error validation
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters middle names as <InvalidMiddleNames>
     When User clicks on continue
@@ -149,7 +149,7 @@ Feature: DVLA Driving licence CRI Error Validations - Welsh Translation
 
   #####  DateOfBirthWithSpecialCharacters, DateOfBirthNotReal, NoDateOfBirth #####
   @mock-api:dvla-invalidDateOfBirth @language-regression
-  Scenario Outline: DVLA Driving Licence Date of birth that are not real or with special characters or no date of birth error validation
+  Scenario Outline: DVLA - Welsh Translation Tests - DVLA Driving Licence Date of birth that are not real or with special characters or no date of birth error validation
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters day of birth as <InvalidDayOfBirth>
     And User re-enters month of birth as <InvalidMonthOfBirth>
@@ -166,7 +166,7 @@ Feature: DVLA Driving licence CRI Error Validations - Welsh Translation
   #|DrivingLicenceSubjectHappyPeter|                 |                   |                |
 
   @mock-api:dvla-invalidDateOfBirth @language-regression
-  Scenario Outline: DVLA Driving Licence Date of birth in the future error validation
+  Scenario Outline: DVLA - Welsh Translation Tests - DVLA Driving Licence Date of birth in the future error validation
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters day of birth as <InvalidDayOfBirth>
     And User re-enters month of birth as <InvalidMonthOfBirth>
@@ -181,7 +181,7 @@ Feature: DVLA Driving licence CRI Error Validations - Welsh Translation
 
   #####  InvalidIssueDate, NoIssueDate #####
   @mock-api:dvla-invalidIssueDate @language-regression
-  Scenario Outline: DVLA Driving Licence Issue date that are not real or with special characters or no issue date error validation
+  Scenario Outline: DVLA - Welsh Translation Tests - DVLA Driving Licence Issue date that are not real or with special characters or no issue date error validation
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters day of issue as <InvalidDayOfIssue>
     And User re-enters month of issue as <InvalidMonthOfIssue>
@@ -198,7 +198,7 @@ Feature: DVLA Driving licence CRI Error Validations - Welsh Translation
       | DrivingLicenceSubjectHappyPeter |                   |                     |                    |
 
   @mock-api:dvla-invalidIssueDate @language-regression
-  Scenario Outline: DVLA Driving Licence Issue date in the future error validation
+  Scenario Outline: DVLA - Welsh Translation Tests - DVLA Driving Licence Issue date in the future error validation
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters day of issue as <InvalidDayOfIssue>
     And User re-enters month of issue as <InvalidMonthOfIssue>
@@ -213,7 +213,7 @@ Feature: DVLA Driving licence CRI Error Validations - Welsh Translation
 
   ####  InvalidValidToDate, ValidToDateWithSpecialCharacters, NoValidToDate  #####
   @mock-api:dvla-invalidExpiryDate @language-regression
-  Scenario Outline: DVLA Driving Licence Valid to date that are not real or with special characters or no valid to date error validation
+  Scenario Outline: DVLA - Welsh Translation Tests - DVLA Driving Licence Valid to date that are not real or with special characters or no valid to date error validation
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters valid to day as <InvalidValidToDay>
     And User re-enters valid to month as <InvalidValidToMonth>
@@ -229,7 +229,7 @@ Feature: DVLA Driving licence CRI Error Validations - Welsh Translation
       | DrivingLicenceSubjectHappyPeter |                   |                     |                    |
 
   @mock-api:dvla-invalidExpiryDate @language-regression
-  Scenario Outline: DVLA Driving Licence Valid to date in the past error validation
+  Scenario Outline: DVLA - Welsh Translation Tests - DVLA Driving Licence Valid to date in the past error validation
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters valid to day as <InvalidValidToDay>
     And User re-enters valid to month as <InvalidValidToMonth>
@@ -243,7 +243,7 @@ Feature: DVLA Driving licence CRI Error Validations - Welsh Translation
       | DrivingLicenceSubjectHappyPeter | 10                | 01                  | 2010               |
 
   @mock-api:dvla-invalidDrivingLicenceNumber @language-regression
-  Scenario Outline: DVLA Driving Licence number less than 16 characters error validation
+  Scenario Outline: DVLA - Welsh Translation Tests - DVLA Driving Licence number less than 16 characters error validation
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters drivingLicenceNumber as <InvalidLicenceNumber>
     When User clicks on continue
@@ -255,7 +255,7 @@ Feature: DVLA Driving licence CRI Error Validations - Welsh Translation
       | DrivingLicenceSubjectHappyPeter | PARKE610112PBF       |
 
   @mock-api:dvla-invalidDrivingLicenceNumber @language-regression
-  Scenario Outline: DVLA Driving Licence number with special characters and spaces error validation
+  Scenario Outline: DVLA - Welsh Translation Tests - DVLA Driving Licence number with special characters and spaces error validation
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters drivingLicenceNumber as <InvalidLicenceNumber>
     When User clicks on continue
@@ -268,7 +268,7 @@ Feature: DVLA Driving licence CRI Error Validations - Welsh Translation
 
   ####### DrivingLicenceNumberWithNumericChar, DrivingLicenceNumberWithAlphaChar, NoDrivingLicenceNumber #######
   @mock-api:dvla-invalidDrivingLicenceNumber @language-regression
-  Scenario Outline: DVLA Driving Licence number with numeric characters or alpha characters or no licence number error validation
+  Scenario Outline: DVLA - Welsh Translation Tests - DVLA Driving Licence number with numeric characters or alpha characters or no licence number error validation
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters drivingLicenceNumber as <InvalidLicenceNumber>
     When User clicks on continue
@@ -282,7 +282,7 @@ Feature: DVLA Driving licence CRI Error Validations - Welsh Translation
       | DrivingLicenceSubjectHappyPeter |                      |
 
   @mock-api:dvla-invalidIssueNumber @language-regression
-  Scenario Outline: DVLA Driving Licence Issue number less than 2 characters error validation
+  Scenario Outline: DVLA - Welsh Translation Tests - DVLA Driving Licence Issue number less than 2 characters error validation
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters issue number as <InvalidIssueNumber>
     When User clicks on continue
@@ -294,7 +294,7 @@ Feature: DVLA Driving licence CRI Error Validations - Welsh Translation
       | DrivingLicenceSubjectHappyPeter | 1                  |
 
   @mock-api:dvla-invalidIssueNumber @language-regression
-  Scenario Outline: DVLA Driving Licence Issue number with special characters error validation
+  Scenario Outline: DVLA - Welsh Translation Tests - DVLA Driving Licence Issue number with special characters error validation
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters issue number as <InvalidIssueNumber>
     When User clicks on continue
@@ -307,7 +307,7 @@ Feature: DVLA Driving licence CRI Error Validations - Welsh Translation
 
   ##### IssueNumberWithAlphanumericChar, IssueNumberWithAlphaChar, NoIssueNumber #####
   @mock-api:dvla-invalidIssueNumber @language-regression
-  Scenario Outline: DVLA Driving Licence Issue number with alphanumeric characters or alpha characters No issue number error validation
+  Scenario Outline: DVLA - Welsh Translation Tests - DVLA Driving Licence Issue number with alphanumeric characters or alpha characters No issue number error validation
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters issue number as <InvalidIssueNumber>
     When User clicks on continue
@@ -321,7 +321,7 @@ Feature: DVLA Driving licence CRI Error Validations - Welsh Translation
   #     |DrivingLicenceSubjectHappyPeter|AB                |bug rasied - LIME-751
 
   @mock-api:dvla-invalidPostcode @language-regression
-  Scenario Outline: DVLA Driving Licence Postcode less than 5 characters error validation
+  Scenario Outline: DVLA - Welsh Translation Tests - DVLA Driving Licence Postcode less than 5 characters error validation
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters postcode as <InvalidPostcode>
     When User clicks on continue
@@ -333,7 +333,7 @@ Feature: DVLA Driving licence CRI Error Validations - Welsh Translation
       | DrivingLicenceSubjectHappyPeter | E20A            |
 
   @mock-api:dvla-invalidPostcode @language-regression
-  Scenario Outline: DVLA Driving Licence - No Postcode in the Postcode field error validation
+  Scenario Outline: DVLA - Welsh Translation Tests - DVLA Driving Licence - No Postcode in the Postcode field error validation
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters postcode as <InvalidPostcode>
     When User clicks on continue
@@ -345,7 +345,7 @@ Feature: DVLA Driving licence CRI Error Validations - Welsh Translation
       | DrivingLicenceSubjectHappyPeter |                 |
 
   @mock-api:dvla-invalidPostcode @language-regression
-  Scenario Outline: DVLA Driving Licence International Postcode error validation
+  Scenario Outline: DVLA - Welsh Translation Tests - DVLA Driving Licence International Postcode error validation
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters postcode as <InvalidPostcode>
     When User clicks on continue
@@ -358,7 +358,7 @@ Feature: DVLA Driving licence CRI Error Validations - Welsh Translation
 
   ##### PostcodeWithSpecialChar #####
   @mock-api:dvla-invalidPostcode @language-regression
-  Scenario Outline: DVLA Driving Licence Postcode with special characters error validation
+  Scenario Outline: DVLA - Welsh Translation Tests - DVLA Driving Licence Postcode with special characters error validation
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters postcode as <InvalidPostcode>
     When User clicks on continue
@@ -371,7 +371,7 @@ Feature: DVLA Driving licence CRI Error Validations - Welsh Translation
 
   ###### PostcodeWithNumericChar, PostcodeWithAlphaChar #####  (need clarification)
   @mock-api:dvla-invalidPostcode @language-regression
-  Scenario Outline: DVLA Driving Licence Postcode with numeric characters or alpha characters error validation
+  Scenario Outline: DVLA - Welsh Translation Tests - DVLA Driving Licence Postcode with numeric characters or alpha characters error validation
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters postcode as <InvalidPostcode>
     When User clicks on continue
@@ -385,7 +385,7 @@ Feature: DVLA Driving licence CRI Error Validations - Welsh Translation
 
   ##### Consent Checkbox Unselected error Validation ##### (passed)
   @mock-api:dvla-Consent-checkbox-error @language-regression
-  Scenario Outline: DVLA Driving Licence error validation when DVLA consent checkbox is unselected
+  Scenario Outline: DVLA - Welsh Translation Tests - DVLA Driving Licence error validation when DVLA consent checkbox is unselected
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And DVLA consent checkbox is unselected
     When User clicks on continue
@@ -398,7 +398,7 @@ Feature: DVLA Driving licence CRI Error Validations - Welsh Translation
 
   ##### Retry message #####
   @mock-api:dl-failed @language-regression
-  Scenario Outline:Retry message
+  Scenario Outline: DVLA - Welsh Translation Tests - Retry message
     Given User enters DVLA data as a <DrivingLicenceSubject>
     And User re-enters drivingLicenceNumber as <InvalidLicenceNumber>
     And User re-enters last name as <InvalidLastName>
@@ -412,3 +412,9 @@ Feature: DVLA Driving licence CRI Error Validations - Welsh Translation
     Examples:
       | DrivingLicenceSubject             | InvalidLicenceNumber | InvalidLastName | InvalidFirstName | InvalidMiddleNames |
       | DrivingLicenceSubjectHappyKenneth | AB999607085JAAAA     | JOHN            | SMITH            | A                  |
+
+  @mock-api:dvla-BackButton @language-regression
+  Scenario: DVLA - Welsh Translation Tests - User clicks the back button
+    Given I see the back button on the DVLA details page with text Yn ôl
+    And User clicks the back button
+    Then I see the Landing Page Title Summary Text Mae hwn i'w weld yn adran 4c o'ch trwydded yrru. Bydd naill ai’n dweud DVLA (Asiantaeth Trwyddedu Gyrru a Cherbydau) neu DVA (Asiantaeth Gyrwyr a Cherbydau).

@@ -4,6 +4,7 @@ exports.UniversalSteps = class PlaywrightDevPage {
   constructor(page, url) {
     this.page = page;
     this.url = url;
+    this.backButton = this.page.locator('xpath=//*[@id="back"]/a');
   }
 
   async changeLanguageTo(language) {
@@ -33,5 +34,10 @@ exports.UniversalSteps = class PlaywrightDevPage {
   async assertURLContains(expected) {
     const url = await this.driver.getCurrentUrl();
     assertTrue(url.contains(expected));
+  }
+
+  async clickBackButton() {
+    await this.backButton.click();
+    await this.page.waitForTimeout(2000); //waitForNavigation and waitForLoadState do not work in this case
   }
 };
