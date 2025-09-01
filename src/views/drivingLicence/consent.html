@@ -7,11 +7,7 @@
 
 {% block mainContent %}
 
-  {% call hmpoForm(ctx, {
-    attributes: {
-      onsubmit: 'window.disableFormSubmit()'
-    }
-  }) %}
+  {% call hmpoForm(ctx) %}
 
     {% if (values.licenceIssuer == "DVA") %}
 
@@ -76,50 +72,26 @@
 
 {% block scripts %}
 
-{{ super ()}}
-
-<script nonce="{{ cspNonce }}">
-    var formSubmitted = false;
-
-    submitSpinner()
-
-    function delayDisableButton(button) {
-      button.className += ' button--spinner'
-      setTimeout(function () {
-        button.setAttribute('disabled', 'disabled')
-      }, 200);
-    }
-
-    function submitSpinner() {
-      var selects = document.getElementById('continue')
-
-      selects.addEventListener('click', function (event) {
-        if (!formSubmitted) {
-          formSubmitted = true;
-
-          delayDisableButton(event.target);
-        } else {
-          event.preventDefault()
-        }
-      })
-    }
-
-    window.addEventListener('load', function () {
-      window
-        .DI
-        .analyticsGa4
-        .pageViewTracker
-        .trackOnPageLoad({
-          statusCode: '200', // Access status code
-          englishPageTitle: '{{translate("pages.consent.title")}}',
-          taxonomy_level1: 'web cri', // Access taxonomy level 1
-          taxonomy_level2: 'driving licence', // Access taxonomy level 2
-          content_id: '001',
-          logged_in_status: true,
-          dynamic: false
-        });
-    });
-</script>
+  {{ super ()}}
+  {% include "partials/prevent-enter.html" %}
+  {% include "partials/submit-spinner.html" %}
+  <script nonce="{{ cspNonce }}">
+      window.addEventListener('load', function () {
+        window
+          .DI
+          .analyticsGa4
+          .pageViewTracker
+          .trackOnPageLoad({
+            statusCode: '200', // Access status code
+            englishPageTitle: '{{translate("pages.consent.title")}}',
+            taxonomy_level1: 'web cri', // Access taxonomy level 1
+            taxonomy_level2: 'driving licence', // Access taxonomy level 2
+            content_id: '001',
+            logged_in_status: true,
+            dynamic: false
+          });
+      });
+  </script>
 
 {% endblock %}
 
