@@ -12,7 +12,7 @@ module.exports = class PlaywrightDevPage {
     this.radioBtnNoDrivingLicence = this.page.locator(
       'xpath=//*[@id="licenceIssuer-noLicence"]'
     );
-    this.CTButton = this.page.locator('xpath=//*[@id="submitButton"]');
+    this.CTButton = this.page.locator('xpath=//*[@id="continue"]');
     this.betaBanner = this.page.locator("xpath=/html/body/div[2]/div");
     this.betaBannerText = this.page.locator(
       "xpath=/html/body/div[2]/div/p/span"
