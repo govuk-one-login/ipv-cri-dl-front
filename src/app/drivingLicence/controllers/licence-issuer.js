@@ -1,6 +1,5 @@
 const BaseController = require("hmpo-form-wizard").Controller;
-const { PACKAGE_NAME } = require("../../../lib/config");
-const logger = require("hmpo-logger").get(PACKAGE_NAME);
+const { logger } = require("../../../lib/logger");
 
 class LicenceIssuerController extends BaseController {
   async saveValues(req, res, next) {
