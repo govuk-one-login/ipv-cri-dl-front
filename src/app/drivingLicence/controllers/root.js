@@ -1,6 +1,6 @@
 const { Controller: BaseController } = require("hmpo-form-wizard");
-const { PACKAGE_NAME, APP } = require("../../../lib/config");
-const logger = require("hmpo-logger").get(PACKAGE_NAME);
+const { APP } = require("../../../lib/config");
+const { logger } = require("../../../lib/logger");
 
 const {
   API: {
