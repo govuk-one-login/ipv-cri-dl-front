@@ -8,6 +8,7 @@ const addLanguageParam = require("@govuk-one-login/frontend-language-toggle/buil
 const RoutingService = require("./router");
 const AppSetup = require("./app-setup");
 
+
 const { app, router } = AppSetup.create(setup);
 
 app.get("nunjucks").addGlobal("getContext", function () {
