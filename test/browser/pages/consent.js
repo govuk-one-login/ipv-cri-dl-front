@@ -60,6 +60,16 @@ exports.ConsentPage = class PlaywrightDevPage {
     await this.CTButton.click();
   }
 
+  async setupConsoleListener(page) {
+    const consoleMessages = [];
+    return new Promise((resolve) => {
+      page.on("console", (msg) => {
+        consoleMessages.push({ type: msg.type(), text: msg.text() });
+      });
+      setTimeout(() => resolve(consoleMessages), 500);
+    });
+  }
+
   async assertNoConsentProvidedErrorSummary(errorSummaryText) {
     await this.page.waitForLoadState("domcontentloaded");
     expect(await this.isCurrentPage()).to.be.true;
