@@ -61,6 +61,8 @@ exports.DVADetailsEntryPage = class PlaywrightDevPage {
       'xpath=//*[@id="main-content"]/div/div/p[8]/a'
     );
 
+    this.backButton = this.page.locator('xpath=//*[@id="back"]/a');
+
     // DVA Error summary items
 
     this.dvaErrorSummaryBoxLicenceNumber = this.page.locator(
@@ -509,5 +511,11 @@ exports.DVADetailsEntryPage = class PlaywrightDevPage {
 
   async goToPage(pageName) {
     await this.page.goto(this.page.url() + pageName);
+  }
+
+  async assertBackButtonText(backButtonText) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    expect(await this.backButton.innerText()).to.equal(backButtonText);
   }
 };

@@ -9,6 +9,7 @@
 
 
 {% set isPageDataSensitive = false %}
+{% set statusCode = '200' %}
 {% set pageTitleKey = "pages.check-your-details.title" %}
 {% set contentID = "8826a513-9d0d-4129-b587-4e8a3f3d5c1f" %}
 {% set taxLevel2 = 'driving licence' %}
@@ -25,11 +26,7 @@
         text: translate("pages.check-your-details.warningText")
     }) }}
 
-    {% call hmpoForm(ctx, {
-        attributes: {
-            onsubmit: 'window.disableFormSubmit()'
-        }
-    }) %}
+    {% call hmpoForm(ctx) %}
 
         {% if values.licenceIssuer == "DVLA" %}
 
@@ -190,10 +187,16 @@
             id: "confirmDetails"
         }) }}
 
-        {{ hmpoSubmit(ctx, {id: "", text: translate("pages.check-your-details.confirmButton")}) }}
+        {{ hmpoSubmit(ctx, {id: "continue", text: translate("pages.check-your-details.confirmButton")}) }}
 
     {% endcall %}
 
+{% endblock %}
+
+{% block scripts %}
+    {% include "partials/prevent-enter.html" %}
+    {% include "partials/submit-spinner.html" %}
+    {{ super ()}}
 {% endblock %}
 
 {% set footerNavItems = translate("govuk.footerNavItems") %}

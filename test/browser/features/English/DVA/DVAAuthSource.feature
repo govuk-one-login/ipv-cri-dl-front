@@ -33,6 +33,15 @@ Feature: DVA Driving licence - Auth Source
     And I can see the check details formatted issueDate value as 19 04 2018
     And I can see the check details formatted validTo value as 01 10 2042
 
+  @mock-api:dl-dva-auth-success @validation-regression
+  Scenario: DVA Auth Source - User clicks the back button
+    When I click on the Yes radio button
+    Then I click on the Confirm and Continue button
+    And I should be on the DVA consent page We need to check your driving licence details – GOV.UK One Login
+    Then I see the back button on the DVA check your details page with text Back
+    And User clicks the back button
+    Then I should be on the Driving Licence check your details page Check your UK photocard driving licence details – GOV.UK One Login
+
   @mock-api:dl-dva-auth-success @validation-regression @accessibility
   Scenario: DVA Auth Source - Axe Accessibility Scan - Driving Licence - Check Your Details Page
     Then I run the Axe Accessibility check against the Driving Licence check your details page
@@ -43,3 +52,13 @@ Feature: DVA Driving licence - Auth Source
     Then I click on the Confirm and Continue button
     And I should be on the DVA consent page We need to check your driving licence details – GOV.UK One Login
     And I run the Axe Accessibility check against the Driving Licence Consent page
+
+  @mock-api:dl-dva-auth-success @console-error-checks
+  Scenario: DVA Auth Source - User navigates through the Auth Source Journey - Check for Console Errors
+    When I click on the Yes radio button
+    And User starts the Console Listener
+    Then I click on the Confirm and Continue button
+    Then There are no console errors on the page
+    And I should be on the DVA consent page We need to check your driving licence details – GOV.UK One Login
+    And I click on the DVA consent checkbox
+    When I click on the Continue button

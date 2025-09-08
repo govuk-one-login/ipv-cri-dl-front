@@ -8,6 +8,7 @@
 {% from "hmpo-details/macro.njk" import hmpoDetails %}
 
 {% set isPageDataSensitive = false %}
+{% set statusCode = '200' %}
 {% set pageTitleKey = "pages.licence-issuer.title" %}
 {% set contentID = "3984e021-96f1-43cd-b3c8-077390224204" %}
 {% set taxLevel2 = 'driving licence' %}
@@ -16,11 +17,7 @@
 
 {% block mainContent %}
 {% set title = translate("licence-issuer.title") %}
-{% call hmpoForm(ctx, {
-    attributes: {
-        onsubmit: 'window.disableFormSubmit()'
-    }
-}) %}
+{% call hmpoForm(ctx) %}
 {{ hmpoRadios(ctx, {
    id: "licenceIssuer",
    fieldset: {
@@ -38,12 +35,18 @@
 }) }}
 
 {% block submitButton %}
-    {{ hmpoSubmit(ctx, {id: 'submitButton'}) }}
+    {{ hmpoSubmit(ctx, {id: 'continue'}) }}
 
 {% endblock %}
 
 {% endcall %}
 
+{% endblock %}
+
+{% block scripts %}
+  {% include "partials/prevent-enter.html" %}
+  {% include "partials/submit-spinner.html" %}
+  {{ super ()}}
 {% endblock %}
 
 {% set footerNavItems = translate("govuk.footerNavItems") %}

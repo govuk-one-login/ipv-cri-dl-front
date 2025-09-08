@@ -30,6 +30,7 @@ Then(
 
 Then(/^User clicks on continue$/, { timeout: 2 * 5000 }, async function () {
   const drivingLicencePage = new DrivingLicencePage(this.page);
+  expect(drivingLicencePage.isCurrentPage()).to.be.true;
   await drivingLicencePage.clickOnContinue();
 });
 
@@ -1077,5 +1078,21 @@ Then(
   async function (consentOneLoginLink) {
     const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
     await dvaDetailsEntryPage.assertDVAConsentOneLoginLink(consentOneLoginLink);
+  }
+);
+
+Given(
+  /^I see the back button on the DVA details page with text (.*)$/,
+  async function (backButtonText) {
+    const dvaDetailsEntryPage = new DVADetailsEntryPage(this.page);
+    await dvaDetailsEntryPage.assertBackButtonText(backButtonText);
+  }
+);
+
+Given(
+  /^I see the back button on the DVLA details page with text (.*)$/,
+  async function (backButtonText) {
+    const drivingLicencePage = new DrivingLicencePage(this.page);
+    await drivingLicencePage.assertBackButtonText(backButtonText);
   }
 );

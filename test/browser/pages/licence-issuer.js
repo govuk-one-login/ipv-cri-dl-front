@@ -12,7 +12,7 @@ module.exports = class PlaywrightDevPage {
     this.radioBtnNoDrivingLicence = this.page.locator(
       'xpath=//*[@id="licenceIssuer-noLicence"]'
     );
-    this.CTButton = this.page.locator('xpath=//*[@id="submitButton"]');
+    this.CTButton = this.page.locator('xpath=//*[@id="continue"]');
     this.betaBanner = this.page.locator("xpath=/html/body/div[2]/div");
     this.betaBannerText = this.page.locator(
       "xpath=/html/body/div[2]/div/p/span"
@@ -44,6 +44,7 @@ module.exports = class PlaywrightDevPage {
     this.viewCookiesLink = this.page.locator(
       'xpath=//*[@id="cookies-banner-main"]/div[2]/a'
     );
+
     this.cookiesPageTitle = this.page.locator(
       'xpath=//*[@id="main-content"]/div/div/h1'
     );
@@ -71,56 +72,44 @@ module.exports = class PlaywrightDevPage {
     this.whyWeNeedToSeeThisDropDownText = this.page.locator(
       'xpath=//*[@id="main-content"]/div/div/form/details/div'
     );
-    this.accessibilityStatementLink = this.page.locator(
-      "xpath=/html/body/footer/div/div/div[1]/ul/li[1]/a"
+    this.footerAccessibilityStatementText = this.page.locator(
+      "xpath=//html/body/footer/div/div/div[1]/ul/li[1]/a"
     );
-    this.accessibilityStatementPageTitle = this.page.locator(
-      'xpath=//*[@id="main-content"]/div/div/h1'
+
+    this.footerCookieText = this.page.locator(
+      "xpath=//html/body/footer/div/div/div[1]/ul/li[2]/a"
     );
-    this.cookiesLink = this.page.locator(
-      "xpath=/html/body/footer/div/div/div[1]/ul/li[2]/a"
+
+    this.footerTermsAndConditionsText = this.page.locator(
+      "xpath=//html/body/footer/div/div/div[1]/ul/li[3]/a"
     );
-    this.termsAndConditionsLink = this.page.locator(
-      "xpath=/html/body/footer/div/div/div[1]/ul/li[3]/a"
+
+    this.footerPrivacyNoticeText = this.page.locator(
+      "xpath=//html/body/footer/div/div/div[1]/ul/li[4]/a"
     );
-    this.termsAndConditionsPageTitle = this.page.locator(
-      'xpath=//*[@id="main-content"]/div/div/h1'
+
+    this.footerSupportText = this.page.locator(
+      "xpath=//html/body/footer/div/div/div[1]/ul/li[5]/a"
     );
-    this.privacyNoticeLink = this.page.locator(
-      "xpath=/html/body/footer/div/div/div[1]/ul/li[4]/a"
+
+    this.footerOpenGovernmentLicenceText = this.page.locator(
+      "xpath=//html/body/footer/div/div/div[1]/span/a"
     );
-    this.privacyNoticePageTitle = this.page.locator(
-      'xpath=//*[@id="main-content"]/div/div/h1'
+
+    this.footerCrownCopyrightText = this.page.locator(
+      "xpath=//html/body/footer/div/div/div[2]/a"
     );
-    this.supportLink = this.page.locator(
-      "xpath=/html/body/footer/div/div/div[1]/ul/li[5]/a"
-    );
-    this.supportPageTitle = this.page.locator(
-      'xpath=//*[@id="main-content"]/div/div/h1'
-    );
-    this.crownCopyrightLink = this.page.locator(
-      "xpath=/html/body/footer/div/div/div[2]/a"
-    );
-    this.crownCopyrightPageTitle = this.page.locator(
-      'xpath=//*[@id="primary"]/div/div[1]/div/div/article/div[1]/h1'
-    );
-    this.openGovernmentLicenceLinkText = this.page.locator(
-      "xpath=/html/body/footer/div/div/div[1]/span"
-    );
-    this.openGovernmentLicenceLink = this.page.locator(
-      "xpath=/html/body/footer/div/div/div[1]/span/a"
-    );
-    this.openGovernmentLicencePageTitle = this.page.locator(
-      'xpath=//*[@id="open-licence-logo"]'
-    );
+
     this.govUkLink = this.page.locator("xpath=/html/body/header/div/div");
-    this.govUkPageTitle = this.page.locator(
-      'xpath=//*[@id="content"]/header/div/div[1]/h1/span[1]'
+    this.govUkPageTitle = this.page.locator('xpath=//*[@id="logo"]');
+    this.dlLandingPageTitle = this.page.locator(
+      'xpath=//*[@id="licenceIssuer-fieldset"]/legend/h1'
     );
-    this.dlLandingPageTitle = this.page.locator('xpath=//*[@id="header"]');
     this.dlLandingPageTitleSummary = this.page.locator(
       'xpath=//*[@id="licenceIssuer-hint"]'
     );
+
+    this.skipToMainContent = this.page.locator("xpath=//html/body/a");
 
     this.dlLandingPageErrorTitle = this.page.locator(
       'xpath=//*[@id="main-content"]/div[1]/div/h2'
@@ -141,6 +130,27 @@ module.exports = class PlaywrightDevPage {
       'xpath=//*[@id="main-content"]/div/div/p[8]/a'
     );
     this.header = this.page.locator('xpath=//*[@id="header"]');
+    this.footerLinks = {
+      Accessibility: this.page.locator(
+        "xpath=/html/body/footer/div/div/div[1]/ul/li[1]/a"
+      ),
+      Cookies: this.page.locator(
+        "xpath=/html/body/footer/div/div/div[1]/ul/li[2]/a"
+      ),
+      TsAndCs: this.page.locator(
+        "xpath=/html/body/footer/div/div/div[1]/ul/li[3]/a"
+      ),
+      Privacy: this.page.locator(
+        "xpath=/html/body/footer/div/div/div[1]/ul/li[4]/a"
+      ),
+      Support: this.page.locator(
+        "xpath=/html/body/footer/div/div/div[1]/ul/li[5]/a"
+      ),
+      OGL: this.page.locator("xpath=/html/body/footer/div/div/div[1]/span/a"),
+      CrownCopyright: this.page.locator(
+        "xpath=/html/body/footer/div/div/div[2]/a"
+      )
+    };
   }
 
   isCurrentPage() {
@@ -159,6 +169,16 @@ module.exports = class PlaywrightDevPage {
 
   async continue() {
     await this.CTButton.click();
+  }
+
+  async setupConsoleListener(page) {
+    const consoleMessages = [];
+    return new Promise((resolve) => {
+      page.on("console", (msg) => {
+        consoleMessages.push({ type: msg.type(), text: msg.text() });
+      });
+      setTimeout(() => resolve(consoleMessages), 500);
+    });
   }
 
   async clickOnDVARadioButton() {
@@ -194,16 +214,17 @@ module.exports = class PlaywrightDevPage {
     await this.viewCookiesLink.click();
   }
 
+  async assertCookiesPolicyPageTitle(cookiesPageTitle) {
+    await this.page.waitForLoadState("domcontentloaded");
+    await this.cookiesPageTitle.isVisible(cookiesPageTitle);
+    expect(await this.cookiesPageTitle.textContent()).to.contains(
+      cookiesPageTitle
+    );
+  }
+
   async clickChangeCookieSettingsLink() {
     await this.page.waitForLoadState("domcontentloaded");
-    await this.page.evaluate(() => {
-      const linkElement = document.querySelector(
-        'div.govuk-cookie-banner__message > a.govuk-link[href="https://signin.account.gov.uk/cookies"]'
-      );
-      if (linkElement) {
-        linkElement.click();
-      }
-    });
+    await this.changeYourCookiesSettingsLink.click();
   }
 
   async selectDVLARadioButton() {
@@ -256,6 +277,66 @@ module.exports = class PlaywrightDevPage {
     ).to.contains(thirdRadioButton);
   }
 
+  async assertFooterAccessibilityStatementText(
+    assertFooterAccessibilityStatementText
+  ) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    await expect(
+      await this.footerAccessibilityStatementText.textContent()
+    ).to.contains(assertFooterAccessibilityStatementText);
+  }
+
+  async assertFooterCookieText(assertFooterCookieText) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    await expect(await this.footerCookieText.textContent()).to.contains(
+      assertFooterCookieText
+    );
+  }
+
+  async assertFooterTermsAndConditonsText(assertFooterTermsAndConditonsText) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    await expect(
+      await this.footerTermsAndConditionsText.textContent()
+    ).to.contains(assertFooterTermsAndConditonsText);
+  }
+
+  async assertFooterPrivacyNoticeText(assertFooterPrivacyNoticeText) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    await expect(await this.footerPrivacyNoticeText.textContent()).to.contains(
+      assertFooterPrivacyNoticeText
+    );
+  }
+
+  async assertFooterSupportText(assertFooterSupportText) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    await expect(await this.footerSupportText.textContent()).to.contains(
+      assertFooterSupportText
+    );
+  }
+
+  async assertFooterOpenGovernmentLicenceText(
+    assertFooterOpenGovernmentLicenceText
+  ) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    await expect(
+      await this.footerOpenGovernmentLicenceText.textContent()
+    ).to.contains(assertFooterOpenGovernmentLicenceText);
+  }
+
+  async assertFooterCrownCopyrightText(assertFooterCrownCopyrightText) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    await expect(await this.footerCrownCopyrightText.textContent()).to.contains(
+      assertFooterCrownCopyrightText
+    );
+  }
+
   async dropDownSummaryLinkText(dropDownSummaryLinkText) {
     await this.page.waitForLoadState("domcontentloaded");
     expect(await this.whyWeNeedToSeeThisDropDownLink.textContent()).to.contains(
@@ -278,11 +359,15 @@ module.exports = class PlaywrightDevPage {
   async assertCookieBannerAcceptText(cookieAcceptSummaryText) {
     await this.page.waitForLoadState("domcontentloaded");
     await this.cookieAcceptedTestDisplayed.isVisible(cookieAcceptSummaryText);
+    const actualText = await this.cookieAcceptedTestDisplayed.innerText();
+    expect(actualText.trim()).to.equal(cookieAcceptSummaryText.trim());
   }
 
   async assertCookieBannerRejectText(cookieRejectSummaryText) {
     await this.page.waitForLoadState("domcontentloaded");
-    this.cookieRejectedTestDisplayed.isVisible(cookieRejectSummaryText);
+    await this.cookieRejectedTestDisplayed.isVisible(cookieRejectSummaryText);
+    const actualText = await this.cookieRejectedTestDisplayed.innerText();
+    expect(actualText.trim()).to.equal(cookieRejectSummaryText.trim());
   }
 
   async assertBetaBannerText(betaBannerText) {
@@ -305,6 +390,70 @@ module.exports = class PlaywrightDevPage {
     await newPage.close();
   }
 
+  async assertFooterLink(linkName) {
+    const timeout = 10000;
+    const linkLocator = this.footerLinks[linkName];
+
+    if (!linkLocator) {
+      throw new Error(`No locator defined for footer link: ${linkName}`);
+    }
+
+    // Define urlAssertions
+    const urlAssertions = {
+      Accessibility: "https://signin.account.gov.uk/accessibility-statement",
+      Cookies: "https://signin.account.gov.uk/cookies",
+      TsAndCs: "https://signin.account.gov.uk/terms-and-conditions",
+      Privacy:
+        "https://www.gov.uk/government/publications/govuk-one-login-privacy-notice",
+      Support: "https://home.account.gov.uk/contact-gov-uk-one-login",
+      OGL: "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+      CrownCopyright:
+        "https://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/uk-government-licensing-framework/crown-copyright/"
+    };
+
+    // Determine if the link opens in a new tab or not
+    const targetAttribute = await linkLocator.evaluate((el) =>
+      el.getAttribute("target")
+    );
+    const newTabExpected = targetAttribute === "_blank";
+
+    if (newTabExpected) {
+      await Promise.all([
+        this.page.waitForEvent("popup", { timeout }),
+        linkLocator.click({ modifier: "Ctrl" })
+      ]);
+
+      const pages = this.page.context().pages();
+      const newTab = pages[pages.length - 1];
+
+      expect(await newTab.title()).to.not.equal(
+        "Page not found - GOV.UK One Login"
+      );
+
+      if (urlAssertions[linkName]) {
+        expect(newTab.url()).to.contain(urlAssertions[linkName]);
+      } else {
+        throw new Error(
+          `No URL assertion defined for footer link: ${linkName}`
+        );
+      }
+    } else {
+      // Pass a URL pattern or '*' to waitForURL
+      await Promise.all([
+        this.page.waitForURL(/.*/, { timeout }), // Wait for any URL change
+        linkLocator.click()
+      ]);
+
+      if (urlAssertions[linkName]) {
+        expect(this.page.url()).to.contain(urlAssertions[linkName]);
+      } else {
+        throw new Error(
+          `No URL assertion defined for footer link: ${linkName}`
+        );
+      }
+    }
+  }
+
   async clickHideThisMessageCookieButton() {
     await this.page.waitForLoadState("domcontentloaded");
     await this.page.evaluate(() => {
@@ -313,127 +462,6 @@ module.exports = class PlaywrightDevPage {
         hiddenButton.click();
       }
     });
-  }
-
-  async assertCookiesPolicyPageTitle(cookiesPageTitle) {
-    await this.page.waitForLoadState("domcontentloaded");
-    await this.cookiesPageTitle.isVisible(cookiesPageTitle);
-  }
-
-  async assertAccessibilityStatementPageTitle(accessibilityStatementPageTitle) {
-    await this.page.waitForLoadState("domcontentloaded");
-    await this.accessibilityStatementPageTitle.isVisible(
-      accessibilityStatementPageTitle
-    );
-  }
-
-  async assertAccessibilityStatementLinkText(accessibilityStatementLinkText) {
-    await this.page.waitForLoadState("domcontentloaded");
-    expect(await this.accessibilityStatementLink.innerText()).to.equal(
-      accessibilityStatementLinkText
-    );
-  }
-
-  async clickAccessibilityStatementLink() {
-    await this.page.waitForLoadState("domcontentloaded");
-    await this.accessibilityStatementLink.click();
-  }
-
-  async assertCookiesLinkText(cookiesLinkText) {
-    await this.page.waitForLoadState("domcontentloaded");
-    expect(await this.cookiesLink.innerText()).to.equal(cookiesLinkText);
-  }
-
-  async clickCookiesLink() {
-    await this.page.waitForLoadState("domcontentloaded");
-    await this.cookiesLink.click();
-  }
-
-  async assertTermsAndConditionsLinkText(termsAndConditionsLinkText) {
-    await this.page.waitForLoadState("domcontentloaded");
-    expect(await this.termsAndConditionsLink.innerText()).to.equal(
-      termsAndConditionsLinkText
-    );
-  }
-
-  async clickTermsAndConditionsLink() {
-    await this.page.waitForLoadState("domcontentloaded");
-    await this.termsAndConditionsLink.click();
-  }
-
-  async assertTermsAndConditionsPageTitle(termsAndConditionsPageTitle) {
-    await this.page.waitForLoadState("domcontentloaded");
-    await this.accessibilityStatementPageTitle.isVisible(
-      termsAndConditionsPageTitle
-    );
-  }
-
-  async assertPrivacyNoticeLinkText(privacyNoticeLinkText) {
-    await this.page.waitForLoadState("domcontentloaded");
-    expect(await this.privacyNoticeLink.innerText()).to.equal(
-      privacyNoticeLinkText
-    );
-  }
-
-  async clickPrivacyNoticeLink() {
-    await this.page.waitForLoadState("domcontentloaded");
-    await this.privacyNoticeLink.click();
-  }
-
-  async assertPrivacyNoticePageTitle(privacyNoticePageTitle) {
-    await this.page.waitForLoadState("domcontentloaded");
-    await this.privacyNoticePageTitle.isVisible(privacyNoticePageTitle);
-  }
-
-  async assertSupportLinkText(supportLinkText) {
-    await this.page.waitForLoadState("domcontentloaded");
-    expect(await this.supportLink.innerText()).to.equal(supportLinkText);
-  }
-
-  async clickSupportLink() {
-    await this.page.waitForLoadState("domcontentloaded");
-    await this.supportLink.click();
-  }
-
-  async assertSupportPageTitle(supportPageTitle) {
-    await this.page.waitForLoadState("domcontentloaded");
-    await this.supportPageTitle.isVisible(supportPageTitle);
-  }
-
-  async assertCrownCopyrightLinkText(crownCopyrightLinkText) {
-    await this.page.waitForLoadState("domcontentloaded");
-    expect(await this.crownCopyrightLink.innerText()).to.equal(
-      crownCopyrightLinkText
-    );
-  }
-
-  async clickCrownCopyrightLink() {
-    await this.page.waitForLoadState("domcontentloaded");
-    await this.crownCopyrightLink.click();
-  }
-
-  async assertCrownCopyrightPageTitle(crownCopyrightPageTitle) {
-    await this.page.waitForLoadState("domcontentloaded");
-    await this.crownCopyrightPageTitle.isVisible(crownCopyrightPageTitle);
-  }
-
-  async assertOpenGovernmentLicenceLinkText(openGovernmentLicenceLinkText) {
-    await this.page.waitForLoadState("domcontentloaded");
-    expect(await this.openGovernmentLicenceLinkText.innerText()).to.equal(
-      openGovernmentLicenceLinkText
-    );
-  }
-
-  async clickOpenGovernmentLicenceLink() {
-    await this.page.waitForLoadState("domcontentloaded");
-    await this.openGovernmentLicenceLink.click();
-  }
-
-  async assertOpenGovernmentLicencePageTitle(openGovernmentLicencePageTitle) {
-    await this.page.waitForLoadState("domcontentloaded");
-    await this.openGovernmentLicencePageTitle.isVisible(
-      openGovernmentLicencePageTitle
-    );
   }
 
   async assertGovUkLinkText(govUkLinkText) {
@@ -449,16 +477,30 @@ module.exports = class PlaywrightDevPage {
   async assertGovUkPageTitle(govUkPageTitle) {
     await this.page.waitForLoadState("domcontentloaded");
     await this.govUkPageTitle.isVisible(govUkPageTitle);
+    expect(await this.govUkPageTitle.textContent()).to.contains(govUkPageTitle);
   }
 
   async assertDlLandingPageTitle(dlLandingPageTitle) {
     await this.page.waitForLoadState("domcontentloaded");
-    await this.dlLandingPageTitle.isVisible(dlLandingPageTitle);
+    expect(await this.dlLandingPageTitle.textContent()).to.contains(
+      dlLandingPageTitle
+    );
+  }
+
+  async assertSkipToMainContent(skipToMainContent) {
+    await this.page.waitForLoadState("domcontentloaded");
+    await this.skipToMainContent.textContent(skipToMainContent);
+    expect(await this.skipToMainContent.textContent()).to.contains(
+      skipToMainContent
+    );
   }
 
   async assertDlLandingPageTitleSummary(dlLandingPageTitleSummary) {
     await this.page.waitForLoadState("domcontentloaded");
     await this.dlLandingPageTitleSummary.isVisible(dlLandingPageTitleSummary);
+    expect(await this.dlLandingPageTitleSummary.textContent()).to.contains(
+      dlLandingPageTitleSummary
+    );
   }
 
   async assertTitleError(noRadioButtonSelectTitleError) {

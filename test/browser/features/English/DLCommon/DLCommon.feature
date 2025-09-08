@@ -1,4 +1,4 @@
-@mock-api:dl-success @success @DVA
+@mock-api:dl-success @success
 Feature: Driving licence CRI - Common Tests
 
     Background:
@@ -8,7 +8,12 @@ Feature: Driving licence CRI - Common Tests
     @mock-api:driving-licence-PageHeading @validation-regression
     Scenario: Driving Licence - Landing Page - Title and Text
         Given I should be on the Landing Page with Page Title Was your UK photocard driving licence issued by DVLA or DVA?
-        And I see the Landing Page Title Summary Text You can find this in section 4c of your driving licence. It will either say DVLA (Driving and vehicle Licensing Agency) or DVA (Driver and Vehicle Agency).
+        And I see the Landing Page Title Summary Text You can find this in section 4c of your driving licence. It will either say DVLA (Driver and Vehicle Licensing Agency) or DVA (Driver and Vehicle Agency).
+
+    @mock-api:driving-licence-RadioButtons @validation-regression
+    Scenario: Driving Licence - Landing Page - Skip to Main Content
+        Given I should be on the Landing Page with Page Title Was your UK photocard driving licence issued by DVLA or DVA?
+        Then I see the Skip to main content Link Text
 
     @mock-api:driving-licence-RadioButtons @validation-regression
     Scenario: Driving Licence - Landing Page - Displays correct radio button options for DVA and DVLA
@@ -38,28 +43,28 @@ Feature: Driving licence CRI - Common Tests
     Scenario: Driving Licence - User Clicks the Accept Cookies on the Cookie Banner
         Given The cookie banner is displayed
         When User clicks on the Accept Cookie Button
-        Then I see the Cookie Banner Accept text as You’ve accepted additional cookies. You can change your cookie settings at any time.
+        Then I see the Cookie Banner Accept text as You've accepted additional cookies. You can change your cookie settings at any time.
         Then User clicks on the Accept Hide this message button
 
     @mock-api:driving-licence-Cookies @validation-regression
     Scenario: Driving Licence - User Clicks the Reject Cookies on the Cookie Banner
         Given The cookie banner is displayed
         When User clicks on the Reject Cookie Button
-        Then I see the Cookie Banner Reject text as You’ve rejected additional cookies. You can change your cookie settings at any time.
+        Then I see the Cookie Banner Reject text as You've rejected additional cookies. You can change your cookie settings at any time.
         Then User clicks on the Reject Hide this message button
 
     @mock-api:driving-licence-Cookies @validation-regression
     Scenario: Driving Licence - User Clicks the View Cookies on the Cookie Banner
         Given The cookie banner is displayed
         When User clicks on the View Cookies Link
-        And I check the Cookies page Title GOV.UK One Login cookies policy – GOV.UK One Login
+        And I check the Cookies page Title GOV.UK One Login cookies policy
 
     @mock-api:driving-licence-Cookies @validation-regression
     Scenario: Driving Licence - User Clicks the change your cookie settings after Accepting Cookies on the Cookie Banner
         Given The cookie banner is displayed
         When User clicks on the Accept Cookie Button
         Then User click the change your cookie settings link
-        And I check the Cookies page Title GOV.UK One Login cookies policy – GOV.UK One Login
+        And I check the Cookies page Title GOV.UK One Login cookies policy
 
     @mock-api:driving-licence-BetaBanner @validation-regression
     Scenario Outline: Driving Licence - GOV.UK Beta Banner
@@ -78,46 +83,18 @@ Feature: Driving licence CRI - Common Tests
         And I check the GOV.UK page Title GOV.UK
 
     @mock-api:driving-licence-PageFooter @validation-regression
-    Scenario: Driving Licence - Footer - Accessibility statement
-        Given I see the Accessibility statement footer link with the text Accessibility statement
-        When User clicks the Accessibiliy statement Link
-        And I check the Accessibiliy statement page Title Accessibility statement for GOV.UK One Login – GOV.UK One Login
-
-    @mock-api:driving-licence-PageFooter @validation-regression
-    Scenario: Driving Licence - Footer - Cookies
-        Given I see the Cookies footer link with the text Cookies
-        When User clicks the Cookies Link
-        And I check the Cookies page Title GOV.UK One Login cookies policy – GOV.UK One Login
-
-    @mock-api:driving-licence-PageFooter @validation-regression
-    Scenario: Driving Licence - Footer - Terms and Conditions
-        Given I see the Terms and conditions footer link with the text Terms and conditions
-        When User clicks the Terms and conditions Link
-        And I check the Terms and conditions page Title GOV.UK One Login terms and conditions – GOV.UK One Login
-
-    @mock-api:driving-licence-PageFooter @validation-regression
-    Scenario: Driving Licence - Footer - Privacy Notice
-        Given I see the Privacy notice footer link with the text Privacy notice
-        When User clicks the Privacy notice Link
-        And I check the Privacy notice page Title GOV.UK One Login privacy notice – GOV.UK One Login
-
-    @mock-api:driving-licence-PageFooter @validation-regression
-    Scenario: Driving Licence - Footer - Support (opens in new tab)
-        Given I see the Support footer link with the text Support (opens in new tab)
-        When User clicks the Support Link
-        And I check the Support page Title Contact GOV.UK One Login – GOV.UK One Login
-
-    @mock-api:driving-licence-PageFooter @validation-regression
-    Scenario: Driving Licence - Footer - Crown Copyright
-        Given I see the Crown Copyright footer link with the text © Crown copyright
-        When User clicks the Crown Copyright Link
-        And I check the Crown Copyright page Title Contact GOV.UK One Login – GOV.UK One Login
-
-    @mock-api:driving-licence-PageFooter @validation-regression
-    Scenario: Driving Licence - Footer - Open Government Licence v3.0
-        Given I see the OGL footer link with the text All content is available under the Open Government Licence v3.0, except where otherwise stated
-        When User clicks the OGL Link
-        And I check the OGL page Title Open Government Licence for public sector information
+    Scenario Outline: Fraud CRI - Footer Links
+        Given I should be on the Landing Page with Page Title Was your UK photocard driving licence issued by DVLA or DVA?
+        Then they click Footer <link> and assert I have been redirected correctly
+        Examples:
+            | link           |
+            | Accessibility  |
+            | Cookies        |
+            | TsAndCs        |
+            | Privacy        |
+            | Support        |
+            | OGL            |
+            | CrownCopyright |
 
     @mock-api:driving-licence-PageCookies @cookies
     Scenario: Driving Licence - Cookies - Device Intelligence
