@@ -52,3 +52,13 @@ Feature: DVA Driving licence - Auth Source
     Then I click on the Confirm and Continue button
     And I should be on the DVA consent page We need to check your driving licence details – GOV.UK One Login
     And I run the Axe Accessibility check against the Driving Licence Consent page
+
+  @mock-api:dl-dva-auth-success @console-error-checks
+  Scenario: DVA Auth Source - User navigates through the Auth Source Journey - Check for Console Errors
+    When I click on the Yes radio button
+    And User starts the Console Listener
+    Then I click on the Confirm and Continue button
+    Then There are no console errors on the page
+    And I should be on the DVA consent page We need to check your driving licence details – GOV.UK One Login
+    And I click on the DVA consent checkbox
+    When I click on the Continue button

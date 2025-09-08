@@ -389,3 +389,12 @@ Feature: DVA Driving licence CRI Error Validations
     And User clicks on continue
     Then they should see an error page
     Then I run the Axe Accessibility check against the DL Error page
+
+  @mock-api:dva-consoleErrorCheck @console-error-checks
+  Scenario: DVA - User navigates through the DVA Journey - Check for Console Errors
+    Given I see the back button on the DVA details page with text Back
+    And User clicks the back button
+    Then I should be on the Landing Page with Page Title Was your UK photocard driving licence issued by DVLA or DVA?
+    And User starts the Console Listener
+    And I click on DVA radio button and Continue
+    Then There are no console errors on the page

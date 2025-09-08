@@ -171,6 +171,16 @@ module.exports = class PlaywrightDevPage {
     await this.CTButton.click();
   }
 
+  async setupConsoleListener(page) {
+    const consoleMessages = [];
+    return new Promise((resolve) => {
+      page.on("console", (msg) => {
+        consoleMessages.push({ type: msg.type(), text: msg.text() });
+      });
+      setTimeout(() => resolve(consoleMessages), 500);
+    });
+  }
+
   async clickOnDVARadioButton() {
     expect(await this.page.title()).to.equal(
       "Was your UK photocard driving licence issued by DVLA or DVA? – GOV.UK One Login"
