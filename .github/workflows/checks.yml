@@ -76,7 +76,7 @@ jobs:
         run: yarn playwright install-deps chromium
         if: steps.playwright-cache.outputs.cache-hit == 'true'
 
-      - name: Build dependencies
+      - name: Build assets
         run: yarn build
 
       - name: Run lint
