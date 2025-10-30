@@ -11,6 +11,21 @@ on:
       - main
 
 jobs:
+  resolve-test-versions:
+    runs-on: ubuntu-latest
+    outputs:
+      playwright-version: ${{ steps['resolve-playwright-version'].outputs.version }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Resolve Playwright version
+        id: resolve-playwright-version
+        run: |
+          version="$(yq -r '.devDependencies["@playwright/test"] // .dependencies["@playwright/test"] // ""' package.json)"
+          test -n "$version" || { echo "No @playwright/test version found in package.json"; exit 1; }
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
   pre-commit:
     runs-on: ubuntu-latest
     steps:
@@ -32,24 +47,47 @@ jobs:
 
   run-tests:
     runs-on: ubuntu-latest
+    needs: resolve-test-versions
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
+
       - name: Use Node.js 22.x
         uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: "yarn"
+
       - name: Install dependencies
-        run: yarn install
-      - name: Build dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Cache Playwright
+        id: playwright-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-browsers-${{ needs['resolve-test-versions'].outputs.playwright-version }}
+
+      - name: Setup Playwright
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: yarn playwright install chromium --with-deps
+
+      - name: Setup Playwright dependencies
+        run: yarn playwright install-deps chromium
+        if: steps.playwright-cache.outputs.cache-hit == 'true'
+
+      - name: Build assets
         run: yarn build
+
       - name: Run lint
         run: yarn lint
+
       - name: Run test and write coverage
         run: yarn test:coverage
+
       - name: Run browser tests
-        run: yarn run test:browser:ci
+        run: yarn test:browser:ci
+
       - name: Run sonarcloud scan
         if: ${{ github.actor != 'dependabot[bot]' }}
         uses: SonarSource/sonarqube-scan-action@v5.3.1
