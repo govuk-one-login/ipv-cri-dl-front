@@ -2,7 +2,7 @@ const { Given, When, Then } = require("@cucumber/cucumber");
 const { DVADetailsEntryPage } = require("../pages/DVADetailsEntryPage");
 const { DrivingLicencePage } = require("../pages/DrivingLicencePage");
 const { expect } = require("chai");
-const { injectAxe } = require("axe-playwright");
+const { AxeBuilder } = require("@axe-core/playwright");
 
 Then(/^I can see CTA {string}$/, async function () {});
 
@@ -17,14 +17,11 @@ Then(
 Then(
   /^I run the Axe Accessibility check against the DVLA Details page$/,
   async function () {
-    await injectAxe(this.page);
-    // Run Axe for WCAG 2.2 AA rules
-    const wcagResults = await this.page.evaluate(() => {
-      return axe.run({
-        runOnly: ["wcag2aa"]
-      });
-    });
-    expect(wcagResults.violations).to.be.empty;
+    const results = await new AxeBuilder({ page: this.page })
+      .withTags(["wcag22aa"])
+      .analyze();
+
+    expect(results.violations).to.be.empty;
   }
 );
 
@@ -436,14 +433,11 @@ Then(
 Then(
   /^I run the Axe Accessibility check against the DVA Details page$/,
   async function () {
-    await injectAxe(this.page);
-    // Run Axe for WCAG 2.2 AA rules
-    const wcagResults = await this.page.evaluate(() => {
-      return axe.run({
-        runOnly: ["wcag22aa"]
-      });
-    });
-    expect(wcagResults.violations).to.be.empty;
+    const results = await new AxeBuilder({ page: this.page })
+      .withTags(["wcag22aa"])
+      .analyze();
+
+    expect(results.violations).to.be.empty;
   }
 );
 
