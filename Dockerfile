@@ -6,11 +6,11 @@ COPY .yarn ./.yarn
 COPY package.json yarn.lock .yarnrc.yml ./
 COPY /src ./src
 
-RUN yarn install
+RUN yarn install --frozen-lockfile
 RUN yarn build
 
-# 'yarn install --production' does not prune test packages which are necessary
-# to build the app. So delete nod_modules and reinstall only production packages.
+# 'yarn install --production' prunes dev dependencies which are necessary
+# to build the app. So delete node_modules and reinstall only production packages.
 RUN [ "rm", "-rf", "node_modules" ]
 RUN yarn install --production --frozen-lockfile
 
