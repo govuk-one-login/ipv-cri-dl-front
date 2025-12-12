@@ -219,7 +219,7 @@ Resources:
       BucketEncryption:
         ServerSideEncryptionConfiguration:
           - ServerSideEncryptionByDefault:
-              SSEAlgorithm: AES256
+              SSEAlgorithm: aws:kms
 
   DrivingPermitFrontAccessLogsBucketPolicy:
     Condition: IsNotDevelopment
