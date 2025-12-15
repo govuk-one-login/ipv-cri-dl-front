@@ -5501,10 +5501,10 @@ normalize-url@^6.0.1:
   resolved "https://registry.yarnpkg.com/normalize-url/-/normalize-url-6.1.0.tgz#40d0885b535deffe3f3147bec877d05fe4c5668a"
   integrity sha512-DlL+XwOy3NxAQ8xuC0okPgK46iuVNAK01YN7RueYBqqFeGsBjV9XmCAzAdgt+667bCl5kPh9EqKKDwnaPG1I7A==
 
-npm-java-runner@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/npm-java-runner/-/npm-java-runner-1.0.2.tgz#b0b2bcf74a75c94f15c20d371f19c974f0311eeb"
-  integrity sha512-rbf77NAjOm9O1N/IOytA2sabV5uER03fnvNJVwSkQdqwhqsVM4E69Jchg8AdfoYatMY2GR/TmB5KXJY9G8LRYA==
+npm-java-runner@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/npm-java-runner/-/npm-java-runner-2.0.0.tgz#e27060b51efd8582aa0ea23654f732038d35a766"
+  integrity sha512-vYkU45l0J6rNoXJdHHSPzmW9mpbBDR/RmO0w60tnJOmlW3Tki6J9lNK/OQq8EQZSsBe1U3NL9TgJKWL+2YeXxw==
 
 npm-run-all@4.1.5:
   version "4.1.5"
@@ -7449,12 +7449,12 @@ which@^2.0.1:
   dependencies:
     isexe "^2.0.0"
 
-wiremock@3.13.1:
-  version "3.13.1"
-  resolved "https://registry.yarnpkg.com/wiremock/-/wiremock-3.13.1.tgz#1b3488096d827fd42db2677529ae0f4ce068c866"
-  integrity sha512-cwvm1EPwg61XLHtYkdrzXqegrVTRDWpbHmVOLVfqzpHx85Ab3AASNXbQlhOADdkPK7wHeA2QvMT8Eq6LJil15Q==
+wiremock@3.13.2:
+  version "3.13.2"
+  resolved "https://registry.yarnpkg.com/wiremock/-/wiremock-3.13.2.tgz#f1c67e45bad49d16e8f45886ce0e04b317a80e4b"
+  integrity sha512-YkqP6qQhVS45/SjG1sz5rQXQp19NCWkEKygb2OJ5zGKsS5DYZTLYodkH6x5IFG43QtVyeSv1C5oes4Whg31flg==
   dependencies:
-    npm-java-runner "^1.0.2"
+    npm-java-runner "^2.0.0"
 
 word-wrap@^1.2.5:
   version "1.2.5"
