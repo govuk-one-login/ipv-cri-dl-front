@@ -1,8 +1,6 @@
-FROM --platform=linux/arm64 node:22-alpine@sha256:42c19d60d8df0a9eaff90a0598bb575bd1dc9511b55c1d77930e4684b0774a16 AS builder
+FROM --platform=linux/arm64 node:22.16.0-alpine3.21@sha256:4437d7c27c4b9306c577caa17577dc7b367fc320fb7469dbe2c994e23b11d11c AS builder
 
 WORKDIR /app
-
-RUN corepack enable
 
 COPY .yarn ./.yarn
 COPY package.json yarn.lock .yarnrc.yml ./
@@ -16,10 +14,11 @@ RUN yarn build
 RUN [ "rm", "-rf", "node_modules" ]
 RUN yarn install --production --frozen-lockfile
 
-FROM --platform=linux/arm64 node:22-alpine@sha256:42c19d60d8df0a9eaff90a0598bb575bd1dc9511b55c1d77930e4684b0774a16 AS final
+FROM --platform=linux/arm64 node:22.16.0-alpine3.21@sha256:4437d7c27c4b9306c577caa17577dc7b367fc320fb7469dbe2c994e23b11d11c AS final
 
-RUN corepack enable
-RUN apk add --no-cache curl tini
+RUN ["apk", "--no-cache", "upgrade"]
+
+RUN ["apk", "add", "--no-cache", "tini", "curl"]
 
 WORKDIR /app
 
@@ -35,7 +34,11 @@ COPY --from=builder /app/src ./src
 # ENV LD_PRELOAD=/opt/dynatrace/oneagent/agent/lib64/liboneagentproc.so
 
 ENV PORT=8080
-EXPOSE $PORT
+
+HEALTHCHECK --interval=5s --timeout=2s --retries=10 \
+  CMD curl -f http://localhost:8080/healthcheck || exit 1
+
+  EXPOSE $PORT
 
 ENTRYPOINT ["tini", "--"]
 
