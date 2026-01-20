@@ -1,3 +1,4 @@
+@QualityGateRegressionTest @QualityGateIntegrationTest
 @mock-api:dl-failed @success @DVLA
 Feature: DVLA Driving licence CRI Error Validations
 
@@ -555,14 +556,15 @@ Feature: DVLA Driving licence CRI Error Validations
     Then I should be on the Landing Page with Page Title Was your UK photocard driving licence issued by DVLA or DVA?
 
   @mock-api:dl-success @cookies
-  Scenario: Driving Licence - Cookies - Device Intelligence
+  Scenario Outline: Driving Licence - Cookies - Device Intelligence
     Given On the entry details page I see the Device Intelligence Cookie <DeviceIntelligenceCookieName>
     Examples:
       | DeviceIntelligenceCookieName |
       | di-device-intelligence       |
 
+  @QualityGateAccessibilityTest
   @mock-api:dvla-accessibility @accessibility
-  Scenario Outline: DVLA - Axe Accessibility Scan - DVLA Details Page
+  Scenario: DVLA - Axe Accessibility Scan - DVLA Details Page
     Given I run the Axe Accessibility check against the DVLA Details page
 
   @mock-api:dva-consoleErrorCheck @console-error-checks

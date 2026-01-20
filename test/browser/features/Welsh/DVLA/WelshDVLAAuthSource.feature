@@ -1,3 +1,4 @@
+@QualityGateRegressionTest @QualityGateIntegrationTest
 @mock-api:dl-dvla-auth-success @success @DVLA
 Feature: DVLA Driving licence - Auth Source - Welsh Translation
 
