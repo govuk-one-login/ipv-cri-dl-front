@@ -1,4 +1,4 @@
-FROM --platform=linux/arm64 node:22.16.0-alpine3.21@sha256:4437d7c27c4b9306c577caa17577dc7b367fc320fb7469dbe2c994e23b11d11c AS builder
+FROM --platform=linux/arm64 node:22.16.0-alpine3.21@sha256:b16c4e21f9e9e4d02c226d7b2dde3283fc9315104b66009af546b50f5c7acad4 AS builder
 
 WORKDIR /app
 
@@ -14,7 +14,7 @@ RUN yarn build
 RUN [ "rm", "-rf", "node_modules" ]
 RUN yarn install --production --frozen-lockfile
 
-FROM --platform=linux/arm64 node:22.16.0-alpine3.21@sha256:4437d7c27c4b9306c577caa17577dc7b367fc320fb7469dbe2c994e23b11d11c AS final
+FROM --platform=linux/arm64 node:22.16.0-alpine3.21@sha256:b16c4e21f9e9e4d02c226d7b2dde3283fc9315104b66009af546b50f5c7acad4 AS final
 
 RUN ["apk", "--no-cache", "upgrade"]
 
@@ -30,7 +30,7 @@ COPY --from=builder /app/yarn.lock ./
 COPY --from=builder /app/src ./src
 
 # Add in dynatrace layer
-# COPY --from=khw46367.live.dynatrace.com/linux/oneagent-codemodules-musl:nodejs / /
+# COPY --from=khw46367.live.dynatrace.com/linux/oneagent-codemodules-musl:nodejs-arm64 / /
 # ENV LD_PRELOAD=/opt/dynatrace/oneagent/agent/lib64/liboneagentproc.so
 
 ENV PORT=8080
