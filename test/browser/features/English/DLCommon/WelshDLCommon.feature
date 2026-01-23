@@ -1,3 +1,4 @@
+@QualityGateRegressionTest @QualityGateIntegrationTest
 @mock-api:dl-success @success
 Feature: Driving licence CRI - Common Tests - Welsh Translation
 

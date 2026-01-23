@@ -1,3 +1,4 @@
+@QualityGateRegressionTest @QualityGateIntegrationTest
 @mock-api:dl-dva-auth-success @success @DVA
 Feature: DVA Driving licence - Auth Source - Welsh Translation
 
