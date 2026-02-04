@@ -12,6 +12,14 @@
 {% from "hmpo-date/macro.njk" import hmpoDate %}
 {% from "hmpo-checkboxes/macro.njk" import hmpoCheckboxes %}
 
+{% set isPageDataSensitive = false %}
+{% set statusCode = '200' %}
+{% set pageTitleKey = "pages.details.title" %}
+{% set contentID = "002" %}
+{% set taxLevel2 = 'driving licence' %}
+{% set isPageDynamic = false %}
+{% set loggedInStatus = true %}
+
 {% block mainContent %}
     {% if values.showRetryMessage and not(ctx("errors") | length) %}
         {# user is retrying #}
@@ -251,25 +259,6 @@ autocomplete: "family-name"
         {{ super ()}}
         {% include "partials/prevent-enter.html" %}
         {% include "partials/submit-spinner.html" %}
-        <script nonce="{{ cspNonce }}">
-        window.addEventListener('load', function () {
-            window
-                .DI
-                .analyticsGa4
-                .pageViewTracker
-                .trackOnPageLoad({
-                    statusCode: '200', // Access status code
-                    englishPageTitle: '{{translate("pages.details.title")}}',
-                    taxonomy_level1: 'web cri', // Access taxonomy level 1
-                    taxonomy_level2: 'driving licence', // Access taxonomy level 2
-                    content_id: '002',
-                    logged_in_status: true,
-                    dynamic: false
-                });
-        });
-
-
-    </script>
 
     {% endblock %}
     {# generate the specific footer items required for the PYI flows #}
