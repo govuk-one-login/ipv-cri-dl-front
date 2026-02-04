@@ -1,6 +1,9 @@
 const { Controller: BaseController } = require("hmpo-form-wizard");
-const { PACKAGE_NAME, APP } = require("../../../lib/config");
-const logger = require("hmpo-logger").get(PACKAGE_NAME);
+const { APP, PACKAGE_NAME } = require("../../../lib/config");
+const logger =
+  require("@govuk-one-login/di-ipv-cri-common-express/src/bootstrap/lib/logger").get(
+    PACKAGE_NAME
+  );
 
 const {
   API: {
