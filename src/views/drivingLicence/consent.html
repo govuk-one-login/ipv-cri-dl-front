@@ -5,6 +5,14 @@
 {% from "hmpo-checkboxes/macro.njk" import hmpoCheckboxes %}
 {% from "hmpo-text/macro.njk" import hmpoText %}
 
+{% set isPageDataSensitive = false %}
+{% set statusCode = '200' %}
+{% set pageTitleKey = "pages.consent.title" %}
+{% set contentID = "001" %}
+{% set taxLevel2 = 'driving licence' %}
+{% set isPageDynamic = false %}
+{% set loggedInStatus = true %}
+
 {% block mainContent %}
 
   {% call hmpoForm(ctx) %}
@@ -75,24 +83,6 @@
   {{ super ()}}
   {% include "partials/prevent-enter.html" %}
   {% include "partials/submit-spinner.html" %}
-  <script nonce="{{ cspNonce }}">
-      window.addEventListener('load', function () {
-        window
-          .DI
-          .analyticsGa4
-          .pageViewTracker
-          .trackOnPageLoad({
-            statusCode: '200', // Access status code
-            englishPageTitle: '{{translate("pages.consent.title")}}',
-            taxonomy_level1: 'web cri', // Access taxonomy level 1
-            taxonomy_level2: 'driving licence', // Access taxonomy level 2
-            content_id: '001',
-            logged_in_status: true,
-            dynamic: false
-          });
-      });
-  </script>
-
 {% endblock %}
 
 {% set footerNavItems = translate("govuk.footerNavItems") %}

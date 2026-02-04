@@ -7,6 +7,14 @@
 {% from "hmpo-warning-text/macro.njk" import hmpoWarningText %}
 {% from "govuk/components/summary-list/macro.njk" import govukSummaryList %}
 
+{% set isPageDataSensitive = false %}
+{% set statusCode = '200' %}
+{% set pageTitleKey = "pages.check-your-details.title" %}
+{% set contentID = "001" %}
+{% set taxLevel2 = 'driving licence' %}
+{% set isPageDynamic = false %}
+{% set loggedInStatus = true %}
+
 {% block mainContent %}
 
     <h1 id="header" data-page="{{hmpoPageKey}}" class="govuk-heading-l">
@@ -187,23 +195,6 @@
 {% block scripts %}
     {% include "partials/prevent-enter.html" %}
     {% include "partials/submit-spinner.html" %}
-    <script {% if cspNonce %} nonce="{{ cspNonce }}"{%  endif %}>
-        window.addEventListener('load', function () {
-            window
-                .DI
-                .analyticsGa4
-                .pageViewTracker
-                .trackOnPageLoad({
-                    statusCode: '200', // Access status code
-                    englishPageTitle: '{{translate("check-your-details.title")}}',
-                    taxonomy_level1: 'web cri', // Access taxonomy level 1
-                    taxonomy_level2: 'driving licence', // Access taxonomy level 2
-                    content_id: '001',
-                    logged_in_status: true,
-                    dynamic: false
-                });
-        });
-    </script>
     {{ super ()}}
 {% endblock %}
 
