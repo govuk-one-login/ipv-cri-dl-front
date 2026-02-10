@@ -1,3 +1,4 @@
+@QualityGateRegressionTest @QualityGateIntegrationTest
 @mock-api:dl-success @success @DVA
 Feature: DVA Driving licence CRI Error Validations
 
@@ -373,16 +374,18 @@ Feature: DVA Driving licence CRI Error Validations
     Then I see DVA privacy notice link the DVA privacy notice (opens in a new tab)
 
   @mock-api:driving-licence-PageCookies @cookies
-  Scenario: DVA - Cookies - Device Intelligence
+  Scenario Outline: DVA - Cookies - Device Intelligence
     Given On the entry details page I see the Device Intelligence Cookie <DeviceIntelligenceCookieName>
     Examples:
       | DeviceIntelligenceCookieName |
       | di-device-intelligence       |
 
+  @QualityGateAccessibilityTest
   @mock-api:dva-accessibility @accessibility
   Scenario: DVA - Axe Accessibility Scan - DVA Details Page
     Given I run the Axe Accessibility check against the DVA Details page
 
+  @QualityGateAccessibilityTest
   @mock-api:DVA-success @accessibility
   Scenario: DVA - Axe Accessibility Scan - DVA Error Page
     Given I delete the session cookie

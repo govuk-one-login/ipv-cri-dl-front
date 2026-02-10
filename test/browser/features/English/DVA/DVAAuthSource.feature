@@ -1,3 +1,4 @@
+@QualityGateRegressionTest @QualityGateIntegrationTest
 @mock-api:dl-dva-auth-success @success @DVA
 Feature: DVA Driving licence - Auth Source
 
@@ -42,10 +43,12 @@ Feature: DVA Driving licence - Auth Source
     And User clicks the back button
     Then I should be on the Driving Licence check your details page Check your UK photocard driving licence details – GOV.UK One Login
 
+  @QualityGateAccessibilityTest
   @mock-api:dl-dva-auth-success @validation-regression @accessibility
   Scenario: DVA Auth Source - Axe Accessibility Scan - Driving Licence - Check Your Details Page
     Then I run the Axe Accessibility check against the Driving Licence check your details page
 
+  @QualityGateAccessibilityTest
   @mock-api:dl-dva-auth-success @validation-regression @accessibility
   Scenario: DVA Auth Source - Axe Accessibility Scan - Driving Licence - Consent Page
     When I click on the Yes radio button

@@ -1,3 +1,4 @@
+@QualityGateRegressionTest @QualityGateIntegrationTest
 @mock-api:dl-failed @mock-api:dl-success @success @DVLA
 Feature: DVLA Driving licence CRI Error Validations - Welsh Translation
 
