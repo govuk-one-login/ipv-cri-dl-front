@@ -159,9 +159,9 @@ module.exports = {
     if (firstName) {
       var initialsShort = firstName.slice(0, 1);
       if (middleName) {
-        initialsShort += middleName.slice(0, 1);
+        initialsShort += middleName.slice(0, 1); // eslint-disable-line no-useless-assignment
       } else {
-        initialsShort += "9"; // eslint-disable-line
+        initialsShort += "9"; // eslint-disable-line no-unused-vars, no-useless-assignment
       }
     }
 
