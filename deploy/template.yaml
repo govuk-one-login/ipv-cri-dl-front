@@ -114,6 +114,7 @@ Mappings:
       authSourceEnabled: "true"
       deviceIntelligenceEnabled: "true"
       may2025RebrandEnabled: "true"
+      analyticsDataSensitive: "false"
     build:
       ga4Enabled: "true"
       uaEnabled: "false"
@@ -121,6 +122,7 @@ Mappings:
       authSourceEnabled: "true"
       deviceIntelligenceEnabled: "true"
       may2025RebrandEnabled: "true"
+      analyticsDataSensitive: "false"
     staging:
       ga4Enabled: "true"
       uaEnabled: "false"
@@ -128,6 +130,7 @@ Mappings:
       authSourceEnabled: "true"
       deviceIntelligenceEnabled: "true"
       may2025RebrandEnabled: "true"
+      analyticsDataSensitive: "false"
     integration:
       ga4Enabled: "true"
       uaEnabled: "false"
@@ -135,6 +138,7 @@ Mappings:
       authSourceEnabled: "true"
       deviceIntelligenceEnabled: "true"
       may2025RebrandEnabled: "true"
+      analyticsDataSensitive: "true"
     production:
       ga4Enabled: "true"
       uaEnabled: "false"
@@ -142,6 +146,7 @@ Mappings:
       authSourceEnabled: "true"
       deviceIntelligenceEnabled: "true"
       may2025RebrandEnabled: "true"
+      analyticsDataSensitive: "true"
 
   # see https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-access-logs.html
   ElasticLoadBalancerAccountIds:
@@ -462,6 +467,13 @@ Resources:
               Value: !If [IsProduction, "GTM-TT5HDKV", "GTM-TK92W68"]
             - Name: GOOGLE_ANALYTICS_4_GTM_CONTAINER_ID
               Value: !If [IsProduction, "GTM-K4PBJH3", "GTM-KD86CMZ"]
+            - Name: ANALYTICS_DATA_SENSITIVE
+              Value:
+                !FindInMap [
+                  FeatureFlagMapping,
+                  !Ref "Environment",
+                  analyticsDataSensitive
+                ]
             - Name: GA4_ENABLED
               Value:
                 !FindInMap [
