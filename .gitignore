@@ -124,3 +124,6 @@ dist
 
 reports/*
 results/*
+
+# npm package-lock
+package-lock.json
