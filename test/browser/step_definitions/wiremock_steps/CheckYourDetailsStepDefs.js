@@ -1,5 +1,7 @@
 const { Given, When, Then } = require("@cucumber/cucumber");
-const { CheckYourDetailsPage } = require("../pages/CheckYourDetailsPage");
+const {
+  CheckYourDetailsPage
+} = require("../../pages/wiremock_pages/CheckYourDetailsPage");
 const { expect } = require("chai");
 const { AxeBuilder } = require("@axe-core/playwright");
 

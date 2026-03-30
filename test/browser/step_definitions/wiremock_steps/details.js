@@ -1,6 +1,6 @@
 const { Given } = require("@cucumber/cucumber");
 
-const { RelyingPartyPage } = require("../pages");
+const { RelyingPartyPage } = require("../../pages/wiremock_pages");
 
 Given(
   /^(.*) has started the Driving Licence Journey$/,

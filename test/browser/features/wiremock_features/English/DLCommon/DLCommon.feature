@@ -84,7 +84,7 @@ Feature: Driving licence CRI - Common Tests
         And I check the GOV.UK page Title GOV.UK
 
     @mock-api:driving-licence-PageFooter @validation-regression
-    Scenario Outline: Fraud CRI - Footer Links
+    Scenario Outline: Driving Licence CRI - Footer Links
         Given I should be on the Landing Page with Page Title Was your UK photocard driving licence issued by DVLA or DVA?
         Then they click Footer <link> and assert I have been redirected correctly
         Examples:
