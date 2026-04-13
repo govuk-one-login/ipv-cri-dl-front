@@ -15,6 +15,7 @@ const compat = new FlatCompat({
 export default [
   {
     ignores: [
+      "scripts/**/*.js",
       "src/app.test.js",
       "src/app-setup.test.js",
       "**/dist",
@@ -23,7 +24,7 @@ export default [
   },
   {
     languageOptions: {
-      ecmaVersion: 2020,
+      ecmaVersion: 2021,
       sourceType: "module",
       globals: {
         ...globals.node,
