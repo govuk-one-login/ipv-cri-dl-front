@@ -3,7 +3,7 @@ FROM node:22.16.0-alpine3.21@sha256:4437d7c27c4b9306c577caa17577dc7b367fc320fb74
 WORKDIR /app
 
 COPY .yarn ./.yarn
-COPY package.json yarn.lock .yarnrc.yml ./
+COPY package.json yarn.lock .yarnrc ./
 COPY /src ./src
 
 RUN yarn install --frozen-lockfile
