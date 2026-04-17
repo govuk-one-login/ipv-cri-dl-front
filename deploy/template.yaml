@@ -69,7 +69,7 @@ Mappings:
       dynatraceSecretArn: arn:aws:secretsmanager:eu-west-2:216552277552:secret:DynatraceNonProductionVariables
       fargateCPUsize: "256"
       fargateRAMsize: "512"
-      minECSCount: 1
+      minECSCount: 2
       maxECSCount: 4
       nodeEnv: "development"
     build:
@@ -85,7 +85,6 @@ Mappings:
       dynatraceSecretArn: arn:aws:secretsmanager:eu-west-2:216552277552:secret:DynatraceNonProductionVariables
       fargateCPUsize: "256"
       fargateRAMsize: "512"
-      desiredTaskCount: 2
       minECSCount: 2
       maxECSCount: 4
       nodeEnv: "development"
