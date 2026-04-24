@@ -1,59 +1,83 @@
 const { Before, BeforeAll, AfterAll, After } = require("@cucumber/cucumber");
-const { chromium } = require("playwright");
+const { setDefaultTimeout } = require("@cucumber/cucumber");
+const { chromium } = require("@playwright/test");
 const axios = require("axios");
+const ConfigurationReader = require("./configuration-reader");
+
+setDefaultTimeout(31 * 1000); // 60 seconds for all steps
 
 BeforeAll(async function () {
+  // Log environment at start of test execution (only for stub tests)
+  if (
+    process.env.TEST_TYPE === "stub" ||
+    process.argv.some((arg) => arg.includes("stub"))
+  ) {
+    try {
+      const testEnvironment = ConfigurationReader.get("ENVIRONMENT");
+      console.log(`Running tests for environment: ${testEnvironment}`);
+    } catch {
+      console.log("ENVIRONMENT not configured");
+    }
+  }
+
   // Browsers are expensive in Playwright so only create 1
-  global.browser = process.env.GITHUB_ACTIONS
-    ? await chromium.launch()
-    : await chromium.launch({
-        // Not headless so we can watch test runs
-        headless: true,
-        // Slow so we can see things happening
-        slowMo: 0
-      });
+
+  globalThis.browser = await chromium.launch({
+    headless: true,
+    slowMo: 0
+  });
 });
 
 AfterAll(async function () {
-  await global.browser.close();
+  await globalThis.browser.close();
 });
 
 // Add scenario header
 Before(async function ({ pickle } = {}) {
   const tags = pickle.tags || [];
-  const tag = tags.find((tag) => tag.name.startsWith("@mock-api:"));
-  if (!tag) {
-    return;
-  }
-  const header = tag?.name.substring(10);
-  if (!header) {
-    return;
-  }
-  this.SCENARIO_ID_HEADER = header;
-  const url = `http://localhost:8030/__reset/${header}`;
-  try {
-    await axios.get(url);
-  } catch (e) {
-    console.log(`Error fetching ${url}`); // eslint-disable-line no-console
-    console.log(`${e.message}`); // eslint-disable-line no-console
-  }
 
-  // Set environment variable for specific tags
-  if (["dl-dva-auth-success", "dl-dvla-auth-success"].includes(header)) {
-    process.env.AUTH_SOURCE_ENABLED = "true";
+  // Determine if this is a stub test based on the tag @stub-test
+  this.isStubTest = tags.find((tag) => tag.name === "@stub-test");
+
+  console.log(`\nRunning: ${pickle.name}`);
+
+  // Existing logic for WireMock scenario header and reset
+  const mockApiTag = tags.find((tag) => tag.name.startsWith("@mock-api:"));
+  if (mockApiTag) {
+    this.SCENARIO_ID_HEADER = mockApiTag.name.substring(10);
+    if (this.SCENARIO_ID_HEADER && ConfigurationReader.get("API_BASE_URL")) {
+      const url =
+        ConfigurationReader.get("API_BASE_URL") +
+        `__reset/${this.SCENARIO_ID_HEADER}`;
+      try {
+        await axios.get(url);
+      } catch (error) {
+        console.log(`Warning: Failed to reset mock API: ${error.message}`);
+      }
+    }
   }
 });
 
 // Create a new test context and page per scenario
 Before(async function () {
-  this.context = await global.browser.newContext({});
+  const contextOptions = {};
 
-  if (this.SCENARIO_ID_HEADER) {
-    await this.context.setExtraHTTPHeaders({
-      "x-scenario-id": this.SCENARIO_ID_HEADER
-    });
+  // If it's a stub test, set the baseURL from CORE_STUB_URL
+  if (this.isStubTest && ConfigurationReader.get("CORE_STUB_URL")) {
+    contextOptions.baseURL = ConfigurationReader.get("CORE_STUB_URL");
+  } else if (ConfigurationReader.get("API_BASE_URL")) {
+    contextOptions.baseURL = ConfigurationReader.get("API_BASE_URL");
   }
 
+  // Apply scenario ID header if present
+  if (this.SCENARIO_ID_HEADER) {
+    contextOptions.extraHTTPHeaders = {
+      ...contextOptions.extraHTTPHeaders, // Preserve any existing headers
+      "x-scenario-id": this.SCENARIO_ID_HEADER
+    };
+  }
+
+  this.context = await globalThis.browser.newContext(contextOptions);
   this.page = await this.context.newPage();
 });
 

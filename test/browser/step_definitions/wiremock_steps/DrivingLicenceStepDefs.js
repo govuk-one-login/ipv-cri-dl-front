@@ -1,6 +1,10 @@
 const { Given, When, Then } = require("@cucumber/cucumber");
-const { DVADetailsEntryPage } = require("../pages/DVADetailsEntryPage");
-const { DrivingLicencePage } = require("../pages/DrivingLicencePage");
+const {
+  DVADetailsEntryPage
+} = require("../../pages/wiremock_pages/DVADetailsEntryPage");
+const {
+  DrivingLicencePage
+} = require("../../pages/wiremock_pages/DrivingLicencePage");
 const { expect } = require("chai");
 const { AxeBuilder } = require("@axe-core/playwright");
 

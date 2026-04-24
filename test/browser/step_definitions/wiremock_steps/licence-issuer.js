@@ -1,6 +1,6 @@
 const { Given, When, Then } = require("@cucumber/cucumber");
 const { expect } = require("chai");
-const { LicenceIssuerPage } = require("../pages");
+const { LicenceIssuerPage } = require("../../pages/wiremock_pages");
 const { AxeBuilder } = require("@axe-core/playwright");
 
 Given(/they (?:can )?see? the licence-issuer page$/, async function () {

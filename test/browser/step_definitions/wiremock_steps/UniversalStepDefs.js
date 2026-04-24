@@ -1,5 +1,5 @@
 const { Given, When, Then } = require("@cucumber/cucumber");
-const { UniversalSteps } = require("../pages/UniversalSteps");
+const { UniversalSteps } = require("../../pages/wiremock_pages/UniversalSteps");
 const { expect: expect } = require("chai");
 
 Then(

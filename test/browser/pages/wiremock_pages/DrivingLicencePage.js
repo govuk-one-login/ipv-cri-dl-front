@@ -1,6 +1,6 @@
 const { expect: expect } = require("chai");
 const moment = require("moment");
-const TestDataCreator = require("../util/TestDataCreator");
+const TestDataCreator = require("../../util/TestDataCreator");
 
 exports.DrivingLicencePage = class PlaywrightDevPage {
   constructor(page) {
@@ -325,7 +325,6 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
 
   async userEntersData(issuer, drivingLicenceSubjectScenario) {
     var drivingLicenceSubject = TestDataCreator.getDVLATestUserFromMap(
-      issuer,
       drivingLicenceSubjectScenario
     );
     if (issuer === "DVLA") {

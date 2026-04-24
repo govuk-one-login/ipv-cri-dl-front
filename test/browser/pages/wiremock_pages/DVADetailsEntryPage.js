@@ -1,5 +1,5 @@
 const { expect: expect } = require("chai");
-const TestDataCreator = require("../util/TestDataCreator");
+const TestDataCreator = require("../../util/TestDataCreator");
 
 exports.DVADetailsEntryPage = class PlaywrightDevPage {
   constructor(page) {
@@ -184,7 +184,6 @@ exports.DVADetailsEntryPage = class PlaywrightDevPage {
 
   async userEntersDVAData(issuer, drivingLicenceSubjectScenario) {
     var dvaDrivingLicenceSubject = TestDataCreator.getDVATestUserFromMap(
-      issuer,
       drivingLicenceSubjectScenario
     );
     if (issuer === "DVA") {
