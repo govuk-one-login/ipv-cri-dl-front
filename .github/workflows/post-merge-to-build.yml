@@ -4,15 +4,31 @@ on:
     branches:
       - main
 
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
-  dockerBuildAndPush:
+  test-image-build-and-push:
+    name: Build and push test image
+    runs-on: ubuntu-latest
+    steps:
+      - uses: govuk-one-login/devplatform-upload-action-ecr@f82c8774a6390f200b15112b3cbb9faf3442173c
+        with:
+          role-to-assume-arn: ${{ secrets.GH_ACTIONS_ROLE_ARN }}
+          build-and-push-image-only: true
+          artifact-bucket-name: ''
+          ecr-repo-name: ${{ secrets.BUILD_ECR_REPOSITORY_TEST }}
+          dockerfile: test/Dockerfile
+          push-latest-tag: true
+          container-sign-kms-key-arn: ${{ secrets.BUILD_CONTAINER_SIGN_KMS_KEY }}
+
+  app-image-build-and-push:
     name: Docker build and push
     runs-on: ubuntu-latest
+    needs: test-image-build-and-push
     env:
       AWS_REGION: eu-west-2
-    permissions:
-      id-token: write
-      contents: read
     steps:
       - uses: actions/checkout@v6
         with:
