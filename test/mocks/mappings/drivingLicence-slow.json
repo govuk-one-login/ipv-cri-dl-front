@@ -89,6 +89,28 @@
           }
         }
       }
+    },
+    {
+      "scenarioName": "driving-licence-success-slow",
+      "request": {
+        "method": "GET",
+        "urlPathPattern": "/return.*",
+        "queryParameters": {
+          "client_id": {
+            "equalTo": "standalone"
+          },
+          "state": {
+            "equalTo": "sT@t3"
+          },
+          "code": {
+            "equalTo": "FACEFEED"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "OAuth callback received successfully"
+      }
     }
   ]
 }

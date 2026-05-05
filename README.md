@@ -1,6 +1,6 @@
 # Digital Identity DCS Credential Issuer Front
 
-`di-ipv-cri-uk-passport-front`
+`di-ipv-cri-uk-dl-front`
 
 This is the home for the DCS Credential Issuer front end user interface for the Identity Proofing and Verification (IPV) system within the GDS digital identity platform, GOV.UK Sign In.
 
@@ -101,6 +101,22 @@ core/deploy/dns-zones/template.yaml:20:3
 Checkov..............................................(no files to check)Skipped
 - hook id: checkov
 ```
+
+## Core Stub Tests
+
+There are E2E tests which run against the core stub, in the Dev, Build and Staging environments.
+
+To execute these tests run:
+
+`yarn run test:browser:stub:ci`
+
+To build the Docker image run:
+
+`docker build --tag dl-cri-test-image -f Dockerfile ..`
+
+To execute the tests in docker run:
+
+`docker run -e STACK_NAME=local dl-cri-test-image` - add `-e ENVIRONMENT=dev` to run in Dev environment
 
 ## Quality Gate Tags
 

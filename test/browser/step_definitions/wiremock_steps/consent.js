@@ -1,6 +1,6 @@
 const { Given, When, Then } = require("@cucumber/cucumber");
 const { expect } = require("chai");
-const { ConsentPage } = require("../pages/consent");
+const { ConsentPage } = require("../../pages/wiremock_pages/consent");
 const { AxeBuilder } = require("@axe-core/playwright");
 
 Then(

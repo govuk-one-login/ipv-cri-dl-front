@@ -1,17 +1,11 @@
 #!/usr/bin/env bash
 
-#################
-## WIP - to support pipeline tests
-#################
-
 set -e
 
 REPORT_DIR="${TEST_REPORT_DIR:=$PWD}"
 
 export BROWSER="${BROWSER:-chrome-headless}"
-export ENVIRONMENT="${ENVIRONMENT:-build}"
 export NO_CHROME_SANDBOX=true
-
 
 # Added to accommodate ssm stack
 if [[ -z "${CFN_StackName}" ]]; then
@@ -35,29 +29,37 @@ else
   export ENVIRONMENT="${ENVIRONMENT}"
 fi
 
-echo "ENVIRONMENT ${ENVIRONMENT}"
-echo "STACK_NAME ${STACK_NAME}"
+echo "ENVIRONMENT: ${ENVIRONMENT}"
+echo "STACK_NAME: ${STACK_NAME}"
 
 if [ "${STACK_NAME}" != "local" ]; then
-  export JOURNEY_TAG=$(aws ssm get-parameter --name "/tests/${STACK_NAME}/TestTag" | jq -r ".Parameter.Value")
+  echo "Fetching test configuration from AWS SSM Parameter Store..."
 
-  PARAMETERS_NAMES=(coreStubPassword coreStubUrl coreStubUsername passportCriUrl apiBaseUrl)
+  export JOURNEY_TAG=$(aws ssm get-parameter --name "/tests/${STACK_NAME}/TestTag" --region eu-west-2 | jq -r ".Parameter.Value")
+
+  PARAMETERS_NAMES=(coreStubPassword coreStubUrl coreStubUsername)
   tLen=${#PARAMETERS_NAMES[@]}
-   for (( i=0; i<${tLen}; i++ ));
+  for (( i=0; i<${tLen}; i++ ));
   do
-    echo "/tests/$STACK_NAME/${PARAMETERS_NAMES[$i]}"
-    PARAMETER=$(aws ssm get-parameter --name "/tests/$STACK_NAME/${PARAMETERS_NAMES[$i]}" --region eu-west-2)
+    PARAMETER_NAME="/tests/${STACK_NAME}/${PARAMETERS_NAMES[$i]}"
+    echo "Fetching ${PARAMETER_NAME}"
+    PARAMETER=$(aws ssm get-parameter --name "${PARAMETER_NAME}" --region eu-west-2)
     VALUE=$(echo "$PARAMETER" | jq '.Parameter.Value')
     NAME=$(echo "$PARAMETER" | jq '.Parameter.Name' | cut -d "/" -f4 | sed 's/.$//')
 
     eval $(echo "export ${NAME}=${VALUE}")
   done
 else
-  export JOURNEY_TAG="${TEST_TAG}"
+  export JOURNEY_TAG="${TEST_TAG:-@stub-test}"
+  echo "Using local configuration"
 fi
 
-export PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1
-export PLAYWRIGHT_BROWSERS_PATH=/usr/bin/
-yarn test:browser:ci
+echo "TEST_TAG: ${JOURNEY_TAG}"
 
-cp -r reports/* "$REPORT_DIR"
+# Run tests
+cd /home/node
+echo "Running Cucumber tests with tag: ${JOURNEY_TAG}"
+mkdir -p test/browser/reports
+npx cucumber-js --config test/browser/cucumber.js --profile stub_tests --tags "${JOURNEY_TAG}"
+
+echo "Tests completed successfully!"
