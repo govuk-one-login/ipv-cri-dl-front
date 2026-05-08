@@ -930,7 +930,7 @@ Resources:
             ScalingAdjustment: -10
           - MetricIntervalUpperBound: -20
             ScalingAdjustment: -50 # Scale down 50% of containers if the metric is breached
-            # with <20% utilisation
+            # with <10% utilisation
 
   EcsStepScaleOutAlarm:
     DependsOn: ECSAutoScalingTarget
