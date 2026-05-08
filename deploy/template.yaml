@@ -891,7 +891,7 @@ Resources:
         # will max one CPU
           - MetricIntervalUpperBound: 10
             ScalingAdjustment: 100 # Scale by 100% of containers if the metric is breached
-            # with <60% utilisation
+            # with >30% and <40% utilisation
           - MetricIntervalLowerBound: 10
             MetricIntervalUpperBound: 15
             ScalingAdjustment: 200 # Scale by 200% of containers if the metric is breached
