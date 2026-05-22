@@ -11,7 +11,7 @@ This is the home for the front end user interface for a credential issuer as a p
 Clone this repository and then run
 
 ```bash
-yarn install
+npm install
 ```
 
 ## Environment Variables
@@ -22,5 +22,5 @@ yarn install
 ## Running Locally
 
 ```bash
-yarn run dev
+npm run dev
 ```
