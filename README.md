@@ -9,7 +9,7 @@ This is the home for the DCS Credential Issuer front end user interface for the 
 Clone this repository and then run
 
 ```bash
-yarn install
+npm install
 ```
 
 ## Environment Variables
@@ -108,7 +108,7 @@ There are E2E tests which run against the core stub, in the Dev, Build and Stagi
 
 To execute these tests run:
 
-`yarn run test:browser:stub:ci`
+`npm run test:browser:stub:ci`
 
 To build the Docker image run:
 
