@@ -380,6 +380,78 @@ Feature: DVA Driving licence CRI Error Validations
       | DeviceIntelligenceCookieName |
       | di-device-intelligence       |
 
+  @mock-api:dva-consoleErrorCheck @console-error-checks
+  Scenario: DVA - User navigates through the DVA Journey - Check for Console Errors
+    Given I see the back button on the DVA details page with text Back
+    And User clicks the back button
+    Then I should be on the Landing Page with Page Title Was your UK photocard driving licence issued by DVLA or DVA?
+    And User starts the Console Listener
+    And I click on DVA radio button and Continue
+    Then There are no console errors on the page
+
+  ########### Axe Accessibility ##########
+  @QualityGateAccessibilityTest
+  @mock-api:dva-invalidDrivingLicenceNumber @accessibility
+  Scenario: DVA - Axe Accessibility Scan - DVA Details Page - Licence Number Error
+    Given User enters DVA data as a DrivingLicenceSubjectHappyBilly
+    And DVA User re-enters drivingLicenceNumber as 5566778
+    When User clicks on continue
+    Then I run the Axe Accessibility check against the DVA Details page
+
+  @QualityGateAccessibilityTest
+  @mock-api:dva-invalidPostcode @accessibility
+  Scenario: DVA - Axe Accessibility Scan - DVA Details Page - Postcode Error
+    Given User enters DVA data as a DrivingLicenceSubjectHappyBilly
+    And User re-enters postcode as E20A
+    When User clicks on continue
+    Then I run the Axe Accessibility check against the DVA Details page
+
+  @QualityGateAccessibilityTest
+  @mock-api:dva-invalidLastName @accessibility
+  Scenario: DVA - Axe Accessibility Scan - DVA Details Page - Name Field Error
+    Given User enters DVA data as a DrivingLicenceSubjectHappyBilly
+    And User re-enters last name as KYLE123
+    When User clicks on continue
+    Then I run the Axe Accessibility check against the DVA Details page
+
+  @QualityGateAccessibilityTest
+  @mock-api:dva-invalidDateOfBirth @accessibility
+  Scenario: DVA - Axe Accessibility Scan - DVA Details Page - Date of Birth Error
+    Given User enters DVA data as a DrivingLicenceSubjectHappyBilly
+    And DVA user re-enters day of birth as 51
+    And DVA user re-enters month of birth as 71
+    And DVA user re-enters year of birth as 198
+    When User clicks on continue
+    Then I run the Axe Accessibility check against the DVA Details page
+
+  @QualityGateAccessibilityTest
+  @mock-api:dva-invalidIssueDate @accessibility
+  Scenario: DVA - Axe Accessibility Scan - DVA Details Page - Issue Date Error
+    Given User enters DVA data as a DrivingLicenceSubjectHappyBilly
+    And DVA user re-enters day of issue as AA
+    And DVA user re-enters month of issue as BB
+    And DVA user re-enters year of issue as AABC
+    When User clicks on continue
+    Then I run the Axe Accessibility check against the DVA Details page
+
+  @QualityGateAccessibilityTest
+  @mock-api:dva-invalidExpiryDate @accessibility
+  Scenario: DVA - Axe Accessibility Scan - DVA Details Page - Valid To Date Error
+    Given User enters DVA data as a DrivingLicenceSubjectHappyBilly
+    And User re-enters valid to day as AA
+    And User re-enters valid to month as BC
+    And User re-enters valid to year AABD
+    When User clicks on continue
+    Then I run the Axe Accessibility check against the DVA Details page
+
+  @QualityGateAccessibilityTest
+  @mock-api:dva-ConsentError @accessibility
+  Scenario: DVA - Axe Accessibility Scan - DVA Details Page - Consent Checkbox Error
+    Given User enters DVA data as a DrivingLicenceSubjectHappyBilly
+    And DVA consent checkbox is unselected
+    When User clicks on continue
+    Then I run the Axe Accessibility check against the DVA Details page
+
   @QualityGateAccessibilityTest
   @mock-api:dva-accessibility @accessibility
   Scenario: DVA - Axe Accessibility Scan - DVA Details Page
@@ -392,12 +464,3 @@ Feature: DVA Driving licence CRI Error Validations
     And User clicks on continue
     Then they should see an error page
     Then I run the Axe Accessibility check against the DL Error page
-
-  @mock-api:dva-consoleErrorCheck @console-error-checks
-  Scenario: DVA - User navigates through the DVA Journey - Check for Console Errors
-    Given I see the back button on the DVA details page with text Back
-    And User clicks the back button
-    Then I should be on the Landing Page with Page Title Was your UK photocard driving licence issued by DVLA or DVA?
-    And User starts the Console Listener
-    And I click on DVA radio button and Continue
-    Then There are no console errors on the page
