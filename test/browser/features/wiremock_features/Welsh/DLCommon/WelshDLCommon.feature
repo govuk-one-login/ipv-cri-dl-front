@@ -72,3 +72,17 @@ Feature: Driving licence CRI - Common Tests - Welsh Translation
         Then I see the error page heading Mae'n ddrwg gennym, mae problem
         And I see the Contact the One Login team link which reads Cysylltu â thîm GOV.UK One Login (agor mewn tab newydd)
         And I assert the link on the error page is correct and live
+
+    ########### Axe Accessibility ##########
+    @QualityGateAccessibilityTest
+    @mock-api:driving-licence-Accessibility @accessibility
+    Scenario: Driving Licence - Welsh - Axe Accessibility Scan - DL Landing Page
+        Given I should be on the Landing Page with Page Title A oedd eich trwydded yrru cerdyn-llun y DU wedi'i chyhoeddi gan DVLA neu DVA?
+        And I run the Axe Accessibility check against the DL Landing page
+
+    @QualityGateAccessibilityTest
+    @mock-api:driving-licence-InvalidRadioSelection @accessibility
+    Scenario: Driving Licence - Welsh - Axe Accessibility Scan - DL Landing Page - No Radio Selected Error
+        Given I click the continue button without selecting a radio button option
+        Then I see the Error Text Mae problem
+        And I run the Axe Accessibility check against the DL Landing page

@@ -351,3 +351,71 @@ Feature: DVA Driving licence CRI Error Validations - Welsh Translation
     Given I see the back button on the DVA details page with text Yn ôl
     And User clicks the back button
     And I see the Landing Page Title Summary Text Mae hwn i'w weld yn adran 4c o'ch trwydded yrru. Bydd naill ai’n dweud DVLA (Asiantaeth Trwyddedu Gyrru a Cherbydau) neu DVA (Asiantaeth Gyrwyr a Cherbydau).
+
+  ########### Axe Accessibility ##########
+  @QualityGateAccessibilityTest
+  @mock-api:dva-accessibility @accessibility
+  Scenario: DVA - Welsh - Axe Accessibility Scan - DVA Details Page
+    Given I run the Axe Accessibility check against the DVA Details page
+
+  @QualityGateAccessibilityTest
+  @mock-api:dva-invalidDrivingLicenceNumber @accessibility
+  Scenario: DVA - Welsh - Axe Accessibility Scan - DVA Details Page - Licence Number Error
+    Given User enters DVA data as a DrivingLicenceSubjectHappyBilly
+    And DVA User re-enters drivingLicenceNumber as 5566778
+    When User clicks on continue
+    Then I run the Axe Accessibility check against the DVA Details page
+
+  @QualityGateAccessibilityTest
+  @mock-api:dva-invalidPostcode @accessibility
+  Scenario: DVA - Welsh - Axe Accessibility Scan - DVA Details Page - Postcode Error
+    Given User enters DVA data as a DrivingLicenceSubjectHappyBilly
+    And User re-enters postcode as E20A
+    When User clicks on continue
+    Then I run the Axe Accessibility check against the DVA Details page
+
+  @QualityGateAccessibilityTest
+  @mock-api:dva-invalidLastName @accessibility
+  Scenario: DVA - Welsh - Axe Accessibility Scan - DVA Details Page - Name Field Error
+    Given User enters DVA data as a DrivingLicenceSubjectHappyBilly
+    And User re-enters last name as KYLE123
+    When User clicks on continue
+    Then I run the Axe Accessibility check against the DVA Details page
+
+  @QualityGateAccessibilityTest
+  @mock-api:dva-invalidDateOfBirth @accessibility
+  Scenario: DVA - Welsh - Axe Accessibility Scan - DVA Details Page - Date of Birth Error
+    Given User enters DVA data as a DrivingLicenceSubjectHappyBilly
+    And DVA user re-enters day of birth as 51
+    And DVA user re-enters month of birth as 71
+    And DVA user re-enters year of birth as 198
+    When User clicks on continue
+    Then I run the Axe Accessibility check against the DVA Details page
+
+  @QualityGateAccessibilityTest
+  @mock-api:dva-invalidIssueDate @accessibility
+  Scenario: DVA - Welsh - Axe Accessibility Scan - DVA Details Page - Issue Date Error
+    Given User enters DVA data as a DrivingLicenceSubjectHappyBilly
+    And DVA user re-enters day of issue as AA
+    And DVA user re-enters month of issue as BB
+    And DVA user re-enters year of issue as AABC
+    When User clicks on continue
+    Then I run the Axe Accessibility check against the DVA Details page
+
+  @QualityGateAccessibilityTest
+  @mock-api:dva-invalidExpiryDate @accessibility
+  Scenario: DVA - Welsh - Axe Accessibility Scan - DVA Details Page - Valid To Date Error
+    Given User enters DVA data as a DrivingLicenceSubjectHappyBilly
+    And User re-enters valid to day as AA
+    And User re-enters valid to month as BC
+    And User re-enters valid to year AABD
+    When User clicks on continue
+    Then I run the Axe Accessibility check against the DVA Details page
+
+  @QualityGateAccessibilityTest
+  @mock-api:dva-ConsentError @accessibility
+  Scenario: DVA - Welsh - Axe Accessibility Scan - DVA Details Page - Consent Checkbox Error
+    Given User enters DVA data as a DrivingLicenceSubjectHappyBilly
+    And DVA consent checkbox is unselected
+    When User clicks on continue
+    Then I run the Axe Accessibility check against the DVA Details page

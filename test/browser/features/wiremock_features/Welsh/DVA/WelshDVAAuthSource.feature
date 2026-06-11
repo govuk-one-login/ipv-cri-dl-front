@@ -66,3 +66,33 @@ Feature: DVA Driving licence - Auth Source - Welsh Translation
         Then I see the back button on the DVA check your details page with text Yn ôl
         And User clicks the back button
         Then I should be on the Driving Licence check your details page Gwirio manylion eich trwydded yrru cerdyn-llun yn y DU – GOV.UK One Login
+
+    ########### Axe Accessibility ##########
+    @QualityGateAccessibilityTest
+    @mock-api:dl-dva-auth-success @accessibility
+    Scenario: DVA Auth Source - Welsh - Axe Accessibility Scan - Check Your Details Page - No Radio Selected Error
+        Then I click on the Confirm and Continue button
+        And I run the Axe Accessibility check against the Driving Licence check your details page
+
+    @QualityGateAccessibilityTest
+    @mock-api:dl-dva-auth-success @accessibility
+    Scenario: DVA Auth Source - Welsh - Axe Accessibility Scan - Check Your Details Page
+        Then I run the Axe Accessibility check against the Driving Licence check your details page
+
+    @QualityGateAccessibilityTest
+    @mock-api:dl-dva-auth-success @accessibility
+    Scenario: DVA Auth Source - Welsh - Axe Accessibility Scan - Consent Page - Missing Consent Error
+        When I click on the Yes radio button
+        Then I click on the Confirm and Continue button
+        And I should be on the DVA consent page Rydym angen gwirio manylion eich trwydded yrru – GOV.UK One Login
+        When I click on the Continue button
+        Then I see the No Consent Error Text Mae'n rhaid i chi roi eich caniatâd i barhau
+        And I run the Axe Accessibility check against the Driving Licence Consent page
+
+    @QualityGateAccessibilityTest
+    @mock-api:dl-dva-auth-success @accessibility
+    Scenario: DVA Auth Source - Welsh - Axe Accessibility Scan - Consent Page
+        When I click on the Yes radio button
+        Then I click on the Confirm and Continue button
+        And I should be on the DVA consent page Rydym angen gwirio manylion eich trwydded yrru – GOV.UK One Login
+        And I run the Axe Accessibility check against the Driving Licence Consent page

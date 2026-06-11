@@ -110,6 +110,14 @@ Feature: Driving licence CRI - Common Tests
         Given I should be on the Landing Page with Page Title Was your UK photocard driving licence issued by DVLA or DVA?
         And I run the Axe Accessibility check against the DL Landing page
 
+    @mock-api:driving-licence-Accessibility @accessibility
+    Scenario: Driving Licence - Landing Page - There is a problem error displays when no radio button is selected
+        Given I click the continue button without selecting a radio button option
+        Then I see the Error Text There is a problem
+        And I see the Error Summary Text You must choose an option to continue
+        And I see the Hint Error Summary Text You must choose an option to continue
+        And I run the Axe Accessibility check against the DL Landing page
+
     @mock-api:driving-licence-ErrorPageSupportLinks
     Scenario: Driving Licence - Error Page - Contact GOV.UK One Login Link
         Given I should be on the Landing Page with Page Title Was your UK photocard driving licence issued by DVLA or DVA?

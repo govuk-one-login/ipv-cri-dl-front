@@ -43,19 +43,6 @@ Feature: DVLA Driving licence - Auth Source
         And User clicks the back button
         Then I should be on the Driving Licence check your details page Check your UK photocard driving licence details – GOV.UK One Login
 
-    @QualityGateAccessibilityTest
-    @mock-api:dl-dvla-auth-success @validation-regression @accessibility
-    Scenario: DVLA Auth Source - Axe Accessibility Scan - Driving Licence Check Your Details Page
-        Then I run the Axe Accessibility check against the Driving Licence check your details page
-
-    @QualityGateAccessibilityTest
-    @mock-api:dl-dvla-auth-success @validation-regression @accessibility
-    Scenario: DVLA Auth Source - Axe Accessibility Scan - Driving Licence - Consent Page
-        When I click on the Yes radio button
-        Then I click on the Confirm and Continue button
-        And I should be on the DVA consent page We need to check your driving licence details – GOV.UK One Login
-        And I run the Axe Accessibility check against the Driving Licence Consent page
-
     @mock-api:dl-dvla-auth-success @console-error-checks
     Scenario: DVLA Auth Source - User navigates through the Auth Source Journey - Check for Console Errors
         When I click on the Yes radio button
@@ -65,3 +52,33 @@ Feature: DVLA Driving licence - Auth Source
         And I should be on the DVLA consent page We need to check your driving licence details – GOV.UK One Login
         And I click on the DVLA consent checkbox
         When I click on the Continue button
+
+  ########### Axe Accessibility ##########
+    @QualityGateAccessibilityTest
+    @mock-api:dl-dvla-auth-success @validation-regression @accessibility
+    Scenario: DVLA Auth Source - Axe Accessibility Scan - Driving Licence Check Your Details Page - No Radio Selected Error
+        Then I click on the Confirm and Continue button
+        And I run the Axe Accessibility check against the Driving Licence check your details page
+
+    @QualityGateAccessibilityTest
+    @mock-api:dl-dvla-auth-success @validation-regression @accessibility
+    Scenario: DVLA Auth Source - Axe Accessibility Scan - Driving Licence Check Your Details Page
+        Then I run the Axe Accessibility check against the Driving Licence check your details page
+
+    @QualityGateAccessibilityTest
+    @mock-api:dl-dvla-auth-success @validation-regression @accessibility
+    Scenario: DVLA Auth Source - Axe Accessibility Scan - Driving Licence - Consent Page - Missing Consent Error
+        When I click on the Yes radio button
+        Then I click on the Confirm and Continue button
+        And I should be on the DVLA consent page We need to check your driving licence details – GOV.UK One Login
+        When I click on the Continue button
+        Then I see the No Consent Error Text You must give your consent to continue
+        And I run the Axe Accessibility check against the Driving Licence Consent page
+
+    @QualityGateAccessibilityTest
+    @mock-api:dl-dvla-auth-success @validation-regression @accessibility
+    Scenario: DVLA Auth Source - Axe Accessibility Scan - Driving Licence - Consent Page
+        When I click on the Yes radio button
+        Then I click on the Confirm and Continue button
+        And I should be on the DVA consent page We need to check your driving licence details – GOV.UK One Login
+        And I run the Axe Accessibility check against the Driving Licence Consent page
