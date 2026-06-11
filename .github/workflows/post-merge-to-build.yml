@@ -12,11 +12,10 @@ jobs:
       id-token: write
       contents: read
     steps:
-      - uses: govuk-one-login/devplatform-upload-action-ecr@f82c8774a6390f200b15112b3cbb9faf3442173c
+      - uses: govuk-one-login/devplatform-upload-action-ecr@156ca69f253c67f2f71488d0d81f7a3d97657e43 # v1.6.1
         with:
           role-to-assume-arn: ${{ secrets.GH_ACTIONS_ROLE_ARN }}
           build-and-push-image-only: true
-          artifact-bucket-name: ''
           ecr-repo-name: ${{ secrets.BUILD_ECR_REPOSITORY_TEST }}
           dockerfile: test/Dockerfile
           push-latest-tag: true
@@ -43,7 +42,7 @@ jobs:
           aws-region: eu-west-2
 
       - name: Setup SAM
-        uses: aws-actions/setup-sam@d78e1a4a9656d3b223e59b80676a797f20093133 # v2
+        uses: aws-actions/setup-sam@89ddb14d60e682855e3fea4be85b3c56485de310 # v3
         with:
           use-installer: true
           version: "1.157.1"
@@ -63,7 +62,7 @@ jobs:
           password: ${{ secrets.DYNATRACE_PAAS_TOKEN }}
 
       - name: "Push signed image to ECR, updated SAM template with image then upload it to the S3 Artifact Bucket"
-        uses: govuk-one-login/devplatform-upload-action-ecr@f82c8774a6390f200b15112b3cbb9faf3442173c # v1.5.0
+        uses: govuk-one-login/devplatform-upload-action-ecr@156ca69f253c67f2f71488d0d81f7a3d97657e43 # v1.6.1
         with:
           artifact-bucket-name: ${{ secrets.BUILD_ARTIFACT_BUCKET }}
           container-sign-kms-key-arn: ${{ secrets.BUILD_CONTAINER_SIGN_KMS_KEY }}
