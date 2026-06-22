@@ -81,7 +81,7 @@
     "express-session": "1.19.0",
     "govuk-frontend": "5.14.0",
     "hmpo-components": "8.0.6",
-    "hmpo-form-wizard": "12.1.0",
+    "hmpo-form-wizard": "17.0.1",
     "hmpo-logger": "8.0.1",
     "nunjucks": "3.2.4"
   },
