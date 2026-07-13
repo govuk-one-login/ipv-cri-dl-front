@@ -12,7 +12,8 @@ jobs:
       id-token: write
       contents: read
     steps:
-      - uses: govuk-one-login/devplatform-upload-action-ecr@156ca69f253c67f2f71488d0d81f7a3d97657e43 # v1.6.1
+      - name: Test image build and push
+        uses: govuk-one-login/devplatform-upload-action-ecr@d839fc3ead8c9d9f18f7a8cceb7ab4a3eab18a58 # v1.7.0
         with:
           role-to-assume-arn: ${{ secrets.GH_ACTIONS_ROLE_ARN }}
           build-and-push-image-only: true
@@ -20,9 +21,10 @@ jobs:
           dockerfile: test/Dockerfile
           push-latest-tag: true
           container-sign-kms-key-arn: ${{ secrets.BUILD_CONTAINER_SIGN_KMS_KEY }}
+          artifact-bucket-name: ""
 
   app-image-build-and-push:
-    name: Docker build and push
+    name: App image build and push
     runs-on: ubuntu-latest
     needs: test-image-build-and-push
     env:
@@ -61,8 +63,8 @@ jobs:
           username: khw46367
           password: ${{ secrets.DYNATRACE_PAAS_TOKEN }}
 
-      - name: "Push signed image to ECR, updated SAM template with image then upload it to the S3 Artifact Bucket"
-        uses: govuk-one-login/devplatform-upload-action-ecr@156ca69f253c67f2f71488d0d81f7a3d97657e43 # v1.6.1
+      - name: App image build and push
+        uses: govuk-one-login/devplatform-upload-action-ecr@d839fc3ead8c9d9f18f7a8cceb7ab4a3eab18a58 # v1.7.0
         with:
           artifact-bucket-name: ${{ secrets.BUILD_ARTIFACT_BUCKET }}
           container-sign-kms-key-arn: ${{ secrets.BUILD_CONTAINER_SIGN_KMS_KEY }}
