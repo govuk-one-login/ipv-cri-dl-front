@@ -1,12 +1,12 @@
 const { Controller: BaseController } = require("hmpo-form-wizard");
-const { PACKAGE_NAME, APP } = require("../../../lib/config");
-const logger = require("hmpo-logger").get(PACKAGE_NAME);
 
 const {
+  APP,
   API: {
     PATHS: { PERSON_INFO }
   }
 } = require("../../../lib/config");
+const LOGGER = require("../../../utils/logger");
 
 class RootController extends BaseController {
   async saveValues(req, res, next) {
@@ -66,7 +66,7 @@ class RootController extends BaseController {
           );
         }
 
-        this.setNames(req, personInfoApiResponse.data.name[0].nameParts);
+        await this.setNames(req, personInfoApiResponse.data.name[0].nameParts);
 
         req.sessionModel.set(
           "dateOfBirth",
@@ -78,135 +78,45 @@ class RootController extends BaseController {
   }
 
   checkForValidSharedClaimsData(req, personInfoApiResponse) {
-    if (
-      undefined === personInfoApiResponse?.data?.drivingPermit ||
-      "" === personInfoApiResponse?.data?.drivingPermit
-    ) {
-      logger.warn(
-        "Root controller: drivingPermit data missing from API response"
+    const data = personInfoApiResponse?.data;
+    const drivingPermit = data?.drivingPermit?.[0];
+    const address = data?.address?.[0];
+    const birthDate = data?.birthDate?.[0];
+    const name = data?.name?.[0];
+
+    const requiredFields = [
+      ["drivingPermit", data?.drivingPermit],
+      ["drivingPermit.personalNumber", drivingPermit?.personalNumber],
+      ["drivingPermit.expiryDate", drivingPermit?.expiryDate],
+      ["drivingPermit.issueDate", drivingPermit?.issueDate],
+      ["drivingPermit.issuedBy", drivingPermit?.issuedBy],
+      ...(drivingPermit?.issuedBy === "DVLA"
+        ? [["drivingPermit.issueNumber", drivingPermit?.issueNumber]]
+        : []),
+      ["address", data?.address],
+      ["address.postalCode", address?.postalCode],
+      ["birthDate", data?.birthDate],
+      ["birthDate.value", birthDate?.value],
+      ["name", data?.name],
+      ["name.nameParts", name?.nameParts]
+    ];
+
+    for (const [field, value] of requiredFields) {
+      if (value === undefined || value === "") {
+        LOGGER.warn(`root controller: ${field} missing from API response`);
+        return false;
+      }
+    }
+
+    if (name.nameParts[0] === undefined) {
+      LOGGER.warn(
+        "root controller: name.nameParts[0] missing from API response"
       );
       return false;
-    } else {
-      const drivingPermit = personInfoApiResponse?.data?.drivingPermit[0];
-      if (
-        undefined === drivingPermit?.personalNumber ||
-        "" === drivingPermit?.personalNumber
-      ) {
-        logger.warn(
-          "Root controller: drivingPermit personalNumber data missing from API response"
-        );
-        return false;
-      }
-
-      if (
-        undefined === drivingPermit?.expiryDate ||
-        "" === drivingPermit?.expiryDate
-      ) {
-        logger.warn(
-          "Root controller: drivingPermit expiryDate data missing from API response"
-        );
-        return false;
-      }
-
-      if (
-        undefined === drivingPermit?.issueDate ||
-        "" === drivingPermit?.issueDate
-      ) {
-        logger.warn(
-          "Root controller: drivingPermit issueDate data missing from API response"
-        );
-        return false;
-      }
-
-      if (
-        undefined === drivingPermit?.issuedBy ||
-        "" === drivingPermit?.issuedBy
-      ) {
-        logger.warn(
-          "Root controller: drivingPermit issuedBy data missing from API response"
-        );
-        return false;
-      }
-
-      if (drivingPermit?.issuedBy === "DVLA") {
-        if (
-          undefined === drivingPermit?.issueNumber ||
-          "" === drivingPermit?.issueNumber
-        ) {
-          logger.warn(
-            "Root controller: drivingPermit issueNumber data missing from API response"
-          );
-          return false;
-        }
-      }
     }
 
-    if (
-      undefined === personInfoApiResponse?.data?.address ||
-      "" === personInfoApiResponse?.data?.address
-    ) {
-      logger.warn("Root controller: address data missing from API response");
-      return false;
-    } else {
-      const address = personInfoApiResponse?.data?.address[0];
-      if (undefined === address?.postalCode || "" === address?.postalCode) {
-        logger.warn(
-          "Root controller: address postalCode data missing from API response"
-        );
-        return false;
-      }
-    }
-
-    if (
-      undefined === personInfoApiResponse?.data?.birthDate ||
-      "" === personInfoApiResponse?.data?.birthDate
-    ) {
-      logger.warn("Root controller: birthDate data missing from API response");
-      return false;
-    } else {
-      const birthDate = personInfoApiResponse?.data?.birthDate[0];
-      if (undefined === birthDate.value || "" === birthDate.value) {
-        logger.warn(
-          "Root controller: birthDate value data missing from API response"
-        );
-        return false;
-      }
-    }
-
-    if (
-      undefined === personInfoApiResponse?.data?.name ||
-      "" === personInfoApiResponse?.data?.name
-    ) {
-      logger.warn("Root controller: name data missing from API response");
-      return false;
-    } else {
-      const name = personInfoApiResponse?.data?.name[0];
-      if (undefined === name?.nameParts || "" === name?.nameParts) {
-        logger.warn(
-          "Root controller: nameParts data missing from API response"
-        );
-        return false;
-      } else {
-        const namePart = name?.nameParts[0];
-        if (undefined === namePart || "" === namePart) {
-          logger.warn(
-            "Root controller: namePart data missing from API response"
-          );
-          return false;
-        }
-        for (let i = 0; i < namePart.length; i++) {
-          if (undefined === namePart[i] || "" === namePart[i]) {
-            logger.warn(
-              "Root controller: namePart value missing from API response"
-            );
-            return false;
-          }
-        }
-      }
-    }
-
-    logger.warn(
-      "Root Controller: Valid Shared Claims and Context Value, isAuthSourceRoute set to true"
+    LOGGER.info(
+      "root controller: valid shared claims and context, isAuthSourceRoute set to true"
     );
     return true;
   }

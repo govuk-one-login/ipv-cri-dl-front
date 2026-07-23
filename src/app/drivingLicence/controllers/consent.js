@@ -1,13 +1,14 @@
 const BaseController = require("hmpo-form-wizard").Controller;
-const { PACKAGE_NAME } = require("../../../lib/config");
-const logger = require("hmpo-logger").get(PACKAGE_NAME);
+const LOGGER = require("../../../utils/logger");
 
 class ConsentController extends BaseController {
   async saveValues(req, res, next) {
     try {
       return next();
     } catch (err) {
-      logger.error("Error in consent controller - " + err);
+      LOGGER.logError(req, err, {
+        messagePrefix: "consent:"
+      });
       return next(err);
     }
   }
