@@ -38,7 +38,7 @@ describe("licence issuer controller", () => {
     expect(next).to.have.been.calledWith(
       sinon.match.has(
         "message",
-        "licence-issuer: invalid action " + req.form.values.licenceIssuer
+        "invalid action: " + req.form.values.licenceIssuer
       )
     );
   });

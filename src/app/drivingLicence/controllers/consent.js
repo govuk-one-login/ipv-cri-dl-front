@@ -7,7 +7,7 @@ class ConsentController extends BaseController {
       return next();
     } catch (err) {
       LOGGER.logError(req, err, {
-        messagePrefix: "consent:"
+        messagePrefix: "consent"
       });
       return next(err);
     }

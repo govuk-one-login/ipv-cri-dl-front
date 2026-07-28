@@ -103,20 +103,18 @@ class RootController extends BaseController {
 
     for (const [field, value] of requiredFields) {
       if (value === undefined || value === "") {
-        LOGGER.warn(`root controller: ${field} missing from API response`);
+        LOGGER.warn(`root: ${field} missing from API response`);
         return false;
       }
     }
 
     if (name.nameParts[0] === undefined) {
-      LOGGER.warn(
-        "root controller: name.nameParts[0] missing from API response"
-      );
+      LOGGER.warn("root: name.nameParts[0] missing from API response");
       return false;
     }
 
     LOGGER.info(
-      "root controller: valid shared claims and context, isAuthSourceRoute set to true"
+      "root: valid shared claims and context, isAuthSourceRoute set to true"
     );
     return true;
   }

@@ -81,7 +81,7 @@ class ValidateController extends BaseController {
       });
     } catch (error) {
       LOGGER.logError(req, error, {
-        messagePrefix: "error thrown in validate controller"
+        messagePrefix: "validate"
       });
       super.saveValues(req, res, () => {
         req.sessionModel.set("error", error.response.data);

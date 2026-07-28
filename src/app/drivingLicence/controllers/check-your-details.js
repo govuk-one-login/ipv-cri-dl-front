@@ -22,10 +22,10 @@ class CheckYourDetailsController extends BaseController {
           return next();
         }
       }
-      return next(new Error("check-your-details: invalid action - " + action));
+      return next(new Error(`invalid action: ${action}`));
     } catch (err) {
       LOGGER.logError(req, err, {
-        messagePrefix: "check-your-details: unable to set session model error"
+        messagePrefix: "check-your-details"
       });
       return next(err);
     }

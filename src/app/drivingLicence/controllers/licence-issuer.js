@@ -33,10 +33,10 @@ class LicenceIssuerController extends BaseController {
           return next();
         }
       }
-      return next(new Error("licence-issuer: invalid action " + action));
+      return next(new Error(`invalid action: ${action}`));
     } catch (err) {
       LOGGER.logError(req, err, {
-        messagePrefix: "licence-issuer:"
+        messagePrefix: "licence-issuer"
       });
       return next(err);
     }
