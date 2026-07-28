@@ -1,0 +1,140 @@
+{
+  "mappings": [
+    {
+      "scenarioName": "dl-dvla-auth-retry",
+      "request": {
+        "method": "GET",
+        "url": "/__reset/dl-dvla-auth-retry"
+      },
+      "response": {
+        "status": 200
+      }
+    },
+    {
+      "scenarioName": "dl-dvla-auth-retry",
+      "request": {
+        "method": "POST",
+        "urlPath": "/session",
+        "headers": {
+          "x-scenario-id": {
+            "equalTo": "dl-dvla-auth-retry"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "session_id": "ABADCAFE",
+          "state": "sT@t3",
+          "redirect_uri": "http://localhost:8030/return"
+        }
+      }
+    },
+    {
+      "scenarioName": "dl-dvla-auth-retry",
+      "request": {
+        "method": "GET",
+        "urlPath": "/person-info",
+        "headers": {
+          "x-scenario-id": {
+            "equalTo": "dl-dvla-auth-retry"
+          },
+          "session_id": {
+            "equalTo": "ABADCAFE"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "name": [
+            {
+              "nameParts": [
+                { "type": "GivenName", "value": "KENNETH" },
+                { "type": "FamilyName", "value": "DECERQUEIRA" }
+              ]
+            }
+          ],
+          "birthDate": [{ "value": "1965-07-08" }],
+          "address": [{ "postalCode": "BA2 5AA" }],
+          "drivingPermit": [
+            {
+              "personalNumber": "DECER607085K99AE",
+              "expiryDate": "2025-04-27",
+              "issuedBy": "DVLA",
+              "issueNumber": "16",
+              "issueDate": "2023-08-22",
+              "fullAddress": "8 HADLEY ROAD BATH BA2 5AA"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "scenarioName": "dl-dvla-auth-retry",
+      "request": {
+        "method": "POST",
+        "urlPath": "/check-driving-licence",
+        "headers": {
+          "x-scenario-id": {
+            "equalTo": "dl-dvla-auth-retry"
+          },
+          "session_id": {
+            "equalTo": "ABADCAFE"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "retry": true
+        }
+      }
+    },
+    {
+      "scenarioName": "dl-dvla-auth-retry",
+      "request": {
+        "method": "GET",
+        "urlPath": "/authorization",
+        "headers": {
+          "x-scenario-id": {
+            "equalTo": "dl-dvla-auth-retry"
+          },
+          "session-id": {
+            "equalTo": "ABADCAFE"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "authorizationCode": {
+            "value": "FACEFEED"
+          }
+        }
+      }
+    },
+    {
+      "scenarioName": "dl-dvla-auth-retry",
+      "request": {
+        "method": "GET",
+        "urlPathPattern": "/return.*",
+        "queryParameters": {
+          "client_id": {
+            "equalTo": "standalone"
+          },
+          "state": {
+            "equalTo": "sT@t3"
+          },
+          "code": {
+            "equalTo": "FACEFEED"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "OAuth callback received successfully"
+      }
+    }
+  ]
+}

@@ -1,0 +1,139 @@
+{
+  "mappings": [
+    {
+      "scenarioName": "dl-dva-auth-retry",
+      "request": {
+        "method": "GET",
+        "url": "/__reset/dl-dva-auth-retry"
+      },
+      "response": {
+        "status": 200
+      }
+    },
+    {
+      "scenarioName": "dl-dva-auth-retry",
+      "request": {
+        "method": "POST",
+        "urlPath": "/session",
+        "headers": {
+          "x-scenario-id": {
+            "equalTo": "dl-dva-auth-retry"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "session_id": "ABADCAFE",
+          "state": "sT@t3",
+          "redirect_uri": "http://localhost:8030/return"
+        }
+      }
+    },
+    {
+      "scenarioName": "dl-dva-auth-retry",
+      "request": {
+        "method": "GET",
+        "urlPath": "/person-info",
+        "headers": {
+          "x-scenario-id": {
+            "equalTo": "dl-dva-auth-retry"
+          },
+          "session_id": {
+            "equalTo": "ABADCAFE"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "name": [
+            {
+              "nameParts": [
+                { "type": "GivenName", "value": "KENNETH" },
+                { "type": "FamilyName", "value": "DECERQUEIRA" }
+              ]
+            }
+          ],
+          "birthDate": [{ "value": "1965-07-08" }],
+          "address": [{ "postalCode": "BA2 5AA" }],
+          "drivingPermit": [
+            {
+              "personalNumber": "12345678",
+              "expiryDate": "2042-10-01",
+              "issuedBy": "DVA",
+              "issueDate": "2018-04-19",
+              "fullAddress": "8 HADLEY ROAD BATH BA2 5AA"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "scenarioName": "dl-dva-auth-retry",
+      "request": {
+        "method": "POST",
+        "urlPath": "/check-driving-licence",
+        "headers": {
+          "x-scenario-id": {
+            "equalTo": "dl-dva-auth-retry"
+          },
+          "session_id": {
+            "equalTo": "ABADCAFE"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "retry": true
+        }
+      }
+    },
+    {
+      "scenarioName": "dl-dva-auth-retry",
+      "request": {
+        "method": "GET",
+        "urlPath": "/authorization",
+        "headers": {
+          "x-scenario-id": {
+            "equalTo": "dl-dva-auth-retry"
+          },
+          "session-id": {
+            "equalTo": "ABADCAFE"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "authorizationCode": {
+            "value": "FACEFEED"
+          }
+        }
+      }
+    },
+    {
+      "scenarioName": "dl-dva-auth-retry",
+      "request": {
+        "method": "GET",
+        "urlPathPattern": "/return.*",
+        "queryParameters": {
+          "client_id": {
+            "equalTo": "standalone"
+          },
+          "state": {
+            "equalTo": "sT@t3"
+          },
+          "code": {
+            "equalTo": "FACEFEED"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "OAuth callback received successfully"
+      }
+    }
+  ]
+}

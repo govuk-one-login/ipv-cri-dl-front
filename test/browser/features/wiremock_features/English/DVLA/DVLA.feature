@@ -272,6 +272,14 @@ Feature: DVLA Driving licence CRI Error Validations
       | 1              |
       | 3              |
 
+  @mock-api:dl-success @retry-banner-render
+  Scenario: DVLA - Retry warning renders after API retry response
+    Given User enters DVLA data as a DrivingLicenceSubjectHappyPeter
+    Then User enters date of issue as current date
+    And User enters day of issue as current day minus 1
+    When User clicks on continue
+    Then The retry warning is displayed containing You will not be able to change your details again
+
   @mock-api:dl-success @validation-regression
   Scenario: DVLA - User enters issue date older than 10 years
     Given User enters DVLA data as a DrivingLicenceSubjectHappyPeter
