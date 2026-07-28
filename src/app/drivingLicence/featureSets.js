@@ -1,5 +1,4 @@
-const { PACKAGE_NAME } = require("../../lib/config");
-const logger = require("hmpo-logger").get(PACKAGE_NAME);
+const LOGGER = require("../../utils/logger");
 
 module.exports = function (req, res, next) {
   try {
@@ -10,7 +9,7 @@ module.exports = function (req, res, next) {
     }
 
     if (featureSet !== undefined) {
-      logger.info("feature set is " + featureSet);
+      LOGGER.info(`feature set is ${featureSet}`);
       req.session.featureSet = featureSet;
     }
     next();

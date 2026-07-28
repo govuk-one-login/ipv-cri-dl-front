@@ -1,12 +1,11 @@
 const BaseController = require("hmpo-form-wizard").Controller;
-const { PACKAGE_NAME } = require("../../../lib/config");
-const logger = require("hmpo-logger").get(PACKAGE_NAME);
+const LOGGER = require("../../../utils/logger");
 
 class LicenceIssuerController extends BaseController {
   async saveValues(req, res, next) {
     try {
       req.sessionModel.reset();
-      logger.info("user submitting licence issuer", { req, res });
+      LOGGER.info("user submitting licence issuer");
       req.sessionModel.set("noLicence", undefined);
 
       const action = req.form.values.licenceIssuer;
@@ -15,36 +14,30 @@ class LicenceIssuerController extends BaseController {
 
       switch (action) {
         case "noLicence": {
-          logger.info(
-            "licence-issuer: user has no licence, routing back to IPVCore",
-            { req, res }
+          LOGGER.info(
+            "licence-issuer: user has no licence, routing back to IPVCore"
           );
           req.sessionModel.set("noLicence", true);
           return next();
         }
         case "DVLA": {
-          logger.info(
-            "licence-issuer: user selected DVLA : redirecting to driving licence details",
-            {
-              req,
-              res
-            }
+          LOGGER.info(
+            "licence-issuer: user selected DVLA, redirecting to driving licence details"
           );
           return next();
         }
         case "DVA": {
-          logger.info(
-            "licence-issuer: user selected DVA : redirecting to driving licence details",
-            {
-              req,
-              res
-            }
+          LOGGER.info(
+            "licence-issuer: user selected DVA, redirecting to driving licence details"
           );
           return next();
         }
       }
-      return next(new Error("licence-issuer: Invalid action " + action));
+      return next(new Error(`invalid action: ${action}`));
     } catch (err) {
+      LOGGER.logError(req, err, {
+        messagePrefix: "licence-issuer"
+      });
       return next(err);
     }
   }

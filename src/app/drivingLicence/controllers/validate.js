@@ -6,11 +6,10 @@ const {
     PATHS: { CHECK }
   }
 } = require("../../../lib/config");
-const { PACKAGE_NAME } = require("../../../lib/config");
-const logger = require("hmpo-logger").get(PACKAGE_NAME);
 const {
   createPersonalDataHeaders
 } = require("@govuk-one-login/frontend-passthrough-headers");
+const LOGGER = require("../../../utils/logger");
 
 class ValidateController extends BaseController {
   async saveValues(req, res, callback) {
@@ -39,7 +38,7 @@ class ValidateController extends BaseController {
     };
 
     try {
-      const headers = {
+      const headers = /** @type {import("axios").RawAxiosRequestHeaders} */ {
         session_id: req.session.tokenId,
         ...createPersonalDataHeaders(`${BASE_URL}${CHECK}`, req)
       };
@@ -48,10 +47,7 @@ class ValidateController extends BaseController {
         headers["document-checking-route"] = "direct";
       }
 
-      logger.info("validate: calling check-driving-licence lambda", {
-        req,
-        res
-      });
+      LOGGER.info("validate: calling check-driving-licence lambda");
       const checkDrivingLicenceResponse = await req.axios.post(
         `${CHECK}`,
         attributes,
@@ -59,7 +55,7 @@ class ValidateController extends BaseController {
       );
 
       if (checkDrivingLicenceResponse.data?.retry === true) {
-        logger.info("validate: driving licence retry", { req, res });
+        LOGGER.info("validate: driving licence retry");
         req.sessionModel.set("showRetryMessage", true);
         if (req.sessionModel.get("isAuthSourceRoute") === false) {
           req.sessionModel.set("showRetryMessage", false);
@@ -68,10 +64,7 @@ class ValidateController extends BaseController {
       }
 
       const redirect_url = checkDrivingLicenceResponse?.data?.redirectUrl;
-      logger.info("Validate: redirecting user to callBack with url ", {
-        req,
-        res
-      });
+      LOGGER.info("validate: redirecting user to callBack with url ");
 
       super.saveValues(req, res, () => {
         if (!redirect_url) {
@@ -87,7 +80,9 @@ class ValidateController extends BaseController {
         }
       });
     } catch (error) {
-      logger.error("error thrown in validate controller", { req, res, error });
+      LOGGER.logError(req, error, {
+        messagePrefix: "validate"
+      });
       super.saveValues(req, res, () => {
         req.sessionModel.set("error", error.response.data);
         callback();

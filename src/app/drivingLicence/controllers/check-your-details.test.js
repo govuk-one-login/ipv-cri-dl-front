@@ -38,7 +38,7 @@ describe("check your details controller", () => {
     expect(next).to.have.been.calledWith(
       sinon.match.has(
         "message",
-        "check-your-details: Invalid action - " + req.form.values.confirmDetails
+        "invalid action: " + req.form.values.confirmDetails
       )
     );
   });

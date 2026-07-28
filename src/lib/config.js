@@ -1,7 +1,6 @@
 require("dotenv").config();
 
 module.exports = {
-  PACKAGE_NAME: "di-ipv-cri-uk-driving-licence-front",
   API: {
     BASE_URL: process.env.API_BASE_URL || "http://localhost:5007/",
     PATHS: {

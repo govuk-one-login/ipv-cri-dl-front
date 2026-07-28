@@ -30,6 +30,7 @@ npm install
 - `GA4_SELECT_CONTENT_ENABLED`- Feature flag to enable GA4 select content tracking, defaulted to `"true"`
 - `LANGUAGE_TOGGLE_DISABLED` - Feature flag to disable Language Toggle, defaulted to `true`
 - `MAY_2025_REBRAND_ENABLED` - Feature flag to enable the May 2025 GOV.UK branding change, defaults to `false`
+- `USE_PINO_LOGGER` - Feature flag to enable Pino logger (replaces HMPO Logger), defaults to `false`
 
 ### Code Owners
 

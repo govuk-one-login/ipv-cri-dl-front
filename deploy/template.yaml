@@ -108,6 +108,7 @@ Mappings:
 
   FeatureFlagMapping:
     dev:
+      pinoEnabled: "true"
       ga4Enabled: "true"
       uaEnabled: "false"
       languageToggleDisabled: "false"
@@ -116,6 +117,7 @@ Mappings:
       may2025RebrandEnabled: "true"
       analyticsDataSensitive: "false"
     build:
+      pinoEnabled: "true"
       ga4Enabled: "true"
       uaEnabled: "false"
       languageToggleDisabled: "false"
@@ -124,6 +126,7 @@ Mappings:
       may2025RebrandEnabled: "true"
       analyticsDataSensitive: "false"
     staging:
+      pinoEnabled: "false"
       ga4Enabled: "true"
       uaEnabled: "false"
       languageToggleDisabled: "false"
@@ -132,6 +135,7 @@ Mappings:
       may2025RebrandEnabled: "true"
       analyticsDataSensitive: "false"
     integration:
+      pinoEnabled: "false"
       ga4Enabled: "true"
       uaEnabled: "false"
       languageToggleDisabled: "false"
@@ -140,6 +144,7 @@ Mappings:
       may2025RebrandEnabled: "true"
       analyticsDataSensitive: "false"
     production:
+      pinoEnabled: "false"
       ga4Enabled: "true"
       uaEnabled: "false"
       languageToggleDisabled: "false"
@@ -454,6 +459,8 @@ Resources:
           Image: CONTAINER-IMAGE-PLACEHOLDER
           Name: app
           Environment:
+            - Name: USE_PINO_LOGGER
+              Value: !FindInMap [ FeatureFlagMapping, !Ref "Environment", pinoEnabled ]
             - Name: API_BASE_URL
               Value: !Sub
                 - "https://${APIGatewayId}.execute-api.eu-west-2.amazonaws.com/${Environment}"

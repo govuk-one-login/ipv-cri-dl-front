@@ -1,6 +1,5 @@
+const LOGGER = require("../../../utils/logger");
 const BaseController = require("hmpo-form-wizard").Controller;
-const { PACKAGE_NAME } = require("../../../lib/config");
-const logger = require("hmpo-logger").get(PACKAGE_NAME);
 
 class CheckYourDetailsController extends BaseController {
   async saveValues(req, res, next) {
@@ -10,29 +9,24 @@ class CheckYourDetailsController extends BaseController {
 
       switch (action) {
         case "detailsNotConfirmed": {
-          logger.info(
-            "check-your-details: User has indicated details are incorrect, routing back to IPVCore",
-            { req, res }
+          LOGGER.info(
+            "check-your-details: user has indicated details are incorrect, routing back to IPVCore"
           );
           req.sessionModel.set("detailsNotConfirmed", true);
           return next();
         }
         case "detailsConfirmed": {
-          logger.info(
-            "check-your-details: User has confirmed details : redirecting to driving licence API",
-            {
-              req,
-              res
-            }
+          LOGGER.info(
+            "check-your-details: user has confirmed details, redirecting to driving licence API"
           );
           return next();
         }
       }
-      return next(new Error("check-your-details: Invalid action - " + action));
+      return next(new Error(`invalid action: ${action}`));
     } catch (err) {
-      logger.error(
-        "check-your-details: Unable to set session model error - " + err
-      );
+      LOGGER.logError(req, err, {
+        messagePrefix: "check-your-details"
+      });
       return next(err);
     }
   }
