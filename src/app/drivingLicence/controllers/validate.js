@@ -51,42 +51,20 @@ class ValidateController extends BaseController {
       const checkDrivingLicenceResponse = await req.axios.post(
         `${CHECK}`,
         attributes,
-        { headers: headers }
+        { headers }
       );
 
       if (checkDrivingLicenceResponse.data?.retry === true) {
-        LOGGER.info("validate: driving licence retry");
         req.sessionModel.set("showRetryMessage", true);
-        if (req.sessionModel.get("isAuthSourceRoute") === false) {
-          req.sessionModel.set("showRetryMessage", false);
-        }
-        return callback();
+        LOGGER.info("validate: driving licence retry");
+      } else {
+        LOGGER.info("validate: redirecting user to callback");
       }
 
-      const redirect_url = checkDrivingLicenceResponse?.data?.redirectUrl;
-      LOGGER.info("validate: redirecting user to callBack with url ");
-
-      super.saveValues(req, res, () => {
-        if (!redirect_url) {
-          const error = {
-            error: "server_error",
-            error_description: "Failed to retrieve authorization redirect url"
-          };
-          req.sessionModel.set("error", error);
-          callback();
-        } else {
-          req.sessionModel.set("redirect_url", redirect_url);
-          callback();
-        }
-      });
-    } catch (error) {
-      LOGGER.logError(req, error, {
-        messagePrefix: "validate"
-      });
-      super.saveValues(req, res, () => {
-        req.sessionModel.set("error", error.response.data);
-        callback();
-      });
+      callback();
+    } catch (err) {
+      LOGGER.logError(req, err, { messagePrefix: "validate" });
+      callback(err);
     }
   }
 }
