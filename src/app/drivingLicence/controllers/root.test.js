@@ -164,6 +164,25 @@ describe("root controller", () => {
     );
   });
 
+  it("should set isAuthSourceRoute=false when personInfo returns 204 No Content", async () => {
+    process.env.AUTH_SOURCE_ENABLED = "true";
+
+    const resolvedPromise = new Promise((resolve) => resolve({ status: 204 }));
+
+    sandbox.stub(req.axios, "get").returns(resolvedPromise);
+    await root.saveValues(req, res, next);
+    expect(req.sessionModel.get("isAuthSourceRoute")).to.equal(false);
+    expect(req.sessionModel.get("drivingLicenceNumber")).to.equal(undefined);
+    expect(req.sessionModel.get("expiryDate")).to.equal(undefined);
+    expect(req.sessionModel.get("issueDate")).to.equal(undefined);
+    expect(req.sessionModel.get("licenceIssuer")).to.equal(undefined);
+    expect(req.sessionModel.get("postcode")).to.equal(undefined);
+    expect(req.sessionModel.get("issueNumber")).to.equal(undefined);
+    expect(req.sessionModel.get("firstName")).to.equal(undefined);
+    expect(req.sessionModel.get("surname")).to.equal(undefined);
+    expect(req.sessionModel.get("dateOfBirth")).to.equal(undefined);
+  });
+
   it("should not update sessionModel if personInfo response is empty", async () => {
     personInfoApiResponse = {};
 

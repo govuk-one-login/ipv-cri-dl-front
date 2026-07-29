@@ -78,6 +78,13 @@ class RootController extends BaseController {
   }
 
   checkForValidSharedClaimsData(req, personInfoApiResponse) {
+    if (personInfoApiResponse?.status === 204) {
+      LOGGER.info(
+        "root: person info response was no content, isAuthSourceRoute set to false"
+      );
+      return false;
+    }
+
     const data = personInfoApiResponse?.data;
     const drivingPermit = data?.drivingPermit?.[0];
     const address = data?.address?.[0];
@@ -85,7 +92,7 @@ class RootController extends BaseController {
     const name = data?.name?.[0];
 
     const requiredFields = [
-      ["drivingPermit", data?.drivingPermit],
+      ["drivingPermit", drivingPermit],
       ["drivingPermit.personalNumber", drivingPermit?.personalNumber],
       ["drivingPermit.expiryDate", drivingPermit?.expiryDate],
       ["drivingPermit.issueDate", drivingPermit?.issueDate],
