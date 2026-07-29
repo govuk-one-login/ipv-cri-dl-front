@@ -53,8 +53,7 @@ describe("validate controller", () => {
 
     await validate.saveValues(req, res, next);
 
-    sandbox.assert.calledWith(
-      stub,
+    expect(stub).to.have.been.calledWith(
       "check-driving-licence",
       {
         drivingLicenceNumber: "SMITH9702105LN99",
@@ -88,8 +87,7 @@ describe("validate controller", () => {
 
     await validate.saveValues(req, res, next);
 
-    sandbox.assert.calledWith(
-      stub,
+    expect(stub).to.have.been.calledWith(
       "check-driving-licence",
       {
         drivingLicenceNumber: "SMITH9702105LN99",
