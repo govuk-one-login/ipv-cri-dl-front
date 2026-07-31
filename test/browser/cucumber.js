@@ -8,9 +8,9 @@ const PROGRESS = "progress";
 
 const commonSupport = ["./test/browser/support/**/*.js"];
 const commonWiremockSteps = [
-  "./test/browser/step_definitions/wiremock_steps/**/*.js"
+  "./test/browser/step-definitions/wiremock-steps/**/*.js"
 ];
-const commonStubSteps = ["./test/browser/step_definitions/stub_steps/**/*.js"];
+const commonStubSteps = ["./test/browser/step-definitions/stub-steps/**/*.js"];
 
 const makeReportPath = (name) =>
   path.relative(process.cwd(), path.join(repoRoot, "reports", name));
@@ -18,8 +18,8 @@ const makeReportPath = (name) =>
 module.exports = {
   default: {
     paths: [
-      "./test/browser/features/wiremock_features/**/*.feature",
-      "./test/browser/features/stub_features/**/*.feature"
+      "./test/browser/features/wiremock-features/**/*.feature",
+      "./test/browser/features/stub-features/**/*.feature"
     ],
     require: [...commonSupport, ...commonWiremockSteps, ...commonStubSteps],
     format: [
@@ -31,10 +31,10 @@ module.exports = {
   },
 
   stub_tests: {
-    paths: ["./test/browser/features/stub_features/**/*.feature"],
+    paths: ["./test/browser/features/stub-features/**/*.feature"],
     require: [
       "./test/browser/support/setup.js",
-      "./test/browser/step_definitions/stub_steps/**/*.js"
+      "./test/browser/step-definitions/stub-steps/**/*.js"
     ],
     format: [
       PROGRESS,
@@ -45,7 +45,7 @@ module.exports = {
   },
 
   wiremock_tests: {
-    paths: ["./test/browser/features/wiremock_features/**/*.feature"],
+    paths: ["./test/browser/features/wiremock-features/**/*.feature"],
     require: [...commonSupport, ...commonWiremockSteps],
     format: [
       PROGRESS,
