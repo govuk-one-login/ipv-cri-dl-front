@@ -6,13 +6,11 @@ exclude:
   - "src/assets/*"
   - "**/*.test.js"
   - "src/dynamo-session-config.js"
-  - "**/*router.js"
   - "src/app.js"
-  - "src/lib/*"
   - "src/app/shared/oauth.js"
-  - "src/app/drivingLicence/router.js"
-  - "src/app/drivingLicence/steps.js"
-  - "src/app/drivingLicence/fields.js"
+  - "src/app/driving-licence/router.js"
+  - "src/app/driving-licence/steps.js"
+  - "src/app/driving-licence/fields.js"
 
 report-dir: reports/coverage
 statements: 60

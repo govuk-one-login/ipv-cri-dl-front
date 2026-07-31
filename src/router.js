@@ -4,9 +4,9 @@ const { getGTM, getLanguageToggle, getDeviceIntelligence } =
 const setScenarioHeaders = commonExpress.lib.scenarioHeaders;
 const setAxiosDefaults = commonExpress.lib.axios;
 
-const steps = require("./app/drivingLicence/steps");
-const fields = require("./app/drivingLicence/fields");
-const featureSets = require("./app/drivingLicence/featureSets");
+const steps = require("./app/driving-licence/steps");
+const fields = require("./app/driving-licence/fields");
+const featureSets = require("./app/driving-licence/feature-sets");
 const frontendUi = require("@govuk-one-login/frontend-ui");
 
 const wizard = require("hmpo-form-wizard");
@@ -25,7 +25,7 @@ const init = (router) => {
   const wizardOptions = {
     name: "cri-driving-licence-front",
     journeyName: "drivingLicence",
-    templatePath: "drivingLicence"
+    templatePath: "driving-licence"
   };
 
   router.use(wizard(steps, fields, wizardOptions));
