@@ -18,3 +18,8 @@ Then("they should be redirected as an error", function () {
 
   expect(rpPage.hasErrorQueryParams()).to.be.true;
 });
+
+Then("the user is redirected to the relying party callback", async function () {
+  await this.page.waitForLoadState("domcontentloaded");
+  expect(this.page.url()).to.match(/\/return[?/]/);
+});

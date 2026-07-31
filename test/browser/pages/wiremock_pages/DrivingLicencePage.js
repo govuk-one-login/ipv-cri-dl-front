@@ -115,6 +115,8 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
       'xpath=//*[@id="main-content"]/div/div/div[1]/div[2]'
     );
 
+    this.retryWarning = this.page.locator(".govuk-warning-text");
+
     this.invalidIssueNumberFieldError = this.page.locator(
       'xpath=//*[@id="issueNumber-error"]'
     );
@@ -537,6 +539,13 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
     expect(
       await this.drivingLicenceRetryMessageHeading.innerText()
     ).to.contains(retryMessageHeading);
+  }
+
+  async assertRetryWarningRendered(warningText) {
+    await this.page.waitForLoadState("domcontentloaded");
+    expect(await this.isCurrentPage()).to.be.true;
+    expect(await this.retryWarning.isVisible()).to.be.true;
+    expect(await this.retryWarning.innerText()).to.contain(warningText);
   }
 
   async assertInvalidIssueNumberInErrorSummary(errorSummaryText) {

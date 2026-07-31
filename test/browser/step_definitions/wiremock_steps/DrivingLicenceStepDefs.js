@@ -316,6 +316,14 @@ Then(
 );
 
 Then(
+  /^The retry warning is displayed containing (.*)$/,
+  async function (warningText) {
+    const drivingLicencePage = new DrivingLicencePage(this.page);
+    await drivingLicencePage.assertRetryWarningRendered(warningText);
+  }
+);
+
+Then(
   /^I see the issue number error in summary as (.*)$/,
   async function (errorSummaryText) {
     const drivingLicencePage = new DrivingLicencePage(this.page);
