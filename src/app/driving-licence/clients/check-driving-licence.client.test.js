@@ -43,7 +43,8 @@ describe("checkDrivingLicenceClient", () => {
           "Content-Type": "application/json",
           "document-checking-route": "direct",
           session_id: "session-token"
-        }
+        },
+        timeoutMs: 30_000
       }
     );
   });

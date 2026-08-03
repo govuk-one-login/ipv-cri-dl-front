@@ -49,7 +49,8 @@ describe("personInfoClient", () => {
 
     expect(req.customFetch).to.have.been.calledOnceWithExactly("/person-info", {
       method: "GET",
-      headers: { session_id: "session-token" }
+      headers: { session_id: "session-token" },
+      timeoutMs: 30_000
     });
   });
 

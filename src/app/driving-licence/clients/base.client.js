@@ -1,3 +1,5 @@
+const TIMEOUT_MS = 30_000;
+
 const createBaseClient = (req) => {
   const sessionHeader = req.session.tokenId
     ? { session_id: req.session.tokenId }
@@ -7,7 +9,8 @@ const createBaseClient = (req) => {
     get: (path, headers = {}) =>
       req.customFetch(path, {
         method: "GET",
-        headers: { ...headers, ...sessionHeader }
+        headers: { ...headers, ...sessionHeader },
+        timeoutMs: TIMEOUT_MS
       }),
 
     post: (path, body, headers = {}) =>
@@ -18,7 +21,8 @@ const createBaseClient = (req) => {
           "Content-Type": "application/json",
           ...headers,
           ...sessionHeader
-        }
+        },
+        timeoutMs: TIMEOUT_MS
       })
   };
 };
