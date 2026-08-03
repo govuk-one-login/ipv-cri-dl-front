@@ -82,13 +82,13 @@ describe("app-setup", () => {
       sinon.assert.calledWith(
         app.set,
         "API.BASE_URL",
-        "http://localhost:5007/"
+        "http://localhost:5007"
       );
-      sinon.assert.calledWith(app.set, "API.PATHS.SESSION", "session");
+      sinon.assert.calledWith(app.set, "API.PATHS.SESSION", "/session");
       sinon.assert.calledWith(
         app.set,
         "API.PATHS.AUTHORIZATION",
-        "authorization"
+        "/authorization"
       );
     });
 
