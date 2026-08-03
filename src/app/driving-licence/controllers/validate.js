@@ -10,6 +10,9 @@ const {
   createPersonalDataHeaders
 } = require("@govuk-one-login/frontend-passthrough-headers");
 const LOGGER = require("../../../utils/logger");
+const {
+  checkDrivingLicenceClient
+} = require("../clients/check-driving-licence.client");
 
 class ValidateController extends BaseController {
   async saveValues(req, res, callback) {
@@ -38,23 +41,19 @@ class ValidateController extends BaseController {
     };
 
     try {
-      const headers = /** @type {import("axios").RawAxiosRequestHeaders} */ {
-        session_id: req.session.tokenId,
-        ...createPersonalDataHeaders(`${BASE_URL}${CHECK}`, req)
-      };
+      const headers = createPersonalDataHeaders(`${BASE_URL}${CHECK}`, req);
 
       if (req.session.featureSet === "direct") {
         headers["document-checking-route"] = "direct";
       }
 
       LOGGER.info("validate: calling check-driving-licence lambda");
-      const checkDrivingLicenceResponse = await req.axios.post(
-        `${CHECK}`,
+      const { retry } = await checkDrivingLicenceClient(req).post(
         attributes,
-        { headers }
+        headers
       );
 
-      if (checkDrivingLicenceResponse.data?.retry === true) {
+      if (retry) {
         req.sessionModel.set("showRetryMessage", true);
         LOGGER.info("validate: driving licence retry");
       } else {

@@ -17,9 +17,20 @@ const buildSessionModel = (req) => {
   req.sessionModel.set("licenceIssuer", "DVLA");
 };
 
+const expectedAttributes = {
+  drivingLicenceNumber: "SMITH9702105LN99",
+  issueNumber: "12",
+  postcode: "SW1 EQR",
+  surname: "Smith",
+  forenames: ["Dan", "Joe"],
+  dateOfBirth: "10/02/1975",
+  expiryDate: "15/01/2035",
+  issueDate: "10/02/2005",
+  licenceIssuer: "DVLA"
+};
+
 describe("validate controller", () => {
   const validate = new ValidateController({ route: "/test" });
-
   let req;
   let res;
   let next;
@@ -31,7 +42,6 @@ describe("validate controller", () => {
     req = setup.req;
     res = setup.res;
     next = setup.next;
-
     req.session.tokenId = SESSION_ID;
   });
 
@@ -41,114 +51,69 @@ describe("validate controller", () => {
     expect(validate).to.be.an.instanceof(BaseController);
   });
 
-  it("should POST API with session model data", async () => {
+  it("POSTs API with session model data", async () => {
     buildSessionModel(req);
-
-    const data = {
-      retry: false
-    };
-
-    const resolvedPromise = new Promise((resolve) => resolve({ data }));
-    let stub = sandbox.stub(req.axios, "post").returns(resolvedPromise);
+    req.customFetch = sandbox
+      .stub()
+      .resolves({ json: async () => ({ retry: false }) });
 
     await validate.saveValues(req, res, next);
 
-    expect(stub).to.have.been.calledWith(
-      "check-driving-licence",
-      {
-        drivingLicenceNumber: "SMITH9702105LN99",
-        issueNumber: "12",
-        postcode: "SW1 EQR",
-        surname: "Smith",
-        forenames: ["Dan", "Joe"],
-        dateOfBirth: "10/02/1975",
-        expiryDate: "15/01/2035",
-        issueDate: "10/02/2005",
-        licenceIssuer: "DVLA"
-      },
-      {
-        headers: {
-          session_id: SESSION_ID
-        }
-      }
-    );
+    expect(req.customFetch).to.have.been.calledOnce;
+    const [path, opts] = req.customFetch.firstCall.args;
+    expect(path).to.equal("/check-driving-licence");
+    expect(opts.method).to.equal("POST");
+    expect(JSON.parse(opts.body)).to.deep.equal(expectedAttributes);
+    expect(opts.headers).to.include({
+      "Content-Type": "application/json",
+      session_id: SESSION_ID
+    });
   });
 
-  it("should add a document check routing header if a feature set has been set", async () => {
+  it("adds document-checking-route header when featureSet=direct", async () => {
     buildSessionModel(req);
     req.session.featureSet = "direct";
-
-    const data = {
-      retry: false
-    };
-
-    const resolvedPromise = new Promise((resolve) => resolve({ data }));
-    let stub = sandbox.stub(req.axios, "post").returns(resolvedPromise);
+    req.customFetch = sandbox
+      .stub()
+      .resolves({ json: async () => ({ retry: false }) });
 
     await validate.saveValues(req, res, next);
 
-    expect(stub).to.have.been.calledWith(
-      "check-driving-licence",
-      {
-        drivingLicenceNumber: "SMITH9702105LN99",
-        issueNumber: "12",
-        postcode: "SW1 EQR",
-        surname: "Smith",
-        forenames: ["Dan", "Joe"],
-        dateOfBirth: "10/02/1975",
-        expiryDate: "15/01/2035",
-        issueDate: "10/02/2005",
-        licenceIssuer: "DVLA"
-      },
-      {
-        headers: {
-          "document-checking-route": "direct",
-          session_id: SESSION_ID
-        }
-      }
-    );
+    const [, opts] = req.customFetch.firstCall.args;
+    expect(opts.headers).to.include({ "document-checking-route": "direct" });
   });
 
-  it("should forward errors to the callback", async () => {
+  it("sets showRetryMessage=true when the API returns retry:true", async () => {
     buildSessionModel(req);
-
-    const axiosError = new Error("self-destruct sequence initiated");
-    axiosError.stack =
-      "Error: self-destruct sequence initiated\n    at validate (test)"; // reduce noisy test output
-    req.axios.post = sandbox.stub().rejects(axiosError);
+    req.customFetch = sandbox
+      .stub()
+      .resolves({ json: async () => ({ retry: true }) });
 
     await validate.saveValues(req, res, next);
 
-    expect(next).to.have.been.calledOnceWithExactly(axiosError);
+    expect(req.sessionModel.get("showRetryMessage")).to.equal(true);
   });
 
-  it("should have showRetryMessage in sessionModel when api response 'retry' is true", async () => {
+  it("does not set showRetryMessage when the API returns retry:false", async () => {
     buildSessionModel(req);
-
-    const data = {
-      retry: true
-    };
-
-    const resolvedPromise = new Promise((resolve) => resolve({ data }));
-    req.axios.post = sandbox.stub().returns(resolvedPromise);
+    req.customFetch = sandbox
+      .stub()
+      .resolves({ json: async () => ({ retry: false }) });
 
     await validate.saveValues(req, res, next);
 
-    expect(req.sessionModel.get("showRetryMessage")).to.eq(true);
+    expect(req.sessionModel.get("showRetryMessage")).to.be.undefined;
   });
 
-  it("should not have showRetryMessage in sessionModel when api response 'retry' is false", async () => {
+  it("forwards errors to the callback when the check-driving-licence call throws", async () => {
     buildSessionModel(req);
-
-    const data = {
-      retry: false
-    };
-
-    const resolvedPromise = new Promise((resolve) => resolve({ data }));
-    req.axios.post = sandbox.stub().returns(resolvedPromise);
+    const err = new Error("self-destruct sequence initiated");
+    err.stack =
+      "Error: self-destruct sequence initiated\n    at validate (test)";
+    req.customFetch = sandbox.stub().rejects(err);
 
     await validate.saveValues(req, res, next);
 
-    expect(req.sessionModel.get("showRetryMessage")).to.eq(undefined);
+    expect(next).to.have.been.calledOnceWithExactly(err);
   });
 });
