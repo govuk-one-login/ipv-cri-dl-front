@@ -2,8 +2,7 @@ const commonExpress = require("@govuk-one-login/di-ipv-cri-common-express");
 const { getGTM, getLanguageToggle, getDeviceIntelligence } =
   commonExpress.lib.locals;
 const setScenarioHeaders = commonExpress.lib.scenarioHeaders;
-const customFetch =
-  commonExpress.lib.customFetch.customFetchMiddleware;
+const customFetch = commonExpress.lib.customFetch.customFetchMiddleware;
 
 const steps = require("./app/driving-licence/steps");
 const fields = require("./app/driving-licence/fields");

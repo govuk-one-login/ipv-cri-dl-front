@@ -27,10 +27,10 @@ const drivingPermit = z
     issuedBy: nonEmpty,
     issueNumber: nonEmpty.optional()
   })
-  .refine(
-    (o) => o.issuedBy !== "DVLA" || Boolean(o.issueNumber),
-    { path: ["issueNumber"], message: "issueNumber is required when issuedBy is DVLA" }
-  );
+  .refine((o) => o.issuedBy !== "DVLA" || Boolean(o.issueNumber), {
+    path: ["issueNumber"],
+    message: "issueNumber is required when issuedBy is DVLA"
+  });
 
 const personInfoSchema = z.object({
   name: z.array(name).min(1),
