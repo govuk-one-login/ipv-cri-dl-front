@@ -22,10 +22,12 @@ const personInfoClient = (req) => {
 
       const parsed = personInfoSchema.safeParse(await res.json());
       if (!parsed.success) {
-        CLIENT_LOGGER.warn(
-          { issues: parsed.error.issues },
-          "response failed schema validation"
-        );
+        const issues = parsed.error.issues.map(({ code, path, message }) => ({
+          code,
+          path,
+          message
+        }));
+        CLIENT_LOGGER.warn({ issues }, "response failed schema validation");
         return NOT_AUTH_SOURCE;
       }
 

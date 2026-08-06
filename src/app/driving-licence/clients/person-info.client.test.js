@@ -1,4 +1,16 @@
 const { personInfoClient } = require("./person-info.client");
+const LOGGER = require("../../../utils/logger");
+
+const PII_VALUES = [
+  "KENNETH",
+  "DECERQUEIRA",
+  "1965-07-08",
+  "BA2 5AA",
+  "DOE99751010AL9OD",
+  "2022-02-02",
+  "2012-02-02",
+  "scared of the dark"
+];
 
 const VALID_RESPONSE = {
   name: [
@@ -82,6 +94,75 @@ describe("personInfoClient", () => {
     const result = await personInfoClient(req).get();
 
     expect(result).to.deep.equal({ authSource: false });
+  });
+
+  describe("schema validation failure", () => {
+    const invalidVariants = {
+      "wrong enum on nameParts.type": {
+        ...VALID_RESPONSE,
+        name: [
+          {
+            nameParts: [
+              { type: "MiddleName", value: "KENNETH" },
+              { type: "FamilyName", value: "DECERQUEIRA" }
+            ]
+          }
+        ]
+      },
+      "wrong type on nameParts.value": {
+        ...VALID_RESPONSE,
+        name: [
+          {
+            nameParts: [
+              { type: "GivenName", value: 12345 },
+              { type: "FamilyName", value: "DECERQUEIRA" }
+            ]
+          }
+        ]
+      },
+      "DVLA missing issueNumber": {
+        ...VALID_RESPONSE,
+        drivingPermit: [
+          {
+            personalNumber: "DOE99751010AL9OD",
+            expiryDate: "2022-02-02",
+            issueDate: "2012-02-02",
+            issuedBy: "DVLA"
+          }
+        ]
+      },
+      "unexpected top-level key": {
+        ...VALID_RESPONSE,
+        veryPersonalInfo: "scared of the dark",
+        name: "bad value"
+      }
+    };
+
+    let warnSpy;
+
+    beforeEach(() => {
+      warnSpy = sandbox.spy();
+      sandbox.stub(LOGGER, "child").returns({
+        info: sandbox.spy(),
+        warn: warnSpy
+      });
+    });
+
+    Object.entries(invalidVariants).forEach(([label, body]) => {
+      it(`does not log any PII value when: ${label}`, async () => {
+        req.customFetch = sandbox.stub().resolves(mockResponse({ body }));
+
+        const result = await personInfoClient(req).get();
+
+        expect(result).to.deep.equal({ authSource: false });
+        expect(warnSpy).to.have.been.calledOnce;
+
+        const serialised = JSON.stringify(warnSpy.firstCall.args);
+        for (const pii of PII_VALUES) {
+          expect(serialised, `leaked PII value "${pii}"`).to.not.include(pii);
+        }
+      });
+    });
   });
 
   it("propagates customFetch errors", async () => {
