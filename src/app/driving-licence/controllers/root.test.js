@@ -114,6 +114,17 @@ describe("root controller", () => {
       expect(req.sessionModel.get("issueNumber")).to.be.undefined;
     });
 
+    it("forwards error to next when client throws", async () => {
+      const err = new Error("crumbs");
+      req.customFetch = sandbox.stub().rejects(err);
+
+      await root.saveValues(req, res, next);
+
+      expect(next).to.have.been.calledOnceWithExactly(err);
+      expect(req.sessionModel.get("isAuthSourceRoute")).to.equal(false);
+      expect(req.sessionModel.get("drivingLicenceNumber")).to.be.undefined;
+    });
+
     it("isAuthSourceRoute=false and the session model is empty when person-info returns 204", async () => {
       req.customFetch = sandbox.stub().resolves(res204());
 

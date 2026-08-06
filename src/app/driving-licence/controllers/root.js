@@ -2,19 +2,25 @@ const { Controller: BaseController } = require("hmpo-form-wizard");
 
 const appConfig = require("../../../lib/config");
 const { personInfoClient } = require("../clients/person-info.client");
+const LOGGER = require("../../../utils/logger");
 
 class RootController extends BaseController {
   async saveValues(req, res, next) {
     req.sessionModel.reset();
     req.sessionModel.set("isAuthSourceRoute", false);
 
-    if (appConfig.APP.AUTH_SOURCE_ENABLED === "true") {
-      const { authSource, data } = await personInfoClient(req).get();
+    try {
+      if (appConfig.APP.AUTH_SOURCE_ENABLED === "true") {
+        const { authSource, data } = await personInfoClient(req).get();
 
-      if (authSource) {
-        req.sessionModel.set("isAuthSourceRoute", true);
-        this.applyPersonInfo(req, data);
+        if (authSource) {
+          req.sessionModel.set("isAuthSourceRoute", true);
+          this.applyPersonInfo(req, data);
+        }
       }
+    } catch (err) {
+      LOGGER.logError(req, err, { messagePrefix: "root" });
+      return next(err);
     }
 
     next();
