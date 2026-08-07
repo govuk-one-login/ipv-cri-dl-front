@@ -1,5 +1,31 @@
 const RootController = require("./root");
 const { Controller: BaseController } = require("hmpo-form-wizard");
+const appConfig = require("../../../lib/config");
+
+const VALID_RESPONSE = {
+  name: [
+    {
+      nameParts: [
+        { type: "GivenName", value: "KENNETH" },
+        { type: "FamilyName", value: "DECERQUEIRA" }
+      ]
+    }
+  ],
+  birthDate: [{ value: "1965-07-08" }],
+  address: [{ postalCode: "BA2 5AA" }],
+  drivingPermit: [
+    {
+      personalNumber: "DOE99751010AL9OD",
+      expiryDate: "2022-02-02",
+      issueNumber: "13",
+      issuedBy: "DVLA",
+      issueDate: "2012-02-02"
+    }
+  ]
+};
+
+const res200 = (body) => ({ status: 200, json: async () => body });
+const res204 = () => ({ status: 204 });
 
 describe("root controller", () => {
   const root = new RootController({ route: "/test" });
@@ -7,808 +33,106 @@ describe("root controller", () => {
   let res;
   let next;
   let sandbox;
+
   beforeEach(() => {
     sandbox = sinon.createSandbox();
     const setup = setupDefaultMocks();
     req = setup.req;
     res = setup.res;
     next = setup.next;
-
-    process.env.AUTH_SOURCE_ENABLED = "false";
-    next = sinon.fake();
+    req.session.tokenId = "session-token";
   });
+
   afterEach(() => sandbox.restore());
 
   it("should be an instance of BaseController", () => {
     expect(root).to.be.an.instanceof(BaseController);
   });
 
-  it("should updated SessionModel when middleName is Present", async () => {
-    process.env.AUTH_SOURCE_ENABLED = "true";
-
-    personInfoApiResponse = {
-      data: {
-        name: [
-          {
-            nameParts: [
-              { type: "GivenName", value: "KENNETH" },
-              { type: "GivenName", value: "MiddleName" },
-              { type: "FamilyName", value: "DECERQUEIRA" }
-            ]
-          }
-        ],
-        birthDate: [{ value: "1965-07-08" }],
-        address: [
-          {
-            postalCode: "BA2 5AA"
-          }
-        ],
-        drivingPermit: [
-          {
-            personalNumber: "DOE99751010AL9OD",
-            expiryDate: "2022-02-02",
-            issueNumber: "13",
-            issuedBy: "DVLA",
-            issueDate: "2012-02-02",
-            fullAddress: "8 HADLEY ROAD BATH BA2 5AA"
-          }
-        ]
-      }
-    };
-
-    const resolvedPromise = new Promise((resolve) =>
-      resolve(personInfoApiResponse)
-    );
-    sandbox.stub(req.axios, "get").returns(resolvedPromise);
-
-    await root.saveValues(req, res, next);
-    expect(req.sessionModel.get("drivingLicenceNumber")).to.equal(
-      personInfoApiResponse.data.drivingPermit[0].personalNumber
-    );
-    expect(req.sessionModel.get("expiryDate")).to.equal(
-      personInfoApiResponse.data.drivingPermit[0].expiryDate
-    );
-    expect(req.sessionModel.get("issueDate")).to.equal(
-      personInfoApiResponse.data.drivingPermit[0].issueDate
-    );
-    expect(req.sessionModel.get("licenceIssuer")).to.equal(
-      personInfoApiResponse.data.drivingPermit[0].issuedBy
-    );
-    expect(req.sessionModel.get("postcode")).to.equal(
-      personInfoApiResponse.data.address[0].postalCode
-    );
-    expect(req.sessionModel.get("issueNumber")).to.equal(
-      personInfoApiResponse.data.drivingPermit[0].issueNumber
-    );
-    expect(req.sessionModel.get("firstName")).to.equal(
-      personInfoApiResponse.data.name[0].nameParts[0].value
-    );
-    expect(req.sessionModel.get("middleNames")).to.equal(
-      personInfoApiResponse.data.name[0].nameParts[1].value
-    );
-    expect(req.sessionModel.get("surname")).to.equal(
-      personInfoApiResponse.data.name[0].nameParts[2].value
-    );
-    expect(req.sessionModel.get("dateOfBirth")).to.equal(
-      personInfoApiResponse.data.birthDate[0].value
-    );
-    expect(req.sessionModel.get("isAuthSourceRoute")).to.equal(true);
-  });
-
-  it("should retrieve shared_claims from session and store it in the sessionModel", async () => {
-    personInfoApiResponse = {
-      data: {
-        name: [
-          {
-            nameParts: [
-              { type: "GivenName", value: "KENNETH" },
-              { type: "FamilyName", value: "DECERQUEIRA" }
-            ]
-          }
-        ],
-        birthDate: [{ value: "1965-07-08" }],
-        address: [
-          {
-            postalCode: "BA2 5AA"
-          }
-        ],
-        drivingPermit: [
-          {
-            personalNumber: "DOE99751010AL9OD",
-            expiryDate: "2022-02-02",
-            issueNumber: "13",
-            issuedBy: "DVLA",
-            issueDate: "2012-02-02",
-            fullAddress: "8 HADLEY ROAD BATH BA2 5AA"
-          }
-        ]
-      }
-    };
-
-    const resolvedPromise = new Promise((resolve) =>
-      resolve(personInfoApiResponse)
-    );
-    sandbox.stub(req.axios, "get").returns(resolvedPromise);
-
-    process.env.AUTH_SOURCE_ENABLED = "true";
+  it("skips person-info call and sets isAuthSourceRoute=false when AUTH_SOURCE_ENABLED is false", async () => {
+    sandbox.replace(appConfig.APP, "AUTH_SOURCE_ENABLED", "false");
+    req.customFetch = sandbox.stub();
 
     await root.saveValues(req, res, next);
 
-    expect(req.sessionModel.get("isAuthSourceRoute")).to.equal(true);
-    expect(req.sessionModel.get("drivingLicenceNumber")).to.equal(
-      personInfoApiResponse.data.drivingPermit[0].personalNumber
-    );
-    expect(req.sessionModel.get("expiryDate")).to.equal(
-      personInfoApiResponse.data.drivingPermit[0].expiryDate
-    );
-    expect(req.sessionModel.get("issueDate")).to.equal(
-      personInfoApiResponse.data.drivingPermit[0].issueDate
-    );
-    expect(req.sessionModel.get("licenceIssuer")).to.equal(
-      personInfoApiResponse.data.drivingPermit[0].issuedBy
-    );
-    expect(req.sessionModel.get("postcode")).to.equal(
-      personInfoApiResponse.data.address[0].postalCode
-    );
-    expect(req.sessionModel.get("issueNumber")).to.equal(
-      personInfoApiResponse.data.drivingPermit[0].issueNumber
-    );
-    expect(req.sessionModel.get("firstName")).to.equal(
-      personInfoApiResponse.data.name[0].nameParts[0].value
-    );
-    expect(req.sessionModel.get("surname")).to.equal(
-      personInfoApiResponse.data.name[0].nameParts[1].value
-    );
-    expect(req.sessionModel.get("dateOfBirth")).to.equal(
-      personInfoApiResponse.data.birthDate[0].value
-    );
-  });
-
-  it("should set isAuthSourceRoute=false when personInfo returns 204 No Content", async () => {
-    process.env.AUTH_SOURCE_ENABLED = "true";
-
-    const resolvedPromise = new Promise((resolve) => resolve({ status: 204 }));
-
-    sandbox.stub(req.axios, "get").returns(resolvedPromise);
-    await root.saveValues(req, res, next);
+    expect(req.customFetch).to.not.have.been.called;
     expect(req.sessionModel.get("isAuthSourceRoute")).to.equal(false);
-    expect(req.sessionModel.get("drivingLicenceNumber")).to.equal(undefined);
-    expect(req.sessionModel.get("expiryDate")).to.equal(undefined);
-    expect(req.sessionModel.get("issueDate")).to.equal(undefined);
-    expect(req.sessionModel.get("licenceIssuer")).to.equal(undefined);
-    expect(req.sessionModel.get("postcode")).to.equal(undefined);
-    expect(req.sessionModel.get("issueNumber")).to.equal(undefined);
-    expect(req.sessionModel.get("firstName")).to.equal(undefined);
-    expect(req.sessionModel.get("surname")).to.equal(undefined);
-    expect(req.sessionModel.get("dateOfBirth")).to.equal(undefined);
   });
 
-  it("should not update sessionModel if personInfo response is empty", async () => {
-    personInfoApiResponse = {};
+  describe("when AUTH_SOURCE_ENABLED is true", () => {
+    beforeEach(() => {
+      sandbox.replace(appConfig.APP, "AUTH_SOURCE_ENABLED", "true");
+    });
 
-    const resolvedPromise = new Promise((resolve) =>
-      resolve(personInfoApiResponse)
-    );
+    it("populates the session model and sets isAuthSourceRoute=true from a valid person-info response", async () => {
+      req.customFetch = sandbox.stub().resolves(res200(VALID_RESPONSE));
 
-    sandbox.stub(req.axios, "get").returns(resolvedPromise);
-    await root.saveValues(req, res, next);
-    expect(req.sessionModel.get("isAuthSourceRoute")).to.equal(false);
-    expect(req.sessionModel.get("drivingLicenceNumber")).to.equal(undefined);
-    expect(req.sessionModel.get("expiryDate")).to.equal(undefined);
-    expect(req.sessionModel.get("issueDate")).to.equal(undefined);
-    expect(req.sessionModel.get("licenceIssuer")).to.equal(undefined);
-    expect(req.sessionModel.get("postcode")).to.equal(undefined);
-    expect(req.sessionModel.get("issueNumber")).to.equal(undefined);
-    expect(req.sessionModel.get("firstName")).to.equal(undefined);
-    expect(req.sessionModel.get("surname")).to.equal(undefined);
-    expect(req.sessionModel.get("dateOfBirth")).to.equal(undefined);
+      await root.saveValues(req, res, next);
+
+      expect(req.sessionModel.get("isAuthSourceRoute")).to.equal(true);
+      expect(req.sessionModel.get("drivingLicenceNumber")).to.equal(
+        "DOE99751010AL9OD"
+      );
+      expect(req.sessionModel.get("expiryDate")).to.equal("2022-02-02");
+      expect(req.sessionModel.get("issueDate")).to.equal("2012-02-02");
+      expect(req.sessionModel.get("licenceIssuer")).to.equal("DVLA");
+      expect(req.sessionModel.get("issueNumber")).to.equal("13");
+      expect(req.sessionModel.get("postcode")).to.equal("BA2 5AA");
+      expect(req.sessionModel.get("dateOfBirth")).to.equal("1965-07-08");
+      expect(req.sessionModel.get("firstName")).to.equal("KENNETH");
+      expect(req.sessionModel.get("middleNames")).to.equal("");
+      expect(req.sessionModel.get("surname")).to.equal("DECERQUEIRA");
+    });
+
+    it("splits multiple GivenName parts into firstName + middleNames", async () => {
+      const validResponseWithMiddleName = structuredClone(VALID_RESPONSE);
+      validResponseWithMiddleName.name[0].nameParts = [
+        { type: "GivenName", value: "KENNETH" },
+        { type: "GivenName", value: "DIAMOND GEEZER" },
+        { type: "FamilyName", value: "DECERQUEIRA" }
+      ];
+      req.customFetch = sandbox
+        .stub()
+        .resolves(res200(validResponseWithMiddleName));
+
+      await root.saveValues(req, res, next);
+
+      expect(req.sessionModel.get("firstName")).to.equal("KENNETH");
+      expect(req.sessionModel.get("middleNames")).to.equal("DIAMOND GEEZER");
+      expect(req.sessionModel.get("surname")).to.equal("DECERQUEIRA");
+    });
+
+    it("does not set issueNumber on the session when issuedBy is DVA", async () => {
+      const validResponseWithDVA = structuredClone(VALID_RESPONSE);
+      validResponseWithDVA.drivingPermit[0].issuedBy = "DVA";
+      delete validResponseWithDVA.drivingPermit[0].issueNumber;
+      req.customFetch = sandbox.stub().resolves(res200(validResponseWithDVA));
+
+      await root.saveValues(req, res, next);
+
+      expect(req.sessionModel.get("licenceIssuer")).to.equal("DVA");
+      expect(req.sessionModel.get("issueNumber")).to.be.undefined;
+    });
+
+    it("forwards error to next when client throws", async () => {
+      const err = new Error("crumbs");
+      req.customFetch = sandbox.stub().rejects(err);
+
+      await root.saveValues(req, res, next);
+
+      expect(next).to.have.been.calledOnceWithExactly(err);
+      expect(req.sessionModel.get("isAuthSourceRoute")).to.equal(false);
+      expect(req.sessionModel.get("drivingLicenceNumber")).to.be.undefined;
+    });
+
+    it("isAuthSourceRoute=false and the session model is empty when person-info returns 204", async () => {
+      req.customFetch = sandbox.stub().resolves(res204());
+
+      await root.saveValues(req, res, next);
+
+      expect(req.sessionModel.get("isAuthSourceRoute")).to.equal(false);
+      expect(req.sessionModel.get("drivingLicenceNumber")).to.be.undefined;
+      expect(req.sessionModel.get("firstName")).to.be.undefined;
+    });
   });
-
-  it("should not update sessionModel if personInfo response is empty", async () => {
-    personInfoApiResponse = {
-      data: {
-        name: [
-          {
-            nameParts: []
-          }
-        ],
-        address: [],
-        drivingPermit: [
-          {
-            personalNumber: "DOE99751010AL9OD",
-            expiryDate: "2022-02-02",
-            issueNumber: "13",
-            issuedBy: "DVLA",
-            issueDate: "2012-02-02",
-            fullAddress: "8 HADLEY ROAD BATH BA2 5AA"
-          }
-        ]
-      }
-    };
-
-    const resolvedPromise = new Promise((resolve) =>
-      resolve(personInfoApiResponse)
-    );
-
-    sandbox.stub(req.axios, "get").returns(resolvedPromise);
-    await root.saveValues(req, res, next);
-    expect(req.sessionModel.get("isAuthSourceRoute")).to.equal(false);
-    expect(req.sessionModel.get("drivingLicenceNumber")).to.equal(undefined);
-    expect(req.sessionModel.get("expiryDate")).to.equal(undefined);
-    expect(req.sessionModel.get("issueDate")).to.equal(undefined);
-    expect(req.sessionModel.get("licenceIssuer")).to.equal(undefined);
-    expect(req.sessionModel.get("postcode")).to.equal(undefined);
-    expect(req.sessionModel.get("issueNumber")).to.equal(undefined);
-    expect(req.sessionModel.get("firstName")).to.equal(undefined);
-    expect(req.sessionModel.get("surname")).to.equal(undefined);
-    expect(req.sessionModel.get("dateOfBirth")).to.equal(undefined);
-  });
-
-  it("should not update sessionModel if personInfo response is empty", async () => {
-    personInfoApiResponse = {
-      data: {
-        name: [
-          {
-            nameParts: []
-          }
-        ],
-        birthDate: [],
-        address: [],
-        drivingPermit: []
-      }
-    };
-
-    const resolvedPromise = new Promise((resolve) =>
-      resolve(personInfoApiResponse)
-    );
-
-    sandbox.stub(req.axios, "get").returns(resolvedPromise);
-    await root.saveValues(req, res, next);
-    expect(req.sessionModel.get("isAuthSourceRoute")).to.equal(false);
-    expect(req.sessionModel.get("drivingLicenceNumber")).to.equal(undefined);
-    expect(req.sessionModel.get("expiryDate")).to.equal(undefined);
-    expect(req.sessionModel.get("issueDate")).to.equal(undefined);
-    expect(req.sessionModel.get("licenceIssuer")).to.equal(undefined);
-    expect(req.sessionModel.get("postcode")).to.equal(undefined);
-    expect(req.sessionModel.get("issueNumber")).to.equal(undefined);
-    expect(req.sessionModel.get("firstName")).to.equal(undefined);
-    expect(req.sessionModel.get("surname")).to.equal(undefined);
-    expect(req.sessionModel.get("dateOfBirth")).to.equal(undefined);
-  });
-
-  it("should not update sessionModel if personInfo response is empty", async () => {
-    personInfoApiResponse = {
-      data: {
-        birthDate: [],
-        drivingPermit: []
-      }
-    };
-
-    const resolvedPromise = new Promise((resolve) =>
-      resolve(personInfoApiResponse)
-    );
-
-    sandbox.stub(req.axios, "get").returns(resolvedPromise);
-    await root.saveValues(req, res, next);
-    expect(req.sessionModel.get("isAuthSourceRoute")).to.equal(false);
-    expect(req.sessionModel.get("drivingLicenceNumber")).to.equal(undefined);
-    expect(req.sessionModel.get("expiryDate")).to.equal(undefined);
-    expect(req.sessionModel.get("issueDate")).to.equal(undefined);
-    expect(req.sessionModel.get("licenceIssuer")).to.equal(undefined);
-    expect(req.sessionModel.get("postcode")).to.equal(undefined);
-    expect(req.sessionModel.get("issueNumber")).to.equal(undefined);
-    expect(req.sessionModel.get("firstName")).to.equal(undefined);
-    expect(req.sessionModel.get("surname")).to.equal(undefined);
-    expect(req.sessionModel.get("dateOfBirth")).to.equal(undefined);
-  });
-
-  it("should retrieve shared_claims from session and store it in the sessionModel", async () => {
-    personInfoApiResponse = {
-      data: {
-        name: [
-          {
-            nameParts: []
-          }
-        ],
-        birthDate: [{ value: "1965-07-08" }],
-        address: [
-          {
-            postalCode: "BA2 5AA"
-          }
-        ],
-        drivingPermit: [
-          {
-            personalNumber: "DOE99751010AL9OD",
-            expiryDate: "2022-02-02",
-            issueNumber: "13",
-            issuedBy: "DVA",
-            issueDate: "2012-02-02",
-            fullAddress: "8 HADLEY ROAD BATH BA2 5AA"
-          }
-        ]
-      }
-    };
-
-    const resolvedPromise = new Promise((resolve) =>
-      resolve(personInfoApiResponse)
-    );
-    sandbox.stub(req.axios, "get").returns(resolvedPromise);
-
-    process.env.AUTH_SOURCE_ENABLED = "true";
-
-    await root.saveValues(req, res, next);
-
-    expect(req.sessionModel.get("isAuthSourceRoute")).to.equal(false);
-    expect(req.sessionModel.get("drivingLicenceNumber")).to.equal(undefined);
-    expect(req.sessionModel.get("expiryDate")).to.equal(undefined);
-    expect(req.sessionModel.get("issueDate")).to.equal(undefined);
-    expect(req.sessionModel.get("licenceIssuer")).to.equal(undefined);
-    expect(req.sessionModel.get("postcode")).to.equal(undefined);
-    expect(req.sessionModel.get("issueNumber")).to.equal(undefined);
-    expect(req.sessionModel.get("firstName")).to.equal(undefined);
-    expect(req.sessionModel.get("surname")).to.equal(undefined);
-    expect(req.sessionModel.get("dateOfBirth")).to.equal(undefined);
-  });
-
-  it("should not update sessionModel if personInfo response is empty", async () => {
-    personInfoApiResponse = {
-      data: {
-        name: [],
-        birthDate: undefined,
-        address: [
-          {
-            postalCode: "BA2 5AA"
-          }
-        ],
-        drivingPermit: [
-          {
-            personalNumber: "",
-            expiryDate: "2022-02-02",
-            issueNumber: "13",
-            issuedBy: "DVLA",
-            issueDate: "2012-02-02",
-            fullAddress: "8 HADLEY ROAD BATH BA2 5AA"
-          }
-        ]
-      }
-    };
-
-    const resolvedPromise = new Promise((resolve) =>
-      resolve(personInfoApiResponse)
-    );
-
-    sandbox.stub(req.axios, "get").returns(resolvedPromise);
-    await root.saveValues(req, res, next);
-    expect(req.sessionModel.get("isAuthSourceRoute")).to.equal(false);
-    expect(req.sessionModel.get("drivingLicenceNumber")).to.equal(undefined);
-    expect(req.sessionModel.get("expiryDate")).to.equal(undefined);
-    expect(req.sessionModel.get("issueDate")).to.equal(undefined);
-    expect(req.sessionModel.get("licenceIssuer")).to.equal(undefined);
-    expect(req.sessionModel.get("postcode")).to.equal(undefined);
-    expect(req.sessionModel.get("issueNumber")).to.equal(undefined);
-    expect(req.sessionModel.get("firstName")).to.equal(undefined);
-    expect(req.sessionModel.get("surname")).to.equal(undefined);
-    expect(req.sessionModel.get("dateOfBirth")).to.equal(undefined);
-  });
-
-  it("should return false if personInfo response is missing name object", async () => {
-    personInfoApiResponse = {
-      data: {
-        birthDate: [{ value: "1965-07-08" }],
-        address: [
-          {
-            postalCode: "BA2 5AA"
-          }
-        ],
-        drivingPermit: [
-          {
-            personalNumber: "DOE99751010AL9OD",
-            expiryDate: "2022-02-02",
-            issueNumber: "13",
-            issuedBy: "DVLA",
-            issueDate: "2012-02-02",
-            fullAddress: "8 HADLEY ROAD BATH BA2 5AA"
-          }
-        ]
-      }
-    };
-
-    expect(
-      root.checkForValidSharedClaimsData(req, personInfoApiResponse)
-    ).to.equal(false);
-  });
-
-  it("should return false if personInfo response is missing nameParts objects", async () => {
-    personInfoApiResponse = {
-      name: [
-        {
-          nameParts: []
-        }
-      ],
-      data: {
-        birthDate: [{ value: "1965-07-08" }],
-        address: [
-          {
-            postalCode: "BA2 5AA"
-          }
-        ],
-        drivingPermit: [
-          {
-            personalNumber: "DOE99751010AL9OD",
-            expiryDate: "2022-02-02",
-            issueNumber: "13",
-            issuedBy: "DVLA",
-            issueDate: "2012-02-02",
-            fullAddress: "8 HADLEY ROAD BATH BA2 5AA"
-          }
-        ]
-      }
-    };
-
-    expect(
-      root.checkForValidSharedClaimsData(req, personInfoApiResponse)
-    ).to.equal(false);
-  });
-
-  it("should return false if personInfo response is missing birthDate object", async () => {
-    personInfoApiResponse = {
-      data: {
-        name: [
-          {
-            nameParts: [
-              { type: "GivenName", value: "KENNETH" },
-              { type: "FamilyName", value: "DECERQUEIRA" }
-            ]
-          }
-        ],
-        address: [
-          {
-            postalCode: "BA2 5AA"
-          }
-        ],
-        drivingPermit: [
-          {
-            personalNumber: "DOE99751010AL9OD",
-            expiryDate: "2022-02-02",
-            issueNumber: "13",
-            issuedBy: "DVLA",
-            issueDate: "2012-02-02",
-            fullAddress: "8 HADLEY ROAD BATH BA2 5AA"
-          }
-        ]
-      }
-    };
-
-    expect(
-      root.checkForValidSharedClaimsData(req, personInfoApiResponse)
-    ).to.equal(false);
-  });
-
-  it("should return false if personInfo response has empty string for birthDate value", async () => {
-    personInfoApiResponse = {
-      data: {
-        name: [
-          {
-            nameParts: [
-              { type: "GivenName", value: "KENNETH" },
-              { type: "FamilyName", value: "DECERQUEIRA" }
-            ]
-          }
-        ],
-        birthDate: [{ value: "" }],
-        address: [
-          {
-            postalCode: "BA2 5AA"
-          }
-        ],
-        drivingPermit: [
-          {
-            personalNumber: "DOE99751010AL9OD",
-            expiryDate: "2022-02-02",
-            issueNumber: "13",
-            issuedBy: "DVLA",
-            issueDate: "2012-02-02",
-            fullAddress: "8 HADLEY ROAD BATH BA2 5AA"
-          }
-        ]
-      }
-    };
-
-    expect(
-      root.checkForValidSharedClaimsData(req, personInfoApiResponse)
-    ).to.equal(false);
-  });
-
-  it("should return false if personInfo response is missing address object", async () => {
-    personInfoApiResponse = {
-      data: {
-        name: [
-          {
-            nameParts: [
-              { type: "GivenName", value: "KENNETH" },
-              { type: "FamilyName", value: "DECERQUEIRA" }
-            ]
-          }
-        ],
-        birthDate: [{ value: "1965-07-08" }],
-        drivingPermit: [
-          {
-            personalNumber: "DOE99751010AL9OD",
-            expiryDate: "2022-02-02",
-            issueNumber: "13",
-            issuedBy: "DVLA",
-            issueDate: "2012-02-02",
-            fullAddress: "8 HADLEY ROAD BATH BA2 5AA"
-          }
-        ]
-      }
-    };
-
-    expect(
-      root.checkForValidSharedClaimsData(req, personInfoApiResponse)
-    ).to.equal(false);
-  });
-  it("should return false if personInfo response is has empty string for postalCode value", async () => {
-    personInfoApiResponse = {
-      data: {
-        name: [
-          {
-            nameParts: [
-              { type: "GivenName", value: "KENNETH" },
-              { type: "FamilyName", value: "DECERQUEIRA" }
-            ]
-          }
-        ],
-        birthDate: [{ value: "1965-07-08" }],
-        address: [
-          {
-            postalCode: ""
-          }
-        ],
-        drivingPermit: [
-          {
-            personalNumber: "DOE99751010AL9OD",
-            expiryDate: "2022-02-02",
-            issueNumber: "13",
-            issuedBy: "DVLA",
-            issueDate: "2012-02-02",
-            fullAddress: "8 HADLEY ROAD BATH BA2 5AA"
-          }
-        ]
-      }
-    };
-
-    expect(
-      root.checkForValidSharedClaimsData(req, personInfoApiResponse)
-    ).to.equal(false);
-  });
-
-  it("should return false if personInfo response is missing drivingPermit object", async () => {
-    personInfoApiResponse = {
-      data: {
-        name: [
-          {
-            nameParts: [
-              { type: "GivenName", value: "KENNETH" },
-              { type: "FamilyName", value: "DECERQUEIRA" }
-            ]
-          }
-        ],
-        birthDate: [{ value: "1965-07-08" }],
-        address: [
-          {
-            postalCode: "BA2 5AA"
-          }
-        ]
-      }
-    };
-
-    expect(
-      root.checkForValidSharedClaimsData(req, personInfoApiResponse)
-    ).to.equal(false);
-  });
-
-  it("should return false if personInfo response has empty string for personalNumber value", async () => {
-    personInfoApiResponse = {
-      data: {
-        name: [
-          {
-            nameParts: [
-              { type: "GivenName", value: "KENNETH" },
-              { type: "FamilyName", value: "DECERQUEIRA" }
-            ]
-          }
-        ],
-        birthDate: [{ value: "1965-07-08" }],
-        address: [
-          {
-            postalCode: "BA2 5AA"
-          }
-        ],
-        drivingPermit: [
-          {
-            personalNumber: "",
-            expiryDate: "2022-02-02",
-            issueNumber: "13",
-            issuedBy: "DVLA",
-            issueDate: "2012-02-02",
-            fullAddress: "8 HADLEY ROAD BATH BA2 5AA"
-          }
-        ]
-      }
-    };
-
-    expect(
-      root.checkForValidSharedClaimsData(req, personInfoApiResponse)
-    ).to.equal(false);
-  });
-
-  it("should return false if personInfo response has empty string for expiryDate value", async () => {
-    personInfoApiResponse = {
-      data: {
-        name: [
-          {
-            nameParts: [
-              { type: "GivenName", value: "KENNETH" },
-              { type: "FamilyName", value: "DECERQUEIRA" }
-            ]
-          }
-        ],
-        birthDate: [{ value: "1965-07-08" }],
-        address: [
-          {
-            postalCode: "BA2 5AA"
-          }
-        ],
-        drivingPermit: [
-          {
-            personalNumber: "DOE99751010AL9OD",
-            expiryDate: "",
-            issueNumber: "13",
-            issuedBy: "DVLA",
-            issueDate: "2012-02-02",
-            fullAddress: "8 HADLEY ROAD BATH BA2 5AA"
-          }
-        ]
-      }
-    };
-
-    expect(
-      root.checkForValidSharedClaimsData(req, personInfoApiResponse)
-    ).to.equal(false);
-  });
-
-  it("should return false if personInfo response has empty string for issueNumber value", async () => {
-    personInfoApiResponse = {
-      data: {
-        name: [
-          {
-            nameParts: [
-              { type: "GivenName", value: "KENNETH" },
-              { type: "FamilyName", value: "DECERQUEIRA" }
-            ]
-          }
-        ],
-        birthDate: [{ value: "1965-07-08" }],
-        address: [
-          {
-            postalCode: "BA2 5AA"
-          }
-        ],
-        drivingPermit: [
-          {
-            personalNumber: "DOE99751010AL9OD",
-            expiryDate: "2022-02-02",
-            issueNumber: "",
-            issuedBy: "DVLA",
-            issueDate: "2012-02-02",
-            fullAddress: "8 HADLEY ROAD BATH BA2 5AA"
-          }
-        ]
-      }
-    };
-
-    expect(
-      root.checkForValidSharedClaimsData(req, personInfoApiResponse)
-    ).to.equal(false);
-  });
-
-  it("should return false if personInfo response has empty string for issuedBy value", async () => {
-    personInfoApiResponse = {
-      data: {
-        name: [
-          {
-            nameParts: [
-              { type: "GivenName", value: "KENNETH" },
-              { type: "FamilyName", value: "DECERQUEIRA" }
-            ]
-          }
-        ],
-        birthDate: [{ value: "1965-07-08" }],
-        address: [
-          {
-            postalCode: "BA2 5AA"
-          }
-        ],
-        drivingPermit: [
-          {
-            personalNumber: "DOE99751010AL9OD",
-            expiryDate: "2022-02-02",
-            issueNumber: "13",
-            issuedBy: "",
-            issueDate: "2012-02-02",
-            fullAddress: "8 HADLEY ROAD BATH BA2 5AA"
-          }
-        ]
-      }
-    };
-
-    expect(
-      root.checkForValidSharedClaimsData(req, personInfoApiResponse)
-    ).to.equal(false);
-  });
-
-  it("should return false if personInfo response has empty string for issuedDate value", async () => {
-    personInfoApiResponse = {
-      data: {
-        name: [
-          {
-            nameParts: [
-              { type: "GivenName", value: "KENNETH" },
-              { type: "FamilyName", value: "DECERQUEIRA" }
-            ]
-          }
-        ],
-        birthDate: [{ value: "1965-07-08" }],
-        address: [
-          {
-            postalCode: "BA2 5AA"
-          }
-        ],
-        drivingPermit: [
-          {
-            personalNumber: "DOE99751010AL9OD",
-            expiryDate: "2022-02-02",
-            issueNumber: "13",
-            issuedBy: "DVLA",
-            issueDate: "",
-            fullAddress: "8 HADLEY ROAD BATH BA2 5AA"
-          }
-        ]
-      }
-    };
-
-    expect(
-      root.checkForValidSharedClaimsData(req, personInfoApiResponse)
-    ).to.equal(false);
-  });
-
-  let personInfoApiResponse = {
-    data: {
-      name: [
-        {
-          nameParts: [
-            { type: "GivenName", value: "KENNETH" },
-            { type: "FamilyName", value: "DECERQUEIRA" }
-          ]
-        }
-      ],
-      birthDate: [{ value: "1965-07-08" }],
-      address: [
-        {
-          postalCode: "BA2 5AA"
-        }
-      ],
-      drivingPermit: [
-        {
-          personalNumber: "DOE99751010AL9OD",
-          expiryDate: "2022-02-02",
-          issueNumber: "13",
-          issuedBy: "DVLA",
-          issueDate: "2012-02-02",
-          fullAddress: "8 HADLEY ROAD BATH BA2 5AA"
-        }
-      ]
-    }
-  };
 });
