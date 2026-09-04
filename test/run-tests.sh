@@ -32,6 +32,11 @@ fi
 echo "ENVIRONMENT: ${ENVIRONMENT}"
 echo "STACK_NAME: ${STACK_NAME}"
 
+if [[ "${STACK_NAME}" != "local" ]]; then
+  export LOG_GROUP_ECSAccessLogsGroup="/aws/ecs/${STACK_NAME}-DrivingPermitFront-ECS"
+  export LOG_GROUP_APIGWAccessLogsGroup="/aws/apigateway/${STACK_NAME}-DrivingPermitFront-API-GW-AccessLogs"
+fi
+
 if [ "${STACK_NAME}" != "local" ]; then
   echo "Fetching test configuration from AWS SSM Parameter Store..."
 

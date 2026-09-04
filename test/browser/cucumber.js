@@ -34,6 +34,7 @@ module.exports = {
     paths: ["./test/browser/features/stub-features/**/*.feature"],
     require: [
       "./test/browser/support/setup.js",
+      "./test/browser/support/pii-log-scan.js",
       "./test/browser/step-definitions/stub-steps/**/*.js"
     ],
     format: [
