@@ -41,6 +41,8 @@
   },
   "homepage": "https://github.com/alphagov/di-ipv-cri-uk-driving-permit-front#readme",
   "devDependencies": {
+    "@aws-sdk/client-cloudformation": "3.1126.0",
+    "@aws-sdk/client-cloudwatch-logs": "3.1126.0",
     "@axe-core/playwright": "4.11.3",
     "@cucumber/cucumber": "13.0.0",
     "@eslint/eslintrc": "3.3.5",
