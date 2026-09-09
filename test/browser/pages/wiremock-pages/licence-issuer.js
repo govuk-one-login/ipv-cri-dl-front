@@ -400,7 +400,8 @@ module.exports = class PlaywrightDevPage {
 
     // Define urlAssertions
     const urlAssertions = {
-      Accessibility: "https://signin.account.gov.uk/accessibility-statement",
+      Accessibility:
+        "https://www.gov.uk/guidance/govuk-one-login-accessibility-statement",
       Cookies: "https://signin.account.gov.uk/cookies",
       TsAndCs: "https://signin.account.gov.uk/terms-and-conditions",
       Privacy:
