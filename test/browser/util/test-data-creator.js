@@ -100,3 +100,6 @@ exports.getDVATestUserFromMap = function (drivingLicenceSubjectKey) {
   subject.fill(data);
   return subject;
 };
+
+exports.dvlaTestUsers = dvlaTestUsers;
+exports.dvaTestUsers = dvaTestUsers;
