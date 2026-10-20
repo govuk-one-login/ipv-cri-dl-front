@@ -439,6 +439,14 @@ exports.DVADetailsEntryPage = class PlaywrightDevPage {
     expect(await this.privacyPolicyDVALink.innerText()).to.equal(
       consentPrivacyLink
     );
+    const dvaHref = await this.privacyPolicyDVALink.getAttribute("href");
+    const requestContext = await this.page
+      .context()
+      .browser()
+      .newContext({ ignoreHTTPSErrors: true });
+    const dvaResponse = await requestContext.request.get(dvaHref);
+    expect(dvaResponse.status()).to.equal(200);
+    await requestContext.close();
   }
 
   async assertDVAConsentOneLoginLink(consentOneLoginLink) {
@@ -447,6 +455,14 @@ exports.DVADetailsEntryPage = class PlaywrightDevPage {
     expect(await this.oneLoginLinkDVA.innerText()).to.equal(
       consentOneLoginLink
     );
+    const oneLoginHref = await this.oneLoginLinkDVA.getAttribute("href");
+    const requestContext = await this.page
+      .context()
+      .browser()
+      .newContext({ ignoreHTTPSErrors: true });
+    const oneLoginResponse = await requestContext.request.get(oneLoginHref);
+    expect(oneLoginResponse.status()).to.equal(200);
+    await requestContext.close();
   }
 
   async assertFooterLink(supportFooterLink) {
