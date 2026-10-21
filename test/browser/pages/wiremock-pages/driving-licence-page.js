@@ -935,6 +935,14 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
     await this.page.waitForLoadState("domcontentloaded");
     expect(await this.isCurrentPage()).to.be.true;
     expect(await this.oneLoginLink.innerText()).to.equal(consentOneLoginLink);
+    const oneLoginHref = await this.oneLoginLink.getAttribute("href");
+    const requestContext = await this.page
+      .context()
+      .browser()
+      .newContext({ ignoreHTTPSErrors: true });
+    const oneLoginResponse = await requestContext.request.get(oneLoginHref);
+    expect(oneLoginResponse.status()).to.equal(200);
+    await requestContext.close();
   }
 
   async assertConsentPrivacyLink(consentPrivacyLink) {
@@ -943,6 +951,14 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
     expect(await this.privacyPolicyDVLALink.innerText()).to.equal(
       consentPrivacyLink
     );
+    const dvlaHref = await this.privacyPolicyDVLALink.getAttribute("href");
+    const requestContext = await this.page
+      .context()
+      .browser()
+      .newContext({ ignoreHTTPSErrors: true });
+    const dvlaResponse = await requestContext.request.get(dvlaHref);
+    expect(dvlaResponse.status()).to.equal(200);
+    await requestContext.close();
   }
 
   async assertContactOneLoginTeamLink(contactOneLoginTeamLink) {
