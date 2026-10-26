@@ -1328,55 +1328,6 @@ Resources:
           ReturnData: false
           Expression: (error/invocations) * 100
 
-  FE4XXErrorAlarm:
-    Type: AWS::CloudWatch::Alarm
-    Condition: "DeployAlarms"
-    Properties:
-      AlarmName: !Sub "${AWS::StackName}-FE4XXErrorAlarm"
-      AlarmDescription: Trigger the alarm if errorThreshold exceeds 15% with a minimum of 150 invocations and a minimum of 2 errors in 4 out of the last 5 minutes
-      ActionsEnabled: true
-      OKActions:
-        - !ImportValue slack-notifications-WarningAlertsTopicArn
-      AlarmActions:
-        - !ImportValue slack-notifications-WarningAlertsTopicArn
-      InsufficientDataActions: []
-      EvaluationPeriods: 5
-      DatapointsToAlarm: 4
-      Threshold: 15
-      ComparisonOperator: GreaterThanOrEqualToThreshold
-      TreatMissingData: notBreaching
-      Metrics:
-        - Id: errorThreshold
-          Label: errorThreshold
-          ReturnData: true
-          Expression: IF(invocations<150 || error<2,0,errorPercentage)
-        - Id: invocations
-          ReturnData: false
-          MetricStat:
-            Metric:
-              Namespace: AWS/ApiGateway
-              MetricName: Count
-              Dimensions:
-                - Name: ApiId
-                  Value: !Ref ApiGwHttpEndpoint
-            Period: 60
-            Stat: Sum
-        - Id: error
-          ReturnData: false
-          MetricStat:
-            Metric:
-              Namespace: AWS/ApiGateway
-              MetricName: 4xx
-              Dimensions:
-                - Name: ApiId
-                  Value: !Ref ApiGwHttpEndpoint
-            Period: 60
-            Stat: Sum
-        - Id: errorPercentage
-          Label: errorPercentage
-          ReturnData: false
-          Expression: (error/invocations) * 100
-
   FELatencyAlarmP95:
     Type: AWS::CloudWatch::Alarm
     Condition: "DeployAlarms"
