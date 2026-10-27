@@ -1,3 +1,4 @@
+const { expect } = require("@playwright/test");
 const TestDataCreator = require("../../util/test-data-creator");
 
 class DrivingLicencePage {
@@ -40,6 +41,9 @@ class DrivingLicencePage {
     );
     this.consentDVACheckbox = page.locator(
       'xpath=//*[@id="consentDVACheckbox"]'
+    );
+    this.couldNotFindDetailsErrorMessage = this.page.locator(
+      'xpath=//*[@class="govuk-notification-banner__content"]'
     );
   }
 
@@ -89,6 +93,21 @@ class DrivingLicencePage {
       await this.licenceValidToYear.fill(subject.getLicenceValidToYear());
       await this.postcode.fill(subject.getPostcode());
     }
+  }
+
+  async enterInvalidDVLALicenceNumber(invalidDrivingLicenceNumber) {
+    await this.licenceNumber.fill(String(invalidDrivingLicenceNumber));
+  }
+
+  async enterInvalidDVALicenceNumber(invalidDrivingLicenceNumber) {
+    await this.dvaLicenceNumber.fill(String(invalidDrivingLicenceNumber));
+  }
+
+  async assertCouldNotFindDetailsErrorMessage() {
+    await this.page.waitForLoadState("domcontentloaded");
+    await expect(this.couldNotFindDetailsErrorMessage).toContainText(
+      "We could not find your details"
+    );
   }
 
   async selectLicenceIssuer(licenceIssuer) {

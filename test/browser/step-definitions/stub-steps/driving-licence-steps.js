@@ -153,6 +153,34 @@ Then(
 );
 
 Then(
+  /^User enters an invalid DVLA driving licence number (.*)$/,
+  async function (invalidDrivingLicenceNumber) {
+    const drivingLicencePage = new DrivingLicencePage(this.page);
+    await drivingLicencePage.enterInvalidDVLALicenceNumber(
+      invalidDrivingLicenceNumber
+    );
+  }
+);
+
+Then(
+  /^User enters an invalid DVA driving licence number (.*)$/,
+  async function (invalidDrivingLicenceNumber) {
+    const drivingLicencePage = new DrivingLicencePage(this.page);
+    await drivingLicencePage.enterInvalidDVALicenceNumber(
+      invalidDrivingLicenceNumber
+    );
+  }
+);
+
+Then(
+  /^Proper error message for the We Could not find your details Error Message is displayed$/,
+  async function () {
+    const drivingLicencePage = new DrivingLicencePage(this.page);
+    await drivingLicencePage.assertCouldNotFindDetailsErrorMessage();
+  }
+);
+
+Then(
   /^I click the (.*) consent checkbox$/,
   async function (drivingLicenceConsent) {
     const drivingLicencePage = new DrivingLicencePage(this.page);
@@ -196,6 +224,25 @@ Then(/^I click the consent page continue button$/, async function () {
   const consentPage = new ConsentPage(this.page);
   await consentPage.clickConsentPageContinue();
 });
+
+Then(
+  /^User is navigated to the Driving Licence verifiable issuer to check for a Invalid response$/,
+  async function () {
+    const ipvCoreStubVerifyVcPage = new IpvCoreStubVerfiyVcPage(this.page);
+    await ipvCoreStubVerifyVcPage.verifyCurrentUrlContains("callback");
+  }
+);
+
+Then(
+  /^JSON response should contain error description (.*) and status code as (.*)$/,
+  async function (errorDescription, errorResponseCode) {
+    const ipvCoreStubVerifyVcPage = new IpvCoreStubVerfiyVcPage(this.page);
+    await ipvCoreStubVerifyVcPage.validateErrorResponse(
+      errorDescription,
+      errorResponseCode
+    );
+  }
+);
 
 Then(
   /^User is navigated to the Verifiable Credential Issuers Page$/,
