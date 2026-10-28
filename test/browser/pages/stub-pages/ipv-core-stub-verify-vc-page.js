@@ -192,6 +192,18 @@ class IpvCoreStubVerfiyVcPage {
    * @param {number|string} expectedValidityScore - The expected validityScore
    * @param {string|string[]} expectedCi - The expected 'ci' value(s)
    */
+  async validateErrorResponse(expectedDescription, expectedStatusCode) {
+    const parsedJson = await this.readVcPayload();
+    const { errorObject } = parsedJson;
+    if (!errorObject) {
+      throw new Error(
+        `No errorObject found in response. Keys: ${JSON.stringify(Object.keys(parsedJson))}`
+      );
+    }
+    expect(errorObject.description).toEqual(expectedDescription);
+    expect(errorObject.httpstatusCode).toEqual(Number(expectedStatusCode));
+  }
+
   async validateJsonResponseFromDrivingLicenceCri(
     expectedGivenName,
     expectedFamilyName,
