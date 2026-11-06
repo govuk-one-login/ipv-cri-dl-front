@@ -40,10 +40,6 @@ Parameters:
     Type: String
     Default: "None"
     # Allowed values: See https://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations.html
-  LogGroupRetentionInDays:
-    Description: "Retention for all log groups"
-    Type: Number
-    Default: "365"
 
 Conditions:
   IsNotDevelopment: !Or
@@ -72,6 +68,7 @@ Mappings:
       minECSCount: 1
       maxECSCount: 4
       nodeEnv: "development"
+      logGroupRetentionInDays: 30
     build:
       logLevel: "info"
       dynatraceSecretArn: arn:aws:secretsmanager:eu-west-2:216552277552:secret:DynatraceNonProductionVariables
@@ -80,6 +77,7 @@ Mappings:
       minECSCount: 6
       maxECSCount: 60
       nodeEnv: "production"
+      logGroupRetentionInDays: 30
     staging:
       logLevel: "warn"
       dynatraceSecretArn: arn:aws:secretsmanager:eu-west-2:216552277552:secret:DynatraceNonProductionVariables
@@ -89,6 +87,7 @@ Mappings:
       minECSCount: 2
       maxECSCount: 4
       nodeEnv: "development"
+      logGroupRetentionInDays: 30
     integration:
       logLevel: "warn"
       dynatraceSecretArn: arn:aws:secretsmanager:eu-west-2:216552277552:secret:DynatraceNonProductionVariables
@@ -97,6 +96,7 @@ Mappings:
       minECSCount: 2
       maxECSCount: 4
       nodeEnv: "development"
+      logGroupRetentionInDays: 30
     production:
       logLevel: "warn"
       dynatraceSecretArn: arn:aws:secretsmanager:eu-west-2:216552277552:secret:DynatraceProductionVariables
@@ -105,6 +105,7 @@ Mappings:
       minECSCount: 6
       maxECSCount: 60
       nodeEnv: "production"
+      logGroupRetentionInDays: 365
 
   FeatureFlagMapping:
     dev:
@@ -441,7 +442,7 @@ Resources:
     Type: AWS::Logs::LogGroup
     Properties:
       LogGroupName: !Sub /aws/ecs/${AWS::StackName}-DrivingPermitFront-ECS
-      RetentionInDays: !Ref LogGroupRetentionInDays
+      RetentionInDays: !FindInMap [EnvironmentConfiguration, !Ref Environment, logGroupRetentionInDays]
 
   ECSServiceTaskDefinition:
     Type: "AWS::ECS::TaskDefinition"
@@ -806,7 +807,7 @@ Resources:
     Type: AWS::Logs::LogGroup
     Properties:
       LogGroupName: !Sub /aws/apigateway/${AWS::StackName}-DrivingPermitFront-API-GW-AccessLogs
-      RetentionInDays: !Ref LogGroupRetentionInDays
+      RetentionInDays: !FindInMap [EnvironmentConfiguration, !Ref Environment, logGroupRetentionInDays]
 
   DrivingPermitFrontSessionsTable:
     Type: AWS::DynamoDB::Table
