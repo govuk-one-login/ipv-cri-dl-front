@@ -14,8 +14,8 @@
         {{ translate("sessionEnded.title") }}
     </h1>
 
-    {% from "hmpo-html/macro.njk" import hmpoHtml %}
-    {{ hmpoHtml(translate("sessionEnded.content")) }}
+    {% from "frontend-ui/build/components/html/macro.njk" import html %}
+    {{ html(translate("sessionEnded.content")) }}
 
 {% endblock %}
 

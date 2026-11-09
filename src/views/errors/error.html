@@ -14,8 +14,8 @@
         {{ translate("error.title") }}
     </h1>
 
-    {% from "hmpo-html/macro.njk" import hmpoHtml %}
-    {{ hmpoHtml(translate("error.content")) }}
+    {% from "frontend-ui/build/components/html/macro.njk" import html %}
+    {{ html(translate("error.content")) }}
 {% endblock %}
 
 {% block scripts %}

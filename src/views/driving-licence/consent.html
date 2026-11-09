@@ -1,9 +1,10 @@
 {% extends "base-form.njk" %}
 {% set hmpoPageKey = "consent" %}
 {% set hmpoH1Class = "govuk-heading-l" %}
-{% from "hmpo-form/macro.njk" import hmpoForm %}
-{% from "hmpo-checkboxes/macro.njk" import hmpoCheckboxes %}
-{% from "hmpo-text/macro.njk" import hmpoText %}
+{% from "frontend-ui/build/components/form/macro.njk" import form %}
+{% from "frontend-ui/build/components/checkboxes/macro.njk" import checkboxes %}
+{% from "frontend-ui/build/components/text/macro.njk" import text %}
+{% from "frontend-ui/build/components/submit/macro.njk" import submit %}
 
 {% set isPageDataSensitive = false %}
 {% set statusCode = '200' %}
@@ -15,7 +16,7 @@
 
 {% block mainContent %}
 
-  {% call hmpoForm(ctx) %}
+  {% call form(ctx) %}
 
     {% if (values.licenceIssuer == "DVA") %}
 
@@ -27,14 +28,14 @@
       </p>
       <h2 >{{ translate("drivingLicence.consentDVA") }}</h2>
 
-      {{ hmpoText(ctx, {
+      {{ text(ctx, {
         id: "issuerDependent",
         type: "hidden",
         legend: "",
         default: "DVA"
       }) }}
 
-      {{ hmpoCheckboxes(ctx, {
+      {{ checkboxes(ctx, {
         id: "consentDVACheckbox",
         hint: {
           classes: "govuk-label"
@@ -53,14 +54,14 @@
       </p>
       <h2 >{{ translate("drivingLicence.consentDVLA") }}</h2>
 
-      {{ hmpoText(ctx, {
+      {{ text(ctx, {
         id: "issuerDependent",
         type: "hidden",
         legend: "",
         default: "DVLA"
       }) }}
 
-      {{ hmpoCheckboxes(ctx, {
+      {{ checkboxes(ctx, {
         id: "consentCheckbox",
         hint: {
           classes: "govuk-label"
@@ -69,7 +70,7 @@
 
     {% endif %}
 
-    {{ hmpoSubmit(ctx, {
+    {{ submit(ctx, {
       id: "continue",
       text: translate("buttons.next")
     }) }}

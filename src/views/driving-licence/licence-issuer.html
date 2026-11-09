@@ -1,11 +1,10 @@
 {% extends "base-form.njk" %}
 {% set hmpoPageKey = "licence-issuer" %}
 {% set hmpoH1Class = "govuk-heading-l" %}
-{% from "hmpo-text/macro.njk" import hmpoText %}
-{% from "hmpo-form/macro.njk" import hmpoForm %}
-{% from "hmpo-radios/macro.njk" import hmpoRadios %}
+{% from "frontend-ui/build/components/form/macro.njk" import form %}
+{% from "frontend-ui/build/components/radios/macro.njk" import radios %}
+{% from "frontend-ui/build/components/submit/macro.njk" import submit %}
 {% from "govuk/components/details/macro.njk" import govukDetails %}
-{% from "hmpo-details/macro.njk" import hmpoDetails %}
 
 {% set isPageDataSensitive = false %}
 {% set statusCode = '200' %}
@@ -17,8 +16,8 @@
 
 {% block mainContent %}
 {% set title = translate("licence-issuer.title") %}
-{% call hmpoForm(ctx) %}
-{{ hmpoRadios(ctx, {
+{% call form(ctx) %}
+{{ radios(ctx, {
    id: "licenceIssuer",
    fieldset: {
         legend: {
@@ -35,7 +34,7 @@
 }) }}
 
 {% block submitButton %}
-    {{ hmpoSubmit(ctx, {id: 'continue'}) }}
+    {{ submit(ctx, {id: 'continue'}) }}
 
 {% endblock %}
 

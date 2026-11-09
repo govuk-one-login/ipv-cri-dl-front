@@ -1,10 +1,10 @@
 {% extends "base-form.njk" %}
 {% set hmpoPageKey = "check-your-details" %}
 {% set hmpoH1Class = "govuk-heading-l" %}
-{% from "hmpo-form/macro.njk" import hmpoForm %}
-{% from "hmpo-submit/macro.njk" import hmpoSubmit %}
-{% from "hmpo-radios/macro.njk" import hmpoRadios %}
-{% from "hmpo-warning-text/macro.njk" import hmpoWarningText %}
+{% from "frontend-ui/build/components/form/macro.njk" import form %}
+{% from "frontend-ui/build/components/submit/macro.njk" import submit %}
+{% from "frontend-ui/build/components/radios/macro.njk" import radios %}
+{% from "frontend-ui/build/components/warning-text/macro.njk" import warningText %}
 {% from "govuk/components/summary-list/macro.njk" import govukSummaryList %}
 
 {% set isPageDataSensitive = false %}
@@ -21,11 +21,11 @@
         {{ translate("pages.check-your-details.title") }}
     </h1>
 
-    {{ hmpoWarningText({
+    {{ warningText({
         text: translate("pages.check-your-details.warningText")
     }) }}
 
-    {% call hmpoForm(ctx) %}
+    {% call form(ctx) %}
 
         {% if values.licenceIssuer == "DVLA" %}
 
@@ -182,11 +182,11 @@
 
         <h2>{{ translate("pages.check-your-details.correctCheck") }}</h2>
 
-        {{ hmpoRadios(ctx, {
+        {{ radios(ctx, {
             id: "confirmDetails"
         }) }}
 
-        {{ hmpoSubmit(ctx, {id: "continue", text: translate("pages.check-your-details.confirmButton")}) }}
+        {{ submit(ctx, {id: "continue", text: translate("pages.check-your-details.confirmButton")}) }}
 
     {% endcall %}
 
