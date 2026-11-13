@@ -7,10 +7,11 @@
 {% from "govuk/components/warning-text/macro.njk" import govukWarningText %}
 {% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
 
-{% from "hmpo-text/macro.njk" import hmpoText %}
-{% from "hmpo-form/macro.njk" import hmpoForm %}
-{% from "hmpo-date/macro.njk" import hmpoDate %}
-{% from "hmpo-checkboxes/macro.njk" import hmpoCheckboxes %}
+{% from "frontend-ui/build/components/text/macro.njk" import text %}
+{% from "frontend-ui/build/components/form/macro.njk" import form %}
+{% from "frontend-ui/build/components/date/macro.njk" import date %}
+{% from "frontend-ui/build/components/checkboxes/macro.njk" import checkboxes %}
+{% from "frontend-ui/build/components/submit/macro.njk" import submit %}
 
 {% set isPageDataSensitive = false %}
 {% set statusCode = '200' %}
@@ -80,9 +81,9 @@ classes:'driving-licence-message'
 html: translate("drivingLicence.drivingLicenceTryAnotherWay")
 }) }}
 
-    {% call hmpoForm(ctx, {autocomplete:'on'}) %}
+    {% call form(ctx, {autocomplete:'on'}) %}
 
-    {{ hmpoText(ctx, {
+    {{ text(ctx, {
 id: "surname",
 label: {
 classes: "govuk-label"
@@ -107,7 +108,7 @@ autocomplete: "family-name"
         }
         }) %}
             <div class="govuk-inset-text govuk-!-margin-top-2 govuk-!-padding-top-1">
-                {{ hmpoText(ctx, {
+                {{ text(ctx, {
             id: "firstName",
             label: {
             classes: "govuk-label"
@@ -116,7 +117,7 @@ autocomplete: "family-name"
             autocomplete: "given-name"
             }) }}
 
-                {{ hmpoText(ctx, {
+                {{ text(ctx, {
             id: "middleNames",
             label: {
             classes: "govuk-label"
@@ -130,21 +131,21 @@ autocomplete: "family-name"
 
         {% if (values.licenceIssuer == "DVLA") %}
 
-            {{ hmpoDate(ctx, {
+            {{ date(ctx, {
     id: "dateOfBirth",
     legend: {
     classes: "govuk-label"
     }
     }) }}
 
-            {{ hmpoText(ctx, {
+            {{ text(ctx, {
     id: "issuerDependent",
     type: "hidden",
     legend: "",
     default: "DVLA"
     }) }}
 
-            {{ hmpoDate(ctx, {
+            {{ date(ctx, {
     id: "issueDate",
     legend: {
     classes: "govuk-label"
@@ -153,21 +154,21 @@ autocomplete: "family-name"
 
         {% else %}
 
-            {{ hmpoDate(ctx, {
+            {{ date(ctx, {
     id: "dvaDateOfBirth",
     legend: {
     classes: "govuk-label"
     }
     }) }}
 
-            {{ hmpoText(ctx, {
+            {{ text(ctx, {
     id: "issuerDependent",
     type: "hidden",
     legend: "",
     default: "DVA"
     }) }}
 
-            {{ hmpoDate(ctx, {
+            {{ date(ctx, {
     id: "dateOfIssue",
     legend: {
     classes: "govuk-label"
@@ -176,7 +177,7 @@ autocomplete: "family-name"
 
         {% endif %}
 
-        {{ hmpoDate(ctx, {
+        {{ date(ctx, {
     id: "expiryDate",
     legend: {
     classes: "govuk-label"
@@ -184,7 +185,7 @@ autocomplete: "family-name"
     }) }}
 
         {% if (values.licenceIssuer == "DVLA") %}
-            {{ hmpoText(ctx, {
+            {{ text(ctx, {
     id: "drivingLicenceNumber",
     label: {
     classes: "govuk-label"
@@ -192,7 +193,7 @@ autocomplete: "family-name"
     autocomplete: "drivingLicenceNumber"
     }) }}
 
-            {{ hmpoText(ctx, {
+            {{ text(ctx, {
     id: "issueNumber",
     label: {
     classes: "govuk-label"
@@ -201,7 +202,7 @@ autocomplete: "family-name"
     }) }}
 
         {% else %}
-            {{ hmpoText(ctx, {
+            {{ text(ctx, {
     id: "dvaLicenceNumber",
     label: {
     classes: "govuk-label"
@@ -211,7 +212,7 @@ autocomplete: "family-name"
 
         {% endif %}
 
-        {{ hmpoText(ctx, {
+        {{ text(ctx, {
     id: "postcode",
     label: {
     classes: "govuk-label"
@@ -222,7 +223,7 @@ autocomplete: "family-name"
         {% if (values.licenceIssuer == "DVA") %}
             <h2 >{{ translate("drivingLicence.consentDVA") }}</h2>
 
-            {{ hmpoCheckboxes(ctx, {
+            {{ checkboxes(ctx, {
     id: "consentDVACheckbox",
     hint: {
     classes: "govuk-label"
@@ -233,7 +234,7 @@ autocomplete: "family-name"
         {% if (values.licenceIssuer == "DVLA") %}
             <h2 >{{ translate("drivingLicence.consentDVLA") }}</h2>
 
-            {{ hmpoCheckboxes(ctx, {
+            {{ checkboxes(ctx, {
     id: "consentCheckbox",
     hint: {
     classes: "govuk-label"
@@ -249,7 +250,7 @@ autocomplete: "family-name"
     }) }}
         {% endif %}
 
-        {{ hmpoSubmit(ctx, {id: "continue", text: translate("buttons.next")}) }}
+        {{ submit(ctx, {id: "continue", text: translate("buttons.next")}) }}
 
         {% endcall %}
 
