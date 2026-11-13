@@ -4,10 +4,10 @@ End-to-end tests for the Driving Licence CRI front end, using Playwright and Cuc
 
 ## Test Profiles
 
-| Profile          | Command                        | Description                                              |
-| ---------------- | ------------------------------ | -------------------------------------------------------- |
-| `stub_tests`     | `npm run test:browser:stub:ci` | Runs against the IPV Core Stub in a deployed environment |
-| `wiremock_tests` | `npm run test:browser:ci`      | Runs locally against a WireMock instance                 |
+| Profile          | Command                         | Description                                              |
+| ---------------- | ------------------------------- | -------------------------------------------------------- |
+| `core_stub`      | `npm run test:browser:corestub` | Runs against the IPV Core Stub in a deployed environment |
+| `wiremock_tests` | `npm run test:browser:wiremock` | Runs locally against a WireMock instance                 |
 
 ## Running Core Stub Tests
 
@@ -28,12 +28,12 @@ CORE_STUB_PASSWORD=<password>
 ### Run
 
 ```bash
-npm run test:browser:stub:ci
+npm run test:browser:corestub
 ```
 
 ### Run a specific test
 
-You can execute a specific test by adding --tags=@test (or any other tag) at the end of the test:browser or test:browser:stub script.
+You can execute a specific test by adding --tags=@test (or any other tag) to either command.
 Add in the @test tag against the speicifc scenario you wish to execute, then execute the test as normal.
 
 ## PII Log Scan

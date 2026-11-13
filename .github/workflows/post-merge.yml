@@ -1,0 +1,52 @@
+name: Post merge
+
+on:
+  push:
+    branches:
+      - main
+
+permissions: {}
+
+jobs:
+  scan-repo:
+    name: CodeQL and Sonar scans
+    permissions:
+      contents: read
+      security-events: write
+    uses: ./.github/workflows/scan-repo.yml
+    secrets:
+      sonar_token: ${{ secrets.SONAR_TOKEN }}
+
+  deploy-dev:
+    uses: ./.github/workflows/_secure-pipeline-deploy.yml
+    concurrency:
+      group: deploy-to-dev
+    permissions:
+      id-token: write
+      contents: read
+    secrets:
+      role_arn: ${{ secrets.AWS_DL_DEV_ROLE_ARN }}
+      artifact_bucket: ${{ secrets.DEV_ARTIFACT_BUCKET }}
+      container_sign_kms_key: ${{ secrets.DEV_CONTAINER_SIGN_KMS_KEY }}
+      ecr_repository: ${{ secrets.DEV_ECR_REPOSITORY }}
+      ecr_repository_tests: ${{ secrets.DEV_ECR_REPOSITORY_TEST }}
+      dynatrace_paas_token: ${{ secrets.DYNATRACE_PAAS_TOKEN }}
+    with:
+      environment: development
+
+  deploy-build:
+    uses: ./.github/workflows/_secure-pipeline-deploy.yml
+    concurrency:
+      group: deploy-to-build
+    permissions:
+      id-token: write
+      contents: read
+    secrets:
+      role_arn: ${{ secrets.GH_ACTIONS_ROLE_ARN }}
+      artifact_bucket: ${{ secrets.BUILD_ARTIFACT_BUCKET }}
+      container_sign_kms_key: ${{ secrets.BUILD_CONTAINER_SIGN_KMS_KEY }}
+      ecr_repository: ${{ secrets.BUILD_ECR_REPOSITORY }}
+      ecr_repository_tests: ${{ secrets.BUILD_ECR_REPOSITORY_TEST }}
+      dynatrace_paas_token: ${{ secrets.DYNATRACE_PAAS_TOKEN }}
+    with:
+      environment: build
