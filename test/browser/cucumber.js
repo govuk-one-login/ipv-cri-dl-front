@@ -30,7 +30,7 @@ module.exports = {
     timeout: DEFAULT_TIMEOUT_MS
   },
 
-  stub_tests: {
+  core_stub: {
     paths: ["./test/browser/features/stub-features/**/*.feature"],
     require: [
       "./test/browser/support/setup.js",
@@ -47,7 +47,11 @@ module.exports = {
 
   wiremock_tests: {
     paths: ["./test/browser/features/wiremock-features/**/*.feature"],
-    require: [...commonSupport, ...commonWiremockSteps],
+    require: [
+      ...commonSupport,
+      ...commonWiremockSteps,
+      "./test/browser/local-app.js"
+    ],
     format: [
       PROGRESS,
       `json:${makeReportPath("cucumber-wiremock-report.json")}`,

@@ -12,7 +12,7 @@ exclude:
   - "src/app/driving-licence/steps.js"
   - "src/app/driving-licence/fields.js"
 
-report-dir: reports/coverage
+report-dir: coverage
 statements: 60
 branches: 60
 functions: 80
