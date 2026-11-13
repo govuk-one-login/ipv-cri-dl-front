@@ -17,8 +17,10 @@
     "build-js:analytics": "mkdir -p dist/public/javascripts; uglifyjs node_modules/@govuk-one-login/frontend-analytics/lib/analytics.js -o dist/public/javascripts/analytics.js",
     "build-js:device-intelligence": "mkdir -p dist/public/javascripts; uglifyjs node_modules/@govuk-one-login/frontend-device-intelligence/build/esm/index.js -o dist/public/javascripts/deviceIntelligence.js",
     "build-js:all": "mkdir -p dist/public/javascripts; uglifyjs node_modules/govuk-frontend/dist/govuk/all.bundle.js node_modules/hmpo-components/all.js --beautify -o dist/public/javascripts/all.js",
-    "lint": "prettier --check --no-editorconfig src test && eslint .",
-    "lint-apply": "prettier --write src test && eslint .",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix",
+    "format": "prettier --check --no-editorconfig src test",
+    "format:fix": "prettier --write --no-editorconfig src test",
     "test": "npm run test:unit && npm run test:infra",
     "test:unit": "nyc --reporter=lcov --reporter=text-summary mocha",
     "test:infra": "mocha --config test/infra/.mocharc.yml",
@@ -26,7 +28,7 @@
     "mocks": "wiremock --port 8030 --root-dir test/mocks",
     "test:browser:wiremock": "cucumber-js --config test/browser/cucumber.js --profile wiremock_tests",
     "test:browser:corestub": "cucumber-js --config test/browser/cucumber.js --profile core_stub",
-    "check-translation": "node node_modules/@govuk-one-login/di-ipv-cri-common-express/scripts/checkTranslations.js '../../../../src/locales'"
+    "translation-check": "node node_modules/@govuk-one-login/di-ipv-cri-common-express/scripts/checkTranslations.js '../../../../src/locales'"
   },
   "repository": {
     "type": "git",
