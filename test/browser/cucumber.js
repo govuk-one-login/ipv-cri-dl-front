@@ -1,7 +1,11 @@
-require("dotenv").config();
 const path = require("path");
 
 const repoRoot = path.resolve(__dirname, "..", "..");
+
+try {
+  process.loadEnvFile(path.join(repoRoot, ".env"));
+  console.log(`🚨 local .env loaded: ${path.join(repoRoot, ".env")}`);
+} catch {}
 
 const DEFAULT_TIMEOUT_MS = 60_000;
 const PROGRESS = "progress";
