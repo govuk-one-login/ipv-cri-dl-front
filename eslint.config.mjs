@@ -15,12 +15,12 @@ const compat = new FlatCompat({
 export default [
   {
     ignores: [
-      "scripts/**/*.js",
       "src/app.test.js",
       "src/app-setup.test.js",
       "**/dist",
       "**/*.cjs",
-      "reports/**/*"
+      "reports/**/*",
+      "coverage/**/*"
     ]
   },
   {
@@ -67,6 +67,16 @@ export default [
           varsIgnorePattern: "Given|And|When|Then"
         }
       ]
+    }
+  },
+  {
+    files: ["test/**/*"],
+    rules: {
+      "no-console": "off",
+      "no-empty": "off",
+      "no-empty-pattern": "off",
+      "no-unsafe-optional-chaining": "warn",
+      "no-restricted-imports": "off"
     }
   }
 ];

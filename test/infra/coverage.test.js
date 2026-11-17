@@ -115,7 +115,6 @@ describe("@QualityGateStackTest", () => {
       });
 
       if (orphanedFiles.length > 0) {
-        // eslint-disable-next-line no-console
         console.warn(
           `Warning: Potentially orphaned test files: ${orphanedFiles.join(", ")}`
         );

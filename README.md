@@ -109,7 +109,7 @@ There are E2E tests which run against the core stub, in the Dev, Build and Stagi
 
 To execute these tests run:
 
-`npm run test:browser:stub:ci`
+`npm run test:browser:corestub`
 
 To build the Docker image run:
 
