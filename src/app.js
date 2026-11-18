@@ -16,7 +16,7 @@ app.get("nunjucks").addGlobal("getContext", function () {
   };
 });
 
-AppSetup.init(app, router);
+AppSetup.init(app);
 RoutingService.init(router);
 
 /* Server configuration */
