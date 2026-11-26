@@ -1,7 +1,11 @@
-require("dotenv").config();
 const path = require("path");
 
 const repoRoot = path.resolve(__dirname, "..", "..");
+
+try {
+  process.loadEnvFile(path.join(repoRoot, ".env"));
+  console.log(`🚨 local .env loaded: ${path.join(repoRoot, ".env")}`);
+} catch {}
 
 const DEFAULT_TIMEOUT_MS = 60_000;
 const PROGRESS = "progress";
@@ -30,7 +34,7 @@ module.exports = {
     timeout: DEFAULT_TIMEOUT_MS
   },
 
-  stub_tests: {
+  core_stub: {
     paths: ["./test/browser/features/stub-features/**/*.feature"],
     require: [
       "./test/browser/support/setup.js",
@@ -47,7 +51,11 @@ module.exports = {
 
   wiremock_tests: {
     paths: ["./test/browser/features/wiremock-features/**/*.feature"],
-    require: [...commonSupport, ...commonWiremockSteps],
+    require: [
+      ...commonSupport,
+      ...commonWiremockSteps,
+      "./test/browser/local-app.js"
+    ],
     format: [
       PROGRESS,
       `json:${makeReportPath("cucumber-wiremock-report.json")}`,

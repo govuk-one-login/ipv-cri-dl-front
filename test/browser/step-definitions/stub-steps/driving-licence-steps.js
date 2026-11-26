@@ -12,8 +12,6 @@ const {
 const { assertUrlPathContains } = require("../../util/browser-utils");
 const ConfigurationReader = require("../../support/configuration-reader");
 
-require("dotenv").config();
-
 Given("I navigate to the IPV Core Stub", async function () {
   await this.context.clearCookies();
 
