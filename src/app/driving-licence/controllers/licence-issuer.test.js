@@ -1,5 +1,7 @@
-const BaseController = require("hmpo-form-wizard").Controller;
-const LicenceIssuerController = require("./licence-issuer");
+import wizard from "hmpo-form-wizard";
+import { LicenceIssuerController } from "./licence-issuer.js";
+
+const BaseController = wizard.Controller;
 
 describe("licence issuer controller", () => {
   const licenceIssuerController = new LicenceIssuerController({

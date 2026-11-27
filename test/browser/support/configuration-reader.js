@@ -2,9 +2,9 @@
  * Configuration reader utility
  * Reads configuration from config.js with environment variables taking precedence
  */
-const config = require("./config");
+import config from "./config.js";
 
-class ConfigurationReader {
+export class ConfigurationReader {
   /**
    * @param {string} keyName - The configuration key
    * @returns {string} The configuration value
@@ -57,5 +57,3 @@ class ConfigurationReader {
     }
   }
 }
-
-module.exports = ConfigurationReader;

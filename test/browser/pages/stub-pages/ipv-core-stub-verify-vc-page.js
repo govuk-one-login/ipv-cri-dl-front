@@ -1,6 +1,6 @@
-const { expect } = require("@playwright/test");
+import { expect } from "@playwright/test";
 
-class IpvCoreStubVerfiyVcPage {
+export class IpvCoreStubVerifyVcPage {
   /**
    * @param {import('@playwright/test').Page} page
    */
@@ -237,5 +237,3 @@ class IpvCoreStubVerfiyVcPage {
     );
   }
 }
-
-module.exports = IpvCoreStubVerfiyVcPage;

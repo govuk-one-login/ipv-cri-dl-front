@@ -1,4 +1,4 @@
-class IpvCoreStubUserEditPage {
+export class IpvCoreStubUserEditPage {
   /**
    * @param {import('@playwright/test').Page} page
    */
@@ -59,5 +59,3 @@ class IpvCoreStubUserEditPage {
     );
   }
 }
-
-module.exports = IpvCoreStubUserEditPage;

@@ -1,5 +1,5 @@
-const { personInfoClient } = require("./person-info.client");
-const LOGGER = require("../../../utils/logger");
+import { personInfoClient } from "./person-info.client.js";
+import LOGGER from "../../../utils/logger.js";
 
 const PII_VALUES = [
   "KENNETH",

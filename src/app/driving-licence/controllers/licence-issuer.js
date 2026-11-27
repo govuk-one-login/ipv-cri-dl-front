@@ -1,7 +1,9 @@
-const BaseController = require("hmpo-form-wizard").Controller;
-const LOGGER = require("../../../utils/logger");
+import wizard from "hmpo-form-wizard";
+import LOGGER from "../../../utils/logger.js";
 
-class LicenceIssuerController extends BaseController {
+const BaseController = wizard.Controller;
+
+export class LicenceIssuerController extends BaseController {
   async saveValues(req, res, next) {
     try {
       req.sessionModel.reset();
@@ -42,5 +44,3 @@ class LicenceIssuerController extends BaseController {
     }
   }
 }
-
-module.exports = LicenceIssuerController;

@@ -1,10 +1,13 @@
-const { firstNameMiddleNameLengthValidator } = require("./fields-helper");
-const { surnameLengthValidator } = require("./fields-helper");
-const { firstNameLengthValidator } = require("./fields-helper");
-const { middleNamesLengthValidator } = require("./fields-helper");
-const { postCodeLengthValidator } = require("./fields-helper");
-const { licenceLengthValidator } = require("./fields-helper");
-const fields = require("./fields-helper");
+import { fieldsHelper } from "./fields-helper.js";
+
+const {
+  firstNameMiddleNameLengthValidator,
+  surnameLengthValidator,
+  firstNameLengthValidator,
+  middleNamesLengthValidator,
+  postCodeLengthValidator,
+  licenceLengthValidator
+} = fieldsHelper;
 
 const firstNameMiddleNameLengthValidatorObj = {
   fn: firstNameMiddleNameLengthValidator,
@@ -37,7 +40,7 @@ const postCodeLengthValidatorObj = {
 };
 
 const dvlaValidatorObj = {
-  fn: fields.dvlaValidator,
+  fn: fieldsHelper.dvlaValidator,
   arguments: [
     "firstName",
     "middleNames",
@@ -47,14 +50,15 @@ const dvlaValidatorObj = {
   ]
 };
 
-module.exports = {
-  firstNameMiddleNameLengthValidator: fields.firstNameMiddleNameLengthValidator,
-  surnameLengthValidator: fields.surnameLengthValidator,
-  firstNameLengthValidator: fields.firstNameLengthValidator,
-  middleNamesLengthValidator: fields.middleNamesLengthValidator,
-  licenceLengthValidator: fields.licenceLengthValidator,
-  postCodeLengthValidator: fields.postCodeLengthValidator,
-  dvlaValidator: fields.dvlaValidator,
+export const fields = {
+  firstNameMiddleNameLengthValidator:
+    fieldsHelper.firstNameMiddleNameLengthValidator,
+  surnameLengthValidator: fieldsHelper.surnameLengthValidator,
+  firstNameLengthValidator: fieldsHelper.firstNameLengthValidator,
+  middleNamesLengthValidator: fieldsHelper.middleNamesLengthValidator,
+  licenceLengthValidator: fieldsHelper.licenceLengthValidator,
+  postCodeLengthValidator: fieldsHelper.postCodeLengthValidator,
+  dvlaValidator: fieldsHelper.dvlaValidator,
   surname: {
     type: "text",
     validate: [
@@ -135,7 +139,7 @@ module.exports = {
       },
       {
         type: "beforeNow",
-        fn: fields.beforeNow,
+        fn: fieldsHelper.beforeNowValidator,
         arguments: [10, "years"]
       }
     ],
@@ -154,7 +158,7 @@ module.exports = {
       },
       {
         type: "beforeNow",
-        fn: fields.beforeNow,
+        fn: fieldsHelper.beforeNowValidator,
         arguments: [10, "years"]
       }
     ],

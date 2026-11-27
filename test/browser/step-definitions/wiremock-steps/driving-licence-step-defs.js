@@ -1,12 +1,8 @@
-const { Given, When, Then } = require("@cucumber/cucumber");
-const {
-  DVADetailsEntryPage
-} = require("../../pages/wiremock-pages/dva-details-entry-page");
-const {
-  DrivingLicencePage
-} = require("../../pages/wiremock-pages/driving-licence-page");
-const { expect } = require("chai");
-const { AxeBuilder } = require("@axe-core/playwright");
+import { Given, Then } from "@cucumber/cucumber";
+import { DVADetailsEntryPage } from "../../pages/wiremock-pages/index.js";
+import { DrivingLicencePage } from "../../pages/wiremock-pages/index.js";
+import { expect } from "chai";
+import { AxeBuilder } from "@axe-core/playwright";
 
 Then(/^I can see CTA {string}$/, async function () {});
 

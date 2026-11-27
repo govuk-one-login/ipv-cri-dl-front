@@ -1,4 +1,4 @@
-module.exports = {
+export const appConfig = {
   API: {
     BASE_URL: process.env.API_BASE_URL || "http://localhost:5007",
     PATHS: {
@@ -44,3 +44,5 @@ module.exports = {
     PORT: process.env.REDIS_PORT || 6379
   }
 };
+
+export default appConfig;

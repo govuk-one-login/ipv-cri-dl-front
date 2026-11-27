@@ -209,4 +209,4 @@ DVADrivingLicenceSubject.prototype.fill = function (newFields) {
   }
 };
 
-module.exports = DVADrivingLicenceSubject;
+export default DVADrivingLicenceSubject;

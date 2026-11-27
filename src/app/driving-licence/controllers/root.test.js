@@ -1,6 +1,8 @@
-const RootController = require("./root");
-const { Controller: BaseController } = require("hmpo-form-wizard");
-const appConfig = require("../../../lib/config");
+import { RootController } from "./root.js";
+import wizard from "hmpo-form-wizard";
+import appConfig from "../../../lib/config.js";
+
+const BaseController = wizard.Controller;
 
 const VALID_RESPONSE = {
   name: [

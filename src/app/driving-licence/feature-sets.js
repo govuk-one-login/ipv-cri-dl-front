@@ -1,6 +1,6 @@
-const LOGGER = require("../../utils/logger");
+import LOGGER from "../../utils/logger.js";
 
-module.exports = function (req, res, next) {
+export function featureSet(req, res, next) {
   try {
     const featureSet = req.query.featureSet;
     const isValidFeatureSet = /^\w{1,32}$/.test(featureSet);
@@ -16,4 +16,4 @@ module.exports = function (req, res, next) {
   } catch (error) {
     return next(error);
   }
-};
+}

@@ -1,4 +1,4 @@
-const { validateResourceProperty } = require("../helpers/helpers");
+import { validateResourceProperty } from "../helpers/helpers.js";
 
 describe("@QualityGateStackTest", () => {
   describe("AWS::ApplicationAutoScaling::ScalableTarget Resources", () => {

@@ -8,7 +8,7 @@ Feature: DVA Driving licence CRI Error Validations
     And I click on DVA radio button and Continue
     And I should be on the DVA details entry page Enter your details exactly as they appear on your UK driving licence – GOV.UK One Login
 
-  @mock-api:dva-invalidDrivingLicenceNumber @validation-regression
+  @mock-api:dva-invalidDrivingLicenceNumber @validation-regression @debug
   Scenario Outline: DVA - User enters licence number with less than 8 characters
     Given User enters DVA data as a <DVADrivingLicenceSubject>
     And DVA User re-enters drivingLicenceNumber as <InvalidLicenceNumber>

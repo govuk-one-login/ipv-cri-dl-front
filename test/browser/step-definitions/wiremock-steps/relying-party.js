@@ -1,7 +1,6 @@
-const { Given, When, Then } = require("@cucumber/cucumber");
-
-const { RelyingPartyPage } = require("../../pages/wiremock-pages");
-const { expect } = require("chai");
+import { Then } from "@cucumber/cucumber";
+import { RelyingPartyPage } from "../../pages/wiremock-pages/index.js";
+import { expect } from "chai";
 
 Then("they should be redirected as a success", function () {
   const rpPage = new RelyingPartyPage(this.page);

@@ -1,11 +1,11 @@
-const sessionConfig = require("./session-config");
-const sessionDbConfig = require("./dynamo-session-config");
+import { sessionConfig } from "./session-config.js";
+import { dynamoSessionConfig } from "./dynamo-session-config.js";
 
 describe("app", () => {
   const sandbox = sinon.createSandbox();
   beforeEach(() => {
     sandbox
-      .stub(sessionDbConfig, "createSessionStore")
+      .stub(dynamoSessionConfig, "createSessionStore")
       .returns("sessionStoreMock");
   });
 
@@ -15,7 +15,7 @@ describe("app", () => {
 
   describe("setup session", () => {
     it("should initialise session config", () => {
-      var initialisedSessionConfig = sessionConfig.init();
+      var initialisedSessionConfig = sessionConfig.createSessionConfig();
       expect(initialisedSessionConfig).to.deep.equal({
         cookieName: "service_session",
         secret: "1234",

@@ -1,20 +1,18 @@
-const BaseController = require("hmpo-form-wizard").Controller;
+import wizard from "hmpo-form-wizard";
+import appConfig from "../../../lib/config.js";
+import { createPersonalDataHeaders } from "@govuk-one-login/frontend-passthrough-headers";
+import LOGGER from "../../../utils/logger.js";
+import { checkDrivingLicenceClient } from "../clients/check-driving-licence.client.js";
 
+const BaseController = wizard.Controller;
 const {
   API: {
     BASE_URL,
     PATHS: { CHECK }
   }
-} = require("../../../lib/config");
-const {
-  createPersonalDataHeaders
-} = require("@govuk-one-login/frontend-passthrough-headers");
-const LOGGER = require("../../../utils/logger");
-const {
-  checkDrivingLicenceClient
-} = require("../clients/check-driving-licence.client");
+} = appConfig;
 
-class ValidateController extends BaseController {
+export class ValidateController extends BaseController {
   async saveValues(req, res, callback) {
     const firstName = req.sessionModel.get("firstName");
     const middleNames = req.sessionModel.get("middleNames");
@@ -67,5 +65,3 @@ class ValidateController extends BaseController {
     }
   }
 }
-
-module.exports = ValidateController;

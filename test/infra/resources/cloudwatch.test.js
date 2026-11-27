@@ -1,11 +1,11 @@
-const { expect } = require("chai");
-const {
+import { expect } from "chai";
+import {
   getResourcesByType,
   validateResourceProperty,
   validateInRawYaml,
   loadTemplate
-} = require("../helpers/helpers");
-const { VALID_COMPARISON_OPERATORS } = require("../helpers/constants");
+} from "../helpers/helpers.js";
+import { VALID_COMPARISON_OPERATORS } from "../helpers/constants.js";
 
 describe("@QualityGateStackTest", () => {
   describe("CloudWatch and Logs Resources", () => {

@@ -1,20 +1,20 @@
-const { SESSION_TABLE_NAME } = require("./lib/config");
+import appConfig from "./lib/config.js";
+import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
+import session from "express-session";
+import connectDynamoDB from "connect-dynamodb";
 
-const { DynamoDBClient } = require("@aws-sdk/client-dynamodb");
-const session = require("express-session");
-const DynamoDBStore = require("connect-dynamodb")(session);
+const DynamoDBStore = connectDynamoDB(session);
+const { SESSION_TABLE_NAME } = appConfig;
 
-const createSessionStore = () => {
-  const dynamodbClient = new DynamoDBClient({
-    region: "eu-west-2"
-  });
+export const dynamoSessionConfig = {
+  createSessionStore: () => {
+    const dynamodbClient = new DynamoDBClient({
+      region: "eu-west-2"
+    });
 
-  const dynamoDBSessionStore = new DynamoDBStore({
-    client: dynamodbClient,
-    table: SESSION_TABLE_NAME
-  });
-
-  return dynamoDBSessionStore;
+    return new DynamoDBStore({
+      client: dynamodbClient,
+      table: SESSION_TABLE_NAME
+    });
+  }
 };
-
-module.exports = { createSessionStore };

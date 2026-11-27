@@ -1,5 +1,7 @@
-const BaseController = require("hmpo-form-wizard").Controller;
-const CheckYourDetailsController = require("./check-your-details");
+import wizard from "hmpo-form-wizard";
+import { CheckYourDetailsController } from "./check-your-details.js";
+
+const BaseController = wizard.Controller;
 
 describe("check your details controller", () => {
   const checkYourDetailsController = new CheckYourDetailsController({

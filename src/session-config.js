@@ -1,26 +1,18 @@
-const {
-  SESSION_TABLE_NAME,
-  SESSION_SECRET,
-  SESSION_TTL
-} = require("./lib/config");
+import appConfig from "./lib/config.js";
+import { dynamoSessionConfig } from "./dynamo-session-config.js";
 
-const dynamoSessionConfig = require("./dynamo-session-config");
+const { SESSION_TABLE_NAME, SESSION_SECRET, SESSION_TTL } = appConfig;
 
-const init = () => {
-  const sessionConfig = {
+export const sessionConfig = {
+  createSessionConfig: () => ({
     cookieName: "service_session",
     secret: SESSION_SECRET,
     cookieOptions: { maxAge: SESSION_TTL },
     ...(SESSION_TABLE_NAME && {
       sessionStore: dynamoSessionConfig.createSessionStore()
     })
-  };
-
-  return sessionConfig;
+  }),
+  isDynamo: () => {
+    return !!SESSION_TABLE_NAME; // NOSONAR
+  }
 };
-
-const isDynamo = () => {
-  return SESSION_TABLE_NAME ? true : false; // NOSONAR
-};
-
-module.exports = { init, isDynamo };

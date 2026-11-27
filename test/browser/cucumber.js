@@ -1,6 +1,6 @@
-const path = require("path");
+import path from "node:path";
 
-const repoRoot = path.resolve(__dirname, "..", "..");
+const repoRoot = path.resolve(import.meta.dirname, "..", "..");
 
 try {
   process.loadEnvFile(path.join(repoRoot, ".env"));
@@ -19,48 +19,45 @@ const commonStubSteps = ["./test/browser/step-definitions/stub-steps/**/*.js"];
 const makeReportPath = (name) =>
   path.relative(process.cwd(), path.join(repoRoot, "reports", name));
 
-module.exports = {
-  default: {
-    paths: [
-      "./test/browser/features/wiremock-features/**/*.feature",
-      "./test/browser/features/stub-features/**/*.feature"
-    ],
-    require: [...commonSupport, ...commonWiremockSteps, ...commonStubSteps],
-    format: [
-      PROGRESS,
-      `json:${makeReportPath("cucumber-report.json")}`,
-      `html:${makeReportPath("index.html")}`
-    ],
-    timeout: DEFAULT_TIMEOUT_MS
-  },
+export const core_stub = {
+  paths: ["./test/browser/features/stub-features/**/*.feature"],
+  require: [
+    "./test/browser/support/setup.js",
+    "./test/browser/support/pii-log-scan.js",
+    "./test/browser/step-definitions/stub-steps/**/*.js"
+  ],
+  format: [
+    PROGRESS,
+    `json:${makeReportPath("cucumber-stub-report.json")}`,
+    `html:${makeReportPath("stub-index.html")}`
+  ],
+  timeout: DEFAULT_TIMEOUT_MS
+};
+export const wiremock_tests = {
+  paths: ["./test/browser/features/wiremock-features/**/*.feature"],
+  require: [
+    ...commonSupport,
+    ...commonWiremockSteps,
+    "./test/browser/local-app.js"
+  ],
+  format: [
+    PROGRESS,
+    `json:${makeReportPath("cucumber-wiremock-report.json")}`,
+    `html:${makeReportPath("wiremock-index.html")}`
+  ],
+  timeout: DEFAULT_TIMEOUT_MS
+};
 
-  core_stub: {
-    paths: ["./test/browser/features/stub-features/**/*.feature"],
-    require: [
-      "./test/browser/support/setup.js",
-      "./test/browser/support/pii-log-scan.js",
-      "./test/browser/step-definitions/stub-steps/**/*.js"
-    ],
-    format: [
-      PROGRESS,
-      `json:${makeReportPath("cucumber-stub-report.json")}`,
-      `html:${makeReportPath("stub-index.html")}`
-    ],
-    timeout: DEFAULT_TIMEOUT_MS
-  },
-
-  wiremock_tests: {
-    paths: ["./test/browser/features/wiremock-features/**/*.feature"],
-    require: [
-      ...commonSupport,
-      ...commonWiremockSteps,
-      "./test/browser/local-app.js"
-    ],
-    format: [
-      PROGRESS,
-      `json:${makeReportPath("cucumber-wiremock-report.json")}`,
-      `html:${makeReportPath("wiremock-index.html")}`
-    ],
-    timeout: DEFAULT_TIMEOUT_MS
-  }
+export default {
+  paths: [
+    "./test/browser/features/wiremock-features/**/*.feature",
+    "./test/browser/features/stub-features/**/*.feature"
+  ],
+  require: [...commonSupport, ...commonWiremockSteps, ...commonStubSteps],
+  format: [
+    PROGRESS,
+    `json:${makeReportPath("cucumber-report.json")}`,
+    `html:${makeReportPath("index.html")}`
+  ],
+  timeout: DEFAULT_TIMEOUT_MS
 };

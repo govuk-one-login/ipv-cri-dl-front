@@ -1,5 +1,6 @@
-const { expect: expect } = require("chai");
-exports.ConsentPage = class PlaywrightDevPage {
+import { expect } from "chai";
+
+export class ConsentPage {
   /**
    * @param {import('@playwright/test').Page} page
    */
@@ -93,4 +94,4 @@ exports.ConsentPage = class PlaywrightDevPage {
       consentPageText
     );
   }
-};
+}

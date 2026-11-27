@@ -1,4 +1,4 @@
-const init = () => {
+export const overloadProtectionConfig = () => {
   const protectConfig = {
     production: "production", // if production is false, detailed error messages are exposed to the client
     clientRetrySecs: 1, // Retry-After header, in seconds (0 to disable) [default 1]
@@ -13,5 +13,3 @@ const init = () => {
 
   return protectConfig;
 };
-
-module.exports = { init };

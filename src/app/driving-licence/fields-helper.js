@@ -1,7 +1,7 @@
-const { validators } = require("hmpo-form-wizard/lib/validation");
-const moment = require("moment");
+import { validators } from "hmpo-form-wizard/lib/validation/index.js";
+import moment from "moment";
 
-module.exports = {
+export const fieldsHelper = {
   surnameLengthValidator(_value, length, surnameField, licenceIssuerField) {
     const surname = this.values[surnameField];
     const issuer = this.values[licenceIssuerField];
@@ -183,7 +183,7 @@ module.exports = {
 
     return secondCheck && thirdCheck && fourthCheck;
   },
-  beforeNow(_value, timePeriod, timeUnit) {
+  beforeNowValidator(_value, timePeriod, timeUnit) {
     let dateFormat = "YYYY-MM-DD";
     let test = moment(_value, dateFormat);
     let comparator;

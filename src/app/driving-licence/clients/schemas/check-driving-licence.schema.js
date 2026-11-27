@@ -1,9 +1,5 @@
-const { z } = require("zod");
+import { z } from "zod";
 
-const checkDrivingLicenceResponseSchema = z.object({
+export const checkDrivingLicenceResponseSchema = z.object({
   retry: z.boolean()
 });
-
-module.exports = {
-  checkDrivingLicenceResponseSchema
-};

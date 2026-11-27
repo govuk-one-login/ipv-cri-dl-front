@@ -1,11 +1,18 @@
-const AppSetup = require("./app-setup");
-const path = require("path");
-const sessionConfig = require("./session-config");
-const commonExpress = require("@govuk-one-login/di-ipv-cri-common-express");
-const helmetConfig = require("@govuk-one-login/di-ipv-cri-common-express/src/lib/helmet");
+import * as AppSetup from "./app-setup.js";
+import path from "node:path";
+import { sessionConfig } from "./session-config.js";
+import commonExpress from "@govuk-one-login/di-ipv-cri-common-express";
+import helmetConfig from "@govuk-one-login/di-ipv-cri-common-express/src/lib/helmet.js";
+import { fileURLToPath } from "node:url";
 
 describe("app-setup", () => {
   const sandbox = sinon.createSandbox();
+
+  let app;
+  let router;
+  let setup;
+  let isDynamoBool;
+  let sessionConfigMap;
 
   beforeEach(() => {
     app = {
@@ -17,10 +24,10 @@ describe("app-setup", () => {
     };
     setup = sandbox.stub().returns({ app, router });
 
-    isDynamoBool = new Boolean(true);
+    isDynamoBool = Boolean(true);
     sessionConfigMap = sandbox.stub();
 
-    sandbox.stub(sessionConfig, "init").returns({
+    sandbox.stub(sessionConfig, "createSessionConfig").returns({
       cookieName: "service_session",
       secret: 1234,
       cookieOptions: { maxAge: 7200000 },
@@ -96,7 +103,7 @@ describe("app-setup", () => {
     });
 
     it("should set application config", () => {
-      const { app, router } = AppSetup.create(setup);
+      const { app, router } = AppSetup.createApp(setup);
 
       const loggerConfig = {
         consoleLevel: "request",
@@ -106,7 +113,7 @@ describe("app-setup", () => {
       };
 
       const options = {
-        config: { APP_ROOT: __dirname },
+        config: { APP_ROOT: import.meta.dirname },
         port: false,
         logs: loggerConfig,
         session: {
@@ -126,7 +133,10 @@ describe("app-setup", () => {
         views: [
           path.resolve(
             path.dirname(
-              require.resolve("@govuk-one-login/di-ipv-cri-common-express")
+              fileURLToPath(
+                import.meta
+                  .resolve("@govuk-one-login/di-ipv-cri-common-express")
+              )
             ),
             "components"
           ),
@@ -141,7 +151,7 @@ describe("app-setup", () => {
     it("should set up i18next at app level in middlewareSetupFn", () => {
       const setI18n = sandbox.stub(commonExpress.lib.i18n, "setI18n");
 
-      AppSetup.create(setup);
+      AppSetup.createApp(setup);
       const { middlewareSetupFn } = setup.firstCall.args[0];
       middlewareSetupFn(app);
 
@@ -154,7 +164,7 @@ describe("app-setup", () => {
     it("should set language toggle locals after i18next in middlewareSetupFn", () => {
       const setI18n = sandbox.stub(commonExpress.lib.i18n, "setI18n");
 
-      AppSetup.create(setup);
+      AppSetup.createApp(setup);
       const { middlewareSetupFn } = setup.firstCall.args[0];
       middlewareSetupFn(app);
 

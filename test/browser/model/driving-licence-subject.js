@@ -217,4 +217,4 @@ DrivingLicenceSubject.prototype.fill = function (newFields) {
   }
 };
 
-module.exports = DrivingLicenceSubject;
+export default DrivingLicenceSubject;

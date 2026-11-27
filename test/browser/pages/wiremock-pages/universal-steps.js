@@ -1,6 +1,6 @@
-const { assertTrue, fail } = require("assert");
+import assert from "node:assert";
 
-exports.UniversalSteps = class PlaywrightDevPage {
+export class UniversalSteps {
   constructor(page, url) {
     this.page = page;
     this.url = url;
@@ -21,9 +21,9 @@ exports.UniversalSteps = class PlaywrightDevPage {
     await this.driver.manage().setTimeouts({ implicit: 10000 });
 
     if (header.includes(text)) {
-      assertTrue(this.driver.getTitle().includes(text));
+      assert.ok(this.driver.getTitle().includes(text));
     } else {
-      fail(
+      assert.fail(
         "Page Title Does Not Match " +
           text +
           "But was " +
@@ -34,7 +34,7 @@ exports.UniversalSteps = class PlaywrightDevPage {
 
   async assertURLContains(expected) {
     const url = await this.driver.getCurrentUrl();
-    assertTrue(url.contains(expected));
+    assert.ok(url.contains(expected));
   }
 
   async clickBackButton() {
@@ -51,4 +51,4 @@ exports.UniversalSteps = class PlaywrightDevPage {
       setTimeout(() => resolve(consoleMessages), 500); // Consider a more robust wait strategy
     });
   }
-};
+}

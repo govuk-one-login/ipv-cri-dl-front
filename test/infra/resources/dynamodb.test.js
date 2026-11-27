@@ -1,7 +1,7 @@
-const {
+import {
   validateResourceProperty,
   validateInRawYaml
-} = require("../helpers/helpers");
+} from "../helpers/helpers.js";
 
 describe("@QualityGateStackTest", () => {
   describe("AWS::DynamoDB::Table Resources", () => {

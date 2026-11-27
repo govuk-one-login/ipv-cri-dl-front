@@ -1,5 +1,5 @@
-const { expect } = require("chai");
-const { getResourcesByType } = require("../helpers/helpers");
+import { expect } from "chai";
+import { getResourcesByType } from "../helpers/helpers.js";
 
 describe("@QualityGateStackTest", () => {
   describe("IAM Resources", () => {

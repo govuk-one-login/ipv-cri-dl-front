@@ -1,0 +1,23 @@
+all: true
+check-coverage: true
+include:
+  - "src/**/*.js"
+exclude:
+  - "src/assets/*"
+  - "**/*.test.js"
+  - "src/dynamo-session-config.js"
+  - "src/app.js"
+  - "src/app/shared/oauth.js"
+  - "src/app/driving-licence/router.js"
+  - "src/app/driving-licence/steps.js"
+  - "src/app/driving-licence/fields.js"
+reports-dir: coverage
+statements: 60
+branches: 60
+functions: 80
+lines: 60
+watermarks:
+  statements: [60, 80]
+  branches: [60, 80]
+  functions: [80, 90]
+  lines: [60, 80]

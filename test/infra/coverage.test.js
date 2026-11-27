@@ -1,13 +1,13 @@
-const { expect } = require("chai");
-const { getAllResourceTypes } = require("./helpers/helpers");
-const fs = require("node:fs");
-const path = require("node:path");
+import { expect } from "chai";
+import { getAllResourceTypes } from "./helpers/helpers.js";
+import fs from "node:fs";
+import path from "node:path";
 
 describe("@QualityGateStackTest", () => {
   describe("Test Coverage Validation", () => {
     it("should have tests for all resource types in template", () => {
       const allResourceTypes = getAllResourceTypes();
-      const resourcesDir = path.join(__dirname, "resources");
+      const resourcesDir = path.join(import.meta.dirname, "resources");
       const testFiles = new Set(
         fs.readdirSync(resourcesDir).filter((f) => f.endsWith(".test.js"))
       );
@@ -63,7 +63,7 @@ describe("@QualityGateStackTest", () => {
 
     it("should not have orphaned test files", () => {
       const allResourceTypes = getAllResourceTypes();
-      const resourcesDir = path.join(__dirname, "resources");
+      const resourcesDir = path.join(import.meta.dirname, "resources");
       const testFiles = fs
         .readdirSync(resourcesDir)
         .filter((f) => f.endsWith(".test.js"));
