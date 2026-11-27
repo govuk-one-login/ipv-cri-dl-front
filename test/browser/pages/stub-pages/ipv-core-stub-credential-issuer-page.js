@@ -1,8 +1,8 @@
-const { expect } = require("@playwright/test");
-const path = require("path");
-const fs = require("fs");
+import { expect } from "@playwright/test";
+import path from "node:path";
+import fs from "node:fs";
 
-class IpvCoreStubCredentialIssuerPage {
+export class IpvCoreStubCredentialIssuerPage {
   /**
    * @param {import('@playwright/test').Page} page
    */
@@ -87,7 +87,7 @@ class IpvCoreStubCredentialIssuerPage {
 
   async enterRawJSON(jsonFileName) {
     const filePath = path.resolve(
-      __dirname,
+      import.meta.dirname,
       "../../util/data",
       `${jsonFileName}.json`
     );
@@ -99,5 +99,3 @@ class IpvCoreStubCredentialIssuerPage {
     await this.goToDrivingLicenceCRIButton.click();
   }
 }
-
-module.exports = IpvCoreStubCredentialIssuerPage;

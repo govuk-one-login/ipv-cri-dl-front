@@ -1,7 +1,7 @@
-const { expect: expect } = require("chai");
-const TestDataCreator = require("../../util/test-data-creator");
+import { expect } from "chai";
+import { getDVATestUserFromMap } from "../../util/test-data-creator.js";
 
-exports.DVADetailsEntryPage = class PlaywrightDevPage {
+export class DVADetailsEntryPage {
   constructor(page) {
     this.page = page;
     this.url = "http://localhost:5030/details";
@@ -183,7 +183,7 @@ exports.DVADetailsEntryPage = class PlaywrightDevPage {
   }
 
   async userEntersDVAData(issuer, drivingLicenceSubjectScenario) {
-    var dvaDrivingLicenceSubject = TestDataCreator.getDVATestUserFromMap(
+    var dvaDrivingLicenceSubject = getDVATestUserFromMap(
       drivingLicenceSubjectScenario
     );
     if (issuer === "DVA") {
@@ -255,6 +255,8 @@ exports.DVADetailsEntryPage = class PlaywrightDevPage {
 
   async assertInvalidDVALicenceNumberInErrorSummary(errorSummaryText) {
     await this.page.waitForLoadState("domcontentloaded");
+    console.log("Current URL:", this.page.url());
+    console.log("Expected URL:", this.url);
     expect(await this.isCurrentPage()).to.be.true;
     expect(await this.dvaErrorSummaryBoxLicenceNumber.innerText()).to.equal(
       errorSummaryText
@@ -533,4 +535,4 @@ exports.DVADetailsEntryPage = class PlaywrightDevPage {
     expect(await this.isCurrentPage()).to.be.true;
     expect(await this.backButton.innerText()).to.equal(backButtonText);
   }
-};
+}

@@ -1,9 +1,7 @@
-const { Given, When, Then } = require("@cucumber/cucumber");
-const {
-  CheckYourDetailsPage
-} = require("../../pages/wiremock-pages/check-your-details-page");
-const { expect } = require("chai");
-const { AxeBuilder } = require("@axe-core/playwright");
+import { Given, When, Then } from "@cucumber/cucumber";
+import { CheckYourDetailsPage } from "../../pages/wiremock-pages/index.js";
+import { expect } from "chai";
+import { AxeBuilder } from "@axe-core/playwright";
 
 Then(
   /^I should be on the Driving Licence check your details page (.*)$/,

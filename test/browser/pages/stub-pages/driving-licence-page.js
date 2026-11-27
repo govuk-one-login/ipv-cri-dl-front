@@ -1,7 +1,11 @@
-const { expect } = require("@playwright/test");
-const TestDataCreator = require("../../util/test-data-creator");
+import { expect } from "@playwright/test";
+import {
+  getDVATestUserFromMap,
+  getDVLATestUserFromMap,
+  isDVLAUser
+} from "../../util/test-data-creator.js";
 
-class DrivingLicencePage {
+export class DrivingLicencePage {
   constructor(page) {
     this.page = page;
     this.licenceIssuerContinueButton = page.locator(
@@ -56,10 +60,8 @@ class DrivingLicencePage {
   }
 
   async userEntersData(drivingLicenceSubject) {
-    if (TestDataCreator.isDVLAUser(drivingLicenceSubject)) {
-      const subject = TestDataCreator.getDVLATestUserFromMap(
-        drivingLicenceSubject
-      );
+    if (isDVLAUser(drivingLicenceSubject)) {
+      const subject = getDVLATestUserFromMap(drivingLicenceSubject);
       await this.licenceNumber.fill(subject.getLicenceNumber());
       await this.birthDay.fill(subject.getBirthDay());
       await this.birthMonth.fill(subject.getBirthMonth());
@@ -76,9 +78,7 @@ class DrivingLicencePage {
       await this.licenceValidToYear.fill(subject.getLicenceValidToYear());
       await this.postcode.fill(subject.getPostcode());
     } else {
-      const subject = TestDataCreator.getDVATestUserFromMap(
-        drivingLicenceSubject
-      );
+      const subject = getDVATestUserFromMap(drivingLicenceSubject);
       await this.dvaLicenceNumber.fill(subject.getLicenceNumber());
       await this.dvaBirthDay.fill(subject.getBirthDay());
       await this.dvaBirthMonth.fill(subject.getBirthMonth());
@@ -125,5 +125,3 @@ class DrivingLicencePage {
     ]);
   }
 }
-
-module.exports = DrivingLicencePage;

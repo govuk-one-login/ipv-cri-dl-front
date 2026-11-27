@@ -1,7 +1,7 @@
-const { Given, When, Then } = require("@cucumber/cucumber");
-const { expect } = require("chai");
-const { ErrorPage } = require("../../pages/wiremock-pages");
-const { AxeBuilder } = require("@axe-core/playwright");
+import { Then } from "@cucumber/cucumber";
+import { expect } from "chai";
+import { ErrorPage } from "../../pages/wiremock-pages/index.js";
+import { AxeBuilder } from "@axe-core/playwright";
 
 Then(/^they should see an error page$/, async function () {
   const errorPage = new ErrorPage(this.page);

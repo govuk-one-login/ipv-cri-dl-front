@@ -1,10 +1,8 @@
-module.exports = {
-  LicenceIssuerPage: require("./licence-issuer.js"),
-  CheckYourDetailsPage: require("./check-your-details-page.js"),
-  ConsentPage: require("./consent.js"),
-  UniversalSteps: require("./universal-steps.js"),
-  DrivingLicencePage: require("./driving-licence-page.js"),
-  DVADetailsEntryPage: require("./dva-details-entry-page.js"),
-  RelyingPartyPage: require("./relying-party.js"),
-  ErrorPage: require("./error.js")
-};
+export { LicenceIssuerPage } from "./licence-issuer.js";
+export { CheckYourDetailsPage } from "./check-your-details-page.js";
+export { ConsentPage } from "./consent.js";
+export { UniversalSteps } from "./universal-steps.js";
+export { DrivingLicencePage } from "./driving-licence-page.js";
+export { DVADetailsEntryPage } from "./dva-details-entry-page.js";
+export { RelyingPartyPage } from "./relying-party.js";
+export { ErrorPage } from "./error.js";

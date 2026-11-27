@@ -1,4 +1,4 @@
-const { dvlaTestUsers, dvaTestUsers } = require("./test-data-creator");
+import { dvlaTestUsers, dvaTestUsers } from "./test-data-creator.js";
 
 const MIN_TERM_LENGTH = 4;
 
@@ -21,7 +21,7 @@ const extractPiiTerms = (user) => [
   fullDob(user)
 ];
 
-const collectFromAllTestUsers = () => {
+export const collectFromAllTestUsers = () => {
   const allUsers = [
     ...Object.values(dvlaTestUsers),
     ...Object.values(dvaTestUsers)
@@ -33,5 +33,3 @@ const collectFromAllTestUsers = () => {
       .filter((term) => term && term.length >= MIN_TERM_LENGTH)
   );
 };
-
-module.exports = { collectFromAllTestUsers };

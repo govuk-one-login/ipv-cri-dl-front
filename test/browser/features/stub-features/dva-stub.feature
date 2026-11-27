@@ -5,7 +5,7 @@ Feature: Driving Licence CRI - DVA - IPV Core Stub - Happy Path Tests
     Given I navigate to the IPV Core Stub
     And I click the Driving Licence CRI for the testEnvironment
 
-  @stub-test
+  @stub-test @wip
   Scenario Outline: Driving Licence CRI - DVA - IPV Core Stub - Happy Path - Run DVA Driving Licence Journey by userId <expectedGivenName> <expectedFamilyName>
     Given I search for user number <userId> in the ThirdParty table
     Then User is navigated to the Licence Issuer <page> Page

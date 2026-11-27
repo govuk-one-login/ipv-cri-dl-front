@@ -1,11 +1,11 @@
-const {
+import {
   CloudWatchLogsClient,
   FilterLogEventsCommand
-} = require("@aws-sdk/client-cloudwatch-logs");
-const {
+} from "@aws-sdk/client-cloudwatch-logs";
+import {
   CloudFormationClient,
   DescribeStackResourceCommand
-} = require("@aws-sdk/client-cloudformation");
+} from "@aws-sdk/client-cloudformation";
 
 const region = "eu-west-2";
 const logsClient = new CloudWatchLogsClient({ region });
@@ -31,7 +31,7 @@ const resolveLogGroupName = async (logicalId) => {
   return response.StackResourceDetail.PhysicalResourceId;
 };
 
-const scanForTerm = async (logicalId, term, startTime) => {
+export const scanForTerm = async (logicalId, term, startTime) => {
   const logGroupName = await resolveLogGroupName(logicalId);
   try {
     const events = [];
@@ -56,5 +56,3 @@ const scanForTerm = async (logicalId, term, startTime) => {
     return [];
   }
 };
-
-module.exports = { scanForTerm };

@@ -1,7 +1,7 @@
-const { Given, When, Then } = require("@cucumber/cucumber");
-const { expect } = require("chai");
-const { ConsentPage } = require("../../pages/wiremock-pages/consent");
-const { AxeBuilder } = require("@axe-core/playwright");
+import { When, Then } from "@cucumber/cucumber";
+import { expect } from "chai";
+import { ConsentPage } from "../../pages/wiremock-pages/consent.js";
+import { AxeBuilder } from "@axe-core/playwright";
 
 Then(
   /^I should be on the DVA consent page (.*)$/,

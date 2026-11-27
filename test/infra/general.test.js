@@ -1,10 +1,10 @@
-const { expect } = require("chai");
-const { loadTemplate } = require("./helpers/helpers");
-const {
+import { expect } from "chai";
+import { loadTemplate } from "./helpers/helpers.js";
+import {
   SENSITIVE_RESOURCE_TYPES,
   TAGGABLE_RESOURCE_TYPES,
   ALLOWED_ACCOUNT_IDS
-} = require("./helpers/constants");
+} from "./helpers/constants.js";
 
 describe("@QualityGateStackTest", () => {
   describe("General Resource Validation", () => {

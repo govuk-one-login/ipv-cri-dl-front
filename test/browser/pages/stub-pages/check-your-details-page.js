@@ -1,4 +1,4 @@
-class CheckYourDetailsPage {
+export class CheckYourDetailsPage {
   constructor(page) {
     this.page = page;
     this.confirmDetailsYes = page.locator('xpath=//*[@id="confirmDetails"]');
@@ -25,5 +25,3 @@ class CheckYourDetailsPage {
     ]);
   }
 }
-
-module.exports = CheckYourDetailsPage;

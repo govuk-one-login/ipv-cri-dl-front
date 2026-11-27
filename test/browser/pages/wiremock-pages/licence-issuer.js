@@ -1,6 +1,6 @@
-const { expect: expect } = require("chai");
+import { expect } from "chai";
 
-module.exports = class PlaywrightDevPage {
+export class LicenceIssuerPage {
   /**
    * @param {import('@playwright/test').Page} page
    */
@@ -618,4 +618,4 @@ module.exports = class PlaywrightDevPage {
     expect(await this.isCurrentPage()).to.be.true;
     expect(await this.header.innerText()).to.equal(pageHeadingNotFoundPage);
   }
-};
+}

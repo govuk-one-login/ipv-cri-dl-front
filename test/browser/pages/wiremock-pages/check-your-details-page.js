@@ -1,5 +1,6 @@
-const { expect: expect } = require("chai");
-exports.CheckYourDetailsPage = class PlaywrightDevPage {
+import { expect } from "chai";
+
+export class CheckYourDetailsPage {
   constructor(page) {
     this.page = page;
     this.url = "http://localhost:5030/check-your-details";
@@ -348,4 +349,4 @@ exports.CheckYourDetailsPage = class PlaywrightDevPage {
     await this.page.waitForLoadState("domcontentloaded");
     expect(await this.backButton.innerText()).to.equal(backButtonText);
   }
-};
+}

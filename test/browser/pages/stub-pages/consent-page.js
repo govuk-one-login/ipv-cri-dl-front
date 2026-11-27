@@ -1,4 +1,4 @@
-class ConsentPage {
+export class ConsentPage {
   constructor(page) {
     this.page = page;
     this.consentDVACheckbox = page.locator(
@@ -20,5 +20,3 @@ class ConsentPage {
     await this.consentContinueButton.click();
   }
 }
-
-module.exports = ConsentPage;

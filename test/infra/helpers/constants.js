@@ -91,7 +91,7 @@ const ALLOWED_ACCOUNT_IDS = new Set([
   "652711504416"
 ]);
 
-module.exports = {
+export {
   RESOURCE_TYPES,
   SENSITIVE_RESOURCE_TYPES,
   TAGGABLE_RESOURCE_TYPES,

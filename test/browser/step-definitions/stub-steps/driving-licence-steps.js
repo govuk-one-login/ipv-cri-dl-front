@@ -1,16 +1,16 @@
-const { Given, When, Then, And } = require("@cucumber/cucumber");
-const { expect } = require("@playwright/test");
-const {
+import { Given, When, Then } from "@cucumber/cucumber";
+import { expect } from "@playwright/test";
+import {
   IpvCoreStubCredentialIssuerPage,
   IpvCoreStubUserSearchPage,
   IpvCoreStubUserEditPage,
   DrivingLicencePage,
   CheckYourDetailsPage,
   ConsentPage,
-  IpvCoreStubVerfiyVcPage
-} = require("../../pages/stub-pages");
-const { assertUrlPathContains } = require("../../util/browser-utils");
-const ConfigurationReader = require("../../support/configuration-reader");
+  IpvCoreStubVerifyVcPage
+} from "../../pages/stub-pages/index.js";
+import { assertUrlPathContains } from "../../util/browser-utils.js";
+import { ConfigurationReader } from "../../support/configuration-reader.js";
 
 Given("I navigate to the IPV Core Stub", async function () {
   await this.context.clearCookies();
@@ -226,7 +226,7 @@ Then(/^I click the consent page continue button$/, async function () {
 Then(
   /^User is navigated to the Driving Licence verifiable issuer to check for a Invalid response$/,
   async function () {
-    const ipvCoreStubVerifyVcPage = new IpvCoreStubVerfiyVcPage(this.page);
+    const ipvCoreStubVerifyVcPage = new IpvCoreStubVerifyVcPage(this.page);
     await ipvCoreStubVerifyVcPage.verifyCurrentUrlContains("callback");
   }
 );
@@ -234,7 +234,7 @@ Then(
 Then(
   /^JSON response should contain error description (.*) and status code as (.*)$/,
   async function (errorDescription, errorResponseCode) {
-    const ipvCoreStubVerifyVcPage = new IpvCoreStubVerfiyVcPage(this.page);
+    const ipvCoreStubVerifyVcPage = new IpvCoreStubVerifyVcPage(this.page);
     await ipvCoreStubVerifyVcPage.validateErrorResponse(
       errorDescription,
       errorResponseCode
@@ -245,7 +245,7 @@ Then(
 Then(
   /^User is navigated to the Verifiable Credential Issuers Page$/,
   async function () {
-    const ipvCoreStubVerifyVcPage = new IpvCoreStubVerfiyVcPage(this.page);
+    const ipvCoreStubVerifyVcPage = new IpvCoreStubVerifyVcPage(this.page);
     const expectedSubstring = "callback";
     await ipvCoreStubVerifyVcPage.verifyCurrentUrlContains(expectedSubstring);
   }
@@ -259,7 +259,7 @@ Then(
     expectedStrengthScore,
     expectedValidityScore
   ) {
-    const ipvCoreStubVerifyVcPage = new IpvCoreStubVerfiyVcPage(this.page);
+    const ipvCoreStubVerifyVcPage = new IpvCoreStubVerifyVcPage(this.page);
     await ipvCoreStubVerifyVcPage.validateJsonResponseFromDrivingLicenceCri(
       expectedGivenName,
       expectedFamilyName,

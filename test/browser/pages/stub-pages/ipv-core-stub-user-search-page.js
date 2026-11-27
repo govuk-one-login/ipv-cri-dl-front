@@ -1,4 +1,4 @@
-class IpvCoreStubUserSearchPage {
+export class IpvCoreStubUserSearchPage {
   /**
    * @param {import('@playwright/test').Page} page
    */
@@ -21,5 +21,3 @@ class IpvCoreStubUserSearchPage {
     await this.userSearchEditUserButton.click();
   }
 }
-
-module.exports = IpvCoreStubUserSearchPage;

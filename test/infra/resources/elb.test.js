@@ -1,8 +1,8 @@
-const { expect } = require("chai");
-const {
+import { expect } from "chai";
+import {
   getResourcesByType,
   validateResourceProperty
-} = require("../helpers/helpers");
+} from "../helpers/helpers.js";
 
 describe("@QualityGateStackTest", () => {
   describe("AWS::ElasticLoadBalancingV2::LoadBalancer Resources", () => {

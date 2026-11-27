@@ -1,7 +1,7 @@
-const DrivingLicenceSubject = require("../model/driving-licence-subject.js");
-const DVADrivingLicenceSubject = require("../model/dva-driving-licence-subject.js");
+import DrivingLicenceSubject from "../model/driving-licence-subject.js";
+import DVADrivingLicenceSubject from "../model/dva-driving-licence-subject.js";
 
-const dvlaTestUsers = {
+export const dvlaTestUsers = {
   DrivingLicenceSubjectHappyPeter: {
     licenceNumber: "PARKE610112PBFGH",
     birthDay: "11",
@@ -40,7 +40,7 @@ const dvlaTestUsers = {
   }
 };
 
-exports.getDVLATestUserFromMap = function (drivingLicenceSubjectKey) {
+export function getDVLATestUserFromMap(drivingLicenceSubjectKey) {
   const data = dvlaTestUsers[drivingLicenceSubjectKey];
   if (!data) {
     throw new Error(`Unknown DVLA test user: ${drivingLicenceSubjectKey}`);
@@ -48,13 +48,13 @@ exports.getDVLATestUserFromMap = function (drivingLicenceSubjectKey) {
   const subject = new DrivingLicenceSubject();
   subject.fill(data);
   return subject;
-};
+}
 
-exports.isDVLAUser = function (key) {
+export function isDVLAUser(key) {
   return key in dvlaTestUsers;
-};
+}
 
-const dvaTestUsers = {
+export const dvaTestUsers = {
   DrivingLicenceSubjectHappyBilly: {
     licenceNumber: "55667788",
     birthDay: "26",
@@ -91,7 +91,7 @@ const dvaTestUsers = {
   }
 };
 
-exports.getDVATestUserFromMap = function (drivingLicenceSubjectKey) {
+export function getDVATestUserFromMap(drivingLicenceSubjectKey) {
   const data = dvaTestUsers[drivingLicenceSubjectKey];
   if (!data) {
     throw new Error(`Unknown DVA test user: ${drivingLicenceSubjectKey}`);
@@ -99,7 +99,4 @@ exports.getDVATestUserFromMap = function (drivingLicenceSubjectKey) {
   const subject = new DVADrivingLicenceSubject();
   subject.fill(data);
   return subject;
-};
-
-exports.dvlaTestUsers = dvlaTestUsers;
-exports.dvaTestUsers = dvaTestUsers;
+}

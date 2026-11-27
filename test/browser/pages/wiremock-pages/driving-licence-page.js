@@ -1,8 +1,8 @@
-const { expect: expect } = require("chai");
-const moment = require("moment");
-const TestDataCreator = require("../../util/test-data-creator");
+import { expect } from "chai";
+import moment from "moment";
+import { getDVLATestUserFromMap } from "../../util/test-data-creator.js";
 
-exports.DrivingLicencePage = class PlaywrightDevPage {
+export class DrivingLicencePage {
   constructor(page) {
     this.page = page;
     this.url = "http://localhost:5030/details";
@@ -326,7 +326,7 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
   }
 
   async userEntersData(issuer, drivingLicenceSubjectScenario) {
-    var drivingLicenceSubject = TestDataCreator.getDVLATestUserFromMap(
+    var drivingLicenceSubject = getDVLATestUserFromMap(
       drivingLicenceSubjectScenario
     );
     if (issuer === "DVLA") {
@@ -1026,4 +1026,4 @@ exports.DrivingLicencePage = class PlaywrightDevPage {
     expect(await this.isCurrentPage()).to.be.true;
     expect(await this.backButton.innerText()).to.equal(backButtonText);
   }
-};
+}

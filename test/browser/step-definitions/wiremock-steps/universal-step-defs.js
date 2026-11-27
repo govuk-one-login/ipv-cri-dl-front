@@ -1,8 +1,6 @@
-const { Given, When, Then } = require("@cucumber/cucumber");
-const {
-  UniversalSteps
-} = require("../../pages/wiremock-pages/universal-steps");
-const { expect: expect } = require("chai");
+import { Then } from "@cucumber/cucumber";
+import { UniversalSteps } from "../../pages/wiremock-pages/index.js";
+import { expect } from "chai";
 
 Then(
   /^I add a cookie to change the language to (.*)$/,

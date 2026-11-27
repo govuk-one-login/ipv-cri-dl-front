@@ -1,6 +1,6 @@
-const { BeforeAll, AfterAll } = require("@cucumber/cucumber");
-const { collectFromAllTestUsers } = require("../util/pii-terms-collector");
-const { scanForTerm } = require("../util/cloudwatch-log-service");
+import { BeforeAll, AfterAll } from "@cucumber/cucumber";
+import { collectFromAllTestUsers } from "../util/pii-terms-collector.js";
+import { scanForTerm } from "../util/cloudwatch-log-service.js";
 
 const LOG_GROUPS = ["ECSAccessLogsGroup", "APIGWAccessLogsGroup"];
 

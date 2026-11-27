@@ -1,9 +1,7 @@
-module.exports = {
-  DrivingLicencePage: require("./driving-licence-page.js"),
-  CheckYourDetailsPage: require("./check-your-details-page.js"),
-  ConsentPage: require("./consent-page.js"),
-  IpvCoreStubCredentialIssuerPage: require("./ipv-core-stub-credential-issuer-page.js"),
-  IpvCoreStubUserSearchPage: require("./ipv-core-stub-user-search-page.js"),
-  IpvCoreStubUserEditPage: require("./ipv-core-stub-user-edit-page.js"),
-  IpvCoreStubVerfiyVcPage: require("./ipv-core-stub-verify-vc-page.js")
-};
+export { DrivingLicencePage } from "./driving-licence-page.js";
+export { CheckYourDetailsPage } from "./check-your-details-page.js";
+export { ConsentPage } from "./consent-page.js";
+export { IpvCoreStubCredentialIssuerPage } from "./ipv-core-stub-credential-issuer-page.js";
+export { IpvCoreStubUserSearchPage } from "./ipv-core-stub-user-search-page.js";
+export { IpvCoreStubUserEditPage } from "./ipv-core-stub-user-edit-page.js";
+export { IpvCoreStubVerifyVcPage } from "./ipv-core-stub-verify-vc-page.js";
