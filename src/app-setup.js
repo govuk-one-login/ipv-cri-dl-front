@@ -1,23 +1,22 @@
-const { API, APP, LOG_LEVEL } = require("./lib/config");
+import appConfig from "./lib/config.js";
+import commonExpress from "@govuk-one-login/di-ipv-cri-common-express";
+import { appSettings } from "./lib/settings.js";
+import { sessionConfig } from "./session-config.js";
+import { overloadProtectionConfig } from "./overload-protection-config.js";
+import path from "node:path";
+import helmetConfig from "@govuk-one-login/di-ipv-cri-common-express/src/lib/helmet.js";
+import { frontendVitalSignsInitFromApp } from "@govuk-one-login/frontend-vital-signs";
+import { fileURLToPath } from "node:url";
 
-const commonExpress = require("@govuk-one-login/di-ipv-cri-common-express");
-
+const { API, APP, LOG_LEVEL } = appConfig;
 const { setGTM, setLanguageToggle, setDeviceIntelligence } =
   commonExpress.lib.settings;
-const { setAPIConfig, setOAuthPaths } = require("./lib/settings");
-const sessionConfigService = require("./session-config");
-const overloadProtectionConfigService = require("./overload-protection-config");
-
-const path = require("path");
-const helmetConfig = require("@govuk-one-login/di-ipv-cri-common-express/src/lib/helmet");
+const { setAPIConfig, setOAuthPaths } = appSettings;
 const setHeaders = commonExpress.lib.headers;
 // Common express relies on 0/1 strings
 const showLanguageToggle = APP.LANGUAGE_TOGGLE_DISABLED === "true" ? "0" : "1";
-const {
-  frontendVitalSignsInitFromApp
-} = require("@govuk-one-login/frontend-vital-signs");
 
-const init = (app) => {
+export const init = (app) => {
   setAPIConfig({
     app,
     baseUrl: API.BASE_URL,
@@ -52,7 +51,7 @@ const init = (app) => {
   setLanguageToggle({ app, showLanguageToggle: showLanguageToggle });
 };
 
-const create = (setup) => {
+export const createApp = (setup) => {
   const loggerConfig = {
     consoleLevel: LOG_LEVEL,
     console: true,
@@ -66,16 +65,15 @@ const create = (setup) => {
     }
   };
 
-  const sessionConfig = sessionConfigService.init();
-  const overloadProtectionConfig = overloadProtectionConfigService.init();
+  const sessionConfigService = sessionConfig.createSessionConfig();
 
   const { app, router } = setup({
-    config: { APP_ROOT: __dirname },
+    config: { APP_ROOT: import.meta.dirname },
     port: false,
     logs: loggerConfig,
-    session: sessionConfig,
+    session: sessionConfigService,
     helmet: helmetConfig,
-    redis: sessionConfigService.isDynamo() ? false : commonExpress.lib.redis(),
+    redis: sessionConfig.isDynamo() ? false : commonExpress.lib.redis(),
     urls: {
       public: "/public",
       publicImages: "/public/images"
@@ -85,7 +83,9 @@ const create = (setup) => {
     views: [
       path.resolve(
         path.dirname(
-          require.resolve("@govuk-one-login/di-ipv-cri-common-express")
+          fileURLToPath(
+            import.meta.resolve("@govuk-one-login/di-ipv-cri-common-express")
+          )
         ),
         "components"
       ),
@@ -126,5 +126,3 @@ const create = (setup) => {
   });
   return { app, router };
 };
-
-module.exports = { init, create };

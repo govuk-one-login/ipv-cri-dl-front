@@ -1,4 +1,4 @@
-module.exports = {
+export const appSettings = {
   setAPIConfig: ({ app, baseUrl, sessionPath, authorizationPath }) => {
     app.set("API.BASE_URL", baseUrl);
     app.set("API.PATHS.SESSION", sessionPath);
@@ -9,3 +9,5 @@ module.exports = {
     app.set("APP.PATHS.ENTRYPOINT", entryPointPath);
   }
 };
+
+export default appSettings;

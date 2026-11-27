@@ -1,11 +1,11 @@
-const details = require("./controllers/details");
-const root = require("./controllers/root");
-const validate = require("./controllers/validate");
-const licenceIssuer = require("./controllers/licence-issuer");
-const checkYourDetails = require("./controllers/check-your-details");
-const consent = require("./controllers/consent");
+import { DrivingLicenceDetailsController as details } from "./controllers/details.js";
+import { RootController as root } from "./controllers/root.js";
+import { ValidateController as validate } from "./controllers/validate.js";
+import { LicenceIssuerController as licenceIssuer } from "./controllers/licence-issuer.js";
+import { CheckYourDetailsController as checkYourDetails } from "./controllers/check-your-details.js";
+import { ConsentController as consent } from "./controllers/consent.js";
 
-module.exports = {
+export const steps = {
   "/": {
     resetJourney: true,
     entryPoint: true,

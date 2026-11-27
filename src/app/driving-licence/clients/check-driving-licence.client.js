@@ -1,12 +1,10 @@
-const { createBaseClient } = require("./base.client");
-const {
-  checkDrivingLicenceResponseSchema
-} = require("./schemas/check-driving-licence.schema");
+import { createBaseClient } from "./base.client.js";
+import { checkDrivingLicenceResponseSchema } from "./schemas/check-driving-licence.schema.js";
 
-const appConfig = require("../../../lib/config");
-const LOGGER = require("../../../utils/logger");
+import appConfig from "../../../lib/config.js";
+import LOGGER from "../../../utils/logger.js";
 
-const checkDrivingLicenceClient = (req) => {
+export const checkDrivingLicenceClient = (req) => {
   const client = createBaseClient(req);
   const CLIENT_LOGGER = LOGGER.child({ client: "check-driving-licence" });
   return {
@@ -33,8 +31,4 @@ const checkDrivingLicenceClient = (req) => {
       return parsed.data;
     }
   };
-};
-
-module.exports = {
-  checkDrivingLicenceClient
 };

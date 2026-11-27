@@ -1,4 +1,4 @@
-const { z } = require("zod");
+import { z } from "zod";
 
 const nonEmpty = z.string().min(1);
 
@@ -32,13 +32,9 @@ const drivingPermit = z
     message: "issueNumber is required when issuedBy is DVLA"
   });
 
-const personInfoSchema = z.object({
+export const personInfoSchema = z.object({
   name: z.array(name).min(1),
   birthDate: z.array(birthDate).min(1),
   address: z.array(address).min(1),
   drivingPermit: z.array(drivingPermit).min(1)
 });
-
-module.exports = {
-  personInfoSchema
-};

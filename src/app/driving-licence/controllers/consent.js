@@ -1,7 +1,9 @@
-const BaseController = require("hmpo-form-wizard").Controller;
-const LOGGER = require("../../../utils/logger");
+import wizard from "hmpo-form-wizard";
+import LOGGER from "../../../utils/logger.js";
 
-class ConsentController extends BaseController {
+const BaseController = wizard.Controller;
+
+export class ConsentController extends BaseController {
   async saveValues(req, res, next) {
     try {
       return next();
@@ -13,4 +15,3 @@ class ConsentController extends BaseController {
     }
   }
 }
-module.exports = ConsentController;

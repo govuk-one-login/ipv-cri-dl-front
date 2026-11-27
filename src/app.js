@@ -1,13 +1,15 @@
-require("express");
-require("express-async-errors");
-const { PORT } = require("./lib/config");
-const { setup } =
-  require("@govuk-one-login/di-ipv-cri-common-express").bootstrap;
+import "express";
+import "express-async-errors";
+import appConfig from "./lib/config.js";
+import commonExpress from "@govuk-one-login/di-ipv-cri-common-express";
 
-const RoutingService = require("./router");
-const AppSetup = require("./app-setup");
+import * as RoutingService from "./router.js";
+import * as AppSetup from "./app-setup.js";
 
-const { app, router } = AppSetup.create(setup);
+const { PORT } = appConfig;
+const { setup } = commonExpress.bootstrap;
+
+const { app, router } = AppSetup.createApp(setup);
 
 app.get("nunjucks").addGlobal("getContext", function () {
   return {

@@ -1,4 +1,4 @@
-const { checkDrivingLicenceClient } = require("./check-driving-licence.client");
+import { checkDrivingLicenceClient } from "./check-driving-licence.client.js";
 
 const body = {
   drivingLicenceNumber: "SMITH9702105LN99",

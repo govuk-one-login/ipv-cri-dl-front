@@ -1,5 +1,7 @@
-const BaseController = require("hmpo-form-wizard").Controller;
-const ConsentController = require("./consent");
+import wizard from "hmpo-form-wizard";
+import { ConsentController } from "./consent.js";
+
+const BaseController = wizard.Controller;
 
 describe("consent controller", () => {
   const consentController = new ConsentController({

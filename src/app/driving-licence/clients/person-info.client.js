@@ -1,12 +1,12 @@
-const { createBaseClient } = require("./base.client");
-const { personInfoSchema } = require("./schemas/person-info.schema");
+import { createBaseClient } from "./base.client.js";
+import { personInfoSchema } from "./schemas/person-info.schema.js";
 
-const appConfig = require("../../../lib/config");
-const LOGGER = require("../../../utils/logger");
+import appConfig from "../../../lib/config.js";
+import LOGGER from "../../../utils/logger.js";
 
 const NOT_AUTH_SOURCE = { authSource: false };
 
-const personInfoClient = (req) => {
+export const personInfoClient = (req) => {
   const client = createBaseClient(req);
   const CLIENT_LOGGER = LOGGER.child({ client: "person-info" });
   return {
@@ -35,8 +35,4 @@ const personInfoClient = (req) => {
       return { authSource: true, data: parsed.data };
     }
   };
-};
-
-module.exports = {
-  personInfoClient
 };

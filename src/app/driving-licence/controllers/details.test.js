@@ -1,8 +1,10 @@
-const BaseController = require("hmpo-form-wizard").Controller;
-const DetailsController = require("./details");
+import wizard from "hmpo-form-wizard";
+import { DrivingLicenceDetailsController } from "./details.js";
+
+const BaseController = wizard.Controller;
 
 describe("details controller", () => {
-  const details = new DetailsController({ route: "/test" });
+  const details = new DrivingLicenceDetailsController({ route: "/test" });
 
   let req;
   let res;

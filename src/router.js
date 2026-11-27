@@ -1,22 +1,21 @@
-const commonExpress = require("@govuk-one-login/di-ipv-cri-common-express");
+import commonExpress from "@govuk-one-login/di-ipv-cri-common-express";
+import { steps } from "./app/driving-licence/steps.js";
+import { fields } from "./app/driving-licence/fields.js";
+import { featureSet } from "./app/driving-licence/feature-sets.js";
+import { frontendUiMiddlewareIdentityBypass } from "@govuk-one-login/frontend-ui";
+import wizard from "hmpo-form-wizard";
+
 const { getGTM, getDeviceIntelligence } = commonExpress.lib.locals;
 const setScenarioHeaders = commonExpress.lib.scenarioHeaders;
 const customFetch = commonExpress.lib.customFetch.customFetchMiddleware;
 
-const steps = require("./app/driving-licence/steps");
-const fields = require("./app/driving-licence/fields");
-const featureSets = require("./app/driving-licence/feature-sets");
-const frontendUi = require("@govuk-one-login/frontend-ui");
-
-const wizard = require("hmpo-form-wizard");
-
-const init = (router) => {
+export const init = (router) => {
   router.use(getGTM);
-  router.use(frontendUi.frontendUiMiddlewareIdentityBypass);
+  router.use(frontendUiMiddlewareIdentityBypass);
   router.use(getDeviceIntelligence);
   router.use(setScenarioHeaders);
   router.use(customFetch);
-  router.use(featureSets);
+  router.use(featureSet);
 
   router.use("/oauth2", commonExpress.routes.oauth2);
 
@@ -30,5 +29,3 @@ const init = (router) => {
 
   router.use(commonExpress.lib.errorHandling.redirectAsErrorToCallback);
 };
-
-module.exports = { init };

@@ -1,6 +1,6 @@
 const TIMEOUT_MS = 30_000;
 
-const createBaseClient = (req) => {
+export const createBaseClient = (req) => {
   const sessionHeader = req.session.tokenId
     ? { session_id: req.session.tokenId }
     : {};
@@ -25,8 +25,4 @@ const createBaseClient = (req) => {
         timeoutMs: TIMEOUT_MS
       })
   };
-};
-
-module.exports = {
-  createBaseClient
 };

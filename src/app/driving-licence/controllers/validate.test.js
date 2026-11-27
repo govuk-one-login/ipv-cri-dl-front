@@ -1,5 +1,7 @@
-const BaseController = require("hmpo-form-wizard").Controller;
-const ValidateController = require("./validate");
+import wizard from "hmpo-form-wizard";
+import { ValidateController } from "./validate.js";
+
+const BaseController = wizard.Controller;
 
 const SESSION_ID = "drivingLicence123";
 

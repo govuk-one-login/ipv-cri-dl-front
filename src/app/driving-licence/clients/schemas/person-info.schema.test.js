@@ -1,4 +1,4 @@
-const { personInfoSchema } = require("./person-info.schema");
+import { personInfoSchema } from "./person-info.schema.js";
 
 const validResponse = () => ({
   name: [

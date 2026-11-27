@@ -1,9 +1,9 @@
-const fields = require("./fields-helper");
-const moment = require("moment");
+import { fieldsHelper } from "./fields-helper.js";
+import moment from "moment";
 
 describe("custom validation fields test", () => {
   it("should be false when first and middle name combined is greater than 38 characters and issuer is DVLA", () => {
-    const validator = fields.firstNameMiddleNameLengthValidator.bind({
+    const validator = fieldsHelper.firstNameMiddleNameLengthValidator.bind({
       values: {
         firstName: "jjjjjjjjjjjjjjjjjjjjjjjjjjjjjj",
         middleNames: "jjjjjjjjj",
@@ -16,7 +16,7 @@ describe("custom validation fields test", () => {
   });
 
   it("should be false when first and middle name combined is 38 characters plus extra character and issuer is DVLA", () => {
-    const validator = fields.firstNameMiddleNameLengthValidator.bind({
+    const validator = fieldsHelper.firstNameMiddleNameLengthValidator.bind({
       values: {
         firstName: "jjjjjjjjjjjjjjjjjjjjjjjjjjjjjj",
         middleNames: "jjjjjjjj",
@@ -29,7 +29,7 @@ describe("custom validation fields test", () => {
   });
 
   it("should be false when first and middle name combined is greater than 38 characters and issuer is DVA", () => {
-    const validator = fields.firstNameMiddleNameLengthValidator.bind({
+    const validator = fieldsHelper.firstNameMiddleNameLengthValidator.bind({
       values: {
         firstName: "jjjjjjjjjjjjjjjjjjjjjjjjjjjjjj",
         middleNames: "jjjjjjjjj",
@@ -42,7 +42,7 @@ describe("custom validation fields test", () => {
   });
 
   it("should be false when first and middle name combined is 38 characters plus extra character and issuer is DVA", () => {
-    const validator = fields.firstNameMiddleNameLengthValidator.bind({
+    const validator = fieldsHelper.firstNameMiddleNameLengthValidator.bind({
       values: {
         firstName: "jjjjjjjjjjjjjjjjjjjjjjjjjjjjjj",
         middleNames: "jjjjjjjj",
@@ -55,7 +55,7 @@ describe("custom validation fields test", () => {
   });
 
   it("should be true when first and middle name is 37 characters", () => {
-    const validator = fields.firstNameMiddleNameLengthValidator.bind({
+    const validator = fieldsHelper.firstNameMiddleNameLengthValidator.bind({
       values: {
         firstName: "jjjjjjjjjjjjjjjjjjjjjjjjjjjjjj",
         middleNames: "jjjjjjj",
@@ -68,7 +68,7 @@ describe("custom validation fields test", () => {
   });
 
   it("should be true when middle name is empty", () => {
-    const validator = fields.firstNameMiddleNameLengthValidator.bind({
+    const validator = fieldsHelper.firstNameMiddleNameLengthValidator.bind({
       values: {
         firstName: "jj",
         middleNames: "",
@@ -81,7 +81,7 @@ describe("custom validation fields test", () => {
   });
 
   it("should be false when undefined value is entered", () => {
-    const validator = fields.firstNameMiddleNameLengthValidator.bind({
+    const validator = fieldsHelper.firstNameMiddleNameLengthValidator.bind({
       values: {
         surname: "undefinedFirstAndMiddleName"
       }
@@ -91,7 +91,7 @@ describe("custom validation fields test", () => {
   });
 
   it("should be true when DVA middleName is only entered and is 18 characters", () => {
-    const validator = fields.middleNamesLengthValidator.bind({
+    const validator = fieldsHelper.middleNamesLengthValidator.bind({
       values: {
         middleNames: "asdfghjklasdfghjkl",
         licenceIssuer: "DVA"
@@ -102,7 +102,7 @@ describe("custom validation fields test", () => {
   });
 
   it("should be false when DVA middleName is only entered and is 19 characters", () => {
-    const validator = fields.middleNamesLengthValidator.bind({
+    const validator = fieldsHelper.middleNamesLengthValidator.bind({
       values: {
         middleNames: "asdfghjklasdfghjkla",
         licenceIssuer: "DVA"
@@ -113,7 +113,7 @@ describe("custom validation fields test", () => {
   });
 
   it("should be false when DVLA middleName is only entered and is 44 characters", () => {
-    const validator = fields.middleNamesLengthValidator.bind({
+    const validator = fieldsHelper.middleNamesLengthValidator.bind({
       values: {
         middleNames: "asdfghjklasdfghjklaasdfghjklasdfghjklasdfghj",
         licenceIssuer: "DVA"
@@ -124,7 +124,7 @@ describe("custom validation fields test", () => {
   });
 
   it("should be true when DVLA middleName is only entered and is 43 characters", () => {
-    const validator = fields.middleNamesLengthValidator.bind({
+    const validator = fieldsHelper.middleNamesLengthValidator.bind({
       values: {
         middleNames: "asdfghjklasdfghjklaasdfghjklasdfghjklasdfgh",
         licenceIssuer: "DVLA"
@@ -135,7 +135,7 @@ describe("custom validation fields test", () => {
   });
 
   it("should be true when firstname is only entered and is 18 characters", () => {
-    const validator = fields.firstNameLengthValidator.bind({
+    const validator = fieldsHelper.firstNameLengthValidator.bind({
       values: {
         firstName: "asdfghjklasdfghjkl",
         licenceIssuer: "DVA"
@@ -146,7 +146,7 @@ describe("custom validation fields test", () => {
   });
 
   it("should be false when firstname is 19 characters", () => {
-    const validator = fields.firstNameLengthValidator.bind({
+    const validator = fieldsHelper.firstNameLengthValidator.bind({
       values: {
         firstName: "asdfghjklasdfghjkla",
         licenceIssuer: "DVA"
@@ -157,7 +157,7 @@ describe("custom validation fields test", () => {
   });
 
   it("should be false when undefined value is entered", () => {
-    const validator = fields.firstNameLengthValidator.bind({
+    const validator = fieldsHelper.firstNameLengthValidator.bind({
       values: {
         middleName: "undefinedFirstName"
       }
@@ -167,7 +167,7 @@ describe("custom validation fields test", () => {
   });
 
   it("should be true when surname is 25 characters", () => {
-    const validator = fields.surnameLengthValidator.bind({
+    const validator = fieldsHelper.surnameLengthValidator.bind({
       values: {
         surname: "asdfghjklasdfghjklasdfghj",
         licenceIssuer: "DVA"
@@ -178,7 +178,7 @@ describe("custom validation fields test", () => {
   });
 
   it("should be false when surname is 26 characters", () => {
-    const validator = fields.surnameLengthValidator.bind({
+    const validator = fieldsHelper.surnameLengthValidator.bind({
       values: {
         surname: "asdfghjklasdfghjklasdfghjk",
         licenceIssuer: "DVA"
@@ -189,7 +189,7 @@ describe("custom validation fields test", () => {
   });
 
   it("should be false when undefined value is entered", () => {
-    const validator = fields.surnameLengthValidator.bind({
+    const validator = fieldsHelper.surnameLengthValidator.bind({
       values: {
         middleName: "undefinedSurname"
       }
@@ -199,7 +199,7 @@ describe("custom validation fields test", () => {
   });
 
   it("should be false when DVLALicenceNumber value is under 16 characters", () => {
-    const validator = fields.licenceLengthValidator.bind({
+    const validator = fieldsHelper.licenceLengthValidator.bind({
       values: {
         drivingLicenceNumber: "DECER607085KE9L",
         dvaLicenceNumber: "",
@@ -219,7 +219,7 @@ describe("custom validation fields test", () => {
   });
 
   it("should be false when DVLALicenceNumber value is over 16 characters", () => {
-    const validator = fields.licenceLengthValidator.bind({
+    const validator = fieldsHelper.licenceLengthValidator.bind({
       values: {
         drivingLicenceNumber: "DECER607085KE9LNY",
         dvaLicenceNumber: "",
@@ -239,7 +239,7 @@ describe("custom validation fields test", () => {
   });
 
   it("should be true when DVLALicenceNumber value is exactly 16 characters", () => {
-    const validator = fields.licenceLengthValidator.bind({
+    const validator = fieldsHelper.licenceLengthValidator.bind({
       values: {
         drivingLicenceNumber: "DECER607085KE9LN",
         dvaLicenceNumber: "",
@@ -259,7 +259,7 @@ describe("custom validation fields test", () => {
   });
 
   it("should be false when dvaLicenceNumber value is under 8 characters", () => {
-    const validator = fields.licenceLengthValidator.bind({
+    const validator = fieldsHelper.licenceLengthValidator.bind({
       values: {
         drivingLicenceNumber: "",
         dvaLicenceNumber: "1234567",
@@ -279,7 +279,7 @@ describe("custom validation fields test", () => {
   });
 
   it("should be false when dvaLicenceNumber value is over 8 characters", () => {
-    const validator = fields.licenceLengthValidator.bind({
+    const validator = fieldsHelper.licenceLengthValidator.bind({
       values: {
         drivingLicenceNumber: "",
         dvaLicenceNumber: "123456789",
@@ -299,7 +299,7 @@ describe("custom validation fields test", () => {
   });
 
   it("should be true when dvaLicenceNumber value is exactly 8 characters", () => {
-    const validator = fields.licenceLengthValidator.bind({
+    const validator = fieldsHelper.licenceLengthValidator.bind({
       values: {
         drivingLicenceNumber: "",
         dvaLicenceNumber: "12345678",
@@ -319,7 +319,7 @@ describe("custom validation fields test", () => {
   });
 
   it("should be false when postcode is only entered and is over 8 characters", () => {
-    const validator = fields.postCodeLengthValidator.bind({
+    const validator = fieldsHelper.postCodeLengthValidator.bind({
       values: {
         postcode: "jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj"
       }
@@ -329,7 +329,7 @@ describe("custom validation fields test", () => {
   });
 
   it("should be true when postcode is only entered and is under 8 characters", () => {
-    const validator = fields.postCodeLengthValidator.bind({
+    const validator = fieldsHelper.postCodeLengthValidator.bind({
       values: {
         postcode: "BA2 5AA"
       }
@@ -339,7 +339,7 @@ describe("custom validation fields test", () => {
   });
 
   it("should be true when postcode is only entered and is exactly 7 characters", () => {
-    const validator = fields.postCodeLengthValidator.bind({
+    const validator = fieldsHelper.postCodeLengthValidator.bind({
       values: {
         postcode: "BA2 5AAA"
       }
@@ -349,7 +349,7 @@ describe("custom validation fields test", () => {
   });
 
   it("should be false when undefined value is entered", () => {
-    const validator = fields.postCodeLengthValidator.bind({
+    const validator = fieldsHelper.postCodeLengthValidator.bind({
       values: {
         middleName: "undefinedPostcode"
       }
@@ -360,7 +360,7 @@ describe("custom validation fields test", () => {
 
   it("should be true when licence number matches DOB", () => {
     const licenceNo = "HARRI509146J9L31";
-    const validator = fields.dvlaValidator.bind({
+    const validator = fieldsHelper.dvlaValidator.bind({
       values: {
         firstName: "John",
         middleNames: "",
@@ -377,7 +377,7 @@ describe("custom validation fields test", () => {
 
   it("should be false when licence number does not match DOB year", () => {
     const licenceNo = "HARRI509146J9L31";
-    const validator = fields.dvlaValidator.bind({
+    const validator = fieldsHelper.dvlaValidator.bind({
       values: {
         firstName: "john",
         middleNames: "",
@@ -394,7 +394,7 @@ describe("custom validation fields test", () => {
 
   it("should be false when licence number does not match DOB month", () => {
     const licenceNo = "HARRI509146J9L31";
-    const validator = fields.dvlaValidator.bind({
+    const validator = fieldsHelper.dvlaValidator.bind({
       values: {
         firstName: "john",
         middleNames: "",
@@ -411,7 +411,7 @@ describe("custom validation fields test", () => {
 
   it("should be false when licence number does not match DOB date", () => {
     const licenceNo = "HARRI509146J9L31";
-    const validator = fields.dvlaValidator.bind({
+    const validator = fieldsHelper.dvlaValidator.bind({
       values: {
         firstName: "john",
         middleNames: "",
@@ -431,7 +431,7 @@ describe("custom validation fields test", () => {
       .subtract(10, "years")
       .subtract(1, "days")
       .format("YYYY-MM-DD");
-    const validator = fields.beforeNow.bind({
+    const validator = fieldsHelper.beforeNowValidator.bind({
       values: {
         issueDate: issueDate
       }
@@ -445,7 +445,7 @@ describe("custom validation fields test", () => {
       .subtract(10, "years")
       .add(1, "days")
       .format("YYYY-MM-DD");
-    const validator = fields.beforeNow.bind({
+    const validator = fieldsHelper.beforeNowValidator.bind({
       values: {
         issueDate: issueDate
       }
@@ -456,7 +456,7 @@ describe("custom validation fields test", () => {
 
   it("should be true when licence issued is issued exactly 10 years ago", () => {
     const issueDate = moment().subtract(10, "years").format("YYYY-MM-DD");
-    const validator = fields.beforeNow.bind({
+    const validator = fieldsHelper.beforeNowValidator.bind({
       values: {
         issueDate: issueDate
       }
@@ -467,7 +467,7 @@ describe("custom validation fields test", () => {
 
   it("should be false when No DOB", () => {
     const licenceNo = "DECER607085K99LN";
-    const validator = fields.dvlaValidator.bind({
+    const validator = fieldsHelper.dvlaValidator.bind({
       values: {
         firstName: "KENNETH",
         middleNames: "",
@@ -483,7 +483,7 @@ describe("custom validation fields test", () => {
 
   it("should be false when No firstName", () => {
     const licenceNo = "DECER607085K99LN";
-    const validator = fields.dvlaValidator.bind({
+    const validator = fieldsHelper.dvlaValidator.bind({
       values: {
         middleNames: "",
         surname: "DECERQUEIRA",
@@ -499,7 +499,7 @@ describe("custom validation fields test", () => {
 
   it("should be false when No surname", () => {
     const licenceNo = "DECER607085K99LN";
-    const validator = fields.dvlaValidator.bind({
+    const validator = fieldsHelper.dvlaValidator.bind({
       values: {
         firstName: "KENNETH",
         middleNames: "",
@@ -514,7 +514,7 @@ describe("custom validation fields test", () => {
   });
 
   it("should be false when No licence", () => {
-    const validator = fields.dvlaValidator.bind({
+    const validator = fieldsHelper.dvlaValidator.bind({
       values: {
         firstName: "KENNETH",
         middleNames: "",
@@ -530,7 +530,7 @@ describe("custom validation fields test", () => {
 
   it("should be true when licence number does match DOB date kenneth", () => {
     const licenceNo = "DECER607085K99LN";
-    const validator = fields.dvlaValidator.bind({
+    const validator = fieldsHelper.dvlaValidator.bind({
       values: {
         firstName: "KENNETH",
         middleNames: "",

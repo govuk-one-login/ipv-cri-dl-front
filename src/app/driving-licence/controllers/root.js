@@ -1,10 +1,11 @@
-const { Controller: BaseController } = require("hmpo-form-wizard");
+import wizard from "hmpo-form-wizard";
+import appConfig from "../../../lib/config.js";
+import { personInfoClient } from "../clients/person-info.client.js";
+import LOGGER from "../../../utils/logger.js";
 
-const appConfig = require("../../../lib/config");
-const { personInfoClient } = require("../clients/person-info.client");
-const LOGGER = require("../../../utils/logger");
+const BaseController = wizard.Controller;
 
-class RootController extends BaseController {
+export class RootController extends BaseController {
   async saveValues(req, res, next) {
     req.sessionModel.reset();
     req.sessionModel.set("isAuthSourceRoute", false);
@@ -59,5 +60,3 @@ class RootController extends BaseController {
     req.sessionModel.set("surname", surname);
   }
 }
-
-module.exports = RootController;
